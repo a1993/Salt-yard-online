@@ -1,0 +1,10 @@
+# Shopify CLI 配置文件
+# 在这里设置你的商店名称，然后就可以直接运行 shopify theme dev
+
+# 你的商店配置（不需要 https:// 和末尾的 /）
+store: smka17-ff.myshopify.com
+
+# 格式说明：
+# ✅ 正确：store: myshop.myshopify.com
+# ❌ 错误：store: https://myshop.myshopify.com/
+
