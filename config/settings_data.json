@@ -84,9 +84,9 @@
     "font_size_logo_int": 24,
     "button_style": "normal",
     "button_shape": "sharp",
-    "prod_thumb_shape": "shortest",
+    "prod_thumb_shape": "square",
     "prod_thumb_crop": true,
-    "prod_thumb_mob_per_row": "1",
+    "prod_thumb_mob_per_row": "2",
     "prod_thumb_text_align": "left",
     "prod_thumb_hover_image": true,
     "quickbuy_style": "button",
@@ -95,7 +95,7 @@
     "prod_stock_warn_limit_int": 10,
     "prod_sale_show": true,
     "prod_sold_out_show": true,
-    "enable_product_reviews_collection": false,
+    "enable_product_reviews_collection": true,
     "swatch_method": "variant-images",
     "swatch_style": "icon_square",
     "swatch_picker_image_size": 70,
@@ -114,6 +114,7 @@
     "after_add_to_cart": "notification",
     "show_free_shipping_bar": false,
     "free_shipping_bar_col_under": "#171717",
+    "product_currency_code_enabled": false,
     "content_for_index": [],
     "blocks": {
       "8170924994765517213": {
