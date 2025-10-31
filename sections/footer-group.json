@@ -25,11 +25,11 @@
         "1601308717434": {
           "type": "text",
           "settings": {
-            "title": "Talk about your store",
-            "text": "<p>Provides premium, handcrafted men’s hair replacement systems at competitive prices and offering personalized, non-surgical solutions.<br/><br/>Wholesale Enquiries: <span style=\"text-decoration:underline\">salon@lavividhair.com</span><br/>Wholesale WhatsApp: <span style=\"text-decoration:underline\">+44 7419 360064</span></p>",
-            "image": "{{ shop.brand.logo }}",
+            "title": "About Us",
+            "text": "<p>Lavivid provides premium, handcrafted men’s hair replacement systems at competitive prices and offering personalized, non-surgical solutions.<br/><br/>Wholesale Enquiries: <span style=\"text-decoration:underline\">salon@lavividhair.com</span><br/>Wholesale WhatsApp: <span style=\"text-decoration:underline\">+44 7419 360064</span></p>",
+            "image": "shopify://shop_images/logo1.png",
             "image_width": 140,
-            "show_social_icons": true,
+            "show_social_icons": false,
             "soc_icons_large": true,
             "enable_follow_on_shop": true
           }
@@ -54,8 +54,8 @@
             "title": "Newsletter",
             "text": "<p>Sign up for exclusive offers, original stories, events and more.</p>",
             "button_style": "primary",
-            "show_social_icons": false,
-            "soc_icons_large": false
+            "show_social_icons": true,
+            "soc_icons_large": true
           }
         }
       },
