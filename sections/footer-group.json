@@ -30,7 +30,7 @@
             "image": "{{ shop.brand.logo }}",
             "image_width": 140,
             "show_social_icons": true,
-            "soc_icons_large": false,
+            "soc_icons_large": true,
             "enable_follow_on_shop": true
           }
         },
