@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "aside",
   "name": "Overlay Group",
@@ -15,21 +24,21 @@
         "inventory_threshold": 10,
         "show_announcement": true,
         "announcement_position": "below-items",
-        "announcement_text": "Free shipping (excl. taxes) on all orders over $100. <a href=\"#\" title=\"FAQs\">Learn more<\/a>",
+        "announcement_text": "Free shipping (excl. taxes) on all orders over $100. <a href=\"#\" title=\"FAQs\">Learn more</a>",
         "announcement_icon": "box",
         "announcement_icon_size": "small",
         "announcement_enable_box": true,
         "announcement_box_color": "#66ff65",
         "empty_icon": "bag",
         "empty_heading": "Your bag is empty",
-        "empty_text": "<p>Looking for ideas?<\/p>",
+        "empty_text": "<p>Looking for ideas?</p>",
         "empty_button_text": "Start shopping",
         "empty_button_link": "",
-        "empty_button_style": "secondary",
+        "empty_button_style": "primary",
         "empty_enable_custom_colors": true,
-        "empty_color_background": "#202020",
+        "empty_color_background": "#ffffff",
         "empty_color_background_gradient": "",
-        "empty_color_text": "#cccccc",
+        "empty_color_text": "#070707",
         "enable_cross_sells": true,
         "cross_sell_title": "You may like",
         "cross_sell_products": [],
@@ -43,7 +52,6 @@
         "204b0fb3-d343-4ff3-91af-8209c21f51e3": {
           "type": "image",
           "settings": {
-            "image": "",
             "image_position_desktop": "right",
             "image_position_mobile": "hidden"
           }
@@ -58,7 +66,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Sign up to save on your first order<\/p>",
+            "text": "<p>Sign up to save on your first order</p>",
             "text_size": ""
           }
         },
