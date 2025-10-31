@@ -34,18 +34,18 @@
             "enable_follow_on_shop": true
           }
         },
-        "1601308671932": {
-          "type": "menu",
-          "settings": {
-            "title": "Get Support",
-            "menu": "learning-center"
-          }
-        },
         "menu_GA93cd": {
           "type": "menu",
           "settings": {
             "title": "Explore",
             "menu": "footer"
+          }
+        },
+        "1601308671932": {
+          "type": "menu",
+          "settings": {
+            "title": "Get Support",
+            "menu": "learning-center"
           }
         },
         "1601308656020": {
@@ -61,8 +61,8 @@
       },
       "block_order": [
         "1601308717434",
-        "1601308671932",
         "menu_GA93cd",
+        "1601308671932",
         "1601308656020"
       ],
       "settings": {
