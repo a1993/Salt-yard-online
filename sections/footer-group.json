@@ -66,7 +66,7 @@
         "1601308656020"
       ],
       "settings": {
-        "lower_menu": "learning-center",
+        "lower_menu": "footer-bottom-menu",
         "show_powered_by": false,
         "show_payment_icons": false,
         "enable_country_selector": true,
