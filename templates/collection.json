@@ -95,7 +95,7 @@
         "show_vendor": false,
         "enable_carousel": false,
         "grid": 3,
-        "color_scheme": "1",
+        "color_scheme": "default",
         "full_width": true
       }
     },
