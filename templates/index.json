@@ -563,13 +563,6 @@
         "color_scheme": "default"
       }
     },
-    "pagefly_section_cGcg6B": {
-      "type": "pagefly-section",
-      "name": "PageFly Section",
-      "settings": {
-        "section_id": "pf-2274505a"
-      }
-    },
     "featured_blog_3mVGNT": {
       "type": "featured-blog",
       "name": "Blog posts",
@@ -599,7 +592,6 @@
     "custom_content_M4V8ip",
     "16148743091427bc38",
     "1478606404805",
-    "pagefly_section_cGcg6B",
     "featured_blog_3mVGNT"
   ]
 }
