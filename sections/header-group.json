@@ -81,6 +81,40 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "menu_promotion_large_CjF3Ym": {
+          "type": "menu-promotion-large",
+          "settings": {
+            "dropdown_link_title": "",
+            "desktop_image": "shopify://shop_images/download.webp",
+            "enable_fade": false,
+            "image_position": "left",
+            "subheading": "Tell youradsadasd story",
+            "title": "Wide menu pasdasdromotion",
+            "text": "<p>Pair text with an image to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>",
+            "button_1_label": "Shop this",
+            "button_1_link": "",
+            "button_1_style": "secondary",
+            "button_2_label": "Shop all",
+            "button_2_link": "",
+            "button_2_style": "primary",
+            "text_alignment": "center",
+            "show_countdown": false,
+            "countdown_position": "under-heading",
+            "end_date": "",
+            "end_time": "",
+            "end_text": "",
+            "hide_on_end": false,
+            "number_size": 40,
+            "number_font": "base",
+            "divider_type": "colon",
+            "show_timer_labels": true
+          }
+        }
+      },
+      "block_order": [
+        "menu_promotion_large_CjF3Ym"
+      ],
       "settings": {
         "logo": "shopify://shop_images/logo-menu.webp",
         "logo_img_width_int": 200,

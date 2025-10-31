@@ -70,7 +70,7 @@
           "settings": {
             "enable_media": true,
             "title": "Essentials",
-            "text": "<p>Everyones favourites, you&#x27;ll wear on repeat.<br/>New colours for Spring.</p>",
+            "text": "<p>Everyones favourites, you'll wear on repeat.<br/>New colours for Spring.</p>",
             "button_label": "",
             "link": ""
           }
@@ -569,7 +569,7 @@
       "settings": {
         "title": "Blog posts",
         "blog": "",
-        "post_limit": 3,
+        "post_limit": 6,
         "show_author": true,
         "show_date": true,
         "show_excerpts": true,
