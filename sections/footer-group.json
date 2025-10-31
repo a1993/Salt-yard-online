@@ -25,7 +25,7 @@
         "1601308717434": {
           "type": "text",
           "settings": {
-            "title": "About Us",
+            "title": "",
             "text": "<p>Lavivid provides premium, handcrafted men’s hair replacement systems at competitive prices and offering personalized, non-surgical solutions.<br/><br/>Wholesale Enquiries: <span style=\"text-decoration:underline\">salon@lavividhair.com</span><br/>Wholesale WhatsApp: <span style=\"text-decoration:underline\">+44 7419 360064</span></p>",
             "image": "shopify://shop_images/logo1.png",
             "image_width": 140,
@@ -44,7 +44,7 @@
         "menu_GA93cd": {
           "type": "menu",
           "settings": {
-            "title": "Quick links",
+            "title": "Explore",
             "menu": "footer"
           }
         },
