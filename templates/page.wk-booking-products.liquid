@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="https://booking-app.webkul.com/css/wk_bc_front.css">
+<link rel="stylesheet" href="https://booking-app.webkul.com/css/daterangepicker.css">
+<link rel="stylesheet" href="https://booking-app.webkul.com/css/wk_bc_product_page.css">
+
+
+<div class="div-new-spin-loader">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44px" height="44px" viewBox="0 0 44 44" version="1.1">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>loader</title>
+    <desc>Created with Sketch.</desc>
+    <defs/>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="All-Booking-Products" transform="translate(-314.000000, -113.000000)" fill="#F45B4F" fill-rule="nonzero">
+            <path d="M353.438377,121.610367 L353.449608,121.600012 C356.303293,125.310569 358,129.957141 358,135 C358,147.150264 348.150264,157 336,157 C323.849736,157 314,147.150264 314,135 C314,122.849736 323.849736,113 336,113 C336.257407,113 336.513781,113.004421 336.769051,113.01319 C336.844827,113.004478 336.92189,113 337,113 C338.104569,113 339,113.895431 339,115 C339,116.104569 338.104569,117 337,117 C336.91607,117 336.833348,116.99483 336.752134,116.984792 L336.751802,117.015416 C336.50248,117.005172 336.251844,117 336,117 C326.058875,117 318,125.058875 318,135 C318,144.941125 326.058875,153 336,153 C345.941125,153 354,144.941125 354,135 C354,131.003751 352.697708,127.311668 350.494362,124.32499 L350.498482,124.321191 C350.188205,123.968839 350,123.506398 350,123 C350,121.895431 350.895431,121 352,121 C352.564682,121 353.074706,121.23402 353.438377,121.610367 Z" id="loader"/>
+        </g>
+    </g>
+</svg>
+  <p>{{ shop.metafields.bc_labels.label_59 | default:"Loading, Please wait..." }}</p>
+</div>
+
+<div id ="wk-MainContent"></div>
+
+<style>
+  .div-new-spin-loader{
+    text-align: center;
+    margin-top: 15%;
+    margin-bottom: 15%;
+    background-color: rgba(255,255,255,.85);
+    font-family: 'Cabin',sans-serif;
+  }
+.div-new-spin-loader svg{
+    animation: spin .55s infinite ease-in-out;
+  }
+  
+  @keyframes spin{
+    0%{
+        transform: rotate(-360deg);
+    }
+  }
+</style>
