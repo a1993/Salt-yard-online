@@ -1,1 +1,195 @@
-{"type":"header","name":"Header Group","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-1":{"type":"announcement","settings":{"text":"Up to 50% off. <a href=\"#\" title=\"Sale\">Shop the Sale<\/a>","show_countdown":true,"hide_on_end":false,"end_date":"","end_time":"","number_font":"base","countdown_separator":"box","use_custom_colors":false,"bg_color":"#202020","bg_gradient":"","text_color":"#ffffff"}},"announcement-2":{"type":"announcement","settings":{"text":"Our favorite bomber jacket is back. <a href=\"#\" title=\"Recycled Bomber Jacket\">Shop now.<\/a>","show_countdown":false,"hide_on_end":false,"end_date":"","end_time":"","number_font":"base","countdown_separator":"box","use_custom_colors":false,"bg_color":"#202020","bg_gradient":"","text_color":"#ffffff"}},"10a25077-3fc8-40d4-8f01-e898f98f6f78":{"type":"announcement","settings":{"text":"Free shipping on all orders over $150","show_countdown":false,"hide_on_end":false,"end_date":"","end_time":"","number_font":"base","countdown_separator":"box","use_custom_colors":false,"bg_color":"#202020","bg_gradient":"","text_color":"#ffffff"}}},"block_order":["announcement-1","announcement-2","10a25077-3fc8-40d4-8f01-e898f98f6f78"],"settings":{"message_font_size":12,"announcement_bar_col":"#202020","announcement_bar_gradient":"","announcement_text_col":"#ffffff","show_social_icons":true,"menu":"","enable_country_selector":true,"enable_language_selector":true}},"header":{"type":"header","settings":{"logo":"shopify:\/\/shop_images\/logo-menu.webp","logo_img_width_int":145,"mobile_logo_img_width_int":125,"logo_h1":true,"enable_sticky":true,"enable_transparent":false,"transparent_logo":"shopify:\/\/shop_images\/logo-menu.webp","transparent_color":"#ffffff","transparent_fade":"#000000","transparent_fade_strength":55,"menu_linklist":"main-menu","menu_layout":"inline-menu-center","nav_featured_link":"Sale","menu_linklist_mobile":"","mobile_expand_with_entire_link":true,"enable_mobile_promo_carousel":true,"enable_nav_mob_products":false,"nav_mob_products_title":"Best Sellers","nav_mob_products_collection":"","enable_search":true,"search_recommendations_title":"","search_recommendations_menu":"","icon_strategy":"icons_cart_search","cart_icon":"bag"}},"store-messages":{"type":"store-messages","blocks":{"1601308104445":{"type":"message","settings":{"heading":"","subheading":"Free shipping on orders over $100","link_url":""}},"1601308125690":{"type":"message","settings":{"heading":"","subheading":"Free Click & Collect to US stores*","link_url":""}},"1601308127822":{"type":"message","settings":{"heading":"","subheading":"Free and easy domestic returns","link_url":""}}},"block_order":["1601308104445","1601308125690","1601308127822"],"settings":{"head_not_home_only":false,"head_not_col_bg":"#f7f7f8","head_not_col_txt1":"#171717","head_not_col_txt2":"#4c4c4b","head_not_mob_show":true,"head_not_mob_text":"Free shipping on orders over $100","head_not_mob_url":""}}},"order":["announcement-bar","header","store-messages"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header Group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Up to 50% off. <a href=\"#\" title=\"Sale\">Shop the Sale</a>",
+            "show_countdown": true,
+            "hide_on_end": false,
+            "end_date": "",
+            "end_time": "",
+            "number_font": "base",
+            "countdown_separator": "box",
+            "use_custom_colors": false,
+            "bg_color": "#202020",
+            "bg_gradient": "",
+            "text_color": "#ffffff"
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Our favorite bomber jacket is back. <a href=\"#\" title=\"Recycled Bomber Jacket\">Shop now.</a>",
+            "show_countdown": false,
+            "hide_on_end": false,
+            "end_date": "",
+            "end_time": "",
+            "number_font": "base",
+            "countdown_separator": "box",
+            "use_custom_colors": false,
+            "bg_color": "#202020",
+            "bg_gradient": "",
+            "text_color": "#ffffff"
+          }
+        },
+        "10a25077-3fc8-40d4-8f01-e898f98f6f78": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free shipping on all orders over $150",
+            "show_countdown": false,
+            "hide_on_end": false,
+            "end_date": "",
+            "end_time": "",
+            "number_font": "base",
+            "countdown_separator": "box",
+            "use_custom_colors": false,
+            "bg_color": "#202020",
+            "bg_gradient": "",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "announcement-1",
+        "announcement-2",
+        "10a25077-3fc8-40d4-8f01-e898f98f6f78"
+      ],
+      "settings": {
+        "message_font_size": 12,
+        "announcement_bar_col": "#202020",
+        "announcement_bar_gradient": "",
+        "announcement_text_col": "#ffffff",
+        "show_social_icons": true,
+        "menu": "",
+        "enable_country_selector": true,
+        "enable_language_selector": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "menu_promotion_large_CjF3Ym": {
+          "type": "menu-promotion-large",
+          "settings": {
+            "dropdown_link_title": "hgfzhs",
+            "desktop_image": "shopify://shop_images/download.webp",
+            "enable_fade": true,
+            "image_position": "left",
+            "subheading": "Tell youradsadasd story",
+            "title": "Wide menu pasdasdromotion",
+            "text": "<p>Pair text with an image to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>",
+            "button_1_label": "Shop this",
+            "button_1_link": "shopify://products/15-restocking-fee",
+            "button_1_style": "secondary",
+            "button_2_label": "Shop all",
+            "button_2_link": "",
+            "button_2_style": "primary",
+            "text_alignment": "center",
+            "show_countdown": false,
+            "countdown_position": "under-heading",
+            "end_date": "",
+            "end_time": "",
+            "end_text": "",
+            "hide_on_end": false,
+            "number_size": 40,
+            "number_font": "base",
+            "divider_type": "colon",
+            "show_timer_labels": true
+          }
+        }
+      },
+      "block_order": [
+        "menu_promotion_large_CjF3Ym"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/logo-menu.webp",
+        "logo_img_width_int": 200,
+        "mobile_logo_img_width_int": 125,
+        "logo_h1": true,
+        "enable_sticky": true,
+        "enable_transparent": false,
+        "transparent_logo": "shopify://shop_images/logo-menu.webp",
+        "transparent_color": "#ffffff",
+        "transparent_fade": "#000000",
+        "transparent_fade_strength": 55,
+        "menu_linklist": "main-menu",
+        "menu_layout": "inline-menu-left",
+        "nav_featured_link": "Sale",
+        "menu_linklist_mobile": "",
+        "mobile_expand_with_entire_link": true,
+        "enable_mobile_promo_carousel": true,
+        "enable_nav_mob_products": true,
+        "nav_mob_products_title": "Best Sellers",
+        "nav_mob_products_collection": "best-seller-2025",
+        "enable_search": true,
+        "search_recommendations_title": "Lavivid is where you find confidence",
+        "search_recommendations_menu": "",
+        "icon_strategy": "icons_all",
+        "cart_icon": "bag"
+      }
+    },
+    "store-messages": {
+      "type": "store-messages",
+      "blocks": {
+        "1601308104445": {
+          "type": "message",
+          "settings": {
+            "heading": "",
+            "subheading": "Free shipping on orders over $100",
+            "link_url": ""
+          }
+        },
+        "1601308125690": {
+          "type": "message",
+          "settings": {
+            "heading": "",
+            "subheading": "Free Click & Collect to US stores*",
+            "link_url": ""
+          }
+        },
+        "1601308127822": {
+          "type": "message",
+          "settings": {
+            "heading": "",
+            "subheading": "Free and easy domestic returns",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "1601308104445",
+        "1601308125690",
+        "1601308127822"
+      ],
+      "disabled": true,
+      "settings": {
+        "head_not_home_only": false,
+        "head_not_col_bg": "#f7f7f8",
+        "head_not_col_txt1": "#171717",
+        "head_not_col_txt2": "#4c4c4b",
+        "head_not_mob_show": true,
+        "head_not_mob_text": "Free shipping on orders over $100",
+        "head_not_mob_url": ""
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "store-messages"
+  ]
+}
