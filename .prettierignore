@@ -1,0 +1,28 @@
+# 依赖
+node_modules/
+
+# Shopify CLI
+.shopify/
+
+# 构建产物
+dist/
+build/
+
+# 第三方代码（PageFly 等）
+assets/pagefly-*.css
+assets/pagefly-*.js
+snippets/pagefly-*.liquid
+snippets/pf-*.liquid
+sections/pagefly-*.liquid
+
+# 压缩文件
+*.min.js
+*.min.css
+
+# 配置
+package-lock.json
+yarn.lock
+
+# 日志
+*.log
+

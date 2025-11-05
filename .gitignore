@@ -1,0 +1,50 @@
+# Shopify CLI
+.shopify
+
+# Node modules
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Config files (可能包含敏感信息)
+config.yml
+
+# Backup files
+*.bak
+*.backup
+
+# Theme Kit (旧版工具)
+config.yml
+

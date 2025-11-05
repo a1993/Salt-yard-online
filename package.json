@@ -1,0 +1,33 @@
+{
+  "name": "salt-yard-online-theme",
+  "version": "1.0.0",
+  "description": "Salt Yard Online - Shopify Theme",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev",
+    "push": "shopify theme push",
+    "pull": "shopify theme pull",
+    "check": "shopify theme check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:liquid": "shopify theme check",
+    "lint:js": "eslint assets/*.js --fix",
+    "lint": "npm run lint:liquid && npm run lint:js",
+    "validate": "npm run format && npm run lint"
+  },
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.5.3",
+    "@shopify/theme-check-node": "^2.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "shopify",
+    "theme",
+    "ecommerce"
+  ]
+}

@@ -1,0 +1,37 @@
+# 根据文件路径自动添加标签
+
+feature:
+  - 'feature/**'
+
+hotfix:
+  - 'hotfix/**'
+
+release:
+  - 'release/**'
+
+documentation:
+  - '**/*.md'
+  - 'docs/**'
+
+assets:
+  - 'assets/**'
+
+templates:
+  - 'templates/**'
+  - 'sections/**'
+  - 'snippets/**'
+  - 'layout/**'
+
+config:
+  - 'config/**'
+  - '*.json'
+  - '*.yml'
+  - '*.yaml'
+
+locales:
+  - 'locales/**'
+
+workflows:
+  - '.github/workflows/**'
+
+

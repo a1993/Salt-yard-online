@@ -1,0 +1,62 @@
+# Shopify Theme Check Configuration
+# https://shopify.dev/docs/themes/tools/theme-check
+
+root: .
+
+ignore:
+  - node_modules
+  - assets/pagefly-*
+  - snippets/pagefly-*
+  - snippets/pf-*
+
+# 启用的检查规则
+DeprecatedTags:
+  enabled: true
+  severity: error
+
+DeprecatedFilters:
+  enabled: true
+  severity: error
+
+LiquidTag:
+  enabled: true
+  severity: error
+
+MissingTemplate:
+  enabled: true
+  severity: error
+
+ParserBlockingJavaScript:
+  enabled: true
+  severity: warning
+
+RemoteAsset:
+  enabled: true
+  severity: warning
+
+UnusedAssign:
+  enabled: true
+  severity: suggestion
+
+UnknownFilter:
+  enabled: true
+  severity: error
+
+SyntaxError:
+  enabled: true
+  severity: error
+
+# 代码风格
+ValidHTMLTranslation:
+  enabled: true
+  severity: suggestion
+
+MatchingTranslations:
+  enabled: true
+  severity: suggestion
+
+TranslationKeyExists:
+  enabled: true
+  severity: warning
+
+
