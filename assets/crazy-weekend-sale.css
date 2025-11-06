@@ -12,6 +12,7 @@
 .product-grid--crazy {
   display: flex;
   flex-wrap: wrap;
+  gap: unset;
 }
 
 /* Mobile Responsive Styles */
@@ -28,4 +29,3 @@
     padding: 0 2rem;
   }
 }
-
