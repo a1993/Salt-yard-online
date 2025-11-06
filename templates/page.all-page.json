@@ -16,14 +16,99 @@
         "full_width": false
       }
     },
+    "common_banner_fLFPey": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/banner_1.webp",
+        "banner_mobile": "shopify://shop_images/banner_m_1.webp",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "standard",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
     "halloween_hair_system_sale_78n8pw": {
       "type": "halloween-hair-system-sale",
       "blocks": {
-        "product_category_7WDFxz": {
+        "product_category_cKeaTk": {
           "type": "product_category",
           "settings": {
+            "category_title": "Easy Wear, Effortless Start",
+            "category_description": "Low Maintenance Skin Base",
             "tag_image": "shopify://shop_images/tag.webp",
             "category_discount_percent": 0
+          }
+        },
+        "product_item_qEYmAE": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 2,
+            "product": "",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_rT6Ttd": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 2,
+            "product": "",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_8bPa7j": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 2,
+            "product": "",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_TdJeDe": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 2,
+            "product": "",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_category_QqEJi6": {
+          "type": "product_category",
+          "settings": {
+            "category_title": "Easy Wear, Effortless Start",
+            "category_description": "Low Maintenance Skin Base",
+            "tag_image": "shopify://shop_images/tag.webp",
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_RUbeH7": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
           }
         },
         "product_item_UaPBaq": {
@@ -73,14 +158,33 @@
             "custom_compare_price": "",
             "custom_discount_percent": 0
           }
+        },
+        "firework_feed_w4XN4M": {
+          "type": "firework_feed",
+          "settings": {
+            "playlist": "5bJBa2",
+            "channel": "lavivid_hair",
+            "mode": "row",
+            "open_in": "default",
+            "max_videos": 0,
+            "placement": "middle",
+            "player_placement": "bottom-left"
+          }
         }
       },
       "block_order": [
-        "product_category_7WDFxz",
+        "product_category_cKeaTk",
+        "product_item_qEYmAE",
+        "product_item_rT6Ttd",
+        "product_item_8bPa7j",
+        "product_item_TdJeDe",
+        "product_category_QqEJi6",
+        "product_item_RUbeH7",
         "product_item_UaPBaq",
         "product_item_zXFTPH",
         "product_item_dNLqdr",
-        "product_item_aeEFqx"
+        "product_item_aeEFqx",
+        "firework_feed_w4XN4M"
       ],
       "name": "Halloween Sale",
       "settings": {
@@ -92,6 +196,7 @@
   },
   "order": [
     "main",
+    "common_banner_fLFPey",
     "halloween_hair_system_sale_78n8pw"
   ]
 }
