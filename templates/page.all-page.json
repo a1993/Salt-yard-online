@@ -15,9 +15,83 @@
         "show_page_title": false,
         "full_width": false
       }
+    },
+    "halloween_hair_system_sale_78n8pw": {
+      "type": "halloween-hair-system-sale",
+      "blocks": {
+        "product_category_7WDFxz": {
+          "type": "product_category",
+          "settings": {
+            "tag_image": "shopify://shop_images/tag.webp",
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_UaPBaq": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_zXFTPH": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_dNLqdr": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_aeEFqx": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        }
+      },
+      "block_order": [
+        "product_category_7WDFxz",
+        "product_item_UaPBaq",
+        "product_item_zXFTPH",
+        "product_item_dNLqdr",
+        "product_item_aeEFqx"
+      ],
+      "name": "Halloween Sale",
+      "settings": {
+        "banner_alt": "Halloween Hair System Sale",
+        "background_gradient": "linear-gradient(180deg, rgba(228, 210, 201, 1), rgba(244, 246, 248, 1) 100%)",
+        "show_reviews": false
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "halloween_hair_system_sale_78n8pw"
   ]
 }
