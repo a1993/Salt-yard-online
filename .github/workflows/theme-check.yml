@@ -1,10 +1,11 @@
 name: Theme Check
 
 on:
-  push:
-    branches: [main, develop, 'release/**', 'hotfix/**']
-  pull_request:
-    branches: [main, develop]
+  workflow_dispatch: # 仅手动触发
+  # push:
+  #   branches: [main, develop, 'release/**', 'hotfix/**']
+  # pull_request:
+  #   branches: [main, develop]
 
 jobs:
   theme-check:

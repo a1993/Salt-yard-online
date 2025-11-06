@@ -1,15 +1,15 @@
 name: Deploy to Shopify
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  workflow_dispatch: # 仅手动触发
+  # push:
+  #   branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy Theme
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,5 +29,3 @@ jobs:
         run: |
           shopify theme push --allow-live --path=.
         # 注意：生产环境部署需要谨慎，建议先推送到非live主题
-
-

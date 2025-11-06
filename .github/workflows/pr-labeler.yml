@@ -1,20 +1,21 @@
 name: PR Labeler
 
 on:
-  pull_request:
-    types: [opened, edited, synchronize]
+  workflow_dispatch: # 仅手动触发
+  # pull_request:
+  #   types: [opened, edited, synchronize]
 
 jobs:
   label:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    
+
     steps:
       - name: Label based on branch
         uses: actions/labeler@v4
         with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
           configuration-path: .github/labeler.yml
 
       - name: Label based on size
@@ -30,5 +31,3 @@ jobs:
           l_label: 'size/l'
           l_max_size: 1000
           xl_label: 'size/xl'
-
-
