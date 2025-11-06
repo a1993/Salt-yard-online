@@ -576,112 +576,6 @@
         "crop_ratio": "1.78",
         "color_scheme": "default"
       }
-    },
-    "common_content_area_JGT4Qg": {
-      "type": "common-content-area",
-      "blocks": {
-        "text_mg9Mgc": {
-          "type": "text",
-          "settings": {
-            "content": "",
-            "text_align": "left",
-            "text_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "text_mg9Mgc"
-      ],
-      "name": "内容区域 Content",
-      "settings": {
-        "container_width": "standard",
-        "container_padding": "medium",
-        "spacing_top": "medium",
-        "spacing_bottom": "medium",
-        "background_color": "",
-        "background_gradient": ""
-      }
-    },
-    "video_with_text_rQxG9G": {
-      "type": "video-with-text",
-      "blocks": {
-        "heading_8iN4Px": {
-          "type": "heading",
-          "settings": {
-            "title": "Video with text",
-            "use_h1": false
-          }
-        },
-        "text_J6XwYH": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with a video to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>",
-            "enlarge_text": false
-          }
-        },
-        "button_fYmMY9": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button text",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_8iN4Px",
-        "text_J6XwYH",
-        "button_fYmMY9"
-      ],
-      "name": "Video with text",
-      "settings": {
-        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_description": "",
-        "autoplay": false,
-        "video_position": "left",
-        "text_alignment": "center",
-        "color_scheme": "default"
-      }
-    },
-    "crazy_weekend_sale_gNiMiF": {
-      "type": "crazy-weekend-sale",
-      "blocks": {
-        "product_item_AGDWG6": {
-          "type": "product_item",
-          "settings": {
-            "product_image": "shopify://shop_images/goods1.webp",
-            "product_title": "Upgrade Eros Men’s Hair System",
-            "product_desc": "",
-            "old_price": "269",
-            "new_price": "215.20",
-            "product_url": "",
-            "button_text": "Shop Now >",
-            "card_type": "type1"
-          }
-        },
-        "product_item_YtbFnH": {
-          "type": "product_item",
-          "settings": {
-            "product_image": "shopify://shop_images/goods1.webp",
-            "product_title": "Upgrade Eros Men’s Hair System",
-            "product_desc": "",
-            "old_price": "269",
-            "new_price": "215.20",
-            "product_url": "",
-            "button_text": "Shop Now >",
-            "card_type": "type1"
-          }
-        }
-      },
-      "block_order": [
-        "product_item_AGDWG6",
-        "product_item_YtbFnH"
-      ],
-      "name": "Crazy Weekend Sale",
-      "settings": {
-        "banner_alt": "Crazy Weekend Sale",
-        "currency_symbol": "$"
-      }
     }
   },
   "order": [
@@ -698,9 +592,6 @@
     "custom_content_M4V8ip",
     "16148743091427bc38",
     "1478606404805",
-    "featured_blog_3mVGNT",
-    "common_content_area_JGT4Qg",
-    "video_with_text_rQxG9G",
-    "crazy_weekend_sale_gNiMiF"
+    "featured_blog_3mVGNT"
   ]
 }
