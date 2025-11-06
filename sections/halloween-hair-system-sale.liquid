@@ -25,78 +25,105 @@
   <div class='halloween-sale-content lv-container'>
     {% assign category_index = 0 %}
     {% for block in section.blocks %}
-      {% if block.type == 'product_category' %}
-        {% assign category_index = category_index | plus: 1 %}
-        <div class='halloween-category' {{ block.shopify_attributes }}>
-          {% render 'common-heading',
-            title: block.settings.category_title,
-            subtitle: block.settings.category_description,
-            align: 'left',
-            title_size: 'large',
-            subtitle_size: 'medium',
-            title_color: '#1d1e20',
-            subtitle_color: '#666'
-          %}
-          <!-- Product Swiper -->
-          <div class='halloween-swiper-container' data-category-index='{{ category_index }}'>
-            <div class='halloween-swiper'>
-              <div class='halloween-swiper-wrapper'>
-                {% comment %} 遍历该分类下的所有产品块 {% endcomment %}
-                {% for product_block in section.blocks %}
-                  {% if product_block.type == 'product_item' %}
-                    {% assign parent_category_number = product_block.settings.parent_category_number
-                      | plus: 0
-                    %}
-                    {% if parent_category_number == category_index %}
-                      {% assign product = product_block.settings.product %}
+      {% case block.type %}
+        {% when 'heading' %}
+          {% comment %} 通用标题模块 {% endcomment %}
+          <div {{ block.shopify_attributes }}>
+            {% render 'common-heading',
+              title: block.settings.title,
+              subtitle: block.settings.subtitle,
+              tag: block.settings.title_tag,
+              subtitle_tag: block.settings.subtitle_tag,
+              align: block.settings.align,
+              title_size: block.settings.title_size,
+              subtitle_size: block.settings.subtitle_size,
+              title_color: block.settings.title_color,
+              subtitle_color: block.settings.subtitle_color,
+              spacing_top: block.settings.spacing_top,
+              spacing_bottom: block.settings.spacing_bottom
+            %}
+          </div>
 
-                      {% if product %}
-                        <div class='halloween-swiper-slide' {{ product_block.shopify_attributes }}>
-                          {% render 'product-card-halloween',
-                            product: product,
-                            show_reviews: section.settings.show_reviews,
-                            button_text: product_block.settings.button_text,
-                            tag_image: block.settings.tag_image,
-                            custom_image: product_block.settings.custom_image,
-                            custom_title: product_block.settings.custom_title,
-                            custom_description: product_block.settings.custom_description,
-                            custom_compare_price: product_block.settings.custom_compare_price,
-                            custom_discount_percent: product_block.settings.custom_discount_percent,
-                            category_discount_percent: block.settings.category_discount_percent
-                          %}
-                        </div>
+        {% when 'product_category' %}
+          {% comment %} 产品分类模块 {% endcomment %}
+          {% assign category_index = category_index | plus: 1 %}
+          <div class='halloween-category' {{ block.shopify_attributes }}>
+            {% render 'common-heading',
+              title: block.settings.category_title,
+              subtitle: block.settings.category_description,
+              align: 'left',
+              title_size: 'large',
+              subtitle_size: 'medium',
+              title_color: '#1d1e20',
+              subtitle_color: '#666'
+            %}
+            <!-- Product Swiper -->
+            <div class='halloween-swiper-container' data-category-index='{{ category_index }}'>
+              <div class='halloween-swiper'>
+                <div class='halloween-swiper-wrapper'>
+                  {% comment %} 遍历该分类下的所有产品块 {% endcomment %}
+                  {% for product_block in section.blocks %}
+                    {% if product_block.type == 'product_item' %}
+                      {% assign parent_category_number = product_block.settings.parent_category_number
+                        | plus: 0
+                      %}
+                      {% if parent_category_number == category_index %}
+                        {% assign product = product_block.settings.product %}
+
+                        {% if product %}
+                          <div
+                            class='halloween-swiper-slide'
+                            {{ product_block.shopify_attributes }}
+                          >
+                            {% render 'product-card-halloween',
+                              product: product,
+                              show_reviews: section.settings.show_reviews,
+                              button_text: product_block.settings.button_text,
+                              tag_image: block.settings.tag_image,
+                              custom_image: product_block.settings.custom_image,
+                              custom_title: product_block.settings.custom_title,
+                              custom_description: product_block.settings.custom_description,
+                              custom_compare_price: product_block.settings.custom_compare_price,
+                              custom_discount_percent: product_block.settings.custom_discount_percent,
+                              category_discount_percent: block.settings.category_discount_percent
+                            %}
+                          </div>
+                        {% endif %}
                       {% endif %}
                     {% endif %}
-                  {% endif %}
-                {% endfor %}
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- Navigation Buttons -->
+              <div class='halloween-swiper-button-prev halloween-swiper-button-prev-{{ category_index }}'>
+                <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                  <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class='halloween-swiper-button-next halloween-swiper-button-next-{{ category_index }}'>
+                <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+                  <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
               </div>
             </div>
-
-            <!-- Navigation Buttons -->
-            <div class='halloween-swiper-button-prev halloween-swiper-button-prev-{{ category_index }}'>
-              <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
-                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class='halloween-swiper-button-next halloween-swiper-button-next-{{ category_index }}'>
-              <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
-                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
           </div>
-        </div>
-      {% endif %}
-    {% endfor %}
 
-    {% render 'firework-feed',
-      channel: 'lavivid_hair',
-      mode: 'row',
-      open_in: 'default',
-      max_videos: 0,
-      placement: 'middle',
-      player_placement: 'bottom-left',
-      playlist: '5bJBa2'
-    %}
+        {% when 'firework_feed' %}
+          {% comment %} Firework Feed 模块 {% endcomment %}
+          <div {{ block.shopify_attributes }}>
+            {% render 'firework-feed',
+              channel: block.settings.channel,
+              mode: block.settings.mode,
+              open_in: block.settings.open_in,
+              max_videos: block.settings.max_videos,
+              placement: block.settings.placement,
+              player_placement: block.settings.player_placement,
+              playlist: block.settings.playlist
+            %}
+          </div>
+      {% endcase %}
+    {% endfor %}
   </div>
 </div>
 
@@ -146,9 +173,142 @@
   ],
   "blocks": [
     {
+      "type": "heading",
+      "name": "Heading",
+      "settings": [
+        {
+          "type": "header",
+          "content": "标题内容"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "主标题",
+          "default": "Section Title"
+        },
+        {
+          "type": "select",
+          "id": "title_tag",
+          "label": "主标题 HTML 标签",
+          "options": [
+            { "value": "h1", "label": "H1" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ],
+          "default": "h2"
+        },
+        {
+          "type": "select",
+          "id": "title_size",
+          "label": "主标题大小",
+          "options": [
+            { "value": "small", "label": "小" },
+            { "value": "medium", "label": "中" },
+            { "value": "large", "label": "大" },
+            { "value": "xlarge", "label": "超大" }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "color",
+          "id": "title_color",
+          "label": "主标题颜色"
+        },
+        {
+          "type": "textarea",
+          "id": "subtitle",
+          "label": "副标题"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_tag",
+          "label": "副标题 HTML 标签",
+          "options": [
+            { "value": "p", "label": "P" },
+            { "value": "span", "label": "Span" },
+            { "value": "h3", "label": "H3" },
+            { "value": "h4", "label": "H4" },
+            { "value": "h5", "label": "H5" },
+            { "value": "h6", "label": "H6" }
+          ],
+          "default": "p"
+        },
+        {
+          "type": "select",
+          "id": "subtitle_size",
+          "label": "副标题大小",
+          "options": [
+            { "value": "small", "label": "小" },
+            { "value": "medium", "label": "中" },
+            { "value": "large", "label": "大" }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "color",
+          "id": "subtitle_color",
+          "label": "副标题颜色"
+        },
+        {
+          "type": "header",
+          "content": "布局设置"
+        },
+        {
+          "type": "select",
+          "id": "align",
+          "label": "文本对齐",
+          "options": [
+            { "value": "left", "label": "左对齐" },
+            { "value": "center", "label": "居中" },
+            { "value": "right", "label": "右对齐" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "spacing_top",
+          "label": "上间距",
+          "options": [
+            { "value": "none", "label": "无" },
+            { "value": "small", "label": "小" },
+            { "value": "medium", "label": "中" },
+            { "value": "large", "label": "大" }
+          ],
+          "default": "medium"
+        },
+        {
+          "type": "select",
+          "id": "spacing_bottom",
+          "label": "下间距",
+          "options": [
+            { "value": "none", "label": "无" },
+            { "value": "small", "label": "小" },
+            { "value": "medium", "label": "中" },
+            { "value": "large", "label": "大" }
+          ],
+          "default": "medium"
+        }
+      ]
+    },
+    {
       "type": "product_category",
       "name": "Product Category",
       "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category Title",
+          "default": "Category Name"
+        },
+        {
+          "type": "textarea",
+          "id": "category_description",
+          "label": "Category Description",
+          "default": "Category description text"
+        },
         {
           "type": "image_picker",
           "id": "tag_image",
@@ -229,6 +389,125 @@
           "label": "Custom Discount %",
           "default": 0,
           "info": "Set to 0 to use category or system discount. Or set custom % for this product. Example: 20 for 20% OFF"
+        }
+      ]
+    },
+    {
+      "type": "firework_feed",
+      "name": "Firework Feed",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Playlist Settings"
+        },
+        {
+          "type": "text",
+          "id": "playlist",
+          "label": "Firework Playlist ID",
+          "default": "5bJBa2",
+          "info": "Enter Firework playlist ID (e.g., 5bJBa2)"
+        },
+        {
+          "type": "header",
+          "content": "Display Settings"
+        },
+        {
+          "type": "text",
+          "id": "channel",
+          "label": "Channel Name",
+          "default": "lavivid_hair",
+          "info": "Firework channel name"
+        },
+        {
+          "type": "select",
+          "id": "mode",
+          "label": "Display Mode",
+          "options": [
+            {
+              "value": "row",
+              "label": "Row"
+            },
+            {
+              "value": "grid",
+              "label": "Grid"
+            },
+            {
+              "value": "feed",
+              "label": "Feed"
+            }
+          ],
+          "default": "row"
+        },
+        {
+          "type": "select",
+          "id": "open_in",
+          "label": "Open In",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "modal",
+              "label": "Modal"
+            },
+            {
+              "value": "new_tab",
+              "label": "New Tab"
+            }
+          ],
+          "default": "default"
+        },
+        {
+          "type": "number",
+          "id": "max_videos",
+          "label": "Max Videos",
+          "default": 0,
+          "info": "Maximum number of videos to display (0 = unlimited)"
+        },
+        {
+          "type": "select",
+          "id": "placement",
+          "label": "Placement",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom"
+            }
+          ],
+          "default": "middle"
+        },
+        {
+          "type": "select",
+          "id": "player_placement",
+          "label": "Player Placement",
+          "options": [
+            {
+              "value": "top-left",
+              "label": "Top Left"
+            },
+            {
+              "value": "top-right",
+              "label": "Top Right"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom Left"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom Right"
+            }
+          ],
+          "default": "bottom-left"
         }
       ]
     }
