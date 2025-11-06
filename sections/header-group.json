@@ -194,7 +194,7 @@
         "banner_mobile": "shopify://shop_images/banner_m_1.webp",
         "alt_text": "Banner",
         "link_url": "",
-        "width_mode": "standard",
+        "width_mode": "full",
         "spacing_top": "none",
         "spacing_bottom": "none",
         "lazy_load": false
