@@ -13,11 +13,11 @@
       "type": "main-page",
       "disabled": true,
       "settings": {
-        "show_page_title": false,
+        "show_page_title": true,
         "full_width": false
       }
     },
-    "common_banner_fLFPey": {
+    "common_banner_MYM7wY": {
       "type": "common-banner",
       "name": "横幅 Banner",
       "settings": {
@@ -25,87 +25,41 @@
         "banner_mobile": "shopify://shop_images/banner_m_1.webp",
         "alt_text": "Banner",
         "link_url": "",
-        "width_mode": "full",
+        "width_mode": "standard",
         "spacing_top": "none",
         "spacing_bottom": "none",
         "lazy_load": false
       }
     },
-    "halloween_hair_system_sale_78n8pw": {
-      "type": "halloween-hair-system-sale",
+    "flash_sale_Mfj7aj": {
+      "type": "flash-sale",
       "blocks": {
-        "product_category_cKeaTk": {
-          "type": "product_category",
+        "product_tab_Jtdn3H": {
+          "type": "product_tab",
           "settings": {
-            "category_title": "Easy Wear, Effortless Start",
-            "category_description": "Low Maintenance Skin Base",
-            "tag_image": "shopify://shop_images/tag.webp",
-            "category_discount_percent": 0
+            "tab_title": "Product Category",
+            "discount_percent": 0
           }
         },
-        "product_item_qEYmAE": {
+        "product_tab_ynrQVL": {
+          "type": "product_tab",
+          "settings": {
+            "tab_title": "Product Category",
+            "discount_percent": 0
+          }
+        },
+        "product_tab_FrnhyX": {
+          "type": "product_tab",
+          "settings": {
+            "tab_title": "Product Category",
+            "discount_percent": 0
+          }
+        },
+        "product_item_j8UpKa": {
           "type": "product_item",
           "settings": {
-            "parent_category_number": 2,
-            "product": "",
-            "button_text": "Shop Now",
-            "custom_title": "",
-            "custom_description": "",
-            "custom_compare_price": "",
-            "custom_discount_percent": 0
-          }
-        },
-        "product_item_rT6Ttd": {
-          "type": "product_item",
-          "settings": {
-            "parent_category_number": 2,
-            "product": "",
-            "button_text": "Shop Now",
-            "custom_title": "",
-            "custom_description": "",
-            "custom_compare_price": "",
-            "custom_discount_percent": 0
-          }
-        },
-        "product_item_8bPa7j": {
-          "type": "product_item",
-          "settings": {
-            "parent_category_number": 2,
-            "product": "",
-            "button_text": "Shop Now",
-            "custom_title": "",
-            "custom_description": "",
-            "custom_compare_price": "",
-            "custom_discount_percent": 0
-          }
-        },
-        "product_item_TdJeDe": {
-          "type": "product_item",
-          "settings": {
-            "parent_category_number": 2,
-            "product": "",
-            "button_text": "Shop Now",
-            "custom_title": "",
-            "custom_description": "",
-            "custom_compare_price": "",
-            "custom_discount_percent": 0
-          }
-        },
-        "product_category_QqEJi6": {
-          "type": "product_category",
-          "settings": {
-            "category_title": "Easy Wear, Effortless Start",
-            "category_description": "Low Maintenance Skin Base",
-            "tag_image": "shopify://shop_images/tag.webp",
-            "category_discount_percent": 0
-          }
-        },
-        "product_item_RUbeH7": {
-          "type": "product_item",
-          "settings": {
-            "parent_category_number": 1,
-            "product": "",
-            "button_text": "Shop Now",
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link",
             "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
             "custom_title": "",
             "custom_description": "",
@@ -113,92 +67,131 @@
             "custom_discount_percent": 0
           }
         },
-        "product_item_UaPBaq": {
+        "product_item_Pr43mR": {
           "type": "product_item",
           "settings": {
-            "parent_category_number": 1,
+            "parent_tab_number": 1,
             "product": "1-order-balance-link",
-            "button_text": "Shop Now",
             "custom_title": "",
             "custom_description": "",
             "custom_compare_price": "",
             "custom_discount_percent": 0
           }
         },
-        "product_item_zXFTPH": {
+        "product_item_ELtJC7": {
           "type": "product_item",
           "settings": {
-            "parent_category_number": 1,
+            "parent_tab_number": 1,
             "product": "1-order-balance-link",
-            "button_text": "Shop Now",
             "custom_title": "",
             "custom_description": "",
             "custom_compare_price": "",
             "custom_discount_percent": 0
           }
         },
-        "product_item_dNLqdr": {
+        "product_item_A3zVkL": {
           "type": "product_item",
           "settings": {
-            "parent_category_number": 1,
+            "parent_tab_number": 1,
             "product": "1-order-balance-link",
-            "button_text": "Shop Now",
             "custom_title": "",
             "custom_description": "",
             "custom_compare_price": "",
             "custom_discount_percent": 0
           }
         },
-        "product_item_aeEFqx": {
+        "product_item_jCahAW": {
           "type": "product_item",
           "settings": {
-            "parent_category_number": 1,
+            "parent_tab_number": 1,
             "product": "1-order-balance-link",
-            "button_text": "Shop Now",
             "custom_title": "",
             "custom_description": "",
             "custom_compare_price": "",
             "custom_discount_percent": 0
           }
         },
-        "firework_feed_w4XN4M": {
-          "type": "firework_feed",
+        "product_item_yQaEfU": {
+          "type": "product_item",
           "settings": {
-            "playlist": "5bJBa2",
-            "channel": "lavivid_hair",
-            "mode": "row",
-            "open_in": "default",
-            "max_videos": 0,
-            "placement": "middle",
-            "player_placement": "bottom-left"
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_Vqrh3L": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_rjjeLY": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_nfLVfz": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 3,
+            "product": "1-order-balance-link",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 20
+          }
+        },
+        "product_item_HLYMF9": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 2,
+            "product": "1-order-balance-link",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
           }
         }
       },
       "block_order": [
-        "product_category_cKeaTk",
-        "product_item_qEYmAE",
-        "product_item_rT6Ttd",
-        "product_item_8bPa7j",
-        "product_item_TdJeDe",
-        "product_category_QqEJi6",
-        "product_item_RUbeH7",
-        "product_item_UaPBaq",
-        "product_item_zXFTPH",
-        "product_item_dNLqdr",
-        "product_item_aeEFqx",
-        "firework_feed_w4XN4M"
+        "product_tab_Jtdn3H",
+        "product_tab_ynrQVL",
+        "product_tab_FrnhyX",
+        "product_item_j8UpKa",
+        "product_item_Pr43mR",
+        "product_item_ELtJC7",
+        "product_item_A3zVkL",
+        "product_item_jCahAW",
+        "product_item_yQaEfU",
+        "product_item_Vqrh3L",
+        "product_item_rjjeLY",
+        "product_item_nfLVfz",
+        "product_item_HLYMF9"
       ],
-      "name": "Halloween Sale",
+      "name": "Flash Sale",
       "settings": {
-        "banner_alt": "Halloween Hair System Sale",
-        "background_gradient": "linear-gradient(180deg, rgba(228, 210, 201, 1), rgba(244, 246, 248, 1) 100%)",
+        "banner_alt": "Flash Sale",
         "show_reviews": false
       }
     }
   },
   "order": [
     "main",
-    "common_banner_fLFPey",
-    "halloween_hair_system_sale_78n8pw"
+    "common_banner_MYM7wY",
+    "flash_sale_Mfj7aj"
   ]
 }

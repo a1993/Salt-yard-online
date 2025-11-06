@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_page_title": true,
+        "full_width": false
+      }
+    },
+    "common_banner_RPFh6T": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/banner_1.webp",
+        "banner_mobile": "shopify://shop_images/banner_m_1.webp",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "standard",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
+    "crazy_weekend_sale_Mkh7Rw": {
+      "type": "crazy-weekend-sale",
+      "blocks": {
+        "product_item_BUeUeL": {
+          "type": "product_item",
+          "settings": {
+            "product_image": "shopify://shop_images/goods1.webp",
+            "product_title": "Upgrade Eros Men’s Hair System",
+            "product_desc": "",
+            "old_price": "269.00",
+            "new_price": "215.20",
+            "product_url": "",
+            "button_text": "Shop Now >",
+            "card_type": "type1"
+          }
+        },
+        "product_item_8DWMNW": {
+          "type": "product_item",
+          "settings": {
+            "product_image": "shopify://shop_images/goods1.webp",
+            "product_title": "Upgrade Eros Men’s Hair System",
+            "product_desc": "",
+            "old_price": "269.00",
+            "new_price": "215.20",
+            "product_url": "",
+            "button_text": "Shop Now >",
+            "card_type": "type1"
+          }
+        },
+        "product_item_TWN8wB": {
+          "type": "product_item",
+          "settings": {
+            "product_image": "shopify://shop_images/goods1.webp",
+            "product_title": "Upgrade Eros Men’s Hair System",
+            "product_desc": "",
+            "old_price": "269.00",
+            "new_price": "215.20",
+            "product_url": "",
+            "button_text": "Shop Now >",
+            "card_type": "type1"
+          }
+        },
+        "product_item_bjQwzr": {
+          "type": "product_item",
+          "settings": {
+            "product_image": "shopify://shop_images/goods1.webp",
+            "product_title": "Upgrade Eros Men’s Hair System",
+            "product_desc": "",
+            "old_price": "269.00",
+            "new_price": "215.20",
+            "product_url": "",
+            "button_text": "Shop Now >",
+            "card_type": "type1"
+          }
+        }
+      },
+      "block_order": [
+        "product_item_BUeUeL",
+        "product_item_8DWMNW",
+        "product_item_TWN8wB",
+        "product_item_bjQwzr"
+      ],
+      "name": "Crazy Weekend Sale",
+      "settings": {
+        "banner_alt": "Crazy Weekend Sale",
+        "currency_symbol": "$"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "common_banner_RPFh6T",
+    "crazy_weekend_sale_Mkh7Rw"
+  ]
+}
