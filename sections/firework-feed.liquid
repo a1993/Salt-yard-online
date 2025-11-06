@@ -1,0 +1,184 @@
+{% comment %}
+  Firework Feed Section
+  Firework 视频 Feed 分区模块
+{% endcomment %}
+
+{%- liquid
+  assign channel = section.settings.channel | default: 'lavivid_hair'
+  assign mode = section.settings.mode | default: 'row'
+  assign open_in = section.settings.open_in | default: 'default'
+  assign max_videos = section.settings.max_videos | default: 0
+  assign placement = section.settings.placement | default: 'middle'
+  assign player_placement = section.settings.player_placement | default: 'bottom-left'
+  assign playlist = section.settings.playlist | default: '5bJBa2'
+-%}
+
+<div class="firework-feed-container" {{ section.shopify_attributes }}>
+  {% if playlist != blank %}
+    <fw-embed-feed
+      channel="{{ channel }}"
+      mode="{{ mode }}"
+      open_in="{{ open_in }}"
+      max_videos="{{ max_videos }}"
+      placement="{{ placement }}"
+      player_placement="{{ player_placement }}"
+      playlist="{{ playlist }}"
+    ></fw-embed-feed>
+  {% else %}
+    <div class="firework-feed-placeholder">
+      <p>Please configure a Firework playlist ID in the section settings.</p>
+    </div>
+  {% endif %}
+</div>
+
+<script src="https://asset.fwcdn3.com/js/embed-feed.js" defer async></script>
+
+<style>
+  .firework-feed-container {
+    width: 100%;
+    margin: 2rem 0;
+  }
+  
+  .firework-feed-placeholder {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+    background: #f5f5f5;
+    border-radius: 0.5rem;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .firework-feed-container {
+      margin: 1rem 0;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Firework Feed",
+  "tag": "section",
+  "class": "firework-feed-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Playlist Settings"
+    },
+    {
+      "type": "text",
+      "id": "playlist",
+      "label": "Firework Playlist ID",
+      "default": "5bJBa2",
+      "info": "Enter Firework playlist ID (e.g., 5bJBa2)"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "text",
+      "id": "channel",
+      "label": "Channel Name",
+      "default": "lavivid_hair",
+      "info": "Firework channel name"
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Display Mode",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "feed",
+          "label": "Feed"
+        }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "select",
+      "id": "open_in",
+      "label": "Open In",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "modal",
+          "label": "Modal"
+        },
+        {
+          "value": "new_tab",
+          "label": "New Tab"
+        }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "number",
+      "id": "max_videos",
+      "label": "Max Videos",
+      "default": 0,
+      "info": "Maximum number of videos to display (0 = unlimited)"
+    },
+    {
+      "type": "select",
+      "id": "placement",
+      "label": "Placement",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "middle"
+    },
+    {
+      "type": "select",
+      "id": "player_placement",
+      "label": "Player Placement",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ],
+      "default": "bottom-left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Firework Feed"
+    }
+  ]
+}
+{% endschema %}
+

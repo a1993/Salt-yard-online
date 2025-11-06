@@ -1,0 +1,89 @@
+{% comment %}
+  通用商品网格组件
+  用于展示商品列表，支持不同的布局样式
+  
+  参数说明:
+  - grid_style: 网格样式 ('crazy', 'flash', 'halloween')
+  - grid_class: 额外的 CSS class (可选)
+  - show_reviews: 是否显示评论
+  - currency_symbol: 货币符号
+  - discount_percent: 统一的折扣百分比 (可选)
+  - section_blocks: section.blocks 数组 (用于遍历产品块)
+  - filter_category: 过滤分类编号 (用于 flash-sale 和 halloween)
+{% endcomment %}
+
+{%- liquid
+  assign grid_style = grid_style | default: 'standard'
+-%}
+
+<div class="product-grid product-grid--{{ grid_style }}{% if grid_class %} {{ grid_class }}{% endif %}">
+  {% if section_blocks %}
+    {% comment %} 使用 section.blocks 遍历 {% endcomment %}
+    {% for block in section_blocks %}
+      {% if block.type == 'product_item' %}
+        
+        {% comment %} 如果有分类过滤，检查是否属于当前分类 {% endcomment %}
+        {% if filter_category %}
+          {% assign parent_num = 0 %}
+          {% if grid_style == 'flash' %}
+            {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
+          {% elsif grid_style == 'halloween' %}
+            {% assign parent_num = block.settings.parent_category_number | plus: 0 %}
+          {% endif %}
+          
+          {% if parent_num == filter_category %}
+            {% assign product = block.settings.product %}
+            
+            {% if grid_style == 'flash' %}
+              {% render 'product-card-flash',
+                product: product,
+                show_reviews: show_reviews,
+                discount_percent: discount_percent,
+                custom_image: block.settings.custom_image,
+                custom_title: block.settings.custom_title,
+                custom_description: block.settings.custom_description,
+                custom_compare_price: block.settings.custom_compare_price,
+                custom_discount_percent: block.settings.custom_discount_percent,
+                shopify_attributes: block.shopify_attributes
+              %}
+            {% elsif grid_style == 'halloween' %}
+              {% render 'product-card-halloween',
+                product: product,
+                show_reviews: show_reviews,
+                button_text: block.settings.button_text,
+                custom_image: block.settings.custom_image,
+                custom_title: block.settings.custom_title,
+                custom_description: block.settings.custom_description,
+                custom_compare_price: block.settings.custom_compare_price,
+                custom_discount_percent: block.settings.custom_discount_percent,
+                shopify_attributes: block.shopify_attributes
+              %}
+            {% endif %}
+          {% endif %}
+          
+        {% else %}
+          {% comment %} 没有分类过滤，直接渲染 {% endcomment %}
+          
+          {% if grid_style == 'crazy' %}
+            {% comment %} Crazy Weekend Sale 使用自定义字段 {% endcomment %}
+            {% render 'product-card-crazy',
+              product_image: block.settings.product_image,
+              product_title: block.settings.product_title,
+              product_desc: block.settings.product_desc,
+              product_url: block.settings.product_url,
+              old_price: block.settings.old_price,
+              new_price: block.settings.new_price,
+              card_type: block.settings.card_type,
+              badge_image: block.settings.badge_image,
+              currency_symbol: currency_symbol,
+              button_text: block.settings.button_text,
+              shopify_attributes: block.shopify_attributes
+            %}
+          {% endif %}
+          
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+

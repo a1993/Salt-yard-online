@@ -1,0 +1,363 @@
+{% comment %}
+  Product with Video Section
+  产品+视频组合模块
+{% endcomment %}
+
+{{ 'built-to-last-durable.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'built-to-last-durable.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign product = section.settings.product
+  assign video_cover = section.settings.video_cover
+  assign video_url = section.settings.video_url
+  assign video_position = section.settings.video_position | default: 'left'
+  assign product_position = section.settings.product_position | default: 'left'
+  assign product_desc = section.settings.product_desc
+-%}
+
+<div class="durable-product-video-card" {{ section.shopify_attributes }}>
+  <div class="durable-product-video-wrapper">
+    {% if video_cover != blank and video_url != blank %}
+    <div class="durable-product-video-section {% if video_position == 'right' %}durable-video-order-2{% endif %}" 
+         onclick="openVideoModal('durable-video-modal', '{{ video_url }}')">
+      <img 
+        src="{{ video_cover | image_url: width: 600 }}"
+        alt="Video Cover"
+        loading="lazy"
+        class="durable-video-cover">
+      <div class="durable-play-button">
+        <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
+          <circle cx="34" cy="34" r="34" fill="white" opacity="0.9"/>
+          <path d="M27 22L47 34L27 46V22Z" fill="#1d1e20"/>
+        </svg>
+      </div>
+    </div>
+    {% endif %}
+    
+    {% if product %}
+    <div class="durable-product-info-section">
+      <a href="{{ product.url }}" class="durable-product-info-link">
+        <div class="durable-product-info-content">
+          {% if product.featured_image %}
+            <div class="durable-product-image-wrapper {% if product_position == 'right' %}durable-product-order-2{% endif %}">
+              <img 
+                src="{{ product.featured_image | image_url: width: 400 }}"
+                alt="{{ product.title | escape }}"
+                loading="lazy"
+                class="durable-product-info-image">
+            </div>
+          {% endif %}
+          
+          <div class="durable-product-info-text">
+            <h2 class="durable-product-info-title">{{ product.title }}</h2>
+            
+            {% if product_desc != blank %}
+              <div class="durable-product-info-desc">{{ product_desc }}</div>
+            {% endif %}
+            
+            <div class="durable-product-info-price">
+              {% if product.compare_at_price > product.price %}
+                <span class="durable-price-compare">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+              <span class="durable-price-sale">{{ product.price | money }}</span>
+            </div>
+            
+            <button class="durable-product-info-button">Shop Now</button>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Video Modal -->
+{% render 'video-modal', modal_id: 'durable-video-modal' %}
+
+<style>
+.durable-product-video-card {
+  max-width: 1368px;
+  margin: 7rem auto;
+  padding: 0 1.25rem;
+}
+
+@media screen and (max-width: 768px) {
+  .durable-product-video-card {
+    margin: 4rem 0;
+    padding: 0 1rem;
+  }
+}
+
+.durable-product-video-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  background: #eff5f5;
+  border-radius: 0.9375rem;
+  /* padding: 1rem; */
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 768px) {
+  .durable-product-video-wrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3.5rem;
+    /* padding: 3.5rem; */
+  }
+}
+
+.durable-product-video-section {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.9375rem;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+  .durable-product-video-section {
+    flex: 0 0 39%;
+    max-width: 528px;
+    width: 39%;
+    order: 1;
+  }
+  
+  .durable-video-order-2 {
+    order: 2;
+  }
+}
+
+.durable-video-cover {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.durable-play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.durable-product-video-section:hover .durable-play-button {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.durable-product-info-section {
+  flex: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .durable-product-info-section {
+    order: 1;
+  }
+  
+  /* 当视频在右侧时，产品信息区域保持在左侧（order: 1） */
+  .durable-video-order-2 ~ .durable-product-info-section {
+    order: 1;
+  }
+}
+
+.durable-product-info-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.durable-product-info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .durable-product-info-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    padding: 0;
+  }
+}
+
+.durable-product-image-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  order: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .durable-product-order-2 {
+    order: 2;
+  }
+}
+
+.durable-product-info-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.durable-product-info-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+.durable-product-info-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #1d1e20;
+  margin: 0 0 1rem 0;
+}
+
+.durable-product-info-desc {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  margin: 1rem 0;
+}
+
+.durable-product-info-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.durable-price-compare {
+  font-size: 0.875rem;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.durable-price-sale {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #d80303;
+}
+
+.durable-product-info-button {
+  margin-top: 1rem;
+  padding: 0.875rem 2.5rem;
+  background: #1d1e20;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.durable-product-info-button:hover {
+  background: #2a2a2a;
+}
+
+@media screen and (max-width: 767px) {
+  .durable-product-info-title {
+    font-size: 1.25rem;
+  }
+  
+  .durable-product-info-desc {
+    font-size: 0.875rem;
+  }
+  
+  .durable-price-sale {
+    font-size: 1.25rem;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Product with Video",
+  "tag": "section",
+  "class": "product-with-video-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Settings"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Select Product"
+    },
+    {
+      "type": "text",
+      "id": "product_desc",
+      "label": "Product Description",
+      "info": "Optional product description to display"
+    },
+    {
+      "type": "header",
+      "content": "Video Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_cover",
+      "label": "Video Cover Image"
+    },
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL (YouTube Embed URL)"
+    },
+    {
+      "type": "select",
+      "id": "video_position",
+      "label": "Video Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "product_position",
+      "label": "Product Image Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product with Video"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,186 @@
+{% comment %}
+  通用页面容器组件
+  Common Container Component
+  
+  参数:
+  - width: 容器宽度模式 (default: 'standard', 可选: standard, wide, full, narrow)
+    - standard: 1368px (85.5rem) - 标准页面宽度
+    - wide: 1600px (100rem) - 宽屏宽度
+    - narrow: 1024px (64rem) - 窄屏宽度
+    - full: 100% - 全宽
+  - padding: 内边距 (default: 'medium', 可选: none, small, medium, large)
+  - padding_mobile: 移动端内边距 (default: '', 继承 padding)
+  - spacing_top: 上间距 (default: 'none', 可选: none, small, medium, large)
+  - spacing_bottom: 下间距 (default: 'none', 可选: none, small, medium, large)
+  - background_color: 背景颜色 (default: '')
+  - custom_class: 自定义 CSS 类名 (optional)
+  
+  使用示例:
+  {% render 'common-container', width: 'standard', padding: 'medium' %}
+    <!-- 页面内容 -->
+  {% endrender %}
+  
+  或使用 capture:
+  {% capture container_content %}
+    <h1>Title</h1>
+    <p>Content</p>
+  {% endcapture %}
+  {% render 'common-container', content: container_content, width: 'standard' %}
+{% endcomment %}
+
+{%- liquid
+  assign width = width | default: 'standard'
+  assign padding = padding | default: 'medium'
+  assign padding_mobile = padding_mobile | default: padding
+  assign spacing_top = spacing_top | default: 'none'
+  assign spacing_bottom = spacing_bottom | default: 'none'
+  assign background_color = background_color | default: ''
+  assign custom_class = custom_class | default: ''
+  assign content = content | default: ''
+-%}
+
+<div class="common-container common-container--width-{{ width }} common-container--padding-{{ padding }} common-container--padding-mobile-{{ padding_mobile }} common-container--spacing-top-{{ spacing_top }} common-container--spacing-bottom-{{ spacing_bottom }} {{ custom_class }}"{% if background_color != blank %} style="background-color: {{ background_color }};"{% endif %}>
+  {{ content }}
+</div>
+
+<style>
+  /* Common Container Styles */
+  .common-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Width Variants */
+  .common-container--width-standard {
+    max-width: 85.5rem; /* 1368px - @lv-width */
+  }
+  
+  .common-container--width-wide {
+    max-width: 100rem; /* 1600px */
+  }
+  
+  .common-container--width-narrow {
+    max-width: 64rem; /* 1024px */
+  }
+  
+  .common-container--width-full {
+    max-width: 100%;
+  }
+  
+  /* Padding Variants (Desktop) */
+  .common-container--padding-none {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .common-container--padding-small {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .common-container--padding-medium {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+  
+  .common-container--padding-large {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  /* Spacing Top */
+  .common-container--spacing-top-none {
+    margin-top: 0;
+  }
+  
+  .common-container--spacing-top-small {
+    margin-top: 1rem;
+  }
+  
+  .common-container--spacing-top-medium {
+    margin-top: 2rem;
+  }
+  
+  .common-container--spacing-top-large {
+    margin-top: 4rem;
+  }
+  
+  /* Spacing Bottom */
+  .common-container--spacing-bottom-none {
+    margin-bottom: 0;
+  }
+  
+  .common-container--spacing-bottom-small {
+    margin-bottom: 1rem;
+  }
+  
+  .common-container--spacing-bottom-medium {
+    margin-bottom: 2rem;
+  }
+  
+  .common-container--spacing-bottom-large {
+    margin-bottom: 4rem;
+  }
+  
+  /* Desktop Responsive (>=1280px) */
+  @media screen and (min-width: 1280px) {
+    .common-container--padding-medium {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    
+    .common-container--padding-large {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+    
+    .common-container--spacing-top-large {
+      margin-top: 6rem;
+    }
+    
+    .common-container--spacing-bottom-large {
+      margin-bottom: 6rem;
+    }
+  }
+  
+  /* Mobile Responsive (<=767px) */
+  @media screen and (max-width: 767px) {
+    .common-container--padding-mobile-none {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    
+    .common-container--padding-mobile-small {
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+    }
+    
+    .common-container--padding-mobile-medium {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+    
+    .common-container--padding-mobile-large {
+      padding-left: 1.5rem !important;
+      padding-right: 1.5rem !important;
+    }
+    
+    .common-container--spacing-top-medium {
+      margin-top: 1.5rem;
+    }
+    
+    .common-container--spacing-top-large {
+      margin-top: 2.5rem;
+    }
+    
+    .common-container--spacing-bottom-medium {
+      margin-bottom: 1.5rem;
+    }
+    
+    .common-container--spacing-bottom-large {
+      margin-bottom: 2.5rem;
+    }
+  }
+</style>
+

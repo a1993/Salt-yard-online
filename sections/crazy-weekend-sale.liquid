@@ -1,0 +1,196 @@
+{% comment %}
+  Crazy Weekend Sale Section
+  疯狂周末特卖页面 - 展示特价商品列表
+  
+  功能特性:
+  - 支持自定义 banner 图片（桌面端和移动端）
+  - 支持手动添加多个商品块
+  - 商品卡片包含：图片、标题、描述、原价、折扣价、优惠标签
+  - 响应式布局（桌面端 2 列，移动端 1 列）
+  - 支持不同卡片类型（标准卡片和带浮动图片的卡片）
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'crazy-weekend-sale.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'crazy-weekend-sale.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign banner_desktop = section.settings.banner_desktop
+  assign banner_mobile = section.settings.banner_mobile
+  assign currency_symbol = section.settings.currency_symbol
+-%}
+
+<!-- Structured Data for SEO -->
+{% if section.blocks.size > 0 %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {% for block in section.blocks %}
+      {% if block.type == 'product_item' and block.settings.product_title != blank %}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "item": {
+          "@type": "Product",
+          "name": {{ block.settings.product_title | json }},
+          {% if block.settings.product_image != blank %}
+          "image": {{ block.settings.product_image | image_url: width: 630 | json }},
+          {% endif %}
+          {% if block.settings.product_url != blank %}
+          "url": {{ block.settings.product_url | json }},
+          {% endif %}
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            {% if block.settings.new_price != blank %}
+            "price": {{ block.settings.new_price | json }},
+            {% endif %}
+            "itemCondition": "https://schema.org/NewCondition",
+            "availability": "https://schema.org/InStock"
+          }
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endif %}
+
+<!-- Banner Section -->
+{% render 'campaign-banner',
+  banner_desktop: banner_desktop,
+  banner_mobile: banner_mobile,
+  banner_alt: section.settings.banner_alt,
+  sticky: true,
+  width_desktop: 1920,
+  height_desktop: 628,
+  width_mobile: 750,
+  height_mobile: 750
+%}
+
+<!-- Products Grid -->
+<div class="crazy-weekend-wrap">
+  {% render 'product-grid',
+    section_blocks: section.blocks,
+    grid_style: 'crazy',
+    grid_class: 'crazy-weekend-list',
+    currency_symbol: currency_symbol
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "Crazy Weekend Sale",
+  "tag": "section",
+  "class": "crazy-weekend-sale-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_desktop",
+      "label": "Desktop Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile",
+      "label": "Mobile Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_alt",
+      "label": "Banner Alt Text",
+      "default": "Crazy Weekend Sale"
+    },
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "text",
+      "id": "currency_symbol",
+      "label": "Currency Symbol",
+      "default": "$"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title"
+        },
+        {
+          "type": "text",
+          "id": "product_desc",
+          "label": "Product Description (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "old_price",
+          "label": "Original Price (number only)",
+          "placeholder": "269.00"
+        },
+        {
+          "type": "text",
+          "id": "new_price",
+          "label": "Sale Price (number only)",
+          "placeholder": "215.20"
+        },
+        {
+          "type": "url",
+          "id": "product_url",
+          "label": "Product URL"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now >"
+        },
+        {
+          "type": "select",
+          "id": "card_type",
+          "label": "Card Type",
+          "options": [
+            {
+              "value": "type1",
+              "label": "Standard Card"
+            },
+            {
+              "value": "type2",
+              "label": "Card with Floating Image"
+            }
+          ],
+          "default": "type1"
+        },
+        {
+          "type": "image_picker",
+          "id": "badge_image",
+          "label": "Discount Badge Image (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Crazy Weekend Sale",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+

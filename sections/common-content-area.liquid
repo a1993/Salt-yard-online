@@ -1,0 +1,445 @@
+{% comment %}
+  通用内容区域分区
+  Common Content Area Section
+  
+  可放置任何内容的通用容器，支持 Blocks
+{% endcomment %}
+
+<div class="common-content-area common-content-area--spacing-top-{{ section.settings.spacing_top }} common-content-area--spacing-bottom-{{ section.settings.spacing_bottom }}"{% if section.settings.background_color != blank or section.settings.background_gradient != blank %} style="{% if section.settings.background_gradient != blank %}background: {{ section.settings.background_gradient }};{% elsif section.settings.background_color != blank %}background-color: {{ section.settings.background_color }};{% endif %}"{% endif %}>
+  <div class="common-container common-container--width-{{ section.settings.container_width }} common-container--padding-{{ section.settings.container_padding }}">
+    <div class="common-content-area__blocks">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          
+          {% comment %} 文本内容块 {% endcomment %}
+          {% when 'text' %}
+            <div class="common-content-block common-content-block--text common-content-block--align-{{ block.settings.text_align }}" {{ block.shopify_attributes }}>
+              {% if block.settings.content != blank %}
+                <div class="common-content-block__text"{% if block.settings.text_color != blank %} style="color: {{ block.settings.text_color }};"{% endif %}>
+                  {{ block.settings.content }}
+                </div>
+              {% endif %}
+            </div>
+          
+          {% comment %} 富文本块 {% endcomment %}
+          {% when 'richtext' %}
+            <div class="common-content-block common-content-block--richtext common-content-block--align-{{ block.settings.text_align }}" {{ block.shopify_attributes }}>
+              {% if block.settings.content != blank %}
+                <div class="common-content-block__richtext rte"{% if block.settings.text_color != blank %} style="color: {{ block.settings.text_color }};"{% endif %}>
+                  {{ block.settings.content }}
+                </div>
+              {% endif %}
+            </div>
+          
+          {% comment %} 图片块 {% endcomment %}
+          {% when 'image' %}
+            <div class="common-content-block common-content-block--image common-content-block--align-{{ block.settings.image_align }}" {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                <img 
+                  src="{{ block.settings.image | image_url: width: 1200 }}"
+                  srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                          {{ block.settings.image | image_url: width: 800 }} 800w,
+                          {{ block.settings.image | image_url: width: 1200 }} 1200w"
+                  sizes="(max-width: 767px) 100vw, {{ block.settings.image_width }}"
+                  alt="{{ block.settings.image_alt | escape }}"
+                  loading="lazy"
+                  width="1200"
+                  height="auto"
+                  class="common-content-block__image"
+                  style="max-width: {{ block.settings.image_width }};">
+              {% endif %}
+            </div>
+          
+          {% comment %} 按钮块 {% endcomment %}
+          {% when 'button' %}
+            <div class="common-content-block common-content-block--button common-content-block--align-{{ block.settings.button_align }}" {{ block.shopify_attributes }}>
+              {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+                <a 
+                  href="{{ block.settings.button_link }}" 
+                  class="common-content-block__button common-content-block__button--{{ block.settings.button_style }}"
+                  {% if block.settings.button_color != blank %}style="background-color: {{ block.settings.button_color }}; border-color: {{ block.settings.button_color }};"{% endif %}
+                >
+                  {{ block.settings.button_text }}
+                </a>
+              {% endif %}
+            </div>
+          
+          {% comment %} 间距块 {% endcomment %}
+          {% when 'spacer' %}
+            <div class="common-content-block common-content-block--spacer" {{ block.shopify_attributes }}>
+              <div class="common-content-block__spacer" style="height: {{ block.settings.height }}px;"></div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Common Container Styles */
+  .common-container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .common-container--width-standard { max-width: 85.5rem; }
+  .common-container--width-wide { max-width: 100rem; }
+  .common-container--width-narrow { max-width: 64rem; }
+  .common-container--width-full { max-width: 100%; }
+  
+  .common-container--padding-none { padding-left: 0; padding-right: 0; }
+  .common-container--padding-small { padding-left: 1rem; padding-right: 1rem; }
+  .common-container--padding-medium { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .common-container--padding-large { padding-left: 2rem; padding-right: 2rem; }
+  
+  /* Content Area */
+  .common-content-area {
+    width: 100%;
+  }
+  
+  .common-content-area__blocks {
+    width: 100%;
+  }
+  
+  /* Spacing */
+  .common-content-area--spacing-top-none { padding-top: 0; }
+  .common-content-area--spacing-top-small { padding-top: 1rem; }
+  .common-content-area--spacing-top-medium { padding-top: 2rem; }
+  .common-content-area--spacing-top-large { padding-top: 4rem; }
+  
+  .common-content-area--spacing-bottom-none { padding-bottom: 0; }
+  .common-content-area--spacing-bottom-small { padding-bottom: 1rem; }
+  .common-content-area--spacing-bottom-medium { padding-bottom: 2rem; }
+  .common-content-area--spacing-bottom-large { padding-bottom: 4rem; }
+  
+  /* Content Blocks */
+  .common-content-block {
+    margin-bottom: 1.5rem;
+  }
+  
+  .common-content-block:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* Text Alignment */
+  .common-content-block--align-left { text-align: left; }
+  .common-content-block--align-center { text-align: center; }
+  .common-content-block--align-right { text-align: right; }
+  
+  /* Text Block */
+  .common-content-block__text {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Richtext Block */
+  .common-content-block__richtext {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  /* Image Block */
+  .common-content-block__image {
+    display: block;
+    height: auto;
+  }
+  
+  .common-content-block--align-center .common-content-block__image {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .common-content-block--align-right .common-content-block__image {
+    margin-left: auto;
+  }
+  
+  /* Button Block */
+  .common-content-block__button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .common-content-block__button:hover {
+    opacity: 0.8;
+  }
+  
+  .common-content-block__button--primary {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .common-content-block__button--secondary {
+    background-color: transparent;
+    color: #000;
+    border: 2px solid #000;
+  }
+  
+  .common-content-block__button--outline {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #000;
+  }
+  
+  /* Spacer */
+  .common-content-block__spacer {
+    width: 100%;
+  }
+  
+  /* Desktop */
+  @media screen and (min-width: 1280px) {
+    .common-content-area--spacing-top-large { padding-top: 6rem; }
+    .common-content-area--spacing-bottom-large { padding-bottom: 6rem; }
+  }
+  
+  /* Mobile */
+  @media screen and (max-width: 767px) {
+    .common-content-area--spacing-top-medium { padding-top: 1.5rem; }
+    .common-content-area--spacing-top-large { padding-top: 2.5rem; }
+    .common-content-area--spacing-bottom-medium { padding-bottom: 1.5rem; }
+    .common-content-area--spacing-bottom-large { padding-bottom: 2.5rem; }
+    
+    .common-content-block {
+      margin-bottom: 1rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "内容区域 Content",
+  "tag": "section",
+  "class": "section-common-content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "容器设置"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "容器宽度",
+      "options": [
+        { "value": "standard", "label": "标准 (1368px)" },
+        { "value": "wide", "label": "宽屏 (1600px)" },
+        { "value": "narrow", "label": "窄屏 (1024px)" },
+        { "value": "full", "label": "全宽" }
+      ],
+      "default": "standard"
+    },
+    {
+      "type": "select",
+      "id": "container_padding",
+      "label": "容器内边距",
+      "options": [
+        { "value": "none", "label": "无" },
+        { "value": "small", "label": "小" },
+        { "value": "medium", "label": "中" },
+        { "value": "large", "label": "大" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "spacing_top",
+      "label": "上间距",
+      "options": [
+        { "value": "none", "label": "无" },
+        { "value": "small", "label": "小" },
+        { "value": "medium", "label": "中" },
+        { "value": "large", "label": "大" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "spacing_bottom",
+      "label": "下间距",
+      "options": [
+        { "value": "none", "label": "无" },
+        { "value": "small", "label": "小" },
+        { "value": "medium", "label": "中" },
+        { "value": "large", "label": "大" }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景颜色"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "背景渐变",
+      "info": "如设置渐变，将覆盖背景颜色"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "文本",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "文本内容"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "对齐方式",
+          "options": [
+            { "value": "left", "label": "左对齐" },
+            { "value": "center", "label": "居中" },
+            { "value": "right", "label": "右对齐" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "文本颜色"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "name": "富文本",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "富文本内容"
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "对齐方式",
+          "options": [
+            { "value": "left", "label": "左对齐" },
+            { "value": "center", "label": "居中" },
+            { "value": "right", "label": "右对齐" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "文本颜色"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "图片",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "选择图片"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "图片 Alt 文本"
+        },
+        {
+          "type": "select",
+          "id": "image_align",
+          "label": "对齐方式",
+          "options": [
+            { "value": "left", "label": "左对齐" },
+            { "value": "center", "label": "居中" },
+            { "value": "right", "label": "右对齐" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "text",
+          "id": "image_width",
+          "label": "图片最大宽度",
+          "default": "100%",
+          "info": "可使用 px, %, rem 等单位"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "按钮",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "按钮文字"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "按钮链接"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "按钮样式",
+          "options": [
+            { "value": "primary", "label": "主要按钮" },
+            { "value": "secondary", "label": "次要按钮" },
+            { "value": "outline", "label": "描边按钮" }
+          ],
+          "default": "primary"
+        },
+        {
+          "type": "select",
+          "id": "button_align",
+          "label": "对齐方式",
+          "options": [
+            { "value": "left", "label": "左对齐" },
+            { "value": "center", "label": "居中" },
+            { "value": "right", "label": "右对齐" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "按钮颜色"
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "间距",
+      "settings": [
+        {
+          "type": "range",
+          "id": "height",
+          "label": "间距高度",
+          "min": 0,
+          "max": 200,
+          "step": 10,
+          "default": 40,
+          "unit": "px"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "内容区域 Content",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

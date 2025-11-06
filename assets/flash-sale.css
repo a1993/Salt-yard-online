@@ -1,0 +1,122 @@
+/* Flash Sale Styles */
+
+.flash-sale-container {
+  max-width: 1368px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Tab Navigation */
+.flash-sale-tabs-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2.5rem 0;
+  flex-wrap: wrap;
+}
+
+.flash-sale-tab-btn {
+  padding: 0.625rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2a8e9e;
+  background: #fff;
+  border: 2px solid #2a8e9e;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.flash-sale-tab-btn:hover {
+  background: #f0f9fa;
+}
+
+.flash-sale-tab-btn.active {
+  color: #fff;
+  background: #2a8e9e;
+}
+
+/* Tab Content */
+.flash-sale-tabs-content {
+  position: relative;
+}
+
+.flash-sale-tab-pane {
+  display: none;
+}
+
+.flash-sale-tab-pane.active {
+  display: block;
+}
+
+/* Product Grid - uses product-grid component */
+.product-grid--flash {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  max-width: 1368px;
+  margin: 2.5rem auto;
+  box-sizing: border-box;
+}
+
+/* Desktop Responsive */
+@media screen and (min-width: 768px) {
+  .flash-sale-tabs-nav {
+    margin: 3.75rem 0;
+  }
+  
+  .flash-sale-tab-btn {
+    padding: 0.625rem 2.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .flash-sale-tab-btn:nth-child(2) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  
+  .product-grid--flash {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 5rem auto;
+  }
+}
+
+/* Large Desktop */
+@media screen and (min-width: 1280px) {
+  .product-grid--flash {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .product-grid--flash {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 767px) {
+  .flash-sale-container {
+    padding: 0 1rem;
+  }
+  
+  .flash-sale-tabs-nav {
+    gap: 0.5rem;
+    margin: 2rem 0;
+  }
+  
+  .flash-sale-tab-btn {
+    padding: 0.5rem 1.25rem;
+    font-size: 1rem;
+  }
+  
+  .product-grid--flash {
+    gap: 0.5rem;
+    margin: 1.5rem auto;
+  }
+}

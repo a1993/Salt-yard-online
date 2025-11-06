@@ -1,0 +1,289 @@
+{% comment %}
+  通用 Banner 分区
+  Common Banner Section
+  
+  可在主题编辑器中直接添加和配置的 Banner 组件
+{% endcomment %}
+
+<div class="common-banner-section common-banner-section--width-{{ section.settings.width_mode }} common-banner-section--spacing-top-{{ section.settings.spacing_top }} common-banner-section--spacing-bottom-{{ section.settings.spacing_bottom }}">
+  {% if section.settings.link_url != blank %}<a href="{{ section.settings.link_url }}">{% endif %}
+    
+    {% comment %} Desktop Banner {% endcomment %}
+    {% if section.settings.banner_desktop != blank %}
+      <img 
+        src="{{ section.settings.banner_desktop | image_url: width: 1920 }}" 
+        alt="{{ section.settings.alt_text | escape }}"
+        class="common-banner__img common-banner__img--desktop"
+        width="1920"
+        height="628"
+        {% if section.settings.lazy_load %}
+          loading="lazy"
+        {% else %}
+          loading="eager"
+          fetchpriority="high"
+        {% endif %}
+      >
+    {% endif %}
+    
+    {% comment %} Mobile Banner {% endcomment %}
+    {% if section.settings.banner_mobile != blank %}
+      <img 
+        src="{{ section.settings.banner_mobile | image_url: width: 750 }}" 
+        alt="{{ section.settings.alt_text | escape }}"
+        class="common-banner__img common-banner__img--mobile"
+        width="750"
+        height="750"
+        {% if section.settings.lazy_load %}
+          loading="lazy"
+        {% else %}
+          loading="eager"
+          fetchpriority="high"
+        {% endif %}
+      >
+    {% elsif section.settings.banner_desktop != blank %}
+      {% comment %} 如果没有移动端图片，则在移动端也显示桌面端图片 {% endcomment %}
+      <img 
+        src="{{ section.settings.banner_desktop | image_url: width: 750 }}" 
+        alt="{{ section.settings.alt_text | escape }}"
+        class="common-banner__img common-banner__img--mobile"
+        width="750"
+        height="auto"
+        {% if section.settings.lazy_load %}
+          loading="lazy"
+        {% else %}
+          loading="eager"
+          fetchpriority="high"
+        {% endif %}
+      >
+    {% endif %}
+  
+  {% if section.settings.link_url != blank %}</a>{% endif %}
+</div>
+
+<style>
+  /* Common Banner Section */
+  .common-banner-section {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .common-banner-section a {
+    display: block;
+  }
+  
+  .common-banner__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Desktop Banner - Show by Default */
+  .common-banner__img--desktop {
+    display: block;
+  }
+  
+  .common-banner__img--mobile {
+    display: none;
+  }
+  
+  /* Width Modes */
+  .common-banner-section--width-full {
+    max-width: 100%;
+  }
+  
+  .common-banner-section--width-standard {
+    max-width: 100%;
+  }
+  
+  .common-banner-section--width-wide {
+    max-width: 100%;
+  }
+  
+  .common-banner-section--width-narrow {
+    max-width: 100%;
+  }
+  
+  /* Desktop: Apply Width Constraints */
+  @media screen and (min-width: 1280px) {
+    .common-banner-section--width-standard {
+      max-width: 85.5rem; /* 1368px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .common-banner-section--width-wide {
+      max-width: 100rem; /* 1600px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .common-banner-section--width-narrow {
+      max-width: 64rem; /* 1024px */
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  @media (max-width: 1279px) and (min-width: 992px) {
+    .common-banner-section--width-standard {
+      max-width: 85.5rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+  
+  /* Spacing Top */
+  .common-banner-section--spacing-top-none {
+    margin-top: 0;
+  }
+  
+  .common-banner-section--spacing-top-small {
+    margin-top: 1rem;
+  }
+  
+  .common-banner-section--spacing-top-medium {
+    margin-top: 2rem;
+  }
+  
+  .common-banner-section--spacing-top-large {
+    margin-top: 4rem;
+  }
+  
+  /* Spacing Bottom */
+  .common-banner-section--spacing-bottom-none {
+    margin-bottom: 0;
+  }
+  
+  .common-banner-section--spacing-bottom-small {
+    margin-bottom: 1rem;
+  }
+  
+  .common-banner-section--spacing-bottom-medium {
+    margin-bottom: 2rem;
+  }
+  
+  .common-banner-section--spacing-bottom-large {
+    margin-bottom: 4rem;
+  }
+  
+  /* Mobile: Show Mobile Banner */
+  @media screen and (max-width: 767px) {
+    .common-banner__img--desktop {
+      display: none;
+    }
+    
+    .common-banner__img--mobile {
+      display: block;
+    }
+    
+    .common-banner-section--spacing-top-medium {
+      margin-top: 1.5rem;
+    }
+    
+    .common-banner-section--spacing-top-large {
+      margin-top: 2.5rem;
+    }
+    
+    .common-banner-section--spacing-bottom-medium {
+      margin-bottom: 1.5rem;
+    }
+    
+    .common-banner-section--spacing-bottom-large {
+      margin-bottom: 2.5rem;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "横幅 Banner",
+  "tag": "section",
+  "class": "section-common-banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner 图片"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_desktop",
+      "label": "桌面端图片",
+      "info": "推荐尺寸: 1920x628px"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile",
+      "label": "移动端图片 (可选)",
+      "info": "推荐尺寸: 750x750px。如不设置，则使用桌面端图片"
+    },
+    {
+      "type": "text",
+      "id": "alt_text",
+      "label": "图片 Alt 文本",
+      "default": "Banner",
+      "info": "用于 SEO 和无障碍访问"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Banner 链接 (可选)",
+      "info": "点击 Banner 跳转的链接"
+    },
+    {
+      "type": "header",
+      "content": "布局设置"
+    },
+    {
+      "type": "select",
+      "id": "width_mode",
+      "label": "PC端宽度模式",
+      "options": [
+        { "value": "full", "label": "全屏" },
+        { "value": "standard", "label": "标准 (1368px 居中)" },
+        { "value": "wide", "label": "宽屏 (1600px 居中)" },
+        { "value": "narrow", "label": "窄屏 (1024px 居中)" }
+      ],
+      "default": "standard",
+      "info": "移动端始终全宽显示"
+    },
+    {
+      "type": "select",
+      "id": "spacing_top",
+      "label": "上间距",
+      "options": [
+        { "value": "none", "label": "无" },
+        { "value": "small", "label": "小" },
+        { "value": "medium", "label": "中" },
+        { "value": "large", "label": "大" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "spacing_bottom",
+      "label": "下间距",
+      "options": [
+        { "value": "none", "label": "无" },
+        { "value": "small", "label": "小" },
+        { "value": "medium", "label": "中" },
+        { "value": "large", "label": "大" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "checkbox",
+      "id": "lazy_load",
+      "label": "延迟加载",
+      "default": false,
+      "info": "首屏 Banner 建议关闭，提高页面加载速度"
+    }
+  ],
+  "presets": [
+    {
+      "name": "横幅 Banner"
+    }
+  ]
+}
+{% endschema %}
+

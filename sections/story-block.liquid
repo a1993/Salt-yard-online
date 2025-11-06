@@ -1,0 +1,155 @@
+{% comment %}
+  StoryBlock Section
+  Firework StoryBlock 视频播放器模块
+  适用于在页面上直接嵌入故事板
+{% endcomment %}
+
+{%- liquid
+  assign channel = section.settings.channel | default: 'lavivid_hair'
+  assign playlist = section.settings.playlist | default: '5zJDLe'
+  assign player_placement = section.settings.player_placement | default: 'bottom-left'
+  assign mode = section.settings.mode | default: 'pinned'
+  assign autoplay = section.settings.autoplay
+-%}
+
+<div class="story-block-container" {{ section.shopify_attributes }}>
+  {% if playlist != blank %}
+    <fw-storyblock
+      channel="{{ channel }}"
+      playlist="{{ playlist }}"
+      player_placement="{{ player_placement }}"
+      mode="{{ mode }}"
+      {% if autoplay %}autoplay="autoplay"{% endif %}
+    ></fw-storyblock>
+  {% else %}
+    <div class="story-block-placeholder">
+      <p>Please configure a Firework playlist ID in the section settings.</p>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  (function() {
+    // 检查脚本是否已加载
+    if (!document.querySelector('script[src="https://asset.fwcdn3.com/js/storyblock.js"]')) {
+      const script = document.createElement('script');
+      script.src = 'https://asset.fwcdn3.com/js/storyblock.js';
+      script.defer = true;
+      script.async = true;
+      document.body.appendChild(script);
+    }
+  })();
+</script>
+
+<style>
+  .story-block-container {
+    width: 100%;
+    margin: 2rem 0;
+    min-height: 240px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .story-block-container {
+      min-height: 400px;
+    }
+  }
+  
+  .story-block-placeholder {
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+    background: #f5f5f5;
+    border-radius: 0.5rem;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .story-block-container {
+      margin: 1rem 0;
+      min-height: 240px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "StoryBlock",
+  "tag": "section",
+  "class": "story-block-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Playlist Settings"
+    },
+    {
+      "type": "text",
+      "id": "playlist",
+      "label": "Firework Playlist ID",
+      "default": "5zJDLe",
+      "info": "Enter Firework playlist ID (e.g., 5zJDLe)"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "text",
+      "id": "channel",
+      "label": "Channel Name",
+      "default": "lavivid_hair",
+      "info": "Firework channel name"
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "Display Mode",
+      "options": [
+        {
+          "value": "pinned",
+          "label": "Pinned"
+        },
+        {
+          "value": "floating",
+          "label": "Floating"
+        }
+      ],
+      "default": "pinned"
+    },
+    {
+      "type": "select",
+      "id": "player_placement",
+      "label": "Player Placement",
+      "options": [
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        },
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "StoryBlock"
+    }
+  ]
+}
+{% endschema %}
+

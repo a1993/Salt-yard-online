@@ -1,0 +1,172 @@
+{% comment %}
+  FAQ Section
+  常见问题解答模块
+  支持折叠/展开功能，类似 accordion
+{% endcomment %}
+
+{{ 'faq.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign faq_title = section.settings.faq_title
+  assign faq_subtitle = section.settings.faq_subtitle
+  assign container_class = 'faq-container'
+  if faq_title != blank or faq_subtitle != blank
+    assign container_class = container_class | append: ' faq-container--with-title'
+  endif
+-%}
+
+<div class="{{ container_class }}" {{ section.shopify_attributes }}>
+  <div class="faq-wrapper">
+    {% if faq_title != blank %}
+      <h1 class="faq-title">{{ faq_title }}</h1>
+    {% endif %}
+    
+    {% if faq_subtitle != blank %}
+      <h2 class="faq-subtitle">{{ faq_subtitle }}</h2>
+    {% endif %}
+    
+    {% if section.blocks.size > 0 %}
+      <dl class="faq-list {% if faq_title != blank or faq_subtitle != blank %}faq-list--with-title{% endif %}">
+        {% for block in section.blocks %}
+          <div class="faq-item" {{ block.shopify_attributes }}>
+            <dt class="faq-question-wrapper">
+              <button 
+                class="faq-question" 
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-{{ block.id }}"
+                data-faq-toggle="faq-{{ block.id }}"
+              >
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <span class="faq-icon">
+                  <svg class="faq-icon-plus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <svg class="faq-icon-minus" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </span>
+              </button>
+            </dt>
+            <dd class="faq-answer-wrapper" id="faq-answer-{{ block.id }}" style="display: none;">
+              <div class="faq-answer">
+                {% if block.settings.is_html %}
+                  <div class="faq-answer-content faq-answer-content--html">
+                    {{ block.settings.answer }}
+                  </div>
+                {% else %}
+                  <p class="faq-answer-content">{{ block.settings.answer }}</p>
+                {% endif %}
+              </div>
+            </dd>
+          </div>
+        {% endfor %}
+      </dl>
+    {% else %}
+      <p class="faq-empty">No FAQ items added yet. Please add FAQ items in the section settings.</p>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  (function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      const faqToggles = document.querySelectorAll('[data-faq-toggle]');
+      
+      faqToggles.forEach(function(toggle) {
+        toggle.addEventListener('click', function() {
+          const faqId = this.getAttribute('data-faq-toggle');
+          const answerWrapper = document.getElementById('faq-answer-' + faqId.replace('faq-', ''));
+          const iconPlus = this.querySelector('.faq-icon-plus');
+          const iconMinus = this.querySelector('.faq-icon-minus');
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          
+          if (isExpanded) {
+            // Close
+            answerWrapper.style.display = 'none';
+            this.setAttribute('aria-expanded', 'false');
+            iconPlus.style.display = 'block';
+            iconMinus.style.display = 'none';
+          } else {
+            // Open
+            answerWrapper.style.display = 'block';
+            this.setAttribute('aria-expanded', 'true');
+            iconPlus.style.display = 'none';
+            iconMinus.style.display = 'block';
+          }
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "class": "faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "FAQ Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "text",
+      "id": "faq_subtitle",
+      "label": "FAQ Subtitle"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What is this FAQ about?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "This is the answer to the FAQ question."
+        },
+        {
+          "type": "checkbox",
+          "id": "is_html",
+          "label": "Answer contains HTML",
+          "default": false,
+          "info": "Enable this if your answer contains HTML markup"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is this FAQ about?",
+            "answer": "This is the answer to the FAQ question."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Another question?",
+            "answer": "Another answer."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,193 @@
+{% comment %}
+  Flash Sale Section
+  闪购活动页面 - 带 Tab 切换的产品展示
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'flash-sale.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flash-sale.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign banner_desktop = section.settings.banner_desktop
+  assign banner_mobile = section.settings.banner_mobile
+-%}
+
+<!-- Banner -->
+{% render 'campaign-banner',
+  banner_desktop: banner_desktop,
+  banner_mobile: banner_mobile,
+  banner_alt: section.settings.banner_alt,
+  sticky: true
+%}
+
+<!-- Product Tabs Container -->
+<div class="flash-sale-container lv-container">
+  
+  <!-- Tab Buttons -->
+  <div class="flash-sale-tabs-nav">
+    {% assign tab_index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == 'product_tab' %}
+        {% assign tab_index = tab_index | plus: 1 %}
+        <button 
+          type="button"
+          class="flash-sale-tab-btn{% if forloop.first %} active{% endif %}"
+          data-tab-index="{{ tab_index }}"
+          {{ block.shopify_attributes }}>
+          {{ block.settings.tab_title }}
+        </button>
+      {% endif %}
+    {% endfor %}
+  </div>
+  
+  <!-- Tab Content -->
+  <div class="flash-sale-tabs-content">
+    {% assign tab_index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == 'product_tab' %}
+        {% assign tab_index = tab_index | plus: 1 %}
+        <div 
+          class="flash-sale-tab-pane{% if forloop.first %} active{% endif %}"
+          data-tab-content="{{ tab_index }}"
+          {{ block.shopify_attributes }}>
+          
+          <!-- Product Grid -->
+          {% render 'product-grid',
+            section_blocks: section.blocks,
+            grid_style: 'flash',
+            grid_class: 'flash-sale-products',
+            show_reviews: section.settings.show_reviews,
+            discount_percent: block.settings.discount_percent,
+            filter_category: tab_index
+          %}
+          
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+  
+</div>
+
+{% schema %}
+{
+  "name": "Flash Sale",
+  "tag": "section",
+  "class": "flash-sale-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_desktop",
+      "label": "Desktop Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile",
+      "label": "Mobile Banner"
+    },
+    {
+      "type": "text",
+      "id": "banner_alt",
+      "label": "Banner Alt Text",
+      "default": "Flash Sale"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show Review Count",
+      "default": false,
+      "info": "Requires Shopify Product Reviews app"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_tab",
+      "name": "Product Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "Product Category"
+        },
+        {
+          "type": "number",
+          "id": "discount_percent",
+          "label": "Discount Percentage",
+          "default": 0,
+          "info": "Set to 0 to use product's system discount (compare_at_price). Or set custom % (e.g., 15 for 15% OFF)"
+        }
+      ]
+    },
+    {
+      "type": "product_item",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "number",
+          "id": "parent_tab_number",
+          "label": "Belongs to Tab Number",
+          "default": 1,
+          "info": "Enter 1 for first tab, 2 for second tab, etc."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "header",
+          "content": "Content Customization (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image",
+          "info": "Leave blank to use product's featured image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Leave blank to use product title"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom Description",
+          "info": "Optional short description (not shown in current design)"
+        },
+        {
+          "type": "header",
+          "content": "Price Customization (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "custom_compare_price",
+          "label": "Custom Original Price",
+          "info": "Leave blank to use product's compare_at_price. Example: 299.00"
+        },
+        {
+          "type": "number",
+          "id": "custom_discount_percent",
+          "label": "Custom Discount %",
+          "default": 0,
+          "info": "Override tab discount. Set to 0 to use tab discount or product's system discount. Example: 20 for 20% OFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Flash Sale"
+    }
+  ]
+}
+{% endschema %}

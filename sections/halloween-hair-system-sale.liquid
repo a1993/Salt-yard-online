@@ -1,0 +1,227 @@
+{% comment %}
+  Halloween Hair System Sale Section
+  万圣节发制品促销页面 - 支持多个产品分类滑动展示
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'halloween-hair-system-sale.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'halloween-hair-system-sale.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign banner_desktop = section.settings.banner_desktop
+  assign banner_mobile = section.settings.banner_mobile
+-%}
+
+<!-- Banner -->
+{% render 'campaign-banner',
+  banner_desktop: banner_desktop,
+  banner_mobile: banner_mobile,
+  banner_alt: section.settings.banner_alt,
+  sticky: false
+%}
+
+<!-- Main Content -->
+<div class="halloween-sale-container">
+  <div class="halloween-sale-content lv-container">
+    
+    {% assign category_index = 0 %}
+    {% for block in section.blocks %}
+      {% if block.type == 'product_category' %}
+        {% assign category_index = category_index | plus: 1 %}
+        <div class="halloween-category" {{ block.shopify_attributes }}>
+          
+          <!-- Product Swiper -->
+          <div class="halloween-swiper-container" data-category-index="{{ category_index }}">
+            <div class="halloween-swiper">
+              <div class="halloween-swiper-wrapper">
+                {% comment %} 遍历该分类下的所有产品块 {% endcomment %}
+                {% for product_block in section.blocks %}
+                  {% if product_block.type == 'product_item' %}
+                    {% assign parent_category_number = product_block.settings.parent_category_number | plus: 0 %}
+                    {% if parent_category_number == category_index %}
+                      {% assign product = product_block.settings.product %}
+                    
+                    {% if product %}
+                      <div class="halloween-swiper-slide" {{ product_block.shopify_attributes }}>
+                        {% render 'product-card-halloween',
+                          product: product,
+                          show_reviews: section.settings.show_reviews,
+                          button_text: product_block.settings.button_text,
+                          tag_image: block.settings.tag_image,
+                          custom_image: product_block.settings.custom_image,
+                          custom_title: product_block.settings.custom_title,
+                          custom_description: product_block.settings.custom_description,
+                          custom_compare_price: product_block.settings.custom_compare_price,
+                          custom_discount_percent: product_block.settings.custom_discount_percent,
+                          category_discount_percent: block.settings.category_discount_percent
+                        %}
+                      </div>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+
+            
+            <!-- Navigation Buttons -->
+            <div class="halloween-swiper-button-prev halloween-swiper-button-prev-{{ category_index }}">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="halloween-swiper-button-next halloween-swiper-button-next-{{ category_index }}">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+    
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Halloween Sale",
+  "tag": "section",
+  "class": "halloween-sale-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_desktop",
+      "label": "Desktop Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile",
+      "label": "Mobile Banner"
+    },
+    {
+      "type": "text",
+      "id": "banner_alt",
+      "label": "Banner Alt Text",
+      "default": "Halloween Hair System Sale"
+    },
+    {
+      "type": "header",
+      "content": "Background Settings"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background Gradient",
+      "default": "linear-gradient(180deg, #E4D2C9 0%, #F4F6F8 100%)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show Product Reviews",
+      "default": false,
+      "info": "Display product ratings and review count"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_category",
+      "name": "Product Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "tag_image",
+          "label": "Sale Tag Image (Optional)",
+          "info": "Custom tag image displayed on all products in this category"
+        },
+        {
+          "type": "header",
+          "content": "Category Discount Settings"
+        },
+        {
+          "type": "number",
+          "id": "category_discount_percent",
+          "label": "Category Discount %",
+          "default": 0,
+          "info": "Set to 0 to use product's system discount (compare_at_price). Or set custom % for all products in this category."
+        }
+      ]
+    },
+    {
+      "type": "product_item",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "number",
+          "id": "parent_category_number",
+          "label": "Belongs to Category Number",
+          "default": 1,
+          "info": "Enter 1 for first category, 2 for second category, etc."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now",
+          "info": "Text displayed on the product button"
+        },
+        {
+          "type": "header",
+          "content": "Content Customization (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image",
+          "info": "Leave blank to use product's featured image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Leave blank to use product title"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom Description",
+          "info": "Optional short description (not shown in current design)"
+        },
+        {
+          "type": "header",
+          "content": "Price Customization (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "custom_compare_price",
+          "label": "Custom Original Price",
+          "info": "Leave blank to use product's compare_at_price. Example: 299.00"
+        },
+        {
+          "type": "number",
+          "id": "custom_discount_percent",
+          "label": "Custom Discount %",
+          "default": 0,
+          "info": "Set to 0 to use category or system discount. Or set custom % for this product. Example: 20 for 20% OFF"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Halloween Sale"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,232 @@
+{% comment %}
+  Firework Floating Player Snippet
+  Firework 浮动播放器组件
+  
+  参数:
+  - playlist: 播放列表 ID (default: '5zJDLe')
+  - thumbnail_url: 缩略图 URL (default: Shopify CDN)
+  - channel: Firework 频道名称 (default: 'lavivid_hair')
+{% endcomment %}
+
+{%- liquid
+  assign playlist = playlist | default: '5zJDLe'
+  assign channel = channel | default: 'lavivid_hair'
+  assign thumbnail_url = thumbnail_url | default: 'https://www.lavividhair.com/img/cms/liveIcon/previewIcon2.png'
+-%}
+
+<!-- Firework Floating Player Container -->
+<div id="firework-floating-container">
+  <!-- 播放器容器 -->
+  <div id="fw-story-block" class="fw-story-block" style="display: none;">
+    <fw-storyblock
+      channel="{{ channel }}"
+      playlist="{{ playlist }}"
+      mode="pinned"
+      player_placement="bottom-left"
+      autoplay="autoplay"
+    ></fw-storyblock>
+  </div>
+
+  <!-- 浮动按钮 -->
+  <button id="fw-floating-button" class="fw-open-button">
+    <img id="fw-floating-button-thumbnail" src="{{ thumbnail_url }}" width="80" height="80" alt="Watch Videos" />
+    <span id="fw-live-inactive" class="fw-button-icon">
+      <svg width="40" height="40" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <polygon fill="none" stroke="#000" stroke-width="1.1" points="8.5 7 13.5 10 8.5 13" />
+        <circle fill="none" stroke="#000" stroke-width="1.1" cx="10" cy="10" r="9" />
+      </svg>
+    </span>
+    <span id="fw-live-active" class="fw-button-live" style="display: none;">
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z"/>
+      </svg>
+      live
+    </span>
+  </button>
+</div>
+
+<script src="https://asset.fwcdn3.com/js/fwn.js" defer async></script>
+
+<script>
+(function() {
+  'use strict';
+  
+  const STORAGE_KEY = 'storyBlock';
+  const PLAYLIST_ID = '{{ playlist }}';
+  
+  // 等待 DOM 加载
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('firework-floating-container');
+    const button = document.getElementById('fw-floating-button');
+    const playerContainer = document.getElementById('fw-story-block');
+    const thumbnail = document.getElementById('fw-floating-button-thumbnail');
+    const liveActive = document.getElementById('fw-live-active');
+    const liveInactive = document.getElementById('fw-live-inactive');
+    
+    if (!container || !button || !playerContainer) return;
+    
+    // 初始化
+    function initialize() {
+      const storyBlock = localStorage.getItem(STORAGE_KEY);
+      
+      if (storyBlock === 'false') {
+        showButton();
+      } else if (storyBlock === 'true') {
+        openPlayer();
+      } else {
+        showButton();
+      }
+      
+      // 获取缩略图和直播状态
+      fetchThumbnail();
+    }
+    
+    // 显示浮动按钮
+    function showButton() {
+      button.style.display = 'block';
+      playerContainer.style.display = 'none';
+    }
+    
+    // 隐藏浮动按钮
+    function hideButton() {
+      button.style.display = 'none';
+    }
+    
+    // 打开播放器
+    function openPlayer() {
+      hideButton();
+      localStorage.setItem(STORAGE_KEY, 'true');
+      playerContainer.style.display = 'block';
+    }
+    
+    // 关闭播放器
+    function closePlayer() {
+      localStorage.setItem(STORAGE_KEY, 'false');
+      playerContainer.style.display = 'none';
+      showButton();
+    }
+    
+    // 获取视频缩略图和直播状态
+    function fetchThumbnail() {
+      fetch('https://fireworkapi1.com/embed/v2/playlists/' + PLAYLIST_ID + '/feeds?page_size=1', {
+        method: 'POST'
+      })
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        if (data && data.feed_items && data.feed_items[0]) {
+          const video = data.feed_items[0].video;
+          
+          // 更新缩略图
+          if (video.video_posters && video.video_posters[0]) {
+            thumbnail.src = video.video_posters[0].url;
+          }
+          
+          // 更新直播状态
+          const isLive = video.live_stream_status === 'active';
+          if (isLive) {
+            liveActive.style.display = 'flex';
+            liveInactive.style.display = 'none';
+          } else {
+            liveActive.style.display = 'none';
+            liveInactive.style.display = 'block';
+          }
+        }
+      })
+      .catch(function(error) {
+        console.error('Failed to fetch Firework thumbnail:', error);
+      });
+    }
+    
+    // 点击按钮打开播放器
+    button.addEventListener('click', openPlayer);
+    
+    // 监听播放器关闭事件
+    document.addEventListener('fw:player:quit', closePlayer);
+    
+    // 初始化
+    initialize();
+  });
+  
+})();
+</script>
+
+<style>
+  /* Firework 浮动播放器样式 */
+  .fw-open-button {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 70px;
+    left: 15px;
+    z-index: 1000;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  .fw-open-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .fw-button-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .fw-button-live {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #d80303;
+    color: white;
+    border-radius: 0.625rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    font-size: 1rem;
+    width: 3.125rem;
+    height: 1.25rem;
+    z-index: 1;
+  }
+  
+  .fw-story-block {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+  }
+  
+  /* 移动端优化 */
+  @media screen and (max-width: 767px) {
+    .fw-open-button {
+      bottom: 60px;
+      left: 10px;
+      width: 60px;
+      height: 60px;
+    }
+    
+    .fw-button-icon svg {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .fw-button-live {
+      font-size: 0.875rem;
+      width: 2.5rem;
+      height: 1rem;
+    }
+  }
+</style>
+

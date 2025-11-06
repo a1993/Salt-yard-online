@@ -1,0 +1,150 @@
+/* Halloween Hair System Sale Styles */
+
+.halloween-sale-container {
+  min-height: 40vh;
+  background: linear-gradient(180deg, #E4D2C9 0%, #F4F6F8 100%);
+  padding-bottom: 5rem;
+}
+
+.halloween-sale-content {
+  max-width: 1368px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* Category Section */
+.halloween-category {
+  margin-bottom: 4rem;
+}
+
+.halloween-category:first-child {
+  padding-top: 2.5rem;
+}
+
+/* Swiper Container */
+.halloween-swiper-container {
+  position: relative;
+  padding: 0 3rem;
+}
+
+.halloween-swiper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.halloween-swiper-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 1rem 0 2rem;
+}
+
+.halloween-swiper-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.halloween-swiper-slide {
+  flex: 0 0 auto;
+  width: 280px;
+}
+
+/* Navigation Buttons */
+.halloween-swiper-button-prev,
+.halloween-swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: #1d1e20;
+}
+
+.halloween-swiper-button-prev:hover,
+.halloween-swiper-button-next:hover {
+  background: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.halloween-swiper-button-prev {
+  left: 0;
+}
+
+.halloween-swiper-button-next {
+  right: 0;
+}
+
+.halloween-swiper-button-prev.disabled,
+.halloween-swiper-button-next.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Firework Section */
+.halloween-firework-section {
+  margin: 4rem 0;
+  padding: 0 1rem;
+}
+
+/* Desktop Responsive */
+@media screen and (min-width: 1280px) {
+  .halloween-firework-section {
+    margin: 6rem 0;
+  }
+  
+  .halloween-category:first-child {
+    padding-top: 4.5rem;
+  }
+  
+  .halloween-swiper-slide {
+    width: 320px;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .halloween-swiper-slide {
+    width: 260px;
+  }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 767px) {
+  .halloween-sale-content {
+    padding: 0 1rem;
+  }
+  
+  .halloween-category {
+    margin-bottom: 2.5rem;
+  }
+  
+  .halloween-category:first-child {
+    padding-top: 1.5rem;
+  }
+  
+  .halloween-swiper-container {
+    padding: 0;
+  }
+  
+  .halloween-swiper-slide {
+    width: 180px;
+  }
+  
+  /* Hide navigation buttons on mobile */
+  .halloween-swiper-button-prev,
+  .halloween-swiper-button-next {
+    display: none;
+  }
+}
+

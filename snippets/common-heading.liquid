@@ -1,0 +1,271 @@
+{% comment %}
+  通用标题组件
+  Common Heading Component
+  
+  参数:
+  - title: 主标题文本 (required)
+  - subtitle: 副标题文本 (optional)
+  - tag: HTML 标签等级 (default: 'h2', 可选: h1-h6)
+  - subtitle_tag: 副标题 HTML 标签 (default: 'p', 可选: h1-h6, p, span)
+  - align: 文本对齐 (default: 'center', 可选: left, center, right)
+  - title_size: 标题字体大小类 (default: '', 可选: small, medium, large, xlarge)
+  - subtitle_size: 副标题字体大小类 (default: '', 可选: small, medium, large)
+  - title_color: 标题颜色 (default: '')
+  - subtitle_color: 副标题颜色 (default: '')
+  - spacing_top: 上间距 (default: 'medium', 可选: none, small, medium, large)
+  - spacing_bottom: 下间距 (default: 'medium', 可选: none, small, medium, large)
+  - custom_class: 自定义 CSS 类名 (optional)
+  
+  使用示例:
+  {% render 'common-heading',
+    title: 'Our Products',
+    subtitle: 'Discover amazing deals',
+    tag: 'h1',
+    align: 'center',
+    title_size: 'large'
+  %}
+{% endcomment %}
+
+{%- liquid
+  assign title = title | default: ''
+  assign subtitle = subtitle | default: ''
+  assign tag = tag | default: 'h2'
+  assign subtitle_tag = subtitle_tag | default: 'p'
+  assign align = align | default: 'center'
+  assign title_size = title_size | default: ''
+  assign subtitle_size = subtitle_size | default: ''
+  assign title_color = title_color | default: ''
+  assign subtitle_color = subtitle_color | default: ''
+  assign spacing_top = spacing_top | default: 'medium'
+  assign spacing_bottom = spacing_bottom | default: 'medium'
+  assign custom_class = custom_class | default: ''
+-%}
+
+{% if title != blank or subtitle != blank %}
+<div class="common-heading common-heading--align-{{ align }} common-heading--spacing-top-{{ spacing_top }} common-heading--spacing-bottom-{{ spacing_bottom }} {{ custom_class }}">
+  {% if title != blank %}
+    <{{ tag }} class="common-heading__title{% if title_size != blank %} common-heading__title--{{ title_size }}{% endif %}"{% if title_color != blank %} style="color: {{ title_color }};"{% endif %}>
+      {{ title }}
+    </{{ tag }}>
+  {% endif %}
+  
+  {% if subtitle != blank %}
+    <{{ subtitle_tag }} class="common-heading__subtitle{% if subtitle_size != blank %} common-heading__subtitle--{{ subtitle_size }}{% endif %}"{% if subtitle_color != blank %} style="color: {{ subtitle_color }};"{% endif %}>
+      {{ subtitle }}
+    </{{ subtitle_tag }}>
+  {% endif %}
+</div>
+
+<style>
+  /* Common Heading Styles */
+  .common-heading {
+    width: 100%;
+  }
+  
+  /* Text Alignment */
+  .common-heading--align-left {
+    text-align: left;
+  }
+  
+  .common-heading--align-center {
+    text-align: center;
+  }
+  
+  .common-heading--align-right {
+    text-align: right;
+  }
+  
+  /* Title Styles */
+  .common-heading__title {
+    margin: 0;
+    color: #1d1e20;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  
+  /* Default Title Size (适配不同 h 标签) */
+  .common-heading__title {
+    font-size: 1.875rem; /* 30px */
+  }
+  
+  /* Title Size Variants */
+  .common-heading__title--small {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  .common-heading__title--medium {
+    font-size: 1.875rem; /* 30px */
+  }
+  
+  .common-heading__title--large {
+    font-size: 2.25rem; /* 36px */
+  }
+  
+  .common-heading__title--xlarge {
+    font-size: 3rem; /* 48px */
+  }
+  
+  /* Subtitle Styles */
+  .common-heading__subtitle {
+    margin: 0.5rem 0 0 0;
+    color: #666;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  
+  /* Default Subtitle Size */
+  .common-heading__subtitle {
+    font-size: 1rem; /* 16px */
+  }
+  
+  /* Subtitle Size Variants */
+  .common-heading__subtitle--small {
+    font-size: 0.875rem; /* 14px */
+  }
+  
+  .common-heading__subtitle--medium {
+    font-size: 1rem; /* 16px */
+  }
+  
+  .common-heading__subtitle--large {
+    font-size: 1.25rem; /* 20px */
+  }
+  
+  /* Spacing Top */
+  .common-heading--spacing-top-none {
+    margin-top: 0;
+  }
+  
+  .common-heading--spacing-top-small {
+    margin-top: 1rem;
+  }
+  
+  .common-heading--spacing-top-medium {
+    margin-top: 2rem;
+  }
+  
+  .common-heading--spacing-top-large {
+    margin-top: 4rem;
+  }
+  
+  /* Spacing Bottom */
+  .common-heading--spacing-bottom-none {
+    margin-bottom: 0;
+  }
+  
+  .common-heading--spacing-bottom-small {
+    margin-bottom: 1rem;
+  }
+  
+  .common-heading--spacing-bottom-medium {
+    margin-bottom: 2rem;
+  }
+  
+  .common-heading--spacing-bottom-large {
+    margin-bottom: 4rem;
+  }
+  
+  /* Desktop Responsive (>=1280px) */
+  @media screen and (min-width: 1280px) {
+    .common-heading__title {
+      font-size: 2.25rem; /* 36px */
+    }
+    
+    .common-heading__title--small {
+      font-size: 1.5rem; /* 24px */
+    }
+    
+    .common-heading__title--medium {
+      font-size: 2.25rem; /* 36px */
+    }
+    
+    .common-heading__title--large {
+      font-size: 3rem; /* 48px */
+    }
+    
+    .common-heading__title--xlarge {
+      font-size: 3.75rem; /* 60px */
+    }
+    
+    .common-heading__subtitle {
+      font-size: 1.125rem; /* 18px */
+    }
+    
+    .common-heading__subtitle--small {
+      font-size: 1rem; /* 16px */
+    }
+    
+    .common-heading__subtitle--medium {
+      font-size: 1.125rem; /* 18px */
+    }
+    
+    .common-heading__subtitle--large {
+      font-size: 1.5rem; /* 24px */
+    }
+    
+    .common-heading--spacing-top-large {
+      margin-top: 6rem;
+    }
+    
+    .common-heading--spacing-bottom-large {
+      margin-bottom: 6rem;
+    }
+  }
+  
+  /* Mobile Responsive (<=767px) */
+  @media screen and (max-width: 767px) {
+    .common-heading__title {
+      font-size: 1.5rem; /* 24px */
+    }
+    
+    .common-heading__title--small {
+      font-size: 1.125rem; /* 18px */
+    }
+    
+    .common-heading__title--medium {
+      font-size: 1.5rem; /* 24px */
+    }
+    
+    .common-heading__title--large {
+      font-size: 1.875rem; /* 30px */
+    }
+    
+    .common-heading__title--xlarge {
+      font-size: 2.25rem; /* 36px */
+    }
+    
+    .common-heading__subtitle {
+      font-size: 0.875rem; /* 14px */
+    }
+    
+    .common-heading__subtitle--small {
+      font-size: 0.75rem; /* 12px */
+    }
+    
+    .common-heading__subtitle--medium {
+      font-size: 0.875rem; /* 14px */
+    }
+    
+    .common-heading__subtitle--large {
+      font-size: 1rem; /* 16px */
+    }
+    
+    .common-heading--spacing-top-medium {
+      margin-top: 1.5rem;
+    }
+    
+    .common-heading--spacing-top-large {
+      margin-top: 2.5rem;
+    }
+    
+    .common-heading--spacing-bottom-medium {
+      margin-bottom: 1.5rem;
+    }
+    
+    .common-heading--spacing-bottom-large {
+      margin-bottom: 2.5rem;
+    }
+  }
+</style>
+{% endif %}
+

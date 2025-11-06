@@ -1,0 +1,102 @@
+{% comment %}
+  Campaign Banner Snippet
+  活动页面通用 Banner 组件
+  
+  参数:
+  - banner_desktop: 桌面端 Banner 图片
+  - banner_mobile: 移动端 Banner 图片
+  - banner_alt: 图片 Alt 文本
+  - sticky: 是否使用固定宽度布局（true=居中+最大宽度，false=全屏）
+  - width_mobile: 移动端图片宽度（默认 750）
+  - height_mobile: 移动端图片高度（默认 750）
+  - width_desktop: 桌面端图片宽度（默认 1920）
+  - height_desktop: 桌面端图片高度（默认 628）
+{% endcomment %}
+
+{%- liquid
+  assign banner_desktop = banner_desktop | default: ''
+  assign banner_mobile = banner_mobile | default: ''
+  assign banner_alt = banner_alt | default: 'Campaign Banner'
+  assign sticky = sticky | default: true
+  assign width_mobile = width_mobile | default: 750
+  assign height_mobile = height_mobile | default: 750
+  assign width_desktop = width_desktop | default: 1920
+  assign height_desktop = height_desktop | default: 628
+-%}
+
+{% if banner_desktop != blank or banner_mobile != blank %}
+<div class="campaign-banner{% if sticky %} campaign-banner--sticky{% endif %}">
+  {% comment %} Desktop Banner {% endcomment %}
+  {% if banner_desktop != blank %}
+    <img 
+      src="{{ banner_desktop | image_url: width: width_desktop }}" 
+      alt="{{ banner_alt | escape }}"
+      class="campaign-banner__img campaign-banner__img--desktop"
+      loading="eager"
+      fetchpriority="high"
+      width="{{ width_desktop }}"
+      height="{{ height_desktop }}">
+  {% endif %}
+  
+  {% comment %} Mobile Banner {% endcomment %}
+  {% if banner_mobile != blank %}
+    <img 
+      src="{{ banner_mobile | image_url: width: width_mobile }}" 
+      alt="{{ banner_alt | escape }}"
+      class="campaign-banner__img campaign-banner__img--mobile"
+      loading="eager"
+      fetchpriority="high"
+      width="{{ width_mobile }}"
+      height="{{ height_mobile }}">
+  {% endif %}
+</div>
+
+<style>
+  /* Campaign Banner Styles */
+  .campaign-banner {
+    width: 100%;
+    position: relative;
+  }
+  
+  .campaign-banner__img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Desktop Banner - Default: Full Width */
+  .campaign-banner__img--desktop {
+    display: block;
+  }
+  
+  .campaign-banner__img--mobile {
+    display: none;
+  }
+  
+  /* Sticky Mode: Fixed Width & Centered (PC only) */
+  @media screen and (min-width: 1280px) {
+    .campaign-banner--sticky {
+      max-width: 1368px; /* 85.5rem = @lv-width */
+      margin: 1rem auto 0;
+    }
+  }
+  
+  @media (max-width: 1279px) and (min-width: 992px) {
+    .campaign-banner--sticky {
+      max-width: 1368px;
+      margin: 1rem auto 0;
+    }
+  }
+  
+  /* Mobile: Show Mobile Banner */
+  @media screen and (max-width: 767px) {
+    .campaign-banner__img--desktop {
+      display: none;
+    }
+    
+    .campaign-banner__img--mobile {
+      display: block;
+    }
+  }
+</style>
+{% endif %}

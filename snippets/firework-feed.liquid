@@ -1,0 +1,45 @@
+{% comment %}
+  Firework Feed Snippet
+  Firework 视频 Feed 组件
+  
+  参数:
+  - channel: Firework 频道名称 (default: 'lavivid_hair')
+  - mode: 显示模式 (default: 'row')
+  - open_in: 打开方式 (default: 'default')
+  - max_videos: 最大视频数 (default: 0 = 无限制)
+  - placement: 放置位置 (default: 'middle')
+  - player_placement: 播放器位置 (default: 'bottom-left')
+  - playlist: 播放列表 ID (required)
+{% endcomment %}
+
+{%- liquid
+  assign channel = channel | default: 'lavivid_hair'
+  assign mode = mode | default: 'row'
+  assign open_in = open_in | default: 'default'
+  assign max_videos = max_videos | default: 0
+  assign placement = placement | default: 'middle'
+  assign player_placement = player_placement | default: 'bottom-left'
+  assign playlist = playlist | default: '5bJBa2'
+-%}
+
+<div class="firework-feed-container">
+  <fw-embed-feed
+    channel="{{ channel }}"
+    mode="{{ mode }}"
+    open_in="{{ open_in }}"
+    max_videos="{{ max_videos }}"
+    placement="{{ placement }}"
+    player_placement="{{ player_placement }}"
+    playlist="{{ playlist }}"
+  ></fw-embed-feed>
+</div>
+
+<script src="https://asset.fwcdn3.com/js/embed-feed.js" defer async></script>
+
+<style>
+  .firework-feed-container {
+    width: 100%;
+    margin: 2rem 0;
+  }
+</style>
+

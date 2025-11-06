@@ -1,0 +1,84 @@
+{% comment %}
+  Crazy Weekend Sale 商品卡片组件
+  使用自定义字段而非 Shopify 产品对象
+  
+  参数:
+  - product_image: 商品图片
+  - product_title: 商品标题
+  - product_desc: 商品描述
+  - product_url: 商品链接
+  - old_price: 原价
+  - new_price: 折扣价
+  - card_type: 卡片类型 ('type1', 'type2')
+  - badge_image: 折扣徽章图片
+  - currency_symbol: 货币符号
+  - button_text: 按钮文字
+  - shopify_attributes: Shopify 属性
+{% endcomment %}
+
+{%- liquid
+  assign currency = currency_symbol | default: '$'
+  assign btn_text = button_text | default: 'Shop Now >'
+  assign url = product_url | default: '#'
+  
+  # 图片尺寸
+  if card_type == 'type2'
+    assign img_width = 311
+    assign img_height = 260
+  else
+    assign img_width = 630
+    assign img_height = 254
+  endif
+-%}
+
+<a href="{{ url }}" 
+   target="_blank"
+   class="product-card product-card--crazy{% if card_type == 'type2' %} product-card--type2{% endif %}"
+   {{ shopify_attributes }}>
+  
+  <!-- Product Image -->
+  {% if product_image %}
+    <img loading="lazy"
+         src="{{ product_image | image_url: width: img_width }}"
+         alt="{{ product_title | escape }}"
+         width="{{ img_width }}"
+         height="{{ img_height }}"
+         class="product-card__image">
+  {% endif %}
+  
+  <!-- Product Title -->
+  {% if product_title != blank %}
+    <h2 class="product-card__title">{{ product_title }}</h2>
+  {% endif %}
+  
+  <!-- Product Description -->
+  {% if product_desc != blank %}
+    <h3 class="product-card__desc">{{ product_desc }}</h3>
+  {% endif %}
+  
+  <!-- Price and Button -->
+  <div class="product-card__price">
+    <div class="product-card__price-main">
+      <div class="product-card__price-group">
+        {% if old_price != blank %}
+          <div class="product-card__price-old">{{ currency }}{{ old_price }}</div>
+        {% endif %}
+        {% if new_price != blank %}
+          <div class="product-card__price-new">{{ currency }}{{ new_price }}</div>
+        {% endif %}
+      </div>
+      <div class="product-card__button">{{ btn_text }}</div>
+    </div>
+  </div>
+  
+  <!-- Discount Badge -->
+  {% if badge_image %}
+    <img loading="lazy"
+         src="{{ badge_image | image_url: width: 262 }}"
+         alt="Discount Badge"
+         width="262"
+         height="93"
+         class="product-card__badge-image">
+  {% endif %}
+</a>
+

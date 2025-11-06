@@ -1,0 +1,186 @@
+{% comment %}
+  Halloween Sale 商品卡片组件
+  使用 Shopify 产品对象
+  
+  参数:
+  - product: Shopify 产品对象 (必需)
+  - show_reviews: 是否显示评论
+  - button_text: 按钮文字
+  - tag_image: 自定义标签图片
+  - custom_image: 自定义商品图片 (可选)
+  - custom_title: 自定义标题 (可选)
+  - custom_description: 自定义描述 (可选)
+  - custom_compare_price: 自定义原价 (可选)
+  - custom_discount_percent: 自定义折扣百分比 (可选，优先级最高)
+  - category_discount_percent: 分类折扣百分比 (可选，优先级次之)
+  - shopify_attributes: Shopify 属性
+{% endcomment %}
+
+{% if product %}
+  {%- liquid
+    assign btn_text = button_text | default: 'Shop Now'
+    
+    # 优先使用自定义内容
+    assign display_image = custom_image | default: product.featured_image
+    assign display_title = custom_title | default: product.title
+    
+    # 计算系统折扣百分比（基于产品的 compare_at_price）
+    assign system_discount_percent = 0
+    if product.compare_at_price > product.price
+      assign discount_amount = product.compare_at_price | minus: product.price
+      assign system_discount_percent = discount_amount | times: 100.0 | divided_by: product.compare_at_price | round
+    endif
+    
+    # 确定使用的折扣百分比（优先级：商品折扣 > 分类折扣 > 系统折扣）
+    assign final_discount_percent = 0
+    if custom_discount_percent and custom_discount_percent > 0
+      assign final_discount_percent = custom_discount_percent
+    elsif category_discount_percent and category_discount_percent > 0
+      assign final_discount_percent = category_discount_percent
+    elsif system_discount_percent > 0
+      assign final_discount_percent = system_discount_percent
+    endif
+    
+    # 确定原价和折扣价
+    assign has_custom_price = false
+    assign compare_price = 0
+    assign sale_price = product.price
+    assign display_discount_percent = 0
+    assign show_compare_price = false
+    
+    # 如果有自定义原价
+    if custom_compare_price != blank
+      assign has_custom_price = true
+      assign compare_price_value = custom_compare_price | times: 100
+      assign compare_price = compare_price_value
+      assign show_compare_price = true
+      
+      # 如果设置了折扣百分比，基于自定义原价计算现价
+      if final_discount_percent > 0
+        assign display_discount_percent = final_discount_percent
+        assign discount_decimal = final_discount_percent | times: 1.0 | divided_by: 100.0
+        assign discount_amount = compare_price | times: discount_decimal
+        assign sale_price = compare_price | minus: discount_amount
+      else
+        # 没有折扣设置，计算基于自定义原价和产品价格的折扣百分比
+        if compare_price > product.price
+          assign discount_amount = compare_price | minus: product.price
+          assign display_discount_percent = discount_amount | times: 100.0 | divided_by: compare_price | round
+        endif
+        # 现价使用产品价格
+        assign sale_price = product.price
+      endif
+    else
+      # 没有自定义原价，使用系统固定折扣（product.compare_at_price）
+      if product.compare_at_price > product.price
+        assign compare_price = product.compare_at_price
+        assign sale_price = product.price
+        assign show_compare_price = true
+        # 使用系统计算的折扣百分比或已设置的折扣百分比
+        assign display_discount_percent = final_discount_percent
+      elsif final_discount_percent > 0
+        # 有折扣百分比但没有系统固定折扣，基于产品价格计算
+        assign display_discount_percent = final_discount_percent
+        assign compare_price = product.price
+        assign discount_decimal = final_discount_percent | times: 1.0 | divided_by: 100.0
+        assign discount_amount = product.price | times: discount_decimal
+        assign sale_price = product.price | minus: discount_amount
+        assign show_compare_price = true
+      endif
+    endif
+  -%}
+  
+  <a href="{{ product.url }}" class="product-card product-card--halloween">
+    <!-- Product Image -->
+    {% if display_image %}
+      <img 
+        src="{{ display_image | image_url: width: 300 }}"
+        srcset="{{ display_image | image_url: width: 185 }} 185w,
+                {{ display_image | image_url: width: 215 }} 215w,
+                {{ display_image | image_url: width: 266 }} 266w,
+                {{ display_image | image_url: width: 300 }} 300w"
+        sizes="(max-width: 374px) 185px, (max-width: 479px) 215px, (max-width: 639px) 266px, (max-width: 767px) 300px, (max-width: 1023px) 224px, (max-width: 1279px) 250px, (max-width: 1535px) 287px, 300px"
+        alt="{{ display_title | escape }}"
+        width="300"
+        height="300"
+        loading="lazy"
+        class="product-card__image">
+    {% else %}
+      <div class="product-card__image product-card__image--placeholder">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+    
+    <!-- Product Title -->
+    <h3 class="product-card__title">{{ display_title }}</h3>
+    
+    <!-- Custom Description (Optional) -->
+    {% if custom_description != blank %}
+      <p class="product-card__description">{{ custom_description }}</p>
+    {% endif %}
+    
+    <!-- Reviews (Optional) -->
+    {% if show_reviews and product.metafields.reviews.rating_count.value %}
+      <div class="product-card__reviews">
+        <span class="product-card__rating">
+          {{ product.metafields.reviews.rating.value | round: 1 }} ★
+        </span>
+        <span class="product-card__review-count">
+          ({{ product.metafields.reviews.rating_count.value }})
+        </span>
+      </div>
+    {% endif %}
+    
+    <!-- Product Price -->
+    <div class="product-card__price">
+      {% if show_compare_price and compare_price > sale_price %}
+        {% comment %} 显示原价和折扣价（符合 Shopify 官方格式） {% endcomment %}
+        {% if has_custom_price %}
+          <s class="product-card__price-compare">${{ custom_compare_price }}</s>
+        {% else %}
+          <s class="product-card__price-compare">{{ compare_price | money }}</s>
+        {% endif %}
+        <span class="product-card__price-sale">{{ sale_price | money }}</span>
+      {% else %}
+        {% comment %} 只显示当前价格 {% endcomment %}
+        <span class="product-card__price-sale">{{ sale_price | money }}</span>
+      {% endif %}
+    </div>
+    
+    <!-- Top Left Tag -->
+    {% if tag_image %}
+      <!-- Custom Tag Image -->
+      <img 
+        src="{{ tag_image | image_url: width: 140 }}"
+        alt="Sale Tag"
+        width="140"
+        height="140"
+        class="product-card__tag-image"
+        loading="lazy">
+    {% else %}
+      <!-- Discount & Tag Badges -->
+      <div class="product-card__badges">
+        <!-- Discount Badge -->
+        {% if display_discount_percent > 0 %}
+          <div class="product-card__badge product-card__badge--discount">
+            <span>{{ display_discount_percent }}%</span>
+            <span class="product-card__badge-off">OFF</span>
+          </div>
+        {% endif %}
+        
+        <!-- Product Tag (HOT/NEW) -->
+        {% if product.tags contains 'HOT' or product.tags contains 'hot' %}
+          <div class="product-card__badge product-card__badge--hot">HOT</div>
+        {% elsif product.tags contains 'NEW' or product.tags contains 'new' %}
+          <div class="product-card__badge product-card__badge--new">NEW</div>
+        {% endif %}
+      </div>
+    {% endif %}
+    
+    <!-- Shop Now Button -->
+    <div class="product-card__shop-button">
+      {{ btn_text }}
+    </div>
+  </a>
+{% endif %}
+

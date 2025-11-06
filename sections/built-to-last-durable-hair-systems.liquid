@@ -1,0 +1,238 @@
+{% comment %}
+  Built to Last: Durable Hair Systems Section
+  持久耐用发制品展示页面
+{% endcomment %}
+
+{{ 'built-to-last-durable.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'built-to-last-durable.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign banner_desktop = section.settings.banner_desktop
+  assign banner_mobile = section.settings.banner_mobile
+-%}
+
+<!-- Banner -->
+{% render 'campaign-banner',
+  banner_desktop: banner_desktop,
+  banner_mobile: banner_mobile,
+  banner_alt: section.settings.banner_alt,
+  sticky: true
+%}
+
+<!-- Main Content -->
+<div class="durable-container lv-container">
+  
+  <!-- Introduction Card -->
+  {% if section.settings.show_intro_card %}
+  <div class="durable-intro-card">
+    <div class="durable-intro-content">
+      <h2 class="durable-intro-title">{{ section.settings.intro_title | default: "Why Should We Choose Hair System with Longer Life Span?" }}</h2>
+      
+      <ul class="durable-intro-list">
+        {% if section.settings.point_1 != blank %}
+          <li>{{ section.settings.point_1 }}</li>
+        {% endif %}
+        {% if section.settings.point_2 != blank %}
+          <li>{{ section.settings.point_2 }}</li>
+        {% endif %}
+        {% if section.settings.point_3 != blank %}
+          <li>{{ section.settings.point_3 }}</li>
+        {% endif %}
+      </ul>
+    </div>
+    
+    {% if section.settings.intro_video_url != blank %}
+    <div class="durable-intro-video">
+      <div class="durable-video-wrapper" data-video="{{ section.settings.intro_video_url }}">
+        {% if section.settings.intro_video_cover != blank %}
+          <img 
+            src="{{ section.settings.intro_video_cover | image_url: width: 600 }}"
+            alt="Video Cover"
+            class="durable-video-cover">
+          <div class="durable-play-button">
+            <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
+              <circle cx="34" cy="34" r="34" fill="white" opacity="0.9"/>
+              <path d="M27 22L47 34L27 46V22Z" fill="#1d1e20"/>
+            </svg>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+  
+  <!-- Product Categories -->
+  {% assign category_index = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'product_category' %}
+      {% assign category_index = category_index | plus: 1 %}
+      <div class="durable-category" {{ block.shopify_attributes }}>
+        {% if block.settings.category_title != blank %}
+          <h2 class="durable-category-title">{{ block.settings.category_title }}</h2>
+        {% endif %}
+        
+        {% if block.settings.category_subtitle != blank %}
+          <p class="durable-category-subtitle">{{ block.settings.category_subtitle }}</p>
+        {% endif %}
+        
+        <div class="durable-product-grid">
+          {% comment %} 遍历该分类下的所有产品块 {% endcomment %}
+          {% for product_block in section.blocks %}
+            {% if product_block.type == 'product_item' %}
+              {% assign parent_category_number = product_block.settings.parent_category_number | plus: 0 %}
+              {% if parent_category_number == category_index %}
+                {% assign product = product_block.settings.product %}
+              
+              {% if product %}
+                <div class="durable-product-item" {{ product_block.shopify_attributes }}>
+                  <a href="{{ product.url }}" class="durable-product-link">
+                    {% if product.featured_image %}
+                      <img 
+                        src="{{ product.featured_image | image_url: width: 300 }}"
+                        alt="{{ product.title | escape }}"
+                        loading="lazy"
+                        class="durable-product-image">
+                    {% endif %}
+                    
+                    <h3 class="durable-product-title">{{ product.title }}</h3>
+                    
+                    <div class="durable-product-price">
+                      {% if product.compare_at_price > product.price %}
+                        <span class="durable-price-compare">{{ product.compare_at_price | money }}</span>
+                      {% endif %}
+                      <span class="durable-price-sale">{{ product.price | money }}</span>
+                    </div>
+                  </a>
+                </div>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    
+  {% endfor %}
+  
+</div>
+
+<!-- Video Modal -->
+{% render 'video-modal', modal_id: 'durable-video-modal' %}
+
+{% schema %}
+{
+  "name": "Durable Hair Systems",
+  "tag": "section",
+  "class": "durable-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Banner Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_desktop",
+      "label": "Desktop Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_mobile",
+      "label": "Mobile Banner"
+    },
+    {
+      "type": "text",
+      "id": "banner_alt",
+      "label": "Banner Alt Text",
+      "default": "Built to Last: Durable Hair Systems"
+    },
+    {
+      "type": "header",
+      "content": "Introduction Card"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_intro_card",
+      "label": "Show Introduction Card",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "intro_title",
+      "label": "Introduction Title",
+      "default": "Why Should We Choose Hair System with Longer Life Span?"
+    },
+    {
+      "type": "html",
+      "id": "point_1",
+      "label": "Point 1",
+      "default": "<strong>For Busy People:</strong> Less Maintenance & Fewer Replacements = More Time Saved."
+    },
+    {
+      "type": "html",
+      "id": "point_2",
+      "label": "Point 2",
+      "default": "<strong>For Budget-Conscious Buyers:</strong> Saves money by reducing replacements and repairs."
+    },
+    {
+      "type": "html",
+      "id": "point_3",
+      "label": "Point 3",
+      "default": "<strong>For Quality Seekers:</strong> Longer lifespan means better quality and reliability"
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_video_cover",
+      "label": "Intro Video Cover Image"
+    },
+    {
+      "type": "url",
+      "id": "intro_video_url",
+      "label": "Intro Video URL (YouTube Embed URL)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_category",
+      "name": "Product Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category Title",
+          "default": "Up to 6–12 Months Lifespan"
+        },
+        {
+          "type": "text",
+          "id": "category_subtitle",
+          "label": "Category Subtitle"
+        }
+      ]
+    },
+    {
+      "type": "product_item",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "number",
+          "id": "parent_category_number",
+          "label": "Belongs to Category Number",
+          "default": 1,
+          "info": "Enter 1 for first category, 2 for second category, etc."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Durable Hair Systems"
+    }
+  ]
+}
+{% endschema %}
+
