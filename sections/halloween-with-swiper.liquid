@@ -1,0 +1,458 @@
+{% comment %}
+  Product Swiper Section
+  产品轮播分区 - 颗粒化的轮播加卡片组件
+  支持自定义边距和PC端宽度，背景色透明
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'halloween-hair-system-sale.css' | asset_url | stylesheet_tag }}
+<script src='{{ 'halloween-hair-system-sale.js' | asset_url }}' defer></script>
+
+{%- liquid
+  assign background_color = section.settings.background_color
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign padding_left = section.settings.padding_left
+  assign padding_right = section.settings.padding_right
+  assign max_width = section.settings.max_width
+  assign show_reviews = section.settings.show_reviews
+-%}
+
+<div
+  class='product-swiper-section'
+  {% if background_color != blank %}
+    style='background-color: {{ background_color }};'
+  {% endif %}
+  {%- render 'animation-attrs', attrs: 'data-cc-animate' -%}
+>
+  <div class='product-swiper-container' style='max-width: {{ max_width }}px;'>
+    <!-- Product Swiper -->
+    <div class='halloween-swiper-container' data-category-index='1'>
+      <div class='halloween-swiper'>
+        <div class='halloween-swiper-wrapper'>
+          {% comment %} 遍历所有产品块 {% endcomment %}
+          {% for block in section.blocks %}
+            {% if block.type == 'product_item' %}
+              {% assign product = block.settings.product %}
+
+              {% if product %}
+                <div class='halloween-swiper-slide' {{ block.shopify_attributes }}>
+                  {% render 'product-card-halloween',
+                    product: product,
+                    show_reviews: show_reviews,
+                    button_text: block.settings.button_text,
+                    tag_image: block.settings.tag_image,
+                    custom_image: block.settings.custom_image,
+                    custom_title: block.settings.custom_title,
+                    custom_description: block.settings.custom_description,
+                    custom_compare_price: block.settings.custom_compare_price,
+                    custom_discount_percent: block.settings.custom_discount_percent,
+                    category_discount_percent: block.settings.category_discount_percent
+                  %}
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class='halloween-swiper-button-prev halloween-swiper-button-prev-1'>
+        <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class='halloween-swiper-button-next halloween-swiper-button-next-1'>
+        <svg width='24' height='24' viewBox='0 0 24 24' fill='none'>
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .product-swiper-section {
+    width: 100%;
+    background-color: transparent;
+  }
+
+  .product-swiper-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Padding Top */
+  {% if padding_top == 'none' %}
+    .product-swiper-section {
+      padding-top: 0;
+    }
+  {% elsif padding_top == 'small' %}
+    .product-swiper-section {
+      padding-top: 1rem;
+    }
+  {% elsif padding_top == 'medium' %}
+    .product-swiper-section {
+      padding-top: 2rem;
+    }
+  {% elsif padding_top == 'large' %}
+    .product-swiper-section {
+      padding-top: 4rem;
+    }
+  {% else %}
+    .product-swiper-section {
+      padding-top: 2rem;
+    }
+  {% endif %}
+
+  /* Padding Bottom */
+  {% if padding_bottom == 'none' %}
+    .product-swiper-section {
+      padding-bottom: 0;
+    }
+  {% elsif padding_bottom == 'small' %}
+    .product-swiper-section {
+      padding-bottom: 1rem;
+    }
+  {% elsif padding_bottom == 'medium' %}
+    .product-swiper-section {
+      padding-bottom: 2rem;
+    }
+  {% elsif padding_bottom == 'large' %}
+    .product-swiper-section {
+      padding-bottom: 4rem;
+    }
+  {% else %}
+    .product-swiper-section {
+      padding-bottom: 2rem;
+    }
+  {% endif %}
+
+  /* Padding Left */
+  {% if padding_left == 'none' %}
+    .product-swiper-container {
+      padding-left: 0;
+    }
+  {% elsif padding_left == 'small' %}
+    .product-swiper-container {
+      padding-left: 1rem;
+    }
+  {% elsif padding_left == 'medium' %}
+    .product-swiper-container {
+      padding-left: 1.25rem;
+    }
+  {% elsif padding_left == 'large' %}
+    .product-swiper-container {
+      padding-left: 2rem;
+    }
+  {% else %}
+    .product-swiper-container {
+      padding-left: 1.25rem;
+    }
+  {% endif %}
+
+  /* Padding Right */
+  {% if padding_right == 'none' %}
+    .product-swiper-container {
+      padding-right: 0;
+    }
+  {% elsif padding_right == 'small' %}
+    .product-swiper-container {
+      padding-right: 1rem;
+    }
+  {% elsif padding_right == 'medium' %}
+    .product-swiper-container {
+      padding-right: 1.25rem;
+    }
+  {% elsif padding_right == 'large' %}
+    .product-swiper-container {
+      padding-right: 2rem;
+    }
+  {% else %}
+    .product-swiper-container {
+      padding-right: 1.25rem;
+    }
+  {% endif %}
+
+  /* Desktop Responsive (>=1280px) */
+  @media screen and (min-width: 1280px) {
+    {% if padding_top == 'large' %}
+      .product-swiper-section {
+        padding-top: 6rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'large' %}
+      .product-swiper-section {
+        padding-bottom: 6rem;
+      }
+    {% endif %}
+
+    {% if padding_left == 'large' %}
+      .product-swiper-container {
+        padding-left: 3rem;
+      }
+    {% endif %}
+
+    {% if padding_right == 'large' %}
+      .product-swiper-container {
+        padding-right: 3rem;
+      }
+    {% endif %}
+  }
+
+  /* Mobile Responsive (<=767px) */
+  @media screen and (max-width: 767px) {
+    {% if padding_top == 'medium' %}
+      .product-swiper-section {
+        padding-top: 1.5rem;
+      }
+    {% endif %}
+
+    {% if padding_top == 'large' %}
+      .product-swiper-section {
+        padding-top: 2.5rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'medium' %}
+      .product-swiper-section {
+        padding-bottom: 1.5rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'large' %}
+      .product-swiper-section {
+        padding-bottom: 2.5rem;
+      }
+    {% endif %}
+
+    .product-swiper-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product Swiper",
+  "tag": "section",
+  "class": "section-product-swiper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "PC端最大宽度",
+      "default": 1400,
+      "info": "设置PC端容器的最大宽度（800px - 1920px）"
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "info": "背景色（留空为透明）"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "上边距",
+      "options": [
+        {
+          "value": "none",
+          "label": "无"
+        },
+        {
+          "value": "small",
+          "label": "小"
+        },
+        {
+          "value": "medium",
+          "label": "中"
+        },
+        {
+          "value": "large",
+          "label": "大"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "下边距",
+      "options": [
+        {
+          "value": "none",
+          "label": "无"
+        },
+        {
+          "value": "small",
+          "label": "小"
+        },
+        {
+          "value": "medium",
+          "label": "中"
+        },
+        {
+          "value": "large",
+          "label": "大"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "padding_left",
+      "label": "左边距",
+      "options": [
+        {
+          "value": "none",
+          "label": "无"
+        },
+        {
+          "value": "small",
+          "label": "小"
+        },
+        {
+          "value": "medium",
+          "label": "中"
+        },
+        {
+          "value": "large",
+          "label": "大"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "padding_right",
+      "label": "右边距",
+      "options": [
+        {
+          "value": "none",
+          "label": "无"
+        },
+        {
+          "value": "small",
+          "label": "小"
+        },
+        {
+          "value": "medium",
+          "label": "中"
+        },
+        {
+          "value": "large",
+          "label": "大"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "header",
+      "content": "Product Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show Product Reviews",
+      "default": false,
+      "info": "Display product ratings and review count"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now",
+          "info": "Text displayed on the product button"
+        },
+        {
+          "type": "image_picker",
+          "id": "tag_image",
+          "label": "Sale Tag Image (Optional)",
+          "info": "Custom tag image displayed on this product"
+        },
+        {
+          "type": "header",
+          "content": "Content Customization (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image",
+          "info": "Leave blank to use product's featured image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Leave blank to use product title"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom Description",
+          "info": "Optional short description"
+        },
+        {
+          "type": "header",
+          "content": "Price Customization (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "custom_compare_price",
+          "label": "Custom Original Price",
+          "info": "Leave blank to use product's compare_at_price. Example: 299.00"
+        },
+        {
+          "type": "number",
+          "id": "custom_discount_percent",
+          "label": "Custom Discount %",
+          "default": 0,
+          "info": "Set to 0 to use system discount. Or set custom % for this product. Example: 20 for 20% OFF"
+        },
+        {
+          "type": "number",
+          "id": "category_discount_percent",
+          "label": "Category Discount %",
+          "default": 0,
+          "info": "Set to 0 to use product's system discount. Or set custom % for this product."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Swiper"
+    }
+  ]
+}
+{% endschema %}

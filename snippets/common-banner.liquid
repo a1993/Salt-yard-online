@@ -1,14 +1,14 @@
 {% comment %}
   通用 Banner 组件
   Common Banner Component
-  
+
   参数:
   - banner_desktop: 桌面端图片 (required)
   - banner_mobile: 移动端图片 (optional, 如果不提供则使用 desktop 图)
   - alt_text: 图片 Alt 文本 (default: 'Banner')
   - width_mode: 宽度模式 (default: 'standard', 可选: full, standard, wide, narrow)
     - full: 全屏宽度
-    - standard: 1368px 居中
+    - standard: 1400px 居中 (87.5rem)
     - wide: 1600px 居中
     - narrow: 1024px 居中
   - width_desktop: 桌面端图片宽度 (default: 1920)
@@ -20,7 +20,7 @@
   - lazy_load: 是否延迟加载 (default: false, 首屏 Banner 建议 false)
   - link_url: Banner 链接 (optional)
   - custom_class: 自定义 CSS 类名 (optional)
-  
+
   使用示例:
   {% render 'common-banner',
     banner_desktop: section.settings.banner_desktop,
@@ -47,179 +47,178 @@
 -%}
 
 {% if banner_desktop != blank or banner_mobile != blank %}
-<div class="common-banner common-banner--width-{{ width_mode }} common-banner--spacing-top-{{ spacing_top }} common-banner--spacing-bottom-{{ spacing_bottom }} {{ custom_class }}">
-  {% if link_url != blank %}<a href="{{ link_url }}">{% endif %}
-    
+  <div class='common-banner common-banner--width-{{ width_mode }} common-banner--spacing-top-{{ spacing_top }} common-banner--spacing-bottom-{{ spacing_bottom }} {{ custom_class }}'>
+    {% if link_url != blank %}<a href='{{ link_url }}'>{% endif %}
+
     {% comment %} Desktop Banner {% endcomment %}
     {% if banner_desktop != blank %}
-      <img 
-        src="{{ banner_desktop | image_url: width: width_desktop }}" 
-        alt="{{ alt_text | escape }}"
-        class="common-banner__img common-banner__img--desktop"
-        width="{{ width_desktop }}"
-        height="{{ height_desktop }}"
+      <img
+        src='{{ banner_desktop | image_url: width: width_desktop }}'
+        alt='{{ alt_text | escape }}'
+        class='common-banner__img common-banner__img--desktop'
+        width='{{ width_desktop }}'
+        height='{{ height_desktop }}'
         {% if lazy_load %}
-          loading="lazy"
+          loading='lazy'
         {% else %}
-          loading="eager"
-          fetchpriority="high"
+          loading='eager'
+          fetchpriority='high'
         {% endif %}
       >
     {% endif %}
-    
+
     {% comment %} Mobile Banner {% endcomment %}
     {% if banner_mobile != blank %}
-      <img 
-        src="{{ banner_mobile | image_url: width: width_mobile }}" 
-        alt="{{ alt_text | escape }}"
-        class="common-banner__img common-banner__img--mobile"
-        width="{{ width_mobile }}"
-        height="{{ height_mobile }}"
+      <img
+        src='{{ banner_mobile | image_url: width: width_mobile }}'
+        alt='{{ alt_text | escape }}'
+        class='common-banner__img common-banner__img--mobile'
+        width='{{ width_mobile }}'
+        height='{{ height_mobile }}'
         {% if lazy_load %}
-          loading="lazy"
+          loading='lazy'
         {% else %}
-          loading="eager"
-          fetchpriority="high"
+          loading='eager'
+          fetchpriority='high'
         {% endif %}
       >
     {% endif %}
-  
-  {% if link_url != blank %}</a>{% endif %}
-</div>
 
-<style>
-  /* Common Banner Styles */
-  .common-banner {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .common-banner a {
-    display: block;
-  }
-  
-  .common-banner__img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* Desktop Banner - Show by Default */
-  .common-banner__img--desktop {
-    display: block;
-  }
-  
-  .common-banner__img--mobile {
-    display: none;
-  }
-  
-  /* Width Modes */
-  .common-banner--width-full {
-    max-width: 100%;
-  }
-  
-  .common-banner--width-standard {
-    max-width: 100%;
-  }
-  
-  .common-banner--width-wide {
-    max-width: 100%;
-  }
-  
-  .common-banner--width-narrow {
-    max-width: 100%;
-  }
-  
-  /* Desktop: Apply Width Constraints */
-  @media screen and (min-width: 1280px) {
-    .common-banner--width-standard {
-      max-width: 85.5rem; /* 1368px */
-      margin-left: auto;
-      margin-right: auto;
+    {% if link_url != blank %}</a>{% endif %}
+  </div>
+
+  <style>
+    /* Common Banner Styles */
+    .common-banner {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
     }
-    
-    .common-banner--width-wide {
-      max-width: 100rem; /* 1600px */
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    .common-banner--width-narrow {
-      max-width: 64rem; /* 1024px */
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  
-  @media (max-width: 1279px) and (min-width: 992px) {
-    .common-banner--width-standard {
-      max-width: 85.5rem;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  
-  /* Spacing Top */
-  .common-banner--spacing-top-none {
-    margin-top: 0;
-  }
-  
-  .common-banner--spacing-top-small {
-    margin-top: 1rem;
-  }
-  
-  .common-banner--spacing-top-medium {
-    margin-top: 2rem;
-  }
-  
-  .common-banner--spacing-top-large {
-    margin-top: 4rem;
-  }
-  
-  /* Spacing Bottom */
-  .common-banner--spacing-bottom-none {
-    margin-bottom: 0;
-  }
-  
-  .common-banner--spacing-bottom-small {
-    margin-bottom: 1rem;
-  }
-  
-  .common-banner--spacing-bottom-medium {
-    margin-bottom: 2rem;
-  }
-  
-  .common-banner--spacing-bottom-large {
-    margin-bottom: 4rem;
-  }
-  
-  /* Mobile: Show Mobile Banner */
-  @media screen and (max-width: 767px) {
-    .common-banner__img--desktop {
-      display: none;
-    }
-    
-    .common-banner__img--mobile {
+
+    .common-banner a {
       display: block;
     }
-    
-    .common-banner--spacing-top-medium {
-      margin-top: 1.5rem;
-    }
-    
-    .common-banner--spacing-top-large {
-      margin-top: 2.5rem;
-    }
-    
-    .common-banner--spacing-bottom-medium {
-      margin-bottom: 1.5rem;
-    }
-    
-    .common-banner--spacing-bottom-large {
-      margin-bottom: 2.5rem;
-    }
-  }
-</style>
-{% endif %}
 
+    .common-banner__img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Desktop Banner - Show by Default */
+    .common-banner__img--desktop {
+      display: block;
+    }
+
+    .common-banner__img--mobile {
+      display: none;
+    }
+
+    /* Width Modes */
+    .common-banner--width-full {
+      max-width: 100%;
+    }
+
+    .common-banner--width-standard {
+      max-width: 100%;
+    }
+
+    .common-banner--width-wide {
+      max-width: 100%;
+    }
+
+    .common-banner--width-narrow {
+      max-width: 100%;
+    }
+
+    /* Desktop: Apply Width Constraints */
+    @media screen and (min-width: 1280px) {
+      .common-banner--width-standard {
+        max-width: 87.5rem; /* 1400px */
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .common-banner--width-wide {
+        max-width: 100rem; /* 1600px */
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .common-banner--width-narrow {
+        max-width: 64rem; /* 1024px */
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (max-width: 1279px) and (min-width: 992px) {
+      .common-banner--width-standard {
+        max-width: 87.5rem; /* 1400px */
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    /* Spacing Top */
+    .common-banner--spacing-top-none {
+      margin-top: 0;
+    }
+
+    .common-banner--spacing-top-small {
+      margin-top: 1rem;
+    }
+
+    .common-banner--spacing-top-medium {
+      margin-top: 2rem;
+    }
+
+    .common-banner--spacing-top-large {
+      margin-top: 4rem;
+    }
+
+    /* Spacing Bottom */
+    .common-banner--spacing-bottom-none {
+      margin-bottom: 0;
+    }
+
+    .common-banner--spacing-bottom-small {
+      margin-bottom: 1rem;
+    }
+
+    .common-banner--spacing-bottom-medium {
+      margin-bottom: 2rem;
+    }
+
+    .common-banner--spacing-bottom-large {
+      margin-bottom: 4rem;
+    }
+
+    /* Mobile: Show Mobile Banner */
+    @media screen and (max-width: 767px) {
+      .common-banner__img--desktop {
+        display: none;
+      }
+
+      .common-banner__img--mobile {
+        display: block;
+      }
+
+      .common-banner--spacing-top-medium {
+        margin-top: 1.5rem;
+      }
+
+      .common-banner--spacing-top-large {
+        margin-top: 2.5rem;
+      }
+
+      .common-banner--spacing-bottom-medium {
+        margin-bottom: 1.5rem;
+      }
+
+      .common-banner--spacing-bottom-large {
+        margin-bottom: 2.5rem;
+      }
+    }
+  </style>
+{% endif %}

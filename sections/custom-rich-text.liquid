@@ -1,0 +1,283 @@
+{% comment %}
+  Custom Rich Text Section
+  自定义富文本分区 - 支持自定义背景色和文本颜色，最大宽度1400px
+{% endcomment %}
+
+{%- liquid
+  assign background_color = section.settings.background_color
+  assign text_color = section.settings.text_color
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign text_alignment = section.settings.text_alignment
+-%}
+
+<div
+  class='custom-rich-text-section'
+  {% if background_color != blank %}
+    style='background-color: {{ background_color }};'
+  {% endif %}
+  {%- render 'animation-attrs', attrs: 'data-cc-animate' -%}
+>
+  <div class='custom-rich-text-container'>
+    <div
+      class='custom-rich-text-content rte'
+      {% if text_color != blank %}
+        style='color: {{ text_color }};'
+      {% endif %}
+    >
+      {% if section.settings.richtext != blank %}
+        {{ section.settings.richtext }}
+      {% else %}
+        <p>Add your rich text content here. You can format text, add links, and more.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .custom-rich-text-section {
+    width: 100%;
+  }
+
+  .custom-rich-text-container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .custom-rich-text-content {
+    width: 100%;
+  }
+
+  /* Padding Top */
+  {% if padding_top == 'none' %}
+    .custom-rich-text-section {
+      padding-top: 0;
+    }
+  {% elsif padding_top == 'small' %}
+    .custom-rich-text-section {
+      padding-top: 1rem;
+    }
+  {% elsif padding_top == 'medium' %}
+    .custom-rich-text-section {
+      padding-top: 2rem;
+    }
+  {% elsif padding_top == 'large' %}
+    .custom-rich-text-section {
+      padding-top: 4rem;
+    }
+  {% else %}
+    .custom-rich-text-section {
+      padding-top: 2rem;
+    }
+  {% endif %}
+
+  /* Padding Bottom */
+  {% if padding_bottom == 'none' %}
+    .custom-rich-text-section {
+      padding-bottom: 0;
+    }
+  {% elsif padding_bottom == 'small' %}
+    .custom-rich-text-section {
+      padding-bottom: 1rem;
+    }
+  {% elsif padding_bottom == 'medium' %}
+    .custom-rich-text-section {
+      padding-bottom: 2rem;
+    }
+  {% elsif padding_bottom == 'large' %}
+    .custom-rich-text-section {
+      padding-bottom: 4rem;
+    }
+  {% else %}
+    .custom-rich-text-section {
+      padding-bottom: 2rem;
+    }
+  {% endif %}
+
+  /* Text Alignment */
+  {% if text_alignment == 'left' %}
+    .custom-rich-text-content {
+      text-align: left;
+    }
+  {% elsif text_alignment == 'center' %}
+    .custom-rich-text-content {
+      text-align: center;
+    }
+  {% elsif text_alignment == 'right' %}
+    .custom-rich-text-content {
+      text-align: right;
+    }
+  {% else %}
+    .custom-rich-text-content {
+      text-align: center;
+    }
+  {% endif %}
+
+  /* Desktop Responsive (>=1280px) */
+  @media screen and (min-width: 1280px) {
+    .custom-rich-text-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    {% if padding_top == 'large' %}
+      .custom-rich-text-section {
+        padding-top: 6rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'large' %}
+      .custom-rich-text-section {
+        padding-bottom: 6rem;
+      }
+    {% endif %}
+  }
+
+  /* Mobile Responsive (<=767px) */
+  @media screen and (max-width: 767px) {
+    .custom-rich-text-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    {% if padding_top == 'medium' %}
+      .custom-rich-text-section {
+        padding-top: 1.5rem;
+      }
+    {% endif %}
+
+    {% if padding_top == 'large' %}
+      .custom-rich-text-section {
+        padding-top: 2.5rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'medium' %}
+      .custom-rich-text-section {
+        padding-bottom: 1.5rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'large' %}
+      .custom-rich-text-section {
+        padding-bottom: 2.5rem;
+      }
+    {% endif %}
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Custom Rich Text",
+  "tag": "section",
+  "class": "section-custom-rich-text",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "richtext",
+      "label": "Rich Text Content",
+      "default": "<p>Add your rich text content here. You can format text, add links, and more.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "info": "Select a background color for the rich text section"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "info": "Select a text color for the rich text content"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Rich Text"
+    }
+  ]
+}
+{% endschema %}
