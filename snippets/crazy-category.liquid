@@ -1,0 +1,128 @@
+{% comment %}
+  Crazy Category Component
+  疯狂周末特卖分类组件 - 包含标题、描述和产品网格
+
+  参数:
+  - category_title: 分类标题
+  - category_description: 分类描述
+  - category_index: 分类索引号（用于过滤产品）
+  - section_blocks: 所有产品块数组
+  - currency_symbol: 货币符号
+  - shopify_attributes: Shopify 属性
+{% endcomment %}
+
+{%- liquid
+  assign currency = currency_symbol | default: '$'
+-%}
+
+<div class='crazy-category' {{ shopify_attributes }}>
+  {% comment %} 标题和描述模块 {% endcomment %}
+  {% if category_title != blank or category_description != blank %}
+    <div class='crazy-category__header'>
+      <div class='crazy-category__header-inner'>
+        {% if category_title != blank %}
+          <h2 class='crazy-category__title'>{{ category_title }}</h2>
+        {% endif %}
+
+        {% if category_description != blank %}
+          <p class='crazy-category__description'>{{ category_description }}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% comment %} 产品网格 - 过滤属于当前category的产品 {% endcomment %}
+  <div class='crazy-category__products'>
+    <div class='product-grid product-grid--crazy crazy-weekend-list'>
+      {% for block in section_blocks %}
+        {% if block.type == 'product_item' %}
+          {% assign parent_num = block.settings.parent_category_number | plus: 0 %}
+          {% if parent_num == category_index %}
+            {% render 'product-card-crazy',
+              product_image: block.settings.product_image,
+              product_title: block.settings.product_title,
+              product_desc: block.settings.product_desc,
+              product_url: block.settings.product_url,
+              old_price: block.settings.old_price,
+              new_price: block.settings.new_price,
+              card_type: block.settings.card_type,
+              badge_image: block.settings.badge_image,
+              currency_symbol: currency,
+              button_text: block.settings.button_text,
+              shopify_attributes: block.shopify_attributes
+            %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .crazy-category {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+
+  .crazy-category__header {
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .crazy-category__header-inner {
+    max-width: 85.5rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .crazy-category__title {
+    margin: 0 0 0.5rem 0;
+    color: #1d1e20;
+    line-height: 1.2;
+    font-weight: 700;
+    font-size: 2.25rem;
+  }
+
+  .crazy-category__description {
+    margin: 0.5rem 0 0 0;
+    color: #666;
+    line-height: 1.5;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+  .crazy-category__products {
+    width: 100%;
+  }
+
+  /* Desktop Responsive (>=1280px) */
+  @media screen and (min-width: 1280px) {
+    .crazy-category__title {
+      font-size: 3rem;
+    }
+
+    .crazy-category__description {
+      font-size: 1.125rem;
+    }
+  }
+
+  /* Mobile Responsive (<=767px) */
+  @media screen and (max-width: 767px) {
+    .crazy-category {
+      margin-bottom: 2.5rem;
+    }
+
+    .crazy-category__header {
+      margin-bottom: 1.5rem;
+    }
+
+    .crazy-category__title {
+      font-size: 1.875rem;
+    }
+
+    .crazy-category__description {
+      font-size: 0.875rem;
+    }
+  }
+</style>

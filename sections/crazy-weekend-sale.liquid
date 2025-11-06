@@ -1,7 +1,7 @@
 {% comment %}
   Crazy Weekend Sale Section
   疯狂周末特卖页面 - 展示特价商品列表
-  
+
   功能特性:
   - 支持自定义 banner 图片（桌面端和移动端）
   - 支持手动添加多个商品块
@@ -12,7 +12,7 @@
 
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 {{ 'crazy-weekend-sale.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'crazy-weekend-sale.js' | asset_url }}" defer></script>
+<script src='{{ 'crazy-weekend-sale.js' | asset_url }}' defer></script>
 
 {%- liquid
   assign banner_desktop = section.settings.banner_desktop
@@ -22,41 +22,41 @@
 
 <!-- Structured Data for SEO -->
 {% if section.blocks.size > 0 %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  "itemListElement": [
-    {% for block in section.blocks %}
-      {% if block.type == 'product_item' and block.settings.product_title != blank %}
-      {
-        "@type": "ListItem",
-        "position": {{ forloop.index }},
-        "item": {
-          "@type": "Product",
-          "name": {{ block.settings.product_title | json }},
-          {% if block.settings.product_image != blank %}
-          "image": {{ block.settings.product_image | image_url: width: 630 | json }},
+  <script type='application/ld+json'>
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
+        {% for block in section.blocks %}
+          {% if block.type == 'product_item' and block.settings.product_title != blank %}
+          {
+            "@type": "ListItem",
+            "position": {{ forloop.index }},
+            "item": {
+              "@type": "Product",
+              "name": {{ block.settings.product_title | json }},
+              {% if block.settings.product_image != blank %}
+              "image": {{ block.settings.product_image | image_url: width: 630 | json }},
+              {% endif %}
+              {% if block.settings.product_url != blank %}
+              "url": {{ block.settings.product_url | json }},
+              {% endif %}
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "USD",
+                {% if block.settings.new_price != blank %}
+                "price": {{ block.settings.new_price | json }},
+                {% endif %}
+                "itemCondition": "https://schema.org/NewCondition",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          }{% unless forloop.last %},{% endunless %}
           {% endif %}
-          {% if block.settings.product_url != blank %}
-          "url": {{ block.settings.product_url | json }},
-          {% endif %}
-          "offers": {
-            "@type": "Offer",
-            "priceCurrency": "USD",
-            {% if block.settings.new_price != blank %}
-            "price": {{ block.settings.new_price | json }},
-            {% endif %}
-            "itemCondition": "https://schema.org/NewCondition",
-            "availability": "https://schema.org/InStock"
-          }
-        }
-      }{% unless forloop.last %},{% endunless %}
-      {% endif %}
-    {% endfor %}
-  ]
-}
-</script>
+        {% endfor %}
+      ]
+    }
+  </script>
 {% endif %}
 
 <!-- Banner Section -->
@@ -71,13 +71,34 @@
   height_mobile: 750
 %}
 
-<!-- Products Grid -->
-<div class="crazy-weekend-wrap">
-  {% render 'product-grid',
-    section_blocks: section.blocks,
-    grid_style: 'crazy',
-    grid_class: 'crazy-weekend-list',
-    currency_symbol: currency_symbol
+<!-- Categories Container -->
+<div class='crazy-weekend-wrap'>
+  {% comment %} 遍历所有category blocks {% endcomment %}
+  {% assign category_index = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'category' %}
+      {% assign category_index = category_index | plus: 1 %}
+
+      {% comment %} 渲染category组件 {% endcomment %}
+      {% render 'crazy-category',
+        category_title: block.settings.category_title,
+        category_description: block.settings.category_description,
+        category_index: category_index,
+        section_blocks: section.blocks,
+        currency_symbol: currency_symbol,
+        shopify_attributes: block.shopify_attributes
+      %}
+    {% endif %}
+  {% endfor %}
+
+  {% render 'firework-feed',
+    channel: 'lavivid_hair',
+    mode: 'row',
+    open_in: 'default',
+    max_videos: 0,
+    placement: 'middle',
+    player_placement: 'bottom-left',
+    playlist: '5bJBa2'
   %}
 </div>
 
@@ -120,9 +141,34 @@
   ],
   "blocks": [
     {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category Title",
+          "default": "Category Name"
+        },
+        {
+          "type": "textarea",
+          "id": "category_description",
+          "label": "Category Description",
+          "default": "Category description text"
+        }
+      ]
+    },
+    {
       "type": "product_item",
       "name": "Product Item",
       "settings": [
+        {
+          "type": "text",
+          "id": "parent_category_number",
+          "label": "Category Number",
+          "info": "Enter the number of the category this product belongs to (1, 2, 3, etc.)",
+          "default": "1"
+        },
         {
           "type": "image_picker",
           "id": "product_image",
@@ -193,4 +239,3 @@
   ]
 }
 {% endschema %}
-
