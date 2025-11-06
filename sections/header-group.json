@@ -185,11 +185,104 @@
         "head_not_mob_text": "Free shipping on orders over $100",
         "head_not_mob_url": ""
       }
+    },
+    "common_banner_V6ikwN": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/banner_1.webp",
+        "banner_mobile": "shopify://shop_images/banner_m_1.webp",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "standard",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
+    "halloween_hair_system_sale_CPHUJK": {
+      "type": "halloween-hair-system-sale",
+      "blocks": {
+        "product_category_EeTdda": {
+          "type": "product_category",
+          "settings": {
+            "tag_image": "shopify://shop_images/tag.webp",
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_jKWBRC": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_RGYp7f": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_67bxUK": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        },
+        "product_item_x4DMbt": {
+          "type": "product_item",
+          "settings": {
+            "parent_category_number": 1,
+            "product": "1-order-balance-link",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0
+          }
+        }
+      },
+      "block_order": [
+        "product_category_EeTdda",
+        "product_item_jKWBRC",
+        "product_item_RGYp7f",
+        "product_item_67bxUK",
+        "product_item_x4DMbt"
+      ],
+      "name": "Halloween Sale",
+      "settings": {
+        "banner_alt": "Halloween Hair System Sale",
+        "background_gradient": "linear-gradient(180deg, rgba(228, 210, 201, 1), rgba(244, 246, 248, 1) 100%)",
+        "show_reviews": false
+      }
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "store-messages"
+    "store-messages",
+    "common_banner_V6ikwN",
+    "halloween_hair_system_sale_CPHUJK"
   ]
 }

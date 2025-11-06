@@ -12,6 +12,7 @@
     "main": {
       "type": "main-page",
       "settings": {
+        "show_page_title": false,
         "full_width": false
       }
     }

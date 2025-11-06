@@ -577,17 +577,6 @@
         "color_scheme": "default"
       }
     },
-    "product_with_video_qGp4Ut": {
-      "type": "product-with-video",
-      "name": "Product with Video",
-      "settings": {
-        "product": "",
-        "product_desc": "",
-        "video_url": "",
-        "video_position": "left",
-        "product_position": "left"
-      }
-    },
     "common_content_area_JGT4Qg": {
       "type": "common-content-area",
       "blocks": {
@@ -710,7 +699,6 @@
     "16148743091427bc38",
     "1478606404805",
     "featured_blog_3mVGNT",
-    "product_with_video_qGp4Ut",
     "common_content_area_JGT4Qg",
     "video_with_text_rQxG9G",
     "crazy_weekend_sale_gNiMiF"
