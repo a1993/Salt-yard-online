@@ -264,6 +264,59 @@
         "faq_title": "FAQ",
         "faq_subtitle": ""
       }
+    },
+    "image_text_grid_Q9K6Ub": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_eRCqcQ": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/1761550594725-p6X-744jZ8.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_JA9RKL": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/1761550668630-iQxSUXLbdW.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_FNQYBq": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/1761550702975-rOtM7BircO.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_eRCqcQ",
+        "image_text_item_JA9RKL",
+        "image_text_item_FNQYBq"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "",
+        "max_width": 1400,
+        "columns_desktop": 3,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 24,
+        "text_alignment": "left",
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "none"
+      }
     }
   },
   "order": [
@@ -274,6 +327,7 @@
     "halloween_with_swiper_Gr4DXD",
     "common_heading_DW8r7N",
     "halloween_with_swiper_xxYPLQ",
+    "image_text_grid_Q9K6Ub",
     "faq_QEqmJi"
   ]
 }
