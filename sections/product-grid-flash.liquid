@@ -1,15 +1,18 @@
 {%- liquid
-  assign show_reviews = show_reviews | default: false
-  assign discount_percent = discount_percent | default: 0
+  # 支持作为 section 使用（从 section.settings 获取）或作为 snippet 使用（从参数获取）
+  assign show_reviews = show_reviews | default: section.settings.show_reviews | default: false
+  assign discount_percent = discount_percent | default: section.settings.discount_percent | default: 0
   assign section_blocks = section_blocks | default: section.blocks
-  assign filter_category = filter_category | default: 0
+  assign filter_category = filter_category | default: section.settings.filter_category | default: 0
+  assign grid_class = grid_class | default: ''
 -%}
 
 <div class='product-grid product-grid--flash{% if grid_class %} {{ grid_class }}{% endif %}'>
   {% if section_blocks %}
     {% for block in section_blocks %}
       {% if block.type == 'product_item' %}
-        {% if filter_category %}
+        {% if filter_category and filter_category > 0 %}
+          {% comment %} 如果有分类过滤，检查是否属于当前分类 {% endcomment %}
           {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
           {% if parent_num == filter_category %}
             {% assign product = block.settings.product %}
@@ -25,6 +28,20 @@
               shopify_attributes: block.shopify_attributes
             %}
           {% endif %}
+        {% else %}
+          {% comment %} 没有分类过滤，直接渲染所有产品 {% endcomment %}
+          {% assign product = block.settings.product %}
+          {% render 'product-card-flash',
+            product: product,
+            show_reviews: show_reviews,
+            discount_percent: discount_percent,
+            custom_image: block.settings.custom_image,
+            custom_title: block.settings.custom_title,
+            custom_description: block.settings.custom_description,
+            custom_compare_price: block.settings.custom_compare_price,
+            custom_discount_percent: block.settings.custom_discount_percent,
+            shopify_attributes: block.shopify_attributes
+          %}
         {% endif %}
       {% endif %}
     {% endfor %}
