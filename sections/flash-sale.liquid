@@ -5,7 +5,7 @@
 
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 {{ 'flash-sale.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'flash-sale.js' | asset_url }}" defer></script>
+<script src='{{ 'flash-sale.js' | asset_url }}' defer></script>
 
 {%- liquid
   assign banner_desktop = section.settings.banner_desktop
@@ -21,36 +21,36 @@
 %}
 
 <!-- Product Tabs Container -->
-<div class="flash-sale-container lv-container">
-  
+<div class='flash-sale-container lv-container'>
   <!-- Tab Buttons -->
-  <div class="flash-sale-tabs-nav">
+  <div class='flash-sale-tabs-nav'>
     {% assign tab_index = 0 %}
     {% for block in section.blocks %}
       {% if block.type == 'product_tab' %}
         {% assign tab_index = tab_index | plus: 1 %}
-        <button 
-          type="button"
-          class="flash-sale-tab-btn{% if forloop.first %} active{% endif %}"
-          data-tab-index="{{ tab_index }}"
-          {{ block.shopify_attributes }}>
+        <button
+          type='button'
+          class='flash-sale-tab-btn{% if forloop.first %} active{% endif %}'
+          data-tab-index='{{ tab_index }}'
+          {{ block.shopify_attributes }}
+        >
           {{ block.settings.tab_title }}
         </button>
       {% endif %}
     {% endfor %}
   </div>
-  
+
   <!-- Tab Content -->
-  <div class="flash-sale-tabs-content">
+  <div class='flash-sale-tabs-content'>
     {% assign tab_index = 0 %}
     {% for block in section.blocks %}
       {% if block.type == 'product_tab' %}
         {% assign tab_index = tab_index | plus: 1 %}
-        <div 
-          class="flash-sale-tab-pane{% if forloop.first %} active{% endif %}"
-          data-tab-content="{{ tab_index }}"
-          {{ block.shopify_attributes }}>
-          
+        <div
+          class='flash-sale-tab-pane{% if forloop.first %} active{% endif %}'
+          data-tab-content='{{ tab_index }}'
+          {{ block.shopify_attributes }}
+        >
           <!-- Product Grid -->
           {% render 'product-grid',
             section_blocks: section.blocks,
@@ -60,12 +60,10 @@
             discount_percent: block.settings.discount_percent,
             filter_category: tab_index
           %}
-          
         </div>
       {% endif %}
     {% endfor %}
   </div>
-  
 </div>
 
 {% schema %}

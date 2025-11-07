@@ -54,46 +54,140 @@
 /* Product Grid - uses product-grid component */
 .product-grid--flash {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
   max-width: 1368px;
   margin: 2.5rem auto;
   box-sizing: border-box;
 }
 
+/* 默认移动端：2列 */
+.product-grid--flash {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 如果指定了 per-row 类，使用 CSS 变量系统（优先级更高） */
+.product-grid--flash.product-grid--per-row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-grid--flash.product-grid--per-row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-grid--flash.product-grid--per-row-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-grid--flash.product-grid--per-row-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.product-grid--flash.product-grid--per-row-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* 移动端每行数量（在移动端媒体查询中定义） */
+
 /* Desktop Responsive */
 @media screen and (min-width: 768px) {
   .flash-sale-tabs-nav {
     margin: 3.75rem 0;
   }
-  
+
   .flash-sale-tab-btn {
     padding: 0.625rem 2.5rem;
     font-size: 1.5rem;
   }
-  
+
   .flash-sale-tab-btn:nth-child(2) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
-  
+
   .product-grid--flash {
-    grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
     margin: 5rem auto;
+  }
+
+  /* 桌面端：优先使用 per-row 类 */
+  .product-grid--flash.product-grid--per-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* 如果没有指定 per-row 类，默认4列 */
+  .product-grid--flash:not([class*='product-grid--per-row-']) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 /* Large Desktop */
 @media screen and (min-width: 1280px) {
-  .product-grid--flash {
+  /* 大桌面端：优先使用 per-row 类 */
+  .product-grid--flash.product-grid--per-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .product-grid--flash:not([class*='product-grid--per-row-']) {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 /* Tablet */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .product-grid--flash {
+  /* 平板端：优先使用 per-row 类 */
+  .product-grid--flash.product-grid--per-row-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .product-grid--flash:not([class*='product-grid--per-row-']) {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
@@ -104,19 +198,37 @@
   .flash-sale-container {
     padding: 0 1rem;
   }
-  
+
   .flash-sale-tabs-nav {
     gap: 0.5rem;
     margin: 2rem 0;
   }
-  
+
   .flash-sale-tab-btn {
     padding: 0.5rem 1.25rem;
     font-size: 1rem;
   }
-  
+
   .product-grid--flash {
     gap: 0.5rem;
     margin: 1.5rem auto;
+  }
+
+  /* 移动端：优先使用 per-row-mob 类 */
+  .product-grid--flash.product-grid--per-row-mob-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-mob-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid--flash.product-grid--per-row-mob-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* 如果没有指定 per-row-mob 类，默认2列 */
+  .product-grid--flash:not([class*='product-grid--per-row-mob-']) {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

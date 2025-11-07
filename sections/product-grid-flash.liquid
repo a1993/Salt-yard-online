@@ -1,3 +1,11 @@
+{% comment %}
+  Product Grid Flash Section
+  使用与 flash-sale 相同的样式，确保卡片样式一致
+{% endcomment %}
+
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'flash-sale.css' | asset_url | stylesheet_tag }}
+
 {%- liquid
   # 支持作为 section 使用（从 section.settings 获取）或作为 snippet 使用（从参数获取）
   assign show_reviews = show_reviews | default: section.settings.show_reviews | default: false
