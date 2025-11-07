@@ -148,6 +148,99 @@
         "video_2_cover": "shopify://shop_images/sddefault.jpg",
         "video_2_url": "https://www.youtube.com/embed/rYaYAmJ2N9E?si=qn57SKcBKE2y2BQd"
       }
+    },
+    "common_heading_AiByXH": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "This hair system e-course helps beginner and novice hair system wearers learn everything they need to know about hair systems. Topics covered include how to pick a suitable hair system for yourself, how to apply it, remove it, take care of it, and tips and tricks to make the hair system last. This hair replacement training e-course will save you massive dollars that you possibly would have spent on damaged hair systems because of not knowing how to handle, care for, or maintain them.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "#232323",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "background_color": ""
+      }
+    },
+    "common_heading_ybTU3n": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "For a stylist who already knows how to cut people’s hair, after taking this hair system e-course and spending a little time practicing, you will be able to apply hair systems for your clients. After mastering this skill, you will significantly expand your business volume and revenue.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "#232323",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "none",
+        "background_color": ""
+      }
+    },
+    "custom_content_ejeNGX": {
+      "type": "custom-content",
+      "blocks": {
+        "image_dymmfi": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/description-img.jpg",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Subheading",
+            "title": "Tell your story",
+            "text": "<p>Pair text with an image to tell a story</p>",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "text_cPCRQc": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "",
+            "title_size": 84,
+            "title_size_mobile": 46,
+            "text": "<p>LaVivid partners with Jake Kent in making this e-course available to you. Jake Kent is a well-known hair system expert on YouTube, with tons of videos and thousands of views, who shares tips and tricks to hair system wearers all the time.</p><p>Quote Jake: \"I Suffered with hairloss for most of my life. I knew it was coming, as my father was bald, and my mother suffered from alopecia. I feared the day my turn would come... and eventually it did. I tried the drugs and topical solutions, but they didnt work for me. I thought about getting surgery, but the expense was HUGE, and the results were not guaranteed. when i found hair systems, it completely changed my life. It has improved my appearance, but perhaps more importantly, it's allowed me to be the social, fun-loving man that I always knew was inside. I know they'll do the same for you.\"</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_dymmfi",
+        "text_cPCRQc"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
     }
   },
   "order": [
@@ -157,6 +250,9 @@
     "common_heading_hmRrxH",
     "common_heading_3hW3ba",
     "common_heading_3fWENq",
-    "video_tips_list_TkK9qK"
+    "video_tips_list_TkK9qK",
+    "common_heading_AiByXH",
+    "common_heading_ybTU3n",
+    "custom_content_ejeNGX"
   ]
 }
