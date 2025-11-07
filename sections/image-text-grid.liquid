@@ -1,0 +1,534 @@
+{% comment %}
+  Image Text Grid Section
+  图文网格分区 - 图文为一组，Grid布局，可设置一行展示几个
+{% endcomment %}
+
+{%- liquid
+  assign background_color = section.settings.background_color
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign max_width = section.settings.max_width
+  assign columns_desktop = section.settings.columns_desktop
+  assign columns_tablet = section.settings.columns_tablet
+  assign columns_mobile = section.settings.columns_mobile
+  assign gap_size = section.settings.gap_size
+  assign text_alignment = section.settings.text_alignment
+-%}
+
+<div
+  class='image-text-grid-section'
+  {% if background_color != blank %}
+    style='background-color: {{ background_color }};'
+  {% endif %}
+  {%- render 'animation-attrs', attrs: 'data-cc-animate' -%}
+>
+  <div class='image-text-grid-container' style='max-width: {{ max_width }}px;'>
+    {% if section.settings.title != blank %}
+      <h2 class='image-text-grid-title'>{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div
+      class='image-text-grid'
+      style='--columns-desktop: {{ columns_desktop }}; --columns-tablet: {{ columns_tablet }}; --columns-mobile: {{ columns_mobile }}; --gap-size: {{ gap_size }}px;'
+    >
+      {% for block in section.blocks %}
+        {% if block.type == 'image_text_item' %}
+          <div class='image-text-item' {{ block.shopify_attributes }}>
+            {% if block.settings.link_url != blank %}
+              <a href='{{ block.settings.link_url }}' class='image-text-item__link'>
+            {% endif %}
+
+            {% comment %} Image {% endcomment %}
+            {% if block.settings.image != blank %}
+              <div class='image-text-item__image'>
+                <img
+                  src='{{ block.settings.image | image_url: width: 800 }}'
+                  alt='{{ block.settings.image.alt | default: block.settings.title | escape }}'
+                  width='800'
+                  height='600'
+                  loading='lazy'
+                  class='image-text-item__img'
+                >
+              </div>
+            {% endif %}
+
+            {% comment %} Text Content {% endcomment %}
+            <div class='image-text-item__content' style='text-align: {{ text_alignment }};'>
+              {% if block.settings.title != blank %}
+                <h3 class='image-text-item__title'>{{ block.settings.title }}</h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <div class='image-text-item__text rte'>{{ block.settings.text }}</div>
+              {% endif %}
+
+              {% if block.settings.button_text != blank and block.settings.link_url != blank %}
+                <div class='image-text-item__button'>
+                  <span class='btn btn--primary'>{{ block.settings.button_text }}</span>
+                </div>
+              {% endif %}
+            </div>
+
+            {% if block.settings.link_url != blank %}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .image-text-grid-section {
+    width: 100%;
+    background-color: transparent;
+  }
+
+  .image-text-grid-container {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .image-text-grid-title {
+    text-align: center;
+    margin: 0 0 2rem 0;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #1d1e20;
+  }
+
+  .image-text-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns-mobile), 1fr);
+    gap: var(--gap-size);
+    width: 100%;
+  }
+
+  .image-text-item {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .image-text-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .image-text-item__link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+
+  .image-text-item__image {
+    width: 100%;
+    overflow: hidden;
+    background: #f5f5f5;
+  }
+
+  .image-text-item__img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .image-text-item__content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image-text-item__title {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1d1e20;
+    line-height: 1.3;
+  }
+
+  .image-text-item__text {
+    margin: 0 0 1rem 0;
+    font-size: 0.9375rem;
+    color: #666;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .image-text-item__text p {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .image-text-item__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .image-text-item__button {
+    margin-top: auto;
+  }
+
+  /* Padding Top */
+  {% if padding_top == 'none' %}
+    .image-text-grid-section {
+      padding-top: 0;
+    }
+  {% elsif padding_top == 'small' %}
+    .image-text-grid-section {
+      padding-top: 1rem;
+    }
+  {% elsif padding_top == 'medium' %}
+    .image-text-grid-section {
+      padding-top: 2rem;
+    }
+  {% elsif padding_top == 'large' %}
+    .image-text-grid-section {
+      padding-top: 4rem;
+    }
+  {% else %}
+    .image-text-grid-section {
+      padding-top: 2rem;
+    }
+  {% endif %}
+
+  /* Padding Bottom */
+  {% if padding_bottom == 'none' %}
+    .image-text-grid-section {
+      padding-bottom: 0;
+    }
+  {% elsif padding_bottom == 'small' %}
+    .image-text-grid-section {
+      padding-bottom: 1rem;
+    }
+  {% elsif padding_bottom == 'medium' %}
+    .image-text-grid-section {
+      padding-bottom: 2rem;
+    }
+  {% elsif padding_bottom == 'large' %}
+    .image-text-grid-section {
+      padding-bottom: 4rem;
+    }
+  {% else %}
+    .image-text-grid-section {
+      padding-bottom: 2rem;
+    }
+  {% endif %}
+
+  /* Tablet Responsive (768px - 1023px) */
+  @media screen and (min-width: 768px) {
+    .image-text-grid {
+      grid-template-columns: repeat(var(--columns-tablet), 1fr);
+    }
+
+    .image-text-grid-container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Desktop Responsive (>=1024px) */
+  @media screen and (min-width: 1024px) {
+    .image-text-grid {
+      grid-template-columns: repeat(var(--columns-desktop), 1fr);
+    }
+
+    .image-text-grid-title {
+      font-size: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .image-text-item__content {
+      padding: 2rem;
+    }
+
+    .image-text-item__title {
+      font-size: 1.5rem;
+    }
+
+    .image-text-item__text {
+      font-size: 1rem;
+    }
+
+    {% if padding_top == 'large' %}
+      .image-text-grid-section {
+        padding-top: 6rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'large' %}
+      .image-text-grid-section {
+        padding-bottom: 6rem;
+      }
+    {% endif %}
+  }
+
+  /* Mobile Responsive (<=767px) */
+  @media screen and (max-width: 767px) {
+    .image-text-grid-container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .image-text-grid-title {
+      font-size: 1.875rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .image-text-item__content {
+      padding: 1.25rem;
+    }
+
+    .image-text-item__title {
+      font-size: 1.125rem;
+    }
+
+    .image-text-item__text {
+      font-size: 0.875rem;
+    }
+
+    {% if padding_top == 'medium' %}
+      .image-text-grid-section {
+        padding-top: 1.5rem;
+      }
+    {% endif %}
+
+    {% if padding_top == 'large' %}
+      .image-text-grid-section {
+        padding-top: 2.5rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'medium' %}
+      .image-text-grid-section {
+        padding-bottom: 1.5rem;
+      }
+    {% endif %}
+
+    {% if padding_bottom == 'large' %}
+      .image-text-grid-section {
+        padding-bottom: 2.5rem;
+      }
+    {% endif %}
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Image Text Grid",
+  "tag": "section",
+  "class": "section-image-text-grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "info": "Optional section title"
+    },
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "Container Max Width",
+      "default": 1400,
+      "info": "Maximum width of the container (800px - 1920px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Desktop Columns",
+      "default": 3,
+      "info": "Number of columns on desktop (>=1024px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "label": "Tablet Columns",
+      "default": 2,
+      "info": "Number of columns on tablet (768px - 1023px)"
+    },
+    {
+      "type": "range",
+      "id": "columns_mobile",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Mobile Columns",
+      "default": 1,
+      "info": "Number of columns on mobile (<=767px)"
+    },
+    {
+      "type": "range",
+      "id": "gap_size",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap Size",
+      "default": 24,
+      "info": "Space between grid items"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Color Settings"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "info": "Background color (leave blank for transparent)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing Settings"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "label": "Top Padding",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "label": "Bottom Padding",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image_text_item",
+      "name": "Image Text Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Recommended size: 800x600px"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Item Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text Content",
+          "default": "<p>Add your text content here. You can format text, add links, and more.</p>"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL",
+          "info": "Optional link for the entire item"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "info": "Optional button text (requires Link URL)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Text Grid",
+      "blocks": [
+        {
+          "type": "image_text_item"
+        },
+        {
+          "type": "image_text_item"
+        },
+        {
+          "type": "image_text_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
