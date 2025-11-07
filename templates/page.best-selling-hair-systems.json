@@ -37,26 +37,16 @@
         "background_color": ""
       }
     },
-    "rich_text_AmEbBb": {
-      "type": "rich-text",
-      "blocks": {
-        "text_4FBzjX": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Each of our best sellers earned their spot for a reason, unmatched realism, breathability, and comfort. Whether you prefer skin, lace, or hybrid bases, these systems deliver a flawless look and feel that keeps our customers coming back.<br/><br/></p>",
-            "enlarge_text": true
-          }
-        }
-      },
-      "block_order": [
-        "text_4FBzjX"
-      ],
-      "name": "Rich text",
+    "custom_rich_text_KKgMVx": {
+      "type": "custom-rich-text",
+      "name": "Custom Rich Text",
       "settings": {
-        "height": "medium",
+        "richtext": "<p> Each of our best sellers earned their spot for a reason, unmatched realism, breathability, and comfort. Whether you prefer skin, lace, or hybrid bases, these systems deliver a flawless look and feel that keeps our customers coming back. <br/><br/></p>",
         "text_alignment": "center",
-        "full_width": false,
-        "color_scheme": "default"
+        "background_color": "#bfc7de",
+        "text_color": "#232323",
+        "padding_top": "small",
+        "padding_bottom": "small"
       }
     },
     "common_heading_zq3cK4": {
@@ -78,12 +68,212 @@
         "spacing_bottom": "medium",
         "background_color": ""
       }
+    },
+    "halloween_with_swiper_Gr4DXD": {
+      "type": "halloween-with-swiper",
+      "blocks": {
+        "product_item_xHeRcg": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_jbz3U6": {
+          "type": "product_item",
+          "settings": {
+            "product": "15-restocking-fee",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_d7YbBh": {
+          "type": "product_item",
+          "settings": {
+            "product": "15-restocking-fee",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_CbC8ed": {
+          "type": "product_item",
+          "settings": {
+            "product": "15-restocking-fee",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        }
+      },
+      "block_order": [
+        "product_item_xHeRcg",
+        "product_item_jbz3U6",
+        "product_item_d7YbBh",
+        "product_item_CbC8ed"
+      ],
+      "name": "Product Swiper",
+      "settings": {
+        "max_width": 1400,
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "medium",
+        "padding_left": "medium",
+        "padding_right": "medium",
+        "show_reviews": false
+      }
+    },
+    "common_heading_DW8r7N": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Breathable Lace Base",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "Best for Active Lifestyles",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "halloween_with_swiper_xxYPLQ": {
+      "type": "halloween-with-swiper",
+      "blocks": {
+        "product_item_AKk64T": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_xANiLe": {
+          "type": "product_item",
+          "settings": {
+            "product": "15-restocking-fee",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_wgifM4": {
+          "type": "product_item",
+          "settings": {
+            "product": "15-restocking-fee",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_TQ9wne": {
+          "type": "product_item",
+          "settings": {
+            "product": "15-restocking-fee",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        }
+      },
+      "block_order": [
+        "product_item_AKk64T",
+        "product_item_xANiLe",
+        "product_item_wgifM4",
+        "product_item_TQ9wne"
+      ],
+      "name": "Product Swiper",
+      "settings": {
+        "max_width": 1400,
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "medium",
+        "padding_left": "medium",
+        "padding_right": "medium",
+        "show_reviews": false
+      }
+    },
+    "faq_QEqmJi": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_P6aPeA": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is this FAQ about?",
+            "answer": "This is the answer to the FAQ question.",
+            "is_html": false
+          }
+        },
+        "faq_item_VxV9N4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Another question?",
+            "answer": "Another answer.",
+            "is_html": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_P6aPeA",
+        "faq_item_VxV9N4"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "faq_title": "FAQ",
+        "faq_subtitle": ""
+      }
     }
   },
   "order": [
     "main",
     "common_heading_j3VcGC",
-    "rich_text_AmEbBb",
-    "common_heading_zq3cK4"
+    "custom_rich_text_KKgMVx",
+    "common_heading_zq3cK4",
+    "halloween_with_swiper_Gr4DXD",
+    "common_heading_DW8r7N",
+    "halloween_with_swiper_xxYPLQ",
+    "faq_QEqmJi"
   ]
 }
