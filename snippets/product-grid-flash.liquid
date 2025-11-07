@@ -1,0 +1,59 @@
+{% comment %}
+  Flash Sale 商品网格组件
+  专门用于展示 Flash Sale 商品列表
+  
+  参数说明:
+  - grid_class: 额外的 CSS class (可选)
+  - show_reviews: 是否显示评论
+  - discount_percent: 统一的折扣百分比 (可选)
+  - section_blocks: section.blocks 数组 (用于遍历产品块)
+  - filter_category: 过滤分类编号 (可选，用于过滤特定分类的商品)
+{% endcomment %}
+
+<div class="product-grid product-grid--flash{% if grid_class %} {{ grid_class }}{% endif %}">
+  {% if section_blocks %}
+    {% comment %} 使用 section.blocks 遍历 {% endcomment %}
+    {% for block in section_blocks %}
+      {% if block.type == 'product_item' %}
+        
+        {% comment %} 如果有分类过滤，检查是否属于当前分类 {% endcomment %}
+        {% if filter_category %}
+          {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
+          
+          {% if parent_num == filter_category %}
+            {% assign product = block.settings.product %}
+            
+            {% render 'product-card-flash',
+              product: product,
+              show_reviews: show_reviews,
+              discount_percent: discount_percent,
+              custom_image: block.settings.custom_image,
+              custom_title: block.settings.custom_title,
+              custom_description: block.settings.custom_description,
+              custom_compare_price: block.settings.custom_compare_price,
+              custom_discount_percent: block.settings.custom_discount_percent,
+              shopify_attributes: block.shopify_attributes
+            %}
+          {% endif %}
+          
+        {% else %}
+          {% comment %} 没有分类过滤，直接渲染所有产品 {% endcomment %}
+          {% assign product = block.settings.product %}
+          
+          {% render 'product-card-flash',
+            product: product,
+            show_reviews: show_reviews,
+            discount_percent: discount_percent,
+            custom_image: block.settings.custom_image,
+            custom_title: block.settings.custom_title,
+            custom_description: block.settings.custom_description,
+            custom_compare_price: block.settings.custom_compare_price,
+            custom_discount_percent: block.settings.custom_discount_percent,
+            shopify_attributes: block.shopify_attributes
+          %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+

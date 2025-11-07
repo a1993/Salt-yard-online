@@ -1,0 +1,120 @@
+{%- liquid
+  assign show_reviews = show_reviews | default: false
+  assign discount_percent = discount_percent | default: 0
+  assign section_blocks = section_blocks | default: section.blocks
+  assign filter_category = filter_category | default: 0
+-%}
+
+<div class='product-grid product-grid--flash{% if grid_class %} {{ grid_class }}{% endif %}'>
+  {% if section_blocks %}
+    {% for block in section_blocks %}
+      {% if block.type == 'product_item' %}
+        {% if filter_category %}
+          {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
+          {% if parent_num == filter_category %}
+            {% assign product = block.settings.product %}
+            {% render 'product-card-flash',
+              product: product,
+              show_reviews: show_reviews,
+              discount_percent: discount_percent,
+              custom_image: block.settings.custom_image,
+              custom_title: block.settings.custom_title,
+              custom_description: block.settings.custom_description,
+              custom_compare_price: block.settings.custom_compare_price,
+              custom_discount_percent: block.settings.custom_discount_percent,
+              shopify_attributes: block.shopify_attributes
+            %}
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Product Grid Flash",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show Reviews",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "discount_percent",
+      "label": "Discount Percent",
+      "default": 0
+    },
+    {
+      "type": "number",
+      "id": "filter_category",
+      "label": "Filter Category",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_item",
+      "name": "Product Item",
+      "settings": [
+        {
+          "type": "number",
+          "id": "parent_tab_number",
+          "label": "Parent Tab Number",
+          "default": 1
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image",
+          "info": "Leave blank to use product's featured image"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title",
+          "info": "Leave blank to use product's title"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom Description",
+          "info": "Leave blank to use product's description"
+        },
+        {
+          "type": "text",
+          "id": "custom_compare_price",
+          "label": "Custom Compare Price",
+          "info": "Leave blank to use product's compare_at_price"
+        },
+        {
+          "type": "number",
+          "id": "custom_discount_percent",
+          "label": "Custom Discount Percent",
+          "default": 0,
+          "info": "Leave blank to use product's discount_percent"
+        },
+        {
+          "type": "text",
+          "id": "custom_class",
+          "label": "Custom Class",
+          "info": "Leave blank to use product's custom class"
+        },
+        {
+          "type": "text",
+          "id": "shopify_attributes",
+          "label": "Shopify Attributes",
+          "info": "Leave blank to use product's shopify attributes"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
