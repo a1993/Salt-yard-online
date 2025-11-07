@@ -5,9 +5,11 @@
   assign section_blocks = section_blocks | default: section.blocks
   assign filter_category = filter_category | default: section.settings.filter_category | default: 0
   assign grid_class = grid_class | default: ''
+  assign products_per_row = products_per_row | default: section.settings.products_per_row | default: 4
+  assign products_per_row_mobile = products_per_row_mobile | default: section.settings.products_per_row_mobile | default: settings.prod_thumb_mob_per_row | default: 2
 -%}
 
-<div class='product-grid product-grid--flash{% if grid_class %} {{ grid_class }}{% endif %}'>
+<div class='product-grid product-grid--flash product-grid--per-row-{{ products_per_row }} product-grid--per-row-mob-{{ products_per_row_mobile }}{% if grid_class %} {{ grid_class }}{% endif %}'>
   {% if section_blocks %}
     {% for block in section_blocks %}
       {% if block.type == 'product_item' %}
@@ -52,6 +54,34 @@
 {
   "name": "Product Grid Flash",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row",
+      "label": "Products per row (Desktop)",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "info": "Number of products to display per row on desktop"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row_mobile",
+      "label": "Products per row (Mobile)",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "default": 2,
+      "info": "Number of products to display per row on mobile"
+    },
+    {
+      "type": "header",
+      "content": "Display Settings"
+    },
     {
       "type": "checkbox",
       "id": "show_reviews",
