@@ -11,12 +11,383 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
+        "show_page_title": true,
         "full_width": false
+      }
+    },
+    "common_banner_aLDJMV": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/banner.jpg",
+        "banner_mobile": "shopify://shop_images/m-banner.png",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "standard",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
+    "common_heading_KtNTYp": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "Introducing a diverse range of hair systems tailored to address various men's hair loss pattern. Our comprehensive guide provides insights into solutions for receding hairlines, bald temples, thinning top, thinning crowns, and full hair loss. Discover the perfect match for your unique needs and regain your confidence today.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "none",
+        "background_color": ""
+      }
+    },
+    "custom_content_AGyB8g": {
+      "type": "custom-content",
+      "blocks": {
+        "image_YTBbLB": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/img-1.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Subheading",
+            "title": "Tell your story",
+            "text": "<p>Pair text with an image to tell a story</p>",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "https://www.lavividhair.com/men-hair-system/sideback-hair-patches-for-men-covering-bald-spots-on-head-sides-or-back_p1457-8122.html",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "text_idagcE": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "Coin-Sized Bald Patches",
+            "title_size": 38,
+            "title_size_mobile": 20,
+            "text": "<p>This type of bald patch is typically caused by patchy alopecia areata. In this most common form, hair loss occurs in one or more coin-sized patches on the scalp or other parts of the body. The hair system below is designed to cover coin-sized patches and is customizable to fit various sizes and shapes.</p>",
+            "button_label": "",
+            "button_link": "https://www.lavividhair.com/men-hair-system/sideback-hair-patches-for-men-covering-bald-spots-on-head-sides-or-back_p1457-8122.html",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_YTBbLB",
+        "text_idagcE"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "large",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "common_heading_Ciikjz": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Receding Hairline",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "Receding hairline patterns encompass various shapes and degrees of hair loss, commonly observed in both men and women. The below frontal hairpieces are tailored to cater to specific areas and functionalities.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "custom_content_33tG3g": {
+      "type": "custom-content",
+      "blocks": {
+        "image_bQ6Brj": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/loss5.webp",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Subheading",
+            "title": "Tell your story",
+            "text": "<p>Pair text with an image to tell a story</p>",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "https://www.lavividhair.com/men-hair-system/crown-hair-patch-covering-thinning-or-balding-crown_p1459-7989.html",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "text_VwC89m": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "Crown Thinning",
+            "title_size": 30,
+            "title_size_mobile": 28,
+            "text": "<p>The occurrence of crown hair loss often coincides with a receding hairline. Therefore, it is advisable to consider a combination of hairpieces designed for the receding hairline and crown area in order to restore a natural hair appearance.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_bQ6Brj",
+        "text_VwC89m"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "image_text_grid_QdNXt6": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_me6DBh": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/loss1.webp",
+            "title": "",
+            "text": "",
+            "link_url": "https://www.lavividhair.com/clearance-hair-systems/temple-hair-patches-covering-bald-temples_p1458.html",
+            "button_text": ""
+          }
+        },
+        "image_text_item_MU9twG": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/loss1.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_4WQDFM": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/loss1.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_M7e7t9": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/loss1.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_me6DBh",
+        "image_text_item_MU9twG",
+        "image_text_item_4WQDFM",
+        "image_text_item_M7e7t9"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "",
+        "max_width": 1400,
+        "columns_desktop": 4,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 24,
+        "text_alignment": "left",
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "medium"
+      }
+    },
+    "common_heading_9KdBCU": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Male Pattern Baldness",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "custom_content_VYk4pi": {
+      "type": "custom-content",
+      "blocks": {
+        "image_hLyAVj": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/img-17.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Subheading",
+            "title": "Tell your story",
+            "text": "<p>Pair text with an image to tell a story</p>",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "text_K4aQnw": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "",
+            "title_size": 84,
+            "title_size_mobile": 46,
+            "text": "<p>Male pattern baldness, or androgenetic alopecia, is a common hair loss condition characterized by a receding hairline and thinning at the crown. It's primarily caused by genetic and hormonal factors, leading to a predictable pattern of hair loss. Simultaneously concealing hair loss, you have the option to explore different hair colors for a trendy and stylish appearance.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_hLyAVj",
+        "text_K4aQnw"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "small",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "common_heading_AwYmHL": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Total Baldness",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "A full cap wig designed for individuals experiencing complete baldness provides comprehensive coverage and a natural look. It offers a comfortable, secure fit and is crafted from high-quality materials to mimic real hair, enhancing confidence and style for those with total hair loss.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "image_text_grid_EneQ4b": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_QAFQUN": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/loss16.webp",
+            "title": "",
+            "text": "",
+            "link_url": "https://www.lavividhair.com/clearance-hair-systems/temple-hair-patches-covering-bald-temples_p1458.html",
+            "button_text": ""
+          }
+        },
+        "image_text_item_ww6zNA": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/loss17.webp",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_QAFQUN",
+        "image_text_item_ww6zNA"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "",
+        "max_width": 1400,
+        "columns_desktop": 4,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 24,
+        "text_alignment": "left",
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "medium"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "common_banner_aLDJMV",
+    "common_heading_KtNTYp",
+    "custom_content_AGyB8g",
+    "common_heading_Ciikjz",
+    "custom_content_33tG3g",
+    "image_text_grid_QdNXt6",
+    "common_heading_9KdBCU",
+    "custom_content_VYk4pi",
+    "common_heading_AwYmHL",
+    "image_text_grid_EneQ4b"
   ]
 }
