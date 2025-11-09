@@ -1,0 +1,436 @@
+{% comment %}
+  Hair System Training Section
+  用于展示发型系统培训页面
+
+  包含：
+  - Hero 区域（标题和描述）
+  - 培训师信息卡片（可添加多个）
+  - 图片轮播
+{% endcomment %}
+
+{%- liquid
+  assign hero_title = section.settings.hero_title
+  assign hero_subtitle = section.settings.hero_subtitle
+  assign hero_description = section.settings.hero_description
+  assign hero_bg_image = section.settings.hero_bg_image
+  assign hero_bg_image_mobile = section.settings.hero_bg_image_mobile
+-%}
+
+{{ 'hair-system-training.css' | asset_url | stylesheet_tag }}
+
+{% comment %} Load UIkit if not already loaded {% endcomment %}
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/css/uikit.min.css'>
+<script src='https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/js/uikit.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/js/uikit-icons.min.js'></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {% if hero_bg_image %}
+    #SalonShow-{{ section.id }} {
+      background-image: url('{{ hero_bg_image | image_url: width: 1920 }}');
+    }
+  {% endif %}
+
+  {% if hero_bg_image_mobile %}
+    @media all and (max-width: 767px) {
+      #SalonShow-{{ section.id }} {
+        background-image: url('{{ hero_bg_image_mobile | image_url: width: 768 }}');
+      }
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<div
+  class='hair-system-training-section section-{{ section.id }}-padding'
+  {{ section.shopify_attributes }}
+>
+  <!-- Hero Section -->
+  <div id='SalonShow-{{ section.id }}' class='salon-show'>
+    <div class='b-w1170'>
+      <div class='salonshow-ttl'>
+        {% if hero_subtitle != blank %}
+          <span>{{ hero_subtitle }}</span>
+        {% endif %}
+        {% if hero_title != blank %}
+          <h2>{{ hero_title }}</h2>
+        {% endif %}
+      </div>
+      {% if hero_description != blank %}
+        <p>{{ hero_description }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class='b-w1170'>
+    <!-- Trainers Section -->
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'trainer' %}
+          <div class='hairdresser' {{ block.shopify_attributes }}>
+            <div class='sub-box'>
+              <div class='hairdresser-pic'>
+                <span class='hairdresser-name'>{{ block.settings.trainer_name }}</span>
+                {% if block.settings.trainer_image != blank %}
+                  <img
+                    src='{{ block.settings.trainer_image | image_url: width: 450 }}'
+                    alt='{{ block.settings.trainer_name | escape }}'
+                    width='450'
+                    height='478'
+                    loading='lazy'
+                  >
+                {% endif %}
+              </div>
+
+              <div class='hairdresser-info'>
+                <dl>
+                  {% if block.settings.trainer_title != blank %}
+                    <dt>{{ block.settings.trainer_title }}</dt>
+                  {% endif %}
+
+                  {% if block.settings.trainer_email != blank %}
+                    <dd>
+                      <span>Email:</span>
+                      <p>
+                        <a href='mailto:{{ block.settings.trainer_email }}'>
+                          {{- block.settings.trainer_email -}}
+                        </a>
+                      </p>
+                    </dd>
+                  {% endif %}
+
+                  {% if block.settings.trainer_phone != blank %}
+                    <dd>
+                      <span>Phone:</span>
+                      <p>
+                        <a href='tel:{{ block.settings.trainer_phone }}'>
+                          {{- block.settings.trainer_phone -}}
+                        </a>
+                      </p>
+                    </dd>
+                  {% endif %}
+
+                  {% if block.settings.trainer_instagram != blank %}
+                    <dd>
+                      <span>Instagram:</span>
+                      <p>
+                        <a
+                          class='youtua'
+                          href='{{ block.settings.trainer_instagram_url }}'
+                          target='_blank'
+                          rel='noopener'
+                        >
+                          {{ block.settings.trainer_instagram }}
+                        </a>
+                      </p>
+                    </dd>
+                  {% endif %}
+                </dl>
+
+                {% if block.settings.video_url != blank %}
+                  <iframe
+                    width='560'
+                    height='315'
+                    src='{{ block.settings.video_url }}'
+                    title='YouTube video player'
+                    frameborder='0'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;'
+                    allowfullscreen
+                  >
+                  </iframe>
+                {% endif %}
+
+                {% if block.settings.trainer_info_image != blank %}
+                  <div class='hairdresser-info-pic'>
+                    <img
+                      src='{{ block.settings.trainer_info_image | image_url: width: 777 }}'
+                      alt='{{ block.settings.trainer_name | escape }}'
+                      width='777'
+                      height='600'
+                      loading='lazy'
+                    >
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+
+            {% if block.settings.trainer_description != blank %}
+              <p>{{ block.settings.trainer_description }}</p>
+            {% endif %}
+          </div>
+
+        {% when 'gallery' %}
+          <div class='salon-swiper' uk-slider {{ block.shopify_attributes }}>
+            <div class='uk-position-relative'>
+              <div class='uk-slider-container'>
+                <ul class='uk-slider-items uk-child-width-1-2 uk-grid'>
+                  {% for i in (1..10) %}
+                    {% assign image_key = 'image_' | append: i %}
+                    {% assign image = block.settings[image_key] %}
+                    {% if image != blank %}
+                      <li>
+                        <img
+                          src='{{ image | image_url: width: 600 }}'
+                          alt='{{ image.alt | default: 'Salon' | escape }}'
+                          width='600'
+                          height='600'
+                          loading='lazy'
+                        >
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+              <a
+                class='uk-position-center-left-out uk-slidenav-large'
+                href='#'
+                uk-slider-item='previous'
+                uk-slidenav-previous
+              ></a>
+              <a
+                class='uk-position-center-right-out uk-slidenav-large'
+                href='#'
+                uk-slider-item='next'
+                uk-slidenav-next
+              ></a>
+            </div>
+          </div>
+      {% endcase %}
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hair System Training",
+  "tag": "section",
+  "class": "hair-system-training-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero 区域设置"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "副标题",
+      "default": "Grow Your Hair System Business with LaVivid Hair"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "主标题",
+      "default": "HAIR SYSTEM TRAINING"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_description",
+      "label": "描述文本",
+      "default": "If you are a salon owner or an independent hair specialist who wants to expand your business; If you have clients who are looking for hair system services, check out LaVivid hair system training program and get yourself trained and qualified for providing hair replacement service and add a considerate amount of revenue to your business."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_bg_image",
+      "label": "Hero 背景图片（桌面端）"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_bg_image_mobile",
+      "label": "Hero 背景图片（移动端）"
+    },
+    {
+      "type": "header",
+      "content": "内边距设置"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "上内边距",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "下内边距",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trainer",
+      "name": "培训师信息",
+      "settings": [
+        {
+          "type": "header",
+          "content": "基本信息"
+        },
+        {
+          "type": "text",
+          "id": "trainer_name",
+          "label": "培训师姓名",
+          "default": "Meet Jonathon Selleck"
+        },
+        {
+          "type": "image_picker",
+          "id": "trainer_image",
+          "label": "培训师照片"
+        },
+        {
+          "type": "text",
+          "id": "trainer_title",
+          "label": "培训标题",
+          "default": "Hands-on Hair System Training with Jonathon Selleck"
+        },
+        {
+          "type": "header",
+          "content": "联系方式"
+        },
+        {
+          "type": "text",
+          "id": "trainer_email",
+          "label": "Email",
+          "default": "jgselleck@icloud.com"
+        },
+        {
+          "type": "text",
+          "id": "trainer_phone",
+          "label": "Phone"
+        },
+        {
+          "type": "text",
+          "id": "trainer_instagram",
+          "label": "Instagram 显示文本",
+          "default": "https://www.instagram.com/elitebarbershopnj/"
+        },
+        {
+          "type": "url",
+          "id": "trainer_instagram_url",
+          "label": "Instagram 链接"
+        },
+        {
+          "type": "header",
+          "content": "媒体内容"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "YouTube 视频 URL",
+          "info": "格式: https://www.youtube.com/embed/VIDEO_ID",
+          "default": "https://www.youtube.com/embed/ItdcZqrNEYY"
+        },
+        {
+          "type": "image_picker",
+          "id": "trainer_info_image",
+          "label": "培训师信息图片（可选）"
+        },
+        {
+          "type": "header",
+          "content": "描述"
+        },
+        {
+          "type": "richtext",
+          "id": "trainer_description",
+          "label": "培训师描述"
+        }
+      ]
+    },
+    {
+      "type": "gallery",
+      "name": "图片轮播",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "轮播图片（最多10张）"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "图片 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_2",
+          "label": "图片 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_3",
+          "label": "图片 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_4",
+          "label": "图片 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_5",
+          "label": "图片 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_6",
+          "label": "图片 6"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_7",
+          "label": "图片 7"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_8",
+          "label": "图片 8"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_9",
+          "label": "图片 9"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_10",
+          "label": "图片 10"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hair System Training",
+      "blocks": [
+        {
+          "type": "trainer",
+          "settings": {
+            "trainer_name": "Meet Jonathon Selleck",
+            "trainer_title": "Hands-on Hair System Training with Jonathon Selleck",
+            "trainer_email": "jgselleck@icloud.com",
+            "trainer_instagram": "https://www.instagram.com/elitebarbershopnj/",
+            "trainer_instagram_url": "https://www.instagram.com/elitebarbershopnj/",
+            "video_url": "https://www.youtube.com/embed/ItdcZqrNEYY"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
