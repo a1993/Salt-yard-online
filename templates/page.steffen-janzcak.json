@@ -11,12 +11,276 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
+        "show_page_title": true,
         "full_width": false
+      }
+    },
+    "common_banner_73kkz7": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/steffen.png",
+        "banner_mobile": "shopify://shop_images/steffen_m.png",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "standard",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
+    "custom_content_RwTE7t": {
+      "type": "custom-content",
+      "blocks": {
+        "text_H4CpQV": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "From A Customer to LaVivid Ambassador",
+            "title_size": 32,
+            "title_size_mobile": 28,
+            "text": "<p>\"I discovered LaVivid in 2019 while searching for a high-quality hair replacement solution to enhance my appearance and boost my confidence. After trying my first LaVivid hair system, I was immediately impressed by its quality, natural look, and comfort. Over the years, I’ve remained excited by the brand’s variety and innovation, while the excellent customer service strengthened my trust in the company. Two years ago, I became a collaborator with LaVivid, motivated by my passion for their products and their ability to enhance confidence and self-expression.</p><p></p><p></p><p>Today, as LaVivid’s Ambassador, I actively inspire others and share my journey. I prove that the right hair system does more than alter a look—it has the power to transform confidence and self-expression.\"</p><p></p><p></p><p>Steffen Janczak</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "image_WC3GRT": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/steffenjanczak__1727159061_3463983733366454475_426204717.jpg",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Follow Steffen's Instagram",
+            "title": "",
+            "text": "",
+            "enlarge_text": false,
+            "button_label": "Instagram",
+            "button_style": "primary",
+            "image_link": "",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        }
+      },
+      "block_order": [
+        "text_H4CpQV",
+        "image_WC3GRT"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "story_block_RKTXRX": {
+      "type": "story-block",
+      "name": "StoryBlock",
+      "settings": {
+        "playlist": "5zJDLe",
+        "channel": "lavivid_hair",
+        "mode": "floating",
+        "player_placement": "bottom-left",
+        "autoplay": true
+      }
+    },
+    "collection_list_7Pg79d": {
+      "type": "collection-list",
+      "name": "Collection list",
+      "settings": {
+        "title": "Collection list",
+        "enable_carousel": true,
+        "grid": 4,
+        "color_scheme": "default",
+        "full_width": true,
+        "coll_grid_image_shape": "square",
+        "coll_grid_image_position": "center center",
+        "coll_thumb_mob_per_row": "2",
+        "coll_grid_show_count": true,
+        "coll_text_position": "below",
+        "coll_text_position_under_mobile": false,
+        "coll_thumb_text_align_x": "center",
+        "coll_thumb_text_align_y": "center",
+        "coll_button_style": "primary"
+      }
+    },
+    "custom_content_DLMcPz": {
+      "type": "custom-content",
+      "blocks": {
+        "image_EFwkBD": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/steffen_2.jpg",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "enlarge_text": false,
+            "button_label": "Shop Now",
+            "button_style": "primary",
+            "image_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "text_CWNFpp": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "<a href=\"https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html#/371-base_size-8_x_10_/401-color-1b_off_black/446-pre_style_service-no_pre_cut\">Steffen’s Favorite: Tyler</a>",
+            "title_size": 32,
+            "title_size_mobile": 28,
+            "text": "<p><strong>Base Material:</strong> Lace front with silk in the middle and PU on the sides and back. </p><p><strong>Unmatched Natural Scalp Appearance.</strong><br/><strong>Hair Type:</strong> Indian Remy Human Hair<br/><strong>Hair Texture:</strong> 28mm Body Wave pattern<br/><strong>Life Span:</strong> 8–12 months<br/><strong>Base Size:</strong> 8” x 10” (can be trimmed down to a minimum of 6” x 8.75”)</p>",
+            "button_label": "Use Discount \"Steffen15\" to save 15%",
+            "button_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_EFwkBD",
+        "text_CWNFpp"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "common_heading_MQBazP": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "A BIT ABOUT STEFFEN JANCZAK",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "none",
+        "background_color": ""
+      }
+    },
+    "custom_content_YmGj4E": {
+      "type": "custom-content",
+      "blocks": {
+        "text_bCyDKb": {
+          "type": "text",
+          "settings": {
+            "width": "two-thirds",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "Who Am I?",
+            "title_size": 32,
+            "title_size_mobile": 28,
+            "text": "<p>I’m Steffen, a 40-year-old store manager from Germany with a passion for sports, architecture, travel, and food. Although I don’t have any pets, I dream of a world where everyone feels comfortable and free to be their true selves. I believe in the importance of embracing our personalities, being brave, and staying strong. Something I’d like to share with people is simple: always be yourself, value what makes you unique, and never be afraid to stand tall in who you are.</p>",
+            "button_label": "",
+            "button_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
+            "button_style": "primary"
+          }
+        },
+        "image_PGFJeg": {
+          "type": "image",
+          "settings": {
+            "width": "third",
+            "image": "shopify://shop_images/steffenjanczak__1653496668_2846058790643913195_426204717.jpg",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "",
+            "text": "",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        }
+      },
+      "block_order": [
+        "text_bCyDKb",
+        "image_PGFJeg"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "faq_kABGaw": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_nJNFKX": {
+          "type": "faq_item",
+          "settings": {
+            "question": "1. What motivated you to try a hair system for the first time?",
+            "answer": "I was thrilled with the result and thought it was a real alternative to a hair transplant.",
+            "is_html": false
+          }
+        },
+        "faq_item_r374jg": {
+          "type": "faq_item",
+          "settings": {
+            "question": " 2. When did you first start using LaVivid’s hair systems, and which product did you choose?",
+            "answer": "I tried Lavivid products for the first time in 2019, over 5 years ago.",
+            "is_html": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_nJNFKX",
+        "faq_item_r374jg"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "faq_title": "Q & A for Steffen",
+        "faq_subtitle": ""
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "common_banner_73kkz7",
+    "custom_content_RwTE7t",
+    "story_block_RKTXRX",
+    "collection_list_7Pg79d",
+    "custom_content_DLMcPz",
+    "common_heading_MQBazP",
+    "custom_content_YmGj4E",
+    "faq_kABGaw"
   ]
 }
