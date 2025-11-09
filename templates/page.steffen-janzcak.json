@@ -84,6 +84,13 @@
         "color_scheme": "default"
       }
     },
+    "pagefly_section_tWQkr6": {
+      "type": "pagefly-section",
+      "name": "PageFly Section",
+      "settings": {
+        "section_id": ""
+      }
+    },
     "story_block_RKTXRX": {
       "type": "story-block",
       "name": "StoryBlock",
@@ -95,24 +102,107 @@
         "autoplay": true
       }
     },
-    "collection_list_7Pg79d": {
-      "type": "collection-list",
-      "name": "Collection list",
+    "common_heading_eRUNkh": {
+      "type": "common-heading",
+      "name": "标题 Heading",
       "settings": {
-        "title": "Collection list",
-        "enable_carousel": true,
-        "grid": 4,
-        "color_scheme": "default",
-        "full_width": true,
-        "coll_grid_image_shape": "square",
-        "coll_grid_image_position": "center center",
-        "coll_thumb_mob_per_row": "2",
-        "coll_grid_show_count": true,
-        "coll_text_position": "below",
-        "coll_text_position_under_mobile": false,
-        "coll_thumb_text_align_x": "center",
-        "coll_thumb_text_align_y": "center",
-        "coll_button_style": "primary"
+        "title": "Top Recommendation From Steffen",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "halloween_with_swiper_NMYjhF": {
+      "type": "halloween-with-swiper",
+      "blocks": {
+        "product_item_rJWyC3": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_image": "shopify://shop_images/adam-men-curly-hair-toupee-20mm-rod-size-curl-high-end-hair-look.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_A8ejHW": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_dgw8BL": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_k8pyny": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        },
+        "product_item_c6pRmX": {
+          "type": "product_item",
+          "settings": {
+            "product": "1-order-balance-link-1",
+            "button_text": "Shop Now",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "category_discount_percent": 0
+          }
+        }
+      },
+      "block_order": [
+        "product_item_rJWyC3",
+        "product_item_A8ejHW",
+        "product_item_dgw8BL",
+        "product_item_k8pyny",
+        "product_item_c6pRmX"
+      ],
+      "name": "Product Swiper",
+      "settings": {
+        "max_width": 1400,
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "medium",
+        "padding_left": "medium",
+        "padding_right": "medium",
+        "show_reviews": false
       }
     },
     "custom_content_DLMcPz": {
@@ -276,8 +366,10 @@
     "main",
     "common_banner_73kkz7",
     "custom_content_RwTE7t",
+    "pagefly_section_tWQkr6",
     "story_block_RKTXRX",
-    "collection_list_7Pg79d",
+    "common_heading_eRUNkh",
+    "halloween_with_swiper_NMYjhF",
     "custom_content_DLMcPz",
     "common_heading_MQBazP",
     "custom_content_YmGj4E",
