@@ -132,8 +132,389 @@
         "container_width": "standard",
         "container_padding": "medium",
         "spacing_top": "medium",
+        "spacing_bottom": "none",
+        "background_color": ""
+      }
+    },
+    "product_grid_flash_fYVrDp": {
+      "type": "product-grid-flash",
+      "blocks": {
+        "product_item_xkWMBK": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link-1",
+            "custom_image": "shopify://shop_images/11890_556137b2-39c5-4a6c-b387-ae6d05b455ed.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_EkahTD": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_bzJVJV": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_ezpTYc": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_y6mGwR": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_item_xkWMBK",
+        "product_item_EkahTD",
+        "product_item_bzJVJV",
+        "product_item_ezpTYc",
+        "product_item_y6mGwR"
+      ],
+      "name": "Product Grid Flash",
+      "settings": {
+        "products_per_row": 4,
+        "products_per_row_mobile": 2,
+        "show_reviews": false,
+        "discount_percent": 0,
+        "filter_category": 0
+      }
+    },
+    "custom_content_UbGgVV": {
+      "type": "custom-content",
+      "blocks": {
+        "text_aiNwme": {
+          "type": "text",
+          "settings": {
+            "width": "half",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "",
+            "title_size": 84,
+            "title_size_mobile": 46,
+            "text": "<p>It's advisable to<strong>avoid wearing a clip-on hair system</strong>, especially when anticipating security checks at airports or windy, active environments during your travel. Locations with high-security measures, like airports, often employ metal detectors for screening. If your wig has metallic clips or hook adjusters, they<strong>may trigger the detectors</strong>, potentially causing an alarm during the security check.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "image_c3BaQ3": {
+          "type": "image",
+          "settings": {
+            "width": "half",
+            "image": "shopify://shop_images/img2.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Subheading",
+            "title": "Tell your story",
+            "text": "<p>Pair text with an image to tell a story</p>",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        }
+      },
+      "block_order": [
+        "text_aiNwme",
+        "image_c3BaQ3"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "default"
+      }
+    },
+    "common_heading_VBekpi": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Pack Hair Care Essentials",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
         "spacing_bottom": "medium",
         "background_color": ""
+      }
+    },
+    "custom_content_RDeeMG": {
+      "type": "custom-content",
+      "blocks": {
+        "image_yrQjYP": {
+          "type": "image",
+          "settings": {
+            "width": "quarter",
+            "image": "shopify://shop_images/img3.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "Subheading",
+            "title": "Tell your story",
+            "text": "<p>Pair text with an image to tell a story</p>",
+            "enlarge_text": false,
+            "button_label": "",
+            "button_style": "primary",
+            "image_link": "",
+            "text_alignment": "center center",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "text_RyNEXM": {
+          "type": "text",
+          "settings": {
+            "width": "three-quarters",
+            "text_alignment": "center",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "",
+            "title_size": 84,
+            "title_size_mobile": 46,
+            "text": "<p>Prepare a travel-sized kit with products tailored to your hairpiece. This may include shampoo, conditioner, leave-in conditioner, detangler, shampoo, a bristle brush, styling products, scalp protector, wig tape, wig glue, a touch up pen, a portable wig stand, and even a small hair spray bottle for touch-ups.<br/><br/></p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_yrQjYP",
+        "text_RyNEXM"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "medium",
+        "alignment": "middle",
+        "color_scheme": "1"
+      }
+    },
+    "product_grid_flash_YndVWG": {
+      "type": "product-grid-flash",
+      "blocks": {
+        "product_item_cWLUda": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link-1",
+            "custom_image": "shopify://shop_images/11890_556137b2-39c5-4a6c-b387-ae6d05b455ed.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_MnUQrK": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_cTYcbN": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_WHfzfr": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_gzGRkj": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "25-haircut",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_item_cWLUda",
+        "product_item_MnUQrK",
+        "product_item_cTYcbN",
+        "product_item_WHfzfr",
+        "product_item_gzGRkj"
+      ],
+      "name": "Product Grid Flash",
+      "settings": {
+        "products_per_row": 4,
+        "products_per_row_mobile": 2,
+        "show_reviews": false,
+        "discount_percent": 0,
+        "filter_category": 0
+      }
+    },
+    "image_text_grid_BY7c6Y": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_ATQxJc": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img4.jpg",
+            "title": "Prioritize Pre-Travel Hairpiece Care",
+            "text": "<p>Ensure your hairpiece is clean and well-styled before departure. This sets the stage for a polished look throughout your trip. If it requires professional upkeep, consider servicing it prior to leaving.</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_m6LEMa": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img5.jpg",
+            "title": "Style Your Hairpiece Smartly",
+            "text": "<p>Opt for easy-to-manage hairstyles while traveling. Simple updos or braids can keep your hairpiece secure and hassle-free, especially in windy or active environments.</p>",
+            "link_url": "shopify://products/15-restocking-fee",
+            "button_text": ""
+          }
+        },
+        "image_text_item_f97WEm": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img6.jpg",
+            "title": "Always Have a Backup Hairpiece",
+            "text": "<p>Always have a spare as a backup plan. You never know when it might come in handy. This allows you to switch looks or use the older one for activities like swimming or wearing under a hat, reserving the newer one for special occasions.</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_ATQxJc",
+        "image_text_item_m6LEMa",
+        "image_text_item_f97WEm"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "",
+        "max_width": 1400,
+        "columns_desktop": 3,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 24,
+        "text_alignment": "center",
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "none"
+      }
+    },
+    "faq_jRngjC": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_wWVqfa": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is this FAQ about?",
+            "answer": "This is the answer to the FAQ question.",
+            "is_html": false
+          }
+        },
+        "faq_item_TyxhGc": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Another question?",
+            "answer": "Another answer.",
+            "is_html": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_wWVqfa",
+        "faq_item_TyxhGc"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "faq_title": "Frequently Asked Questions",
+        "faq_subtitle": ""
       }
     }
   },
@@ -143,6 +524,13 @@
     "custom_rich_text_3eJaeh",
     "common_heading_3UHbJ9",
     "custom_content_gBBnLT",
-    "common_heading_33gjTR"
+    "common_heading_33gjTR",
+    "product_grid_flash_fYVrDp",
+    "custom_content_UbGgVV",
+    "common_heading_VBekpi",
+    "custom_content_RDeeMG",
+    "product_grid_flash_YndVWG",
+    "image_text_grid_BY7c6Y",
+    "faq_jRngjC"
   ]
 }
