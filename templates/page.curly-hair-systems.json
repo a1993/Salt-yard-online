@@ -11,12 +11,400 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
+        "show_page_title": true,
         "full_width": false
+      }
+    },
+    "common_heading_8WjPn6": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Section Title",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "common_banner_QmTrDb": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/C78B24A8-15C8-4637-977F-D24CC48DD04A.png",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "full",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
+    "custom_rich_text_ntLDpP": {
+      "type": "custom-rich-text",
+      "name": "Custom Rich Text",
+      "settings": {
+        "richtext": "<p>Men curly hairstyles give you a super stylish, classic, youngish look and volume at the same time. People who are experiencing hair thinning and want to have curly hair styles can use a curly hair system to achieve the look. Here at LaVivid, we can make different curls ranging from 4mm to 28mm rod size and in different lengths ranging from 4’’ to 20’’.</p>",
+        "text_alignment": "center",
+        "background_color": "#53b0bf",
+        "text_color": "#ffffff",
+        "padding_top": "medium",
+        "padding_bottom": "medium"
+      }
+    },
+    "common_heading_8bTzTx": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "What does Each Curl* Look Like?",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "image_text_grid_iGpCNR": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_wQawCq": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img01_1.jpg",
+            "title": "",
+            "text": "<p>3mm Stabdurchmesser Afro</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_z9pFhz": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img02_1.jpg",
+            "title": "",
+            "text": "<p>4mm Stabdurchmesser<br/>Medium Afro</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_978Tx7": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img03_1.jpg",
+            "title": "",
+            "text": "<p>3mm Stabdurchmesser Afro</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_PKMbW3": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img04_1.jpg",
+            "title": "",
+            "text": "<p>3mm Stabdurchmesser Afro</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_VHj943": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img04_1.jpg",
+            "title": "",
+            "text": "<p>3mm Stabdurchmesser Afro</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_wQawCq",
+        "image_text_item_z9pFhz",
+        "image_text_item_978Tx7",
+        "image_text_item_PKMbW3",
+        "image_text_item_VHj943"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "",
+        "max_width": 1400,
+        "columns_desktop": 4,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 20,
+        "text_alignment": "center",
+        "background_color": "",
+        "padding_top": "none",
+        "padding_bottom": "none"
+      }
+    },
+    "common_heading_DRV7Wm": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "What Curls* Can LaVivid Make?",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "Here at LaVivid, we can make any curl that is looser than 8mm which includes 10mm, 12mm, 15mm, 20mm, 22mm, 25mm, 28mm, 30mm and 35mm.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "image_text_grid_YJLqL7": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_g9rjTi": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img09.jpg",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_8HW3iM": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img10.jpg",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_67MH8k": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img11_1.jpg",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_x7zmMx": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img12.jpg",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_t9AeN9": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img13.jpg",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_Pc3QYK": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/img14.jpg",
+            "title": "",
+            "text": "",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_g9rjTi",
+        "image_text_item_8HW3iM",
+        "image_text_item_67MH8k",
+        "image_text_item_x7zmMx",
+        "image_text_item_t9AeN9",
+        "image_text_item_Pc3QYK"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "",
+        "max_width": 1400,
+        "columns_desktop": 6,
+        "columns_tablet": 3,
+        "columns_mobile": 2,
+        "gap_size": 0,
+        "text_alignment": "left",
+        "background_color": "",
+        "padding_top": "none",
+        "padding_bottom": "none"
+      }
+    },
+    "common_heading_VqgLRF": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "What Colors cannot be Made with Small Curls?",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "Light colors like blonde or white are not recommended to be added with a small curl (3mm-22mm) because it causes the hair to break easily. Small curls are added to the hair using high heat, so this process will make the hair a bit more fragile, thus shorten the lifespan slightly. The smaller the curl is, the less time it will last.",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
+    "common_banner_tT6V9L": {
+      "type": "common-banner",
+      "name": "横幅 Banner",
+      "settings": {
+        "banner_desktop": "shopify://shop_images/C4BC9F53-2B8F-4d3c-B1EC-CC6A36CA6BF9.png",
+        "banner_mobile": "shopify://shop_images/BB39696A-52EE-4ca8-A54D-EF8D535541D0.png",
+        "alt_text": "Banner",
+        "link_url": "",
+        "width_mode": "full",
+        "spacing_top": "none",
+        "spacing_bottom": "none",
+        "lazy_load": false
+      }
+    },
+    "common_heading_c6RPFJ": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Men Curly Stock Hair Systems",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "none",
+        "background_color": ""
+      }
+    },
+    "product_grid_flash_tpBWbM": {
+      "type": "product-grid-flash",
+      "blocks": {
+        "product_item_8m3wF8": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link-1",
+            "custom_image": "shopify://shop_images/adam-men-curly-hair-toupee-20mm-rod-size-curl-high-end-hair-look.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_xA8Vjt": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link-1",
+            "custom_image": "shopify://shop_images/adam-men-curly-hair-toupee-20mm-rod-size-curl-high-end-hair-look.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_AHyUGw": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link-1",
+            "custom_image": "shopify://shop_images/adam-men-curly-hair-toupee-20mm-rod-size-curl-high-end-hair-look.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        },
+        "product_item_AYAQn6": {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "product": "1-order-balance-link-1",
+            "custom_image": "shopify://shop_images/adam-men-curly-hair-toupee-20mm-rod-size-curl-high-end-hair-look.jpg",
+            "custom_title": "",
+            "custom_description": "",
+            "custom_compare_price": "",
+            "custom_discount_percent": 0,
+            "custom_class": "",
+            "shopify_attributes": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_item_8m3wF8",
+        "product_item_xA8Vjt",
+        "product_item_AHyUGw",
+        "product_item_AYAQn6"
+      ],
+      "name": "Product Grid Flash",
+      "settings": {
+        "products_per_row": 4,
+        "products_per_row_mobile": 2,
+        "show_reviews": false,
+        "discount_percent": 0,
+        "filter_category": 0
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "common_heading_8WjPn6",
+    "common_banner_QmTrDb",
+    "custom_rich_text_ntLDpP",
+    "common_heading_8bTzTx",
+    "image_text_grid_iGpCNR",
+    "common_heading_DRV7Wm",
+    "image_text_grid_YJLqL7",
+    "common_heading_VqgLRF",
+    "common_banner_tT6V9L",
+    "common_heading_c6RPFJ",
+    "product_grid_flash_tpBWbM"
   ]
 }
