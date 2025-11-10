@@ -313,7 +313,7 @@
           "settings": {
             "title": "Image with text overlay",
             "heading_max_width": 15,
-            "title_size": 84,
+            "title_size": 54,
             "title_size_mobile": 32,
             "use_h1": false
           }
@@ -367,7 +367,7 @@
         "text_caps": false,
         "quote_text_size": 24,
         "quote_text_size_mobile": 20,
-        "image_shape": "square",
+        "image_shape": "natural",
         "color_scheme": "1",
         "use_custom_star_rating_color": true,
         "star_rating_color": "#bbc8e6",
@@ -434,7 +434,7 @@
       "settings": {
         "title": "Blog posts",
         "blog": "",
-        "post_limit": 6,
+        "post_limit": 3,
         "show_author": true,
         "show_date": true,
         "show_excerpts": true,
