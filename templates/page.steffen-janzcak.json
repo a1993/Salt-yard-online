@@ -84,13 +84,6 @@
         "color_scheme": "default"
       }
     },
-    "pagefly_section_tWQkr6": {
-      "type": "pagefly-section",
-      "name": "PageFly Section",
-      "settings": {
-        "section_id": ""
-      }
-    },
     "image_with_text_nnCFNW": {
       "type": "image-with-text",
       "blocks": {
@@ -305,6 +298,7 @@
         "image_EFwkBD",
         "text_CWNFpp"
       ],
+      "disabled": true,
       "name": "Custom content",
       "settings": {
         "spacing": "medium",
@@ -420,7 +414,6 @@
     "main",
     "common_banner_73kkz7",
     "custom_content_RwTE7t",
-    "pagefly_section_tWQkr6",
     "image_with_text_nnCFNW",
     "story_block_RKTXRX",
     "common_heading_eRUNkh",
