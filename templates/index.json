@@ -228,6 +228,19 @@
         "color_scheme": "default"
       }
     },
+    "firework_feed_LK7r7T": {
+      "type": "firework-feed",
+      "name": "Firework Feed",
+      "settings": {
+        "playlist": "5bJBa2",
+        "channel": "lavivid_hair",
+        "mode": "row",
+        "open_in": "default",
+        "max_videos": 0,
+        "placement": "middle",
+        "player_placement": "bottom-left"
+      }
+    },
     "176275649494f4b2f8": {
       "type": "apps",
       "name": "Apps/Video UGC",
@@ -337,26 +350,16 @@
           "type": "testimonial",
           "settings": {
             "star_rating": 5,
-            "testimonial": "What a timeless and classic-style beanie—absolutely love it! It's beautifully knitted from 100% extra-fine, mulesing-free Merino wool, offering both exceptional quality and comfort. It has maintained its shape perfectly over time.",
-            "author": "David F / Amsterdam",
-            "image_caption": "Shop The Beanie",
-            "link": ""
-          }
-        },
-        "16115832006dc80dc9-1": {
-          "type": "testimonial",
-          "settings": {
-            "star_rating": 5,
-            "testimonial": "This soft lambswool sweater is absolutely gorgeous and feels incredibly luxurious. The yarn has a rich, cashmere-like texture that’s both cozy and elegant. Many thanks for creating such a beautiful and high-quality piece!",
-            "author": "Daniele J / New York",
-            "image_caption": "Shop the Merino Sweater",
+            "testimonial": "“I’m a massive fan of the cus tom system and love blonde highlights in them . They are fast and efficient at putting ur dream system to give you the style and confidence u want. Thank you for given me my confidence back and offering full support when I place my orders .”",
+            "author": "-Kevin",
+            "image": "shopify://shop_images/testimonial-link.png",
+            "image_caption": "TRY THIS STYLE",
             "link": ""
           }
         }
       },
       "block_order": [
-        "16115832006dc80dc9-0",
-        "16115832006dc80dc9-1"
+        "16115832006dc80dc9-0"
       ],
       "settings": {
         "title": "From the people",
@@ -485,19 +488,6 @@
         "show_excerpts": true,
         "crop_ratio": "1.78",
         "color_scheme": "default"
-      }
-    },
-    "firework_feed_LK7r7T": {
-      "type": "firework-feed",
-      "name": "Firework Feed",
-      "settings": {
-        "playlist": "5bJBa2",
-        "channel": "lavivid_hair",
-        "mode": "row",
-        "open_in": "default",
-        "max_videos": 0,
-        "placement": "middle",
-        "player_placement": "bottom-left"
       }
     }
   },
