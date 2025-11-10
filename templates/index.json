@@ -383,6 +383,7 @@
           "settings": {
             "width": "half",
             "image": "shopify://shop_images/about-us-image.png",
+            "mobile_image": "shopify://shop_images/about-us-image-mobile.png",
             "height": "adapt",
             "height_desktop": 600,
             "height_mobile": 500,
@@ -428,18 +429,114 @@
         "color_scheme": "default"
       }
     },
-    "featured_blog_3mVGNT": {
-      "type": "featured-blog",
-      "name": "Blog posts",
+    "custom_content_FUMDi3": {
+      "type": "custom-content",
+      "blocks": {
+        "image_63cGdL": {
+          "type": "image",
+          "settings": {
+            "width": "half",
+            "image": "shopify://shop_images/content-video-tutorial.png",
+            "mobile_image": "shopify://shop_images/collection-card-swimming-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "Watch Then Style Like a Pro",
+            "text": "<p>Real techniques. Real results. Follow along and master the art of natural-looking hair in minutes.</p>",
+            "enlarge_text": false,
+            "button_label": "WATCH VIDEO TUTORIALS",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "image_nxDcKq": {
+          "type": "image",
+          "settings": {
+            "width": "half",
+            "image": "shopify://shop_images/content-blogs.png",
+            "mobile_image": "shopify://shop_images/collection-card-fitness-mobile.png",
+            "height": "adapt",
+            "height_desktop": 520,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "The Style Journal",
+            "text": "<p>Dive into curated articles packed with trends, tutorials, and behind-the-scenes knowledge to keep your look on point.</p>",
+            "enlarge_text": false,
+            "button_label": "READ OUT BLOGS",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        }
+      },
+      "block_order": [
+        "image_63cGdL",
+        "image_nxDcKq"
+      ],
+      "name": "Custom content",
       "settings": {
-        "title": "Blog posts",
-        "blog": "",
-        "post_limit": 3,
-        "show_author": true,
-        "show_date": true,
-        "show_excerpts": true,
-        "crop_ratio": "1.78",
+        "spacing": "small",
+        "alignment": "top",
         "color_scheme": "default"
+      }
+    },
+    "image_text_grid_FgMnWt": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_YPiah4": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/Escobarbers_Kettering.png",
+            "title": "Escobarbers Kettering",
+            "text": "<p>Northamptonshire, UK</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_Tdfibm": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/Adherence_4_Appearance_LLC.png",
+            "title": "Adherence 4 Appearance LLC",
+            "text": "<p>Frederick, MD United States</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_tpt4br": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/LA_Hair_Replacement.png",
+            "title": "LA Hair Replacement",
+            "text": "<p>West Hollywood, CA United States</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_YPiah4",
+        "image_text_item_Tdfibm",
+        "image_text_item_tpt4br"
+      ],
+      "name": "Image Text Grid",
+      "settings": {
+        "title": "Expert Care, Within Your Reach",
+        "max_width": 1400,
+        "columns_desktop": 3,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 24,
+        "text_alignment": "center",
+        "background_color": "",
+        "padding_top": "medium",
+        "padding_bottom": "medium"
       }
     }
   },
@@ -454,6 +551,7 @@
     "image_with_text_overlay_Rr89kY",
     "16115832006dc80dc9",
     "custom_content_M4V8ip",
-    "featured_blog_3mVGNT"
+    "custom_content_FUMDi3",
+    "image_text_grid_FgMnWt"
   ]
 }
