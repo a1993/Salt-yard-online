@@ -532,8 +532,8 @@
         "gap_size": 24,
         "text_alignment": "center",
         "background_color": "",
-        "padding_top": "medium",
-        "padding_bottom": "medium"
+        "padding_top": "large",
+        "padding_bottom": "large"
       }
     }
   },
