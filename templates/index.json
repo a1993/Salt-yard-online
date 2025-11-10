@@ -9,57 +9,45 @@
  */
 {
   "sections": {
-    "1594980584619": {
-      "type": "background-video",
+    "slideshow_m8jBVm": {
+      "type": "slideshow",
       "blocks": {
-        "848472a6-f06a-4242-a988-ab9375b5f5ad": {
-          "type": "heading",
+        "image_fCnnht": {
+          "type": "image",
           "settings": {
-            "title": "Rediscover Confidence. Redefine Your Style",
-            "heading_max_width": 12,
+            "slide_link": "",
+            "subheading": "",
+            "title": "Rediscover Confidence Redefine Your Style",
+            "heading_max_width": 13,
             "title_size": 56,
-            "title_size_mobile": 48,
-            "use_h1": false
-          }
-        },
-        "b28b0e71-6c42-42e2-befa-793a92b73a08": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Fresh new styles you'll wear on repeat</p>",
-            "enlarge_text": true
-          }
-        },
-        "df6ef69f-4e07-4e0e-a03f-2130665d2c6d": {
-          "type": "button",
-          "settings": {
-            "button_label": "Shop now",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
-        "24be458d-c4ae-43fe-a143-9626dbdc777b": {
-          "type": "button",
-          "settings": {
-            "button_label": "Shop the collection",
-            "button_link": "",
-            "button_style": "secondary"
+            "title_size_mobile": 46,
+            "use_h1": false,
+            "text": "<p>Premium, hair systems designed for your comfort and personal empowerment.</p>",
+            "enlarge_text": true,
+            "button_label_1": "Shop Hair Systems",
+            "button_url_1": "",
+            "button_label_2": "Customize Hair System",
+            "button_url_2": "",
+            "text_alignment": "center left"
           }
         }
       },
       "block_order": [
-        "848472a6-f06a-4242-a988-ab9375b5f5ad",
-        "b28b0e71-6c42-42e2-befa-793a92b73a08",
-        "df6ef69f-4e07-4e0e-a03f-2130665d2c6d",
-        "24be458d-c4ae-43fe-a143-9626dbdc777b"
+        "image_fCnnht"
       ],
+      "name": "Slideshow",
       "settings": {
-        "video_external": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_description": "",
-        "text_alignment": "center center",
-        "height_desktop": 720,
-        "height_mobile": 560,
+        "height": "fixed",
+        "height_desktop": 600,
+        "height_mobile": 460,
         "full_width": true,
-        "overlay_style": "full image-overlay--bg-shadow"
+        "mobile_overlay_under": false,
+        "overlay_style": "shadow",
+        "transition": "fade",
+        "navigation": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 7,
+        "accessibility_info": ""
       }
     },
     "1614871838b4f4ccd4": {
@@ -69,8 +57,9 @@
           "type": "text_block",
           "settings": {
             "enable_media": true,
-            "title": "Essentials",
-            "text": "<p>Everyones favourites, you'll wear on repeat.<br/>New colours for Spring.</p>",
+            "image": "shopify://shop_images/icon-free-shipping.svg",
+            "title": "Free Shipping",
+            "text": "<p>Enjoy fast, reliable delivery on every order.</p>",
             "button_label": "",
             "link": ""
           }
@@ -79,8 +68,9 @@
           "type": "text_block",
           "settings": {
             "enable_media": true,
-            "title": "New Knitwear Arrivals",
-            "text": "<p>100% extra-fine mulesing free Merino wool.<br/>Just $99.</p>",
+            "image": "shopify://shop_images/icon-secure-payment.svg",
+            "title": "Secure Payment",
+            "text": "<p>Shop confidently with encrypted checkout.</p>",
             "button_label": "",
             "link": ""
           }
@@ -89,8 +79,20 @@
           "type": "text_block",
           "settings": {
             "enable_media": true,
-            "title": "The Cropped Jean",
-            "text": "<p>Way high. Way cute. And way, way flattering.<br/>Introducing our highest rise yet.</p>",
+            "image": "shopify://shop_images/icon-quality-guaranteed.svg",
+            "title": "Quality Guaranteed",
+            "text": "<p>Expertly crafted for natural look and lasting wear.</p>",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "text_block_JfpVnn": {
+          "type": "text_block",
+          "settings": {
+            "enable_media": true,
+            "image": "shopify://shop_images/icon-45-day-money-back.svg",
+            "title": "45-day Money Back",
+            "text": "<p>Try risk-free with our hassle-free return policy.</p>",
             "button_label": "",
             "link": ""
           }
@@ -99,63 +101,16 @@
       "block_order": [
         "1614871838b4f4ccd4-0",
         "1614871838b4f4ccd4-1",
-        "1614871838b4f4ccd4-2"
+        "1614871838b4f4ccd4-2",
+        "text_block_JfpVnn"
       ],
       "settings": {
         "title": "",
-        "media_aspect_ratio": "s",
-        "media_width": 700,
+        "media_aspect_ratio": "1",
+        "media_width": 60,
         "text_alignment": "center",
         "button_style": "primary",
-        "color_scheme": "default"
-      }
-    },
-    "37f4b6ab-4c57-4670-85f0-7b3462d4145c": {
-      "type": "shop-the-look",
-      "blocks": {
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-subheading-1": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Limited Edition"
-          }
-        },
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-heading-1": {
-          "type": "heading",
-          "settings": {
-            "title": "Exude confidence",
-            "heading_max_width": 10,
-            "title_size": 48,
-            "title_size_mobile": 34,
-            "use_h1": false
-          }
-        },
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Shapes designed for modern living</p>",
-            "enlarge_text": true
-          }
-        }
-      },
-      "block_order": [
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-subheading-1",
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-heading-1",
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-text-1"
-      ],
-      "settings": {
-        "video_external": "",
-        "video_description": "",
-        "height": "fixed",
-        "height_desktop": 720,
-        "height_mobile": 480,
-        "product_list": [],
-        "products_alignment": "bottom right",
-        "product_card_layout": "portrait",
-        "show_swatches": false,
-        "full_width": true,
-        "text_alignment": "top left",
-        "mobile_overlay_over": false,
-        "overlay_style": "shadow"
+        "color_scheme": "1"
       }
     },
     "1480591889144": {
@@ -168,213 +123,224 @@
         "grid": 4,
         "rows": 1,
         "color_scheme": "default",
-        "show_view_all": true,
+        "show_view_all": false,
         "full_width": true
       }
     },
-    "1594970282022": {
-      "type": "gallery",
+    "custom_content_XydJMH": {
+      "type": "custom-content",
       "blocks": {
-        "1594970282022-0": {
-          "type": "media",
+        "image_EQBRM8": {
+          "type": "image",
           "settings": {
-            "enlarge_media": false,
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-professional.png",
+            "mobile_image": "shopify://shop_images/collection-card-professional-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
             "subheading": "",
-            "title": "New Arrivals",
-            "button_label": "Shop now",
-            "link": "",
-            "text_alignment": "bottom left"
+            "title": "Professional",
+            "text": "<p>Polished, modern, and effortless for your professional image.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
           }
         },
-        "1594970282022-1": {
-          "type": "media",
+        "image_GejFFT": {
+          "type": "image",
           "settings": {
-            "enlarge_media": false,
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-travel.png",
+            "mobile_image": "shopify://shop_images/collection-card-traveling-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
             "subheading": "",
-            "title": "Denim",
-            "button_label": "Shop now",
-            "link": "",
-            "text_alignment": "bottom left"
+            "title": "Traveling",
+            "text": "<p>Lightweight, easy to style, and ready to go wherever you are.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
           }
         },
-        "1594970282022-2": {
-          "type": "media",
+        "image_ykJzdK": {
+          "type": "image",
           "settings": {
-            "enlarge_media": false,
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-swimming.png",
+            "mobile_image": "shopify://shop_images/collection-card-swimming-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
             "subheading": "",
-            "title": "Knitwear",
-            "button_label": "Shop Now",
-            "link": "",
-            "text_alignment": "bottom left"
+            "title": "Swimming",
+            "text": "<p>Secure, breathable, and durable for you who active in the water.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "image_CPE9Ki": {
+          "type": "image",
+          "settings": {
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-fitness.png",
+            "mobile_image": "shopify://shop_images/collection-card-fitness-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "Fitness",
+            "text": "<p>Designed for intense workouts, ensuring a secure and natural look.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
           }
         }
       },
       "block_order": [
-        "1594970282022-0",
-        "1594970282022-1",
-        "1594970282022-2"
+        "image_EQBRM8",
+        "image_GejFFT",
+        "image_ykJzdK",
+        "image_CPE9Ki"
       ],
+      "name": "Custom content",
       "settings": {
-        "grid_desktop": 2,
-        "grid_mobile": "1",
-        "height": "fixed",
-        "desktop_image_height": 720,
-        "mobile_image_height": 480,
-        "title_size": 34,
-        "title_size_mobile": 28,
-        "enable_margin": false,
-        "enable_row_spacing": true,
-        "full_width": true,
-        "color_scheme": "default",
-        "enable_carousel": true,
-        "overlay_style": "shadow",
-        "overlay_padding": "standard",
-        "button_style": "link"
+        "spacing": "small",
+        "alignment": "top",
+        "color_scheme": "default"
       }
     },
-    "1614873846ee4b328c": {
-      "type": "rich-text",
+    "firework_feed_LK7r7T": {
+      "type": "firework-feed",
+      "name": "Firework Feed",
+      "settings": {
+        "playlist": "5bJBa2",
+        "channel": "lavivid_hair",
+        "mode": "row",
+        "open_in": "default",
+        "max_videos": 0,
+        "placement": "middle",
+        "player_placement": "bottom-left"
+      }
+    },
+    "176275649494f4b2f8": {
+      "type": "apps",
+      "name": "Apps/Video UGC",
+      "settings": {
+        "full_width": false,
+        "show_space": true
+      }
+    },
+    "16148743091427bc38": {
+      "type": "image-with-text",
       "blocks": {
-        "293e9aad-5a79-41b7-8fd3-b708877ddcf2": {
+        "98728156-df44-4876-965e-1af1683386af": {
           "type": "heading",
           "settings": {
-            "title": "We’re transparent, proud of everybody we work with and everything we do.",
+            "title": "Not Sure Where To Begin?",
             "use_h1": false
           }
         },
-        "76486a37-2d11-4242-abc1-ae14b1a776a2": {
+        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7": {
           "type": "text",
           "settings": {
-            "text": "<p>Timeless designs constructed with the future in mind.</p>",
+            "text": "<p>Starting your hair system journey can feel overwhelming but we’re here to make it simple. Get the basics or personalized guidance from our expert.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_nDcain": {
+          "type": "button",
+          "settings": {
+            "button_label": "HELP ME CHOOSE",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "button_hHNiVV": {
+          "type": "button",
+          "settings": {
+            "button_label": "Book Free Consultation",
+            "button_link": "",
+            "button_style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "98728156-df44-4876-965e-1af1683386af",
+        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7",
+        "button_nDcain",
+        "button_hHNiVV"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_1.png",
+        "image_2": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
+        "image_width": 670,
+        "image_link": "",
+        "image_position": "right",
+        "text_alignment": "left",
+        "color_scheme": "default"
+      }
+    },
+    "image_with_text_overlay_Rr89kY": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_XnjRyK": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Tell your story"
+          }
+        },
+        "heading_JzEnJt": {
+          "type": "heading",
+          "settings": {
+            "title": "Image with text overlay",
+            "heading_max_width": 15,
+            "title_size": 54,
+            "title_size_mobile": 32,
+            "use_h1": false
+          }
+        },
+        "text_6ngwpc": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Promote your brand or products with this feature section</p>",
             "enlarge_text": true
           }
         }
       },
       "block_order": [
-        "293e9aad-5a79-41b7-8fd3-b708877ddcf2",
-        "76486a37-2d11-4242-abc1-ae14b1a776a2"
+        "subheading_XnjRyK",
+        "heading_JzEnJt",
+        "text_6ngwpc"
       ],
+      "name": "Image with text overlay",
       "settings": {
-        "height": "medium",
-        "text_alignment": "center",
-        "full_width": false,
-        "color_scheme": "default"
-      }
-    },
-    "161158693318e52003": {
-      "type": "multi-column",
-      "blocks": {
-        "161158693318e52003-1": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Recycled materials, organic cotton, and more.",
-            "text": "",
-            "button_label": "Learn More",
-            "link": ""
-          }
-        },
-        "text_block_wHJYem": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Recycled materials, organic cotton, and more.",
-            "text": "",
-            "button_label": "Learn More",
-            "link": ""
-          }
-        },
-        "161158693318e52003-0": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "A collection made without the use of synthetic blends",
-            "text": "",
-            "button_label": "Shop the collection",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "161158693318e52003-1",
-        "text_block_wHJYem",
-        "161158693318e52003-0"
-      ],
-      "settings": {
-        "title": "",
-        "media_aspect_ratio": "s",
-        "media_width": 700,
-        "text_alignment": "left",
-        "button_style": "link",
-        "color_scheme": "default"
-      }
-    },
-    "992e4a60-c0f6-47a7-8819-0615c1089d4f": {
-      "type": "hotspots",
-      "blocks": {
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-2": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 28,
-            "hotspot_y": 24,
-            "hotspot_x_mobile": 28,
-            "hotspot_y_mobile": 24,
-            "heading": "Naturally sustainable wool",
-            "text": "<p>A sustainable, renewable and biodegradable natural fibre, with some great performance characteristics. It also provides and retains warmth while being naturally flame retardant. We believe that wool is hard to beat.</p>",
-            "icon": "check_mark_in_circle",
-            "icon_width": 32
-          }
-        },
-        "97903fac-3809-43fc-b3a3-feb15cd29ce1": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 64,
-            "hotspot_y": 32,
-            "hotspot_x_mobile": 64,
-            "hotspot_y_mobile": 32,
-            "heading": "Production & Sustainability",
-            "text": "<p>Our commitment to maintaining strong connections with our suppliers lies at the heart of our business. We emphasize personal visits to the factories, ensuring a close relationship and a deep understanding of our production processes</p>",
-            "icon": "eye",
-            "icon_width": 32
-          }
-        },
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-1": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 56,
-            "hotspot_y": 64,
-            "hotspot_x_mobile": 56,
-            "hotspot_y_mobile": 64,
-            "heading": "100% Organic Cotton",
-            "text": "<p>Our cotton is grown on soil that is free of toxic pesticides and fertilizers. The fabric is dyed and finished without the use of heavy metals or allergenic disperse dyes.</p>",
-            "icon": "heart",
-            "icon_width": 32
-          }
-        }
-      },
-      "block_order": [
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-2",
-        "97903fac-3809-43fc-b3a3-feb15cd29ce1",
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-1"
-      ],
-      "settings": {
-        "hotspot_color": "#070707",
-        "button_content": "plus",
-        "outer_circle": "pulse",
-        "full_width": false,
-        "text_alignment": "top left",
-        "overlay_style": "shadow",
-        "subheading": "",
-        "title": "",
-        "use_h1": false,
-        "heading_max_width": 10,
-        "text": "",
-        "button_1_label": "",
-        "button_1_link": "",
-        "button_1_style": "secondary",
-        "button_2_label": "",
-        "button_2_link": "",
-        "button_2_style": "primary"
+        "height": "fixed",
+        "height_desktop": 600,
+        "height_mobile": 460,
+        "image_link": "",
+        "full_width": true,
+        "text_alignment": "bottom left",
+        "mobile_overlay_under": false,
+        "overlay_style": "shadow"
       }
     },
     "16115832006dc80dc9": {
@@ -384,115 +350,39 @@
           "type": "testimonial",
           "settings": {
             "star_rating": 5,
-            "testimonial": "What a timeless and classic-style beanie—absolutely love it! It's beautifully knitted from 100% extra-fine, mulesing-free Merino wool, offering both exceptional quality and comfort. It has maintained its shape perfectly over time.",
-            "author": "David F / Amsterdam",
-            "image_caption": "Shop The Beanie",
-            "link": ""
-          }
-        },
-        "16115832006dc80dc9-1": {
-          "type": "testimonial",
-          "settings": {
-            "star_rating": 5,
-            "testimonial": "This soft lambswool sweater is absolutely gorgeous and feels incredibly luxurious. The yarn has a rich, cashmere-like texture that’s both cozy and elegant. Many thanks for creating such a beautiful and high-quality piece!",
-            "author": "Daniele J / New York",
-            "image_caption": "Shop the Merino Sweater",
+            "testimonial": "“I’m a massive fan of the custom system and love blonde highlights in them . They are fast and efficient at putting ur dream system to give you the style and confidence u want. Thank you for given me my confidence back and offering full support when I place my orders .”",
+            "author": "Kevin",
+            "image": "shopify://shop_images/testimonial-link_1.png",
+            "image_caption": "TRY THIS STYLE",
             "link": ""
           }
         }
       },
       "block_order": [
-        "16115832006dc80dc9-0",
-        "16115832006dc80dc9-1"
+        "16115832006dc80dc9-0"
       ],
       "settings": {
         "title": "From the people",
         "layout": "image-right",
         "text_caps": false,
-        "quote_text_size": 28,
+        "quote_text_size": 24,
         "quote_text_size_mobile": 20,
-        "image_shape": "square",
+        "image_shape": "natural",
         "color_scheme": "1",
-        "use_custom_star_rating_color": false,
-        "star_rating_color": "#e9a80a",
+        "use_custom_star_rating_color": true,
+        "star_rating_color": "#bbc8e6",
         "autoplay": true,
         "autoplay_speed": 3
-      }
-    },
-    "40097cb1-89d1-495b-a695-4f5a8ee8138d": {
-      "type": "scrolling-banner",
-      "blocks": {
-        "d4a4104d-d49f-46b5-af65-aee604558e23": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        },
-        "a743c77e-b731-4526-978d-b5c0a06f3b60": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        },
-        "6540188c-ca6a-44cc-bed4-b0bfb700bf56": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        },
-        "65174202-42bb-43cc-ba34-1e8198979e51": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "d4a4104d-d49f-46b5-af65-aee604558e23",
-        "a743c77e-b731-4526-978d-b5c0a06f3b60",
-        "6540188c-ca6a-44cc-bed4-b0bfb700bf56",
-        "65174202-42bb-43cc-ba34-1e8198979e51"
-      ],
-      "settings": {
-        "full_width": true,
-        "color_scheme": "default",
-        "text_size": 50,
-        "vertical_padding": 50,
-        "speed": 20,
-        "direction": "left",
-        "font": "heading",
-        "space": 140
       }
     },
     "custom_content_M4V8ip": {
       "type": "custom-content",
       "blocks": {
-        "text_eqA3de": {
-          "type": "text",
-          "settings": {
-            "width": "half",
-            "text_alignment": "left",
-            "center_on_mobile": true,
-            "icon": "",
-            "icon_color": "rgba(0,0,0,0)",
-            "subheading": "",
-            "title": "Welcome",
-            "title_size": 54,
-            "title_size_mobile": 46,
-            "text": "<p>Use this text to share information about your store with your customers.</p><p>Describe products, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
         "image_NaMczA": {
           "type": "image",
           "settings": {
             "width": "half",
+            "image": "shopify://shop_images/about-us-image.png",
             "height": "adapt",
             "height_desktop": 600,
             "height_mobile": 500,
@@ -507,59 +397,34 @@
             "mobile_overlay_under": false,
             "overlay_style": "shadow"
           }
+        },
+        "text_eqA3de": {
+          "type": "text",
+          "settings": {
+            "width": "half",
+            "text_alignment": "left",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "Lavivid Crafted By Experts Inspired By Confidence",
+            "title_size": 40,
+            "title_size_mobile": 32,
+            "text": "<p>LaVivid is committed to delivering the best non-surgical solutions to men who are experiencing hair loss. We provide premium quality men’s hair replacement systems for competitive prices. Each hair piece is individually handcrafted and designed with your needs in mind. Here at LaVivid the customer comes first, and we strive to make every customer’s hair loss journey a little bit easier.</p>",
+            "button_label": "READ MORE ABOUT US",
+            "button_link": "shopify://pages/about-us",
+            "button_style": "secondary"
+          }
         }
       },
       "block_order": [
-        "text_eqA3de",
-        "image_NaMczA"
+        "image_NaMczA",
+        "text_eqA3de"
       ],
       "name": "Custom content",
       "settings": {
         "spacing": "medium",
         "alignment": "middle",
-        "color_scheme": "default"
-      }
-    },
-    "16148743091427bc38": {
-      "type": "image-with-text",
-      "blocks": {
-        "98728156-df44-4876-965e-1af1683386af": {
-          "type": "heading",
-          "settings": {
-            "title": "Follow us on Instagram",
-            "use_h1": false
-          }
-        },
-        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7": {
-          "type": "text",
-          "settings": {
-            "text": "<p>All year round, unisex apparel made from 100% Organic Cotton (GOTS Certified).</p><p><a href=\"#\" target=\"_blank\">@INSTAGRAM</a></p>",
-            "enlarge_text": false
-          }
-        }
-      },
-      "block_order": [
-        "98728156-df44-4876-965e-1af1683386af",
-        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7"
-      ],
-      "settings": {
-        "image_width": 700,
-        "image_link": "",
-        "image_position": "left",
-        "text_alignment": "left",
-        "color_scheme": "default"
-      }
-    },
-    "1478606404805": {
-      "type": "featured-blog",
-      "settings": {
-        "title": "Magazine",
-        "blog": "",
-        "post_limit": 3,
-        "show_author": true,
-        "show_date": true,
-        "show_excerpts": true,
-        "crop_ratio": "1.78",
         "color_scheme": "default"
       }
     },
@@ -569,7 +434,7 @@
       "settings": {
         "title": "Blog posts",
         "blog": "",
-        "post_limit": 6,
+        "post_limit": 3,
         "show_author": true,
         "show_date": true,
         "show_excerpts": true,
@@ -579,19 +444,16 @@
     }
   },
   "order": [
-    "1594980584619",
+    "slideshow_m8jBVm",
     "1614871838b4f4ccd4",
-    "37f4b6ab-4c57-4670-85f0-7b3462d4145c",
     "1480591889144",
-    "1594970282022",
-    "1614873846ee4b328c",
-    "161158693318e52003",
-    "992e4a60-c0f6-47a7-8819-0615c1089d4f",
-    "16115832006dc80dc9",
-    "40097cb1-89d1-495b-a695-4f5a8ee8138d",
-    "custom_content_M4V8ip",
+    "custom_content_XydJMH",
+    "firework_feed_LK7r7T",
+    "176275649494f4b2f8",
     "16148743091427bc38",
-    "1478606404805",
+    "image_with_text_overlay_Rr89kY",
+    "16115832006dc80dc9",
+    "custom_content_M4V8ip",
     "featured_blog_3mVGNT"
   ]
 }
