@@ -1,12 +1,24 @@
 {% comment %}
   自定义 HTML 内容模块 - 灵活导入自定义代码
-  
+
   功能：
   - 支持导入自定义 HTML 代码
   - 可以添加自定义 CSS
   - 可以添加自定义 JavaScript
   - 支持多个内容块
   - 完全自由的布局控制
+
+  ⚠️ 样式隔离功能：
+  - 内联 <style> 标签会自动添加作用域，不会污染全局
+  - 外部 CSS 库（<link> 标签）需要启用 "Shadow DOM 隔离" 来防止污染
+  - 自定义 CSS 设置中的样式会自动使用 CSS 嵌套隔离
+
+  💡 使用外部库（如 UIkit, Bootstrap）时：
+  1. 在设置中启用 "Shadow DOM 完全隔离"
+  2. 或勾选 "移除外部 CSS 链接" 并自己写样式
+  3. 查看控制台会有警告提示
+
+  详细文档：snippets/EXTERNAL-CSS-ISOLATION-GUIDE.md
 {% endcomment %}
 
 {%- liquid
@@ -50,56 +62,199 @@
     }
   {% endif %}
 
-  /* 自定义 CSS */
+  /* 自定义 CSS - 自动隔离作用域 */
   {% if custom_css != blank %}
-    {{ custom_css }}
+    /* 将所有自定义样式自动限制在当前 section 内 */
+    /* 示例：用户写 h1 { color: red; } 会自动变成 #{{ section_id }} h1 { color: red; } */
+    #{{ section_id }} {
+      {{ custom_css }}
+    }
   {% endif %}
 {%- endstyle -%}
 
-<div id="{{ section_id }}" class="custom-html-section" {{ section.shopify_attributes }}>
-  <div class="html-content-wrapper">
+<div
+  id='{{ section_id }}'
+  class='custom-html-section custom-scoped-section'
+  {{ section.shopify_attributes }}
+>
+  <div class='html-content-wrapper'>
     {% if section.settings.section_title != blank %}
-      <div class="section-title" style="text-align: {{ section.settings.title_alignment }}; margin-bottom: {{ section.settings.title_margin }}px;">
-        <h2 style="font-size: {{ section.settings.title_size }}px; color: {{ section.settings.title_color }};">
+      <div
+        class='section-title'
+        style='text-align: {{ section.settings.title_alignment }}; margin-bottom: {{ section.settings.title_margin }}px;'
+      >
+        <h2 style='font-size: {{ section.settings.title_size }}px; color: {{ section.settings.title_color }};'>
           {{ section.settings.section_title }}
         </h2>
       </div>
     {% endif %}
 
     {% for block in section.blocks %}
-      <div class="html-content-block html-block-{{ block.type }}" {{ block.shopify_attributes }}>
+      <div class='html-content-block html-block-{{ block.type }}' {{ block.shopify_attributes }}>
         {% case block.type %}
-          
           {% when 'html' %}
             {{ block.settings.html_content }}
-          
+
           {% when 'liquid' %}
             {% comment %} 支持 Liquid 代码 {% endcomment %}
             {{ block.settings.liquid_content }}
-          
+
           {% when 'richtext' %}
-            <div class="richtext-content">
+            <div class='richtext-content'>
               {{ block.settings.richtext_content }}
             </div>
-          
+
           {% when 'code' %}
             {% comment %} 原始代码块，不做任何处理 {% endcomment %}
-            <div class="code-block">
+            <div class='code-block'>
               {{ block.settings.code_content }}
             </div>
 
           {% when 'spacer' %}
-            <div style="height: {{ block.settings.spacer_height }}px;"></div>
-
+            <div style='height: {{ block.settings.spacer_height }}px;'></div>
         {% endcase %}
       </div>
     {% endfor %}
   </div>
 </div>
 
+<!-- 自动样式隔离脚本：处理 HTML 块中的 style 和 link 标签 -->
+<script>
+  (function() {
+    const sectionId = '{{ section_id }}';
+    const section = document.getElementById(sectionId);
+
+    if (!section) return;
+
+    const useShadowDOM = {{ section.settings.use_shadow_dom | default: false }};
+
+    // ==================== Shadow DOM 完全隔离模式 ====================
+    if (useShadowDOM) {
+      console.log('🔒 启用 Shadow DOM 完全隔离模式');
+
+      const htmlBlocks = section.querySelectorAll('.html-content-block');
+      htmlBlocks.forEach(function(block) {
+        // 跳过已经处理过的
+        if (block.hasAttribute('data-shadow-dom-applied')) return;
+
+        try {
+          // 创建一个容器
+          const container = document.createElement('div');
+          container.className = 'shadow-dom-container';
+
+          // 获取原始HTML内容
+          const originalContent = block.innerHTML;
+
+          // 创建 Shadow DOM
+          const shadowRoot = container.attachShadow({ mode: 'open' });
+
+          // 将内容移到 Shadow DOM 中
+          shadowRoot.innerHTML = originalContent;
+
+          // 替换原始内容
+          block.innerHTML = '';
+          block.appendChild(container);
+          block.setAttribute('data-shadow-dom-applied', 'true');
+
+          console.log('✅ Shadow DOM 隔离成功');
+        } catch (e) {
+          console.error('❌ Shadow DOM 创建失败:', e);
+        }
+      });
+
+      return; // Shadow DOM 模式下不需要下面的处理
+    }
+
+    // ==================== 标准模式：检测和处理外部样式 ====================
+
+    // 1. 检测外部 link 标签（会污染全局样式）
+    const externalLinks = section.querySelectorAll('.html-content-block link[rel="stylesheet"]');
+    if (externalLinks.length > 0) {
+      console.warn('⚠️ 检测到外部CSS库！这些样式会影响整个网站：');
+      externalLinks.forEach(function(link) {
+        console.warn('  - ' + link.href);
+      });
+      console.warn('💡 解决方案：在 section 设置中启用 "Shadow DOM 隔离模式"');
+
+      // 在页面上显示警告（仅在编辑模式下）
+      if (window.Shopify && window.Shopify.designMode) {
+        const warning = document.createElement('div');
+        warning.style.cssText = 'background: #fff3cd; border: 2px solid #ffc107; padding: 15px; margin: 10px 0; border-radius: 5px; color: #856404;';
+        warning.innerHTML = '<strong>⚠️ 样式污染警告：</strong> 检测到 ' + externalLinks.length + ' 个外部CSS库，可能影响全站样式。<br><strong>解决方案：</strong>启用 "Shadow DOM 隔离模式"';
+        section.insertBefore(warning, section.firstChild);
+      }
+    }
+
+    // 2. 处理内联 style 标签
+    const styleTags = section.querySelectorAll('.html-content-block style');
+
+    styleTags.forEach(function(styleTag) {
+      try {
+        let cssText = styleTag.textContent || styleTag.innerHTML;
+
+        // 跳过已经处理过的样式
+        if (cssText.includes('/* auto-scoped */')) return;
+
+        // 使用正则表达式添加作用域
+        const scopedCss = cssText.replace(
+          /([^{}@]+)(\s*\{)/g,
+          function(match, selectors, brace) {
+            // 跳过 @规则的内容部分
+            if (match.trim().startsWith('}')) {
+              return match;
+            }
+
+            // 分割多个选择器（逗号分隔）
+            const selectorList = selectors.split(',');
+            const scopedSelectors = selectorList.map(function(sel) {
+              const trimmed = sel.trim();
+
+              // 跳过空选择器
+              if (!trimmed) return sel;
+
+              // 跳过已经有作用域的
+              if (trimmed.includes('#' + sectionId)) return sel;
+
+              // 跳过 @规则（@media, @keyframes 等）
+              if (trimmed.startsWith('@')) return sel;
+
+              // 添加作用域前缀
+              return '\n  #' + sectionId + ' ' + trimmed;
+            });
+
+            return scopedSelectors.join(',') + brace;
+          }
+        );
+
+        // 添加标记，避免重复处理
+        styleTag.textContent = '/* auto-scoped */\n' + scopedCss;
+
+      } catch (e) {
+        console.warn('⚠️ 样式自动隔离失败:', e);
+      }
+    });
+
+    // 3. 移除或隔离外部link标签（可选，需要启用）
+    if ({{ section.settings.remove_external_css | default: false }}) {
+      externalLinks.forEach(function(link) {
+        console.warn('🗑️ 已移除外部CSS:', link.href);
+        link.remove();
+      });
+    }
+
+  })();
+</script>
+
 {% if custom_js != blank %}
   <script>
-    {{ custom_js }}
+    (function () {
+      // 自定义 JavaScript 代码也在函数作用域内，避免污染全局
+      {
+        {
+          custom_js;
+        }
+      }
+    })();
   </script>
 {% endif %}
 
@@ -231,19 +386,37 @@
     },
     {
       "type": "header",
+      "content": "样式隔离设置"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_shadow_dom",
+      "label": "启用 Shadow DOM 完全隔离",
+      "default": false,
+      "info": "🔒 推荐：当使用外部CSS库（如 UIkit、Bootstrap）时启用。完全隔离样式，但可能影响某些 JavaScript 交互"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_external_css",
+      "label": "移除外部 CSS 链接",
+      "default": false,
+      "info": "⚠️ 强制移除 HTML 中的 <link> 标签，防止外部样式污染全局。仅在不使用 Shadow DOM 时生效"
+    },
+    {
+      "type": "header",
       "content": "自定义样式和脚本"
     },
     {
       "type": "html",
       "id": "custom_css",
       "label": "自定义 CSS",
-      "info": "在这里添加自定义 CSS 代码（不需要 style 标签）"
+      "info": "✅ 样式会自动隔离到当前 section，无需手动添加前缀。直接写：h1 { color: red; } 即可"
     },
     {
       "type": "html",
       "id": "custom_js",
       "label": "自定义 JavaScript",
-      "info": "在这里添加自定义 JS 代码（不需要 script 标签）"
+      "info": "💡 建议：使用 document.querySelector('.custom-scoped-section') 来限制操作范围"
     }
   ],
   "blocks": [
@@ -255,7 +428,7 @@
           "type": "html",
           "id": "html_content",
           "label": "HTML 内容",
-          "info": "直接粘贴您的 HTML 代码"
+          "info": "⚠️ 如果包含外部CSS库（<link>标签），请启用 Shadow DOM 隔离模式，否则会污染全局样式。内联<style>标签会自动隔离。"
         }
       ]
     },
@@ -323,4 +496,3 @@
   ]
 }
 {% endschema %}
-
