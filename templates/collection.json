@@ -53,8 +53,6 @@
         "image_6TdMNK": {
           "type": "image",
           "settings": {
-            "image": "{{ collection.image }}",
-            "mobile_image": "{{ collection.image }}",
             "slide_link": "",
             "subheading": "",
             "title": "{{ collection.title }}",
@@ -68,7 +66,7 @@
             "button_url_1": "",
             "button_label_2": "",
             "button_url_2": "",
-            "text_alignment": "center center"
+            "text_alignment": "center left"
           }
         }
       },
@@ -81,7 +79,7 @@
         "height_desktop": 600,
         "height_mobile": 460,
         "full_width": true,
-        "mobile_overlay_under": false,
+        "mobile_overlay_under": true,
         "overlay_style": "shadow",
         "transition": "fade",
         "navigation": "arrows",
