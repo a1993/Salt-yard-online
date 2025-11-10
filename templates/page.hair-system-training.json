@@ -43,6 +43,8 @@
         "background_color": "",
         "padding_top": 0,
         "padding_bottom": 0,
+        "use_shadow_dom": true,
+        "remove_external_css": false,
         "custom_css": "",
         "custom_js": ""
       }
