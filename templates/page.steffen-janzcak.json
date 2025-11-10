@@ -138,6 +138,26 @@
         "color_scheme": "default"
       }
     },
+    "common_heading_AFnDGR": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Video Show from Steffen",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
+      }
+    },
     "story_block_RKTXRX": {
       "type": "story-block",
       "name": "StoryBlock",
@@ -415,6 +435,7 @@
     "common_banner_73kkz7",
     "custom_content_RwTE7t",
     "image_with_text_nnCFNW",
+    "common_heading_AFnDGR",
     "story_block_RKTXRX",
     "common_heading_eRUNkh",
     "halloween_with_swiper_NMYjhF",
