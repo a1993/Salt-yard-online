@@ -375,80 +375,14 @@
         "autoplay_speed": 3
       }
     },
-    "40097cb1-89d1-495b-a695-4f5a8ee8138d": {
-      "type": "scrolling-banner",
-      "blocks": {
-        "d4a4104d-d49f-46b5-af65-aee604558e23": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        },
-        "a743c77e-b731-4526-978d-b5c0a06f3b60": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        },
-        "6540188c-ca6a-44cc-bed4-b0bfb700bf56": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        },
-        "65174202-42bb-43cc-ba34-1e8198979e51": {
-          "type": "image",
-          "settings": {
-            "image_width": 100,
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "d4a4104d-d49f-46b5-af65-aee604558e23",
-        "a743c77e-b731-4526-978d-b5c0a06f3b60",
-        "6540188c-ca6a-44cc-bed4-b0bfb700bf56",
-        "65174202-42bb-43cc-ba34-1e8198979e51"
-      ],
-      "settings": {
-        "full_width": true,
-        "color_scheme": "default",
-        "text_size": 50,
-        "vertical_padding": 50,
-        "speed": 20,
-        "direction": "left",
-        "font": "heading",
-        "space": 140
-      }
-    },
     "custom_content_M4V8ip": {
       "type": "custom-content",
       "blocks": {
-        "text_eqA3de": {
-          "type": "text",
-          "settings": {
-            "width": "half",
-            "text_alignment": "left",
-            "center_on_mobile": true,
-            "icon": "",
-            "icon_color": "rgba(0,0,0,0)",
-            "subheading": "",
-            "title": "Welcome",
-            "title_size": 54,
-            "title_size_mobile": 46,
-            "text": "<p>Use this text to share information about your store with your customers.</p><p>Describe products, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        },
         "image_NaMczA": {
           "type": "image",
           "settings": {
             "width": "half",
+            "image": "shopify://shop_images/about-us-image.png",
             "height": "adapt",
             "height_desktop": 600,
             "height_mobile": 500,
@@ -463,11 +397,29 @@
             "mobile_overlay_under": false,
             "overlay_style": "shadow"
           }
+        },
+        "text_eqA3de": {
+          "type": "text",
+          "settings": {
+            "width": "half",
+            "text_alignment": "left",
+            "center_on_mobile": true,
+            "icon": "",
+            "icon_color": "rgba(0,0,0,0)",
+            "subheading": "",
+            "title": "Lavivid Crafted By Experts Inspired By Confidence",
+            "title_size": 40,
+            "title_size_mobile": 32,
+            "text": "<p>LaVivid is committed to delivering the best non-surgical solutions to men who are experiencing hair loss. We provide premium quality men’s hair replacement systems for competitive prices. Each hair piece is individually handcrafted and designed with your needs in mind. Here at LaVivid the customer comes first, and we strive to make every customer’s hair loss journey a little bit easier.</p>",
+            "button_label": "READ MORE ABOUT US",
+            "button_link": "shopify://pages/about-us",
+            "button_style": "secondary"
+          }
         }
       },
       "block_order": [
-        "text_eqA3de",
-        "image_NaMczA"
+        "image_NaMczA",
+        "text_eqA3de"
       ],
       "name": "Custom content",
       "settings": {
@@ -501,7 +453,6 @@
     "16148743091427bc38",
     "image_with_text_overlay_Rr89kY",
     "16115832006dc80dc9",
-    "40097cb1-89d1-495b-a695-4f5a8ee8138d",
     "custom_content_M4V8ip",
     "featured_blog_3mVGNT"
   ]
