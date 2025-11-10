@@ -301,20 +301,20 @@
         "color_scheme": "default"
       }
     },
-    "image_with_text_overlay_Rr89kY": {
-      "type": "image-with-text-overlay",
+    "shop_the_look_BVNgah": {
+      "type": "shop-the-look",
       "blocks": {
-        "heading_JzEnJt": {
+        "heading_RhH7zw": {
           "type": "heading",
           "settings": {
             "title": "Real Style, Real Confidence",
-            "heading_max_width": 15,
+            "heading_max_width": 10,
             "title_size": 40,
             "title_size_mobile": 32,
             "use_h1": false
           }
         },
-        "text_6ngwpc": {
+        "text_iQ3Wnh": {
           "type": "text",
           "settings": {
             "text": "<p>From casual to active heavy fitness activity, our hair systems is <br/>designed for confidence, comfort, and cool airflow.</p>",
@@ -323,20 +323,28 @@
         }
       },
       "block_order": [
-        "heading_JzEnJt",
-        "text_6ngwpc"
+        "heading_RhH7zw",
+        "text_iQ3Wnh"
       ],
-      "name": "Image with text overlay",
+      "name": "Shop the look",
       "settings": {
         "image": "shopify://shop_images/featured-product-desktop.png",
         "mobile_image": "shopify://shop_images/featured-product-mobile.png",
-        "height": "fixed",
+        "video_external": "",
+        "video_description": "",
+        "height": "adapt",
         "height_desktop": 600,
         "height_mobile": 460,
-        "image_link": "",
+        "product_list": [
+          "2xcoeus-tp1902-total-1-x-color-2-label-donny-macdonald-1-x-color-4-label-lee-davis",
+          "achilles-mens-hair-unit-0-10-0-12mm-full-skin-base-mens-hairstyle-for-thin-hair"
+        ],
+        "products_alignment": "bottom right",
+        "product_card_layout": "portrait",
+        "show_swatches": true,
         "full_width": true,
         "text_alignment": "bottom left",
-        "mobile_overlay_under": false,
+        "mobile_overlay_over": false,
         "overlay_style": "shadow"
       }
     },
@@ -545,7 +553,7 @@
     "firework_feed_LK7r7T",
     "176275649494f4b2f8",
     "16148743091427bc38",
-    "image_with_text_overlay_Rr89kY",
+    "shop_the_look_BVNgah",
     "16115832006dc80dc9",
     "custom_content_M4V8ip",
     "custom_content_FUMDi3",
