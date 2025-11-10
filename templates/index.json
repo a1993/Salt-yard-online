@@ -350,9 +350,9 @@
           "type": "testimonial",
           "settings": {
             "star_rating": 5,
-            "testimonial": "“I’m a massive fan of the cus tom system and love blonde highlights in them . They are fast and efficient at putting ur dream system to give you the style and confidence u want. Thank you for given me my confidence back and offering full support when I place my orders .”",
-            "author": "-Kevin",
-            "image": "shopify://shop_images/testimonial-link.png",
+            "testimonial": "“I’m a massive fan of the custom system and love blonde highlights in them . They are fast and efficient at putting ur dream system to give you the style and confidence u want. Thank you for given me my confidence back and offering full support when I place my orders .”",
+            "author": "Kevin",
+            "image": "shopify://shop_images/testimonial-link_1.png",
             "image_caption": "TRY THIS STYLE",
             "link": ""
           }
@@ -365,12 +365,12 @@
         "title": "From the people",
         "layout": "image-right",
         "text_caps": false,
-        "quote_text_size": 28,
+        "quote_text_size": 24,
         "quote_text_size_mobile": 20,
         "image_shape": "square",
         "color_scheme": "1",
-        "use_custom_star_rating_color": false,
-        "star_rating_color": "#e9a80a",
+        "use_custom_star_rating_color": true,
+        "star_rating_color": "#bbc8e6",
         "autoplay": true,
         "autoplay_speed": 3
       }
