@@ -304,18 +304,12 @@
     "image_with_text_overlay_Rr89kY": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "subheading_XnjRyK": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Tell your story"
-          }
-        },
         "heading_JzEnJt": {
           "type": "heading",
           "settings": {
-            "title": "Image with text overlay",
+            "title": "Real Style, Real Confidence",
             "heading_max_width": 15,
-            "title_size": 54,
+            "title_size": 40,
             "title_size_mobile": 32,
             "use_h1": false
           }
@@ -323,13 +317,12 @@
         "text_6ngwpc": {
           "type": "text",
           "settings": {
-            "text": "<p>Promote your brand or products with this feature section</p>",
-            "enlarge_text": true
+            "text": "<p>From casual to active heavy fitness activity, our hair systems is <br/>designed for confidence, comfort, and cool airflow.</p>",
+            "enlarge_text": false
           }
         }
       },
       "block_order": [
-        "subheading_XnjRyK",
         "heading_JzEnJt",
         "text_6ngwpc"
       ],
