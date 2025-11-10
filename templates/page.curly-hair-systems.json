@@ -252,7 +252,7 @@
       "name": "Image Text Grid",
       "settings": {
         "title": "",
-        "max_width": 1920,
+        "max_width": 1400,
         "columns_desktop": 6,
         "columns_tablet": 3,
         "columns_mobile": 2,
