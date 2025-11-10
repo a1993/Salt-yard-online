@@ -43,7 +43,7 @@
         "height_desktop": 600,
         "height_mobile": 460,
         "full_width": true,
-        "mobile_overlay_under": false,
+        "mobile_overlay_under": true,
         "overlay_style": "shadow",
         "transition": "fade",
         "navigation": "arrows",
