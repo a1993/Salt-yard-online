@@ -1,0 +1,326 @@
+{% comment %}
+  自定义 HTML 内容模块 - 灵活导入自定义代码
+  
+  功能：
+  - 支持导入自定义 HTML 代码
+  - 可以添加自定义 CSS
+  - 可以添加自定义 JavaScript
+  - 支持多个内容块
+  - 完全自由的布局控制
+{% endcomment %}
+
+{%- liquid
+  assign section_id = 'custom-html-' | append: section.id
+  assign container_type = section.settings.container_type
+  assign custom_css = section.settings.custom_css
+  assign custom_js = section.settings.custom_js
+-%}
+
+{%- style -%}
+  #{{ section_id }} {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+    {% if section.settings.background_color != blank %}
+      background-color: {{ section.settings.background_color }};
+    {% endif %}
+    {% if section.settings.background_image != blank %}
+      background-image: url('{{ section.settings.background_image | image_url: width: 1920 }}');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    {% endif %}
+  }
+
+  @media screen and (min-width: 750px) {
+    #{{ section_id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {% if container_type == 'container' %}
+    #{{ section_id }} .html-content-wrapper {
+      max-width: {{ section.settings.container_width }}px;
+      margin: 0 auto;
+      padding: 0 {{ section.settings.container_padding }}px;
+    }
+  {% elsif container_type == 'container-fluid' %}
+    #{{ section_id }} .html-content-wrapper {
+      padding: 0 {{ section.settings.container_padding }}px;
+    }
+  {% endif %}
+
+  /* 自定义 CSS */
+  {% if custom_css != blank %}
+    {{ custom_css }}
+  {% endif %}
+{%- endstyle -%}
+
+<div id="{{ section_id }}" class="custom-html-section" {{ section.shopify_attributes }}>
+  <div class="html-content-wrapper">
+    {% if section.settings.section_title != blank %}
+      <div class="section-title" style="text-align: {{ section.settings.title_alignment }}; margin-bottom: {{ section.settings.title_margin }}px;">
+        <h2 style="font-size: {{ section.settings.title_size }}px; color: {{ section.settings.title_color }};">
+          {{ section.settings.section_title }}
+        </h2>
+      </div>
+    {% endif %}
+
+    {% for block in section.blocks %}
+      <div class="html-content-block html-block-{{ block.type }}" {{ block.shopify_attributes }}>
+        {% case block.type %}
+          
+          {% when 'html' %}
+            {{ block.settings.html_content }}
+          
+          {% when 'liquid' %}
+            {% comment %} 支持 Liquid 代码 {% endcomment %}
+            {{ block.settings.liquid_content }}
+          
+          {% when 'richtext' %}
+            <div class="richtext-content">
+              {{ block.settings.richtext_content }}
+            </div>
+          
+          {% when 'code' %}
+            {% comment %} 原始代码块，不做任何处理 {% endcomment %}
+            <div class="code-block">
+              {{ block.settings.code_content }}
+            </div>
+
+          {% when 'spacer' %}
+            <div style="height: {{ block.settings.spacer_height }}px;"></div>
+
+        {% endcase %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% if custom_js != blank %}
+  <script>
+    {{ custom_js }}
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "自定义 HTML 内容",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "标题设置"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "分区标题（可选）"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "标题字体大小",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "标题颜色",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "标题对齐",
+      "options": [
+        { "value": "left", "label": "左对齐" },
+        { "value": "center", "label": "居中" },
+        { "value": "right", "label": "右对齐" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "title_margin",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "标题下边距",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "容器设置"
+    },
+    {
+      "type": "select",
+      "id": "container_type",
+      "label": "容器类型",
+      "options": [
+        { "value": "full-width", "label": "全宽（无容器）" },
+        { "value": "container", "label": "固定宽度容器" },
+        { "value": "container-fluid", "label": "流式容器" }
+      ],
+      "default": "container"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 800,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "label": "容器最大宽度",
+      "default": 1180,
+      "info": "仅在选择固定宽度容器时生效"
+    },
+    {
+      "type": "range",
+      "id": "container_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "容器左右内边距",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "背景设置"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "背景图片"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景颜色"
+    },
+    {
+      "type": "header",
+      "content": "内边距"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "上内边距",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "下内边距",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "自定义样式和脚本"
+    },
+    {
+      "type": "html",
+      "id": "custom_css",
+      "label": "自定义 CSS",
+      "info": "在这里添加自定义 CSS 代码（不需要 style 标签）"
+    },
+    {
+      "type": "html",
+      "id": "custom_js",
+      "label": "自定义 JavaScript",
+      "info": "在这里添加自定义 JS 代码（不需要 script 标签）"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "html",
+      "name": "HTML 代码块",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html_content",
+          "label": "HTML 内容",
+          "info": "直接粘贴您的 HTML 代码"
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Liquid 代码块",
+      "settings": [
+        {
+          "type": "html",
+          "id": "liquid_content",
+          "label": "Liquid 内容",
+          "info": "可以使用 Liquid 语法和变量"
+        }
+      ]
+    },
+    {
+      "type": "richtext",
+      "name": "富文本",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "richtext_content",
+          "label": "富文本内容"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "name": "原始代码",
+      "settings": [
+        {
+          "type": "html",
+          "id": "code_content",
+          "label": "代码内容",
+          "info": "完全不处理的原始内容"
+        }
+      ]
+    },
+    {
+      "type": "spacer",
+      "name": "间距",
+      "settings": [
+        {
+          "type": "range",
+          "id": "spacer_height",
+          "min": 0,
+          "max": 200,
+          "step": 4,
+          "unit": "px",
+          "label": "间距高度",
+          "default": 40
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "自定义 HTML 内容",
+      "blocks": [
+        {
+          "type": "html"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

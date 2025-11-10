@@ -1,0 +1,55 @@
+/* Hair System Training 页面专用的 Swiper 轮播样式 */
+
+/* 与原 salon-swiper 样式保持一致 */
+.hair-training-gallery {
+  padding: 35px 9.4%;
+  margin-top: 60px;
+  background-image: url('https://www.lavividhair.com/img/cms/tag/salon20220328/bg_show.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  position: relative;
+}
+
+.hair-training-gallery .swiper-slide img {
+  display: block;
+  width: calc(100% - 10px);
+  height: auto;
+  border: white solid 5px;
+}
+
+.hair-training-gallery .swiper-button-prev,
+.hair-training-gallery .swiper-button-next {
+  color: white !important;
+}
+
+.hair-training-gallery .swiper-button-prev {
+  left: -50px;
+}
+
+.hair-training-gallery .swiper-button-next {
+  right: -50px;
+}
+
+.hair-training-gallery .swiper-pagination-bullet {
+  background: white;
+}
+
+/* 响应式样式 */
+@media all and (max-width: 767px) {
+  .hair-training-gallery {
+    margin-top: 30px;
+    padding: 25px 35px;
+  }
+
+  .hair-training-gallery .swiper-button-prev {
+    left: -40px;
+  }
+
+  .hair-training-gallery .swiper-button-next {
+    right: -40px;
+  }
+}
+

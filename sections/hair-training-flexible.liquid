@@ -1,0 +1,493 @@
+{% comment %}
+  Hair System Training - 灵活版本
+  直接导入原 HTML 内容，无需复杂配置
+{% endcomment %}
+
+{%- liquid
+  assign section_id = 'hair-training-flex-' | append: section.id
+-%}
+
+<!-- 加载 UIkit（如果需要） -->
+{% if section.settings.load_uikit %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/css/uikit.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.23.7/dist/js/uikit-icons.min.js"></script>
+{% endif %}
+
+<!-- 加载 Swiper（如果需要） -->
+{% if section.settings.load_swiper %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+{% endif %}
+
+<style>
+/* 原始样式 */
+section#wrapper {
+  max-width: none !important;
+}
+
+#content-wrapper.col-12,
+section.l-wrapper {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+section#wrapper .row {
+  overflow: hidden;
+  display: block !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.salonshow-ttl {
+  padding-bottom: 0 !important;
+}
+
+.salonshow-ttl * {
+  color: white !important;
+}
+
+.salonshow-ttl h2 {
+  margin: 0;
+  line-height: 1.4em;
+}
+
+.salonshow-ttl p {
+  margin: 0;
+}
+
+.b-w1170 {
+  width: 1170px;
+  margin: 0 auto;
+}
+
+#SalonShow {
+  background-image: url(https://www.lavividhair.com/img/cms/tag/salon20220328/bg_show.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  font-size: 125%;
+  color: white;
+  height: 600px;
+}
+
+#SalonShow .b-w1170 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+#SalonShow p {
+  text-align: center;
+  color: white;
+}
+
+.salonshow-ttl {
+  font-size: 160%;
+  padding-bottom: 40px;
+  text-align: center !important;
+}
+
+.salonshow-ttl h2 {
+  font-size: 187.5%;
+  text-align: center !important;
+}
+
+.hairdresser {
+  margin-top: 60px;
+  border-bottom: #333333 solid 1px;
+  padding-bottom: 50px;
+}
+
+.hairdresser .sub-box {
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+.hairdresser p {
+  line-height: 1.8em;
+  word-wrap: break-word;
+}
+
+.hairdresser-pic {
+  width: 37%;
+  float: left;
+  position: relative;
+}
+
+.hairdresser-pic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  right: -10%;
+}
+
+.hairdresser-pic:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 300px;
+  background-image: url(https://www.lavividhair.com/img/cms/tag/salon20220328/bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+}
+
+.hairdresser-name {
+  display: block;
+  color: white;
+  font-size: 220%;
+  position: relative;
+  z-index: 1;
+  padding-left: 10%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.hairdresser-info {
+  width: 56%;
+  float: right;
+}
+
+.hairdresser-info dt {
+  font-size: 125%;
+  font-weight: bold;
+}
+
+.hairdresser-info dd {
+  padding-top: 8px;
+  display: flex !important;
+  align-items: flex-start;
+  margin-bottom: 0 !important;
+}
+
+.hairdresser-info dd span {
+  display: block;
+  margin-top: 4px;
+}
+
+.hairdresser-info dd p {
+  font-size: 125%;
+  line-height: 1.5em;
+  margin: 0 0 0 15px;
+}
+
+.hairdresser-info dd a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.hairdresser-info dd a:hover {
+  text-decoration: underline;
+}
+
+.hairdresser-info iframe {
+  width: 100%;
+  height: 450px;
+}
+
+.salon-swiper {
+  padding: 35px 9.4%;
+  margin-top: 60px;
+  background-image: url(https://www.lavividhair.com/img/cms/tag/salon20220328/bg_show.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  position: relative;
+}
+
+.salon-swiper img {
+  display: block;
+  width: -webkit-calc(100% - 10px);
+  width: -moz-calc(100% - 10px);
+  width: calc(100% - 10px);
+  height: auto;
+  border: white solid 5px;
+}
+
+.salon-swiper .uk-position-center-right-out {
+  color: white !important;
+}
+
+.salon-swiper .uk-position-center-left-out {
+  left: -50px;
+  color: white !important;
+}
+
+.hairdresser-info-pic {
+  width: 100%;
+}
+
+.hairdresser-info-pic img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+@media all and (max-width: 1199px) {
+  .b-w1170 {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media all and (max-width: 767px) {
+  #SalonShow {
+    background-image: url(https://www.lavividhair.com/img/cms/tag/salon20220328/bg_show_sp.jpg);
+    height: auto;
+    padding-top: 20%;
+    padding-bottom: 20%;
+  }
+
+  .salonshow-ttl {
+    font-size: 100%;
+    text-align: center;
+    padding-bottom: 15px;
+  }
+
+  #SalonShow p {
+    text-align: left;
+    margin-left: 12px;
+  }
+
+  .hairdresser {
+    margin-top: 30px;
+    padding-bottom: 20px;
+  }
+
+  .hairdresser-info,
+  .hairdresser-pic {
+    width: auto;
+    float: none;
+  }
+
+  .hairdresser-pic img {
+    width: 90%;
+    right: auto;
+    left: 10%;
+  }
+
+  .hairdresser-info dl {
+    padding: 20px 0;
+  }
+
+  .hairdresser-info dd p,
+  .hairdresser-info dt {
+    font-size: 110%;
+  }
+
+  .hairdresser-info dd span {
+    margin-top: 0;
+  }
+
+  .hairdresser-info iframe {
+    height: 300px;
+  }
+
+  .hairdresser .sub-box {
+    padding-bottom: 15px;
+  }
+
+  .hairdresser-name {
+    font-size: 150%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .hairdresser p {
+    line-height: 1.5em;
+  }
+
+  .salon-swiper .swiper-button-next {
+    right: 5px;
+  }
+
+  .salon-swiper .swiper-button-prev {
+    left: 5px;
+  }
+
+  .salon-swiper {
+    margin-top: 30px;
+    padding: 25px 35px;
+  }
+
+  .youtua {
+    display: block !important;
+    width: 58%;
+  }
+
+  .uk-position-center-right-out {
+    right: -40px;
+    left: auto;
+  }
+
+  .salon-swiper .uk-position-center-left-out {
+    left: -40px;
+    color: white !important;
+  }
+}
+
+/* hack css */
+.hairdresser-info dd,
+.hairdresser .sub-box {
+  display: inline-block;
+}
+
+.hairdresser-info dd:after,
+.hairdresser .sub-box:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.hairdresser-info dd,
+.hairdresser .sub-box {
+  display: block;
+}
+
+/* 自定义样式 */
+{{ section.settings.custom_css }}
+</style>
+
+<div id="{{ section_id }}" class="hair-training-flexible" {{ section.shopify_attributes }}>
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'html_content' %}
+        {{ block.settings.html_code }}
+      
+      {% when 'hero' %}
+        <div id="SalonShow">
+          <div class="b-w1170">
+            <div class="salonshow-ttl">
+              {% if block.settings.subtitle != blank %}
+                <span>{{ block.settings.subtitle }}</span>
+              {% endif %}
+              {% if block.settings.title != blank %}
+                <h2>{{ block.settings.title }}</h2>
+              {% endif %}
+            </div>
+            {% if block.settings.description != blank %}
+              <p>{{ block.settings.description }}</p>
+            {% endif %}
+          </div>
+        </div>
+    {% endcase %}
+  {% endfor %}
+</div>
+
+{% if section.settings.custom_js != blank %}
+<script>
+{{ section.settings.custom_js }}
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Hair Training 灵活版",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "加载依赖库"
+    },
+    {
+      "type": "checkbox",
+      "id": "load_uikit",
+      "label": "加载 UIkit",
+      "default": true,
+      "info": "如果使用 UIkit 轮播，请启用"
+    },
+    {
+      "type": "checkbox",
+      "id": "load_swiper",
+      "label": "加载 Swiper",
+      "default": false,
+      "info": "如果使用 Swiper 轮播，请启用"
+    },
+    {
+      "type": "header",
+      "content": "自定义代码"
+    },
+    {
+      "type": "html",
+      "id": "custom_css",
+      "label": "自定义 CSS",
+      "info": "添加额外的 CSS 样式"
+    },
+    {
+      "type": "html",
+      "id": "custom_js",
+      "label": "自定义 JavaScript",
+      "info": "添加自定义 JS 代码"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "html_content",
+      "name": "HTML 内容块",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html_code",
+          "label": "HTML 代码",
+          "info": "直接粘贴完整的 HTML 代码"
+        }
+      ]
+    },
+    {
+      "type": "hero",
+      "name": "Hero 区域",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "副标题",
+          "default": "Grow Your Hair System Business with LaVivid Hair"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "主标题",
+          "default": "HAIR SYSTEM TRAINING"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "描述"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hair Training 灵活版",
+      "blocks": [
+        {
+          "type": "hero"
+        },
+        {
+          "type": "html_content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
