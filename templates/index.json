@@ -437,7 +437,7 @@
           "settings": {
             "width": "half",
             "image": "shopify://shop_images/content-video-tutorial.png",
-            "mobile_image": "shopify://shop_images/collection-card-swimming-mobile.png",
+            "mobile_image": "shopify://shop_images/content-video-tutorial-mobile.png",
             "height": "adapt",
             "height_desktop": 600,
             "height_mobile": 500,
@@ -458,7 +458,7 @@
           "settings": {
             "width": "half",
             "image": "shopify://shop_images/content-blogs.png",
-            "mobile_image": "shopify://shop_images/collection-card-fitness-mobile.png",
+            "mobile_image": "shopify://shop_images/content-blogs-mobile_7ef53c4f-4256-41a7-8091-ea1cc7a8bd58.png",
             "height": "adapt",
             "height_desktop": 520,
             "height_mobile": 500,
