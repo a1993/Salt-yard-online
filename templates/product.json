@@ -92,6 +92,18 @@
           "settings": {
             "product": "{{product}}"
           }
+        },
+        "custom_option_RbWnNc": {
+          "type": "custom-option",
+          "settings": {
+            "label": "Custom option",
+            "type": "multiple",
+            "text_required": false,
+            "checkbox_checked_value": "Yes",
+            "checkbox_unchecked_value": "No",
+            "multiple_style": "dropdown",
+            "multiple_options": "Option 1\nOption 2\nOption 3"
+          }
         }
       },
       "block_order": [
@@ -105,7 +117,8 @@
         "buy-buttons",
         "description",
         "complementary_J8PHJ3",
-        "tepo_product_options_product_app_block_4tWwWC"
+        "tepo_product_options_product_app_block_4tWwWC",
+        "custom_option_RbWnNc"
       ],
       "settings": {
         "show_breadcrumbs": true,
