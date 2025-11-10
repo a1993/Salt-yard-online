@@ -17,26 +17,6 @@
         "full_width": false
       }
     },
-    "common_heading_8WjPn6": {
-      "type": "common-heading",
-      "name": "标题 Heading",
-      "settings": {
-        "title": "Section Title",
-        "title_tag": "h2",
-        "title_size": "medium",
-        "title_color": "",
-        "subtitle": "",
-        "subtitle_tag": "p",
-        "subtitle_size": "medium",
-        "subtitle_color": "",
-        "align": "center",
-        "container_width": "standard",
-        "container_padding": "medium",
-        "spacing_top": "medium",
-        "spacing_bottom": "medium",
-        "background_color": ""
-      }
-    },
     "common_banner_QmTrDb": {
       "type": "common-banner",
       "name": "横幅 Banner",
@@ -395,7 +375,6 @@
   },
   "order": [
     "main",
-    "common_heading_8WjPn6",
     "common_banner_QmTrDb",
     "custom_rich_text_ntLDpP",
     "common_heading_8bTzTx",
