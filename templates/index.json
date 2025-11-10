@@ -110,55 +110,7 @@
         "media_width": 60,
         "text_alignment": "center",
         "button_style": "primary",
-        "color_scheme": "default"
-      }
-    },
-    "37f4b6ab-4c57-4670-85f0-7b3462d4145c": {
-      "type": "shop-the-look",
-      "blocks": {
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-subheading-1": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Limited Edition"
-          }
-        },
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-heading-1": {
-          "type": "heading",
-          "settings": {
-            "title": "Exude confidence",
-            "heading_max_width": 10,
-            "title_size": 48,
-            "title_size_mobile": 34,
-            "use_h1": false
-          }
-        },
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-text-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Shapes designed for modern living</p>",
-            "enlarge_text": true
-          }
-        }
-      },
-      "block_order": [
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-subheading-1",
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-heading-1",
-        "template--15389994483785__37f4b6ab-4c57-4670-85f0-7b3462d4145c-text-1"
-      ],
-      "settings": {
-        "video_external": "",
-        "video_description": "",
-        "height": "fixed",
-        "height_desktop": 720,
-        "height_mobile": 480,
-        "product_list": [],
-        "products_alignment": "bottom right",
-        "product_card_layout": "portrait",
-        "show_swatches": false,
-        "full_width": true,
-        "text_alignment": "top left",
-        "mobile_overlay_over": false,
-        "overlay_style": "shadow"
+        "color_scheme": "1"
       }
     },
     "1480591889144": {
@@ -553,19 +505,6 @@
         "color_scheme": "default"
       }
     },
-    "1478606404805": {
-      "type": "featured-blog",
-      "settings": {
-        "title": "Magazine",
-        "blog": "",
-        "post_limit": 3,
-        "show_author": true,
-        "show_date": true,
-        "show_excerpts": true,
-        "crop_ratio": "1.78",
-        "color_scheme": "default"
-      }
-    },
     "featured_blog_3mVGNT": {
       "type": "featured-blog",
       "name": "Blog posts",
@@ -584,7 +523,6 @@
   "order": [
     "slideshow_m8jBVm",
     "1614871838b4f4ccd4",
-    "37f4b6ab-4c57-4670-85f0-7b3462d4145c",
     "1480591889144",
     "1594970282022",
     "1614873846ee4b328c",
@@ -594,7 +532,6 @@
     "40097cb1-89d1-495b-a695-4f5a8ee8138d",
     "custom_content_M4V8ip",
     "16148743091427bc38",
-    "1478606404805",
     "featured_blog_3mVGNT"
   ]
 }
