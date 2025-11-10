@@ -88,7 +88,7 @@
         "product_item_jbz3U6": {
           "type": "product_item",
           "settings": {
-            "product": "15-restocking-fee",
+            "product": "crius-mens-half-wig-french-lace-in-center-with-polyskin-all-around-must-have-for-traveling",
             "button_text": "Shop Now",
             "custom_image": "shopify://shop_images/zeo-mirage-antimicrobial-hair-replacement-system-for-men.webp",
             "custom_title": "",
@@ -235,36 +235,6 @@
         "show_reviews": false
       }
     },
-    "faq_QEqmJi": {
-      "type": "faq",
-      "blocks": {
-        "faq_item_P6aPeA": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What is this FAQ about?",
-            "answer": "This is the answer to the FAQ question.",
-            "is_html": false
-          }
-        },
-        "faq_item_VxV9N4": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Another question?",
-            "answer": "Another answer.",
-            "is_html": false
-          }
-        }
-      },
-      "block_order": [
-        "faq_item_P6aPeA",
-        "faq_item_VxV9N4"
-      ],
-      "name": "FAQ",
-      "settings": {
-        "faq_title": "FAQ",
-        "faq_subtitle": ""
-      }
-    },
     "image_text_grid_Q9K6Ub": {
       "type": "image-text-grid",
       "blocks": {
@@ -316,6 +286,36 @@
         "background_color": "",
         "padding_top": "medium",
         "padding_bottom": "none"
+      }
+    },
+    "faq_QEqmJi": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_P6aPeA": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is this FAQ about?",
+            "answer": "This is the answer to the FAQ question.",
+            "is_html": false
+          }
+        },
+        "faq_item_VxV9N4": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Another question?",
+            "answer": "Another answer.",
+            "is_html": false
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_P6aPeA",
+        "faq_item_VxV9N4"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "faq_title": "FAQ",
+        "faq_subtitle": ""
       }
     }
   },
