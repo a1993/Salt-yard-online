@@ -127,209 +127,163 @@
         "full_width": true
       }
     },
-    "1594970282022": {
-      "type": "gallery",
+    "custom_content_XydJMH": {
+      "type": "custom-content",
       "blocks": {
-        "1594970282022-0": {
-          "type": "media",
+        "image_EQBRM8": {
+          "type": "image",
           "settings": {
-            "enlarge_media": false,
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-professional.png",
+            "mobile_image": "shopify://shop_images/collection-card-professional-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
             "subheading": "",
-            "title": "New Arrivals",
-            "button_label": "Shop now",
-            "link": "",
-            "text_alignment": "bottom left"
+            "title": "Professional",
+            "text": "<p>Polished, modern, and effortless for your professional image.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
           }
         },
-        "1594970282022-1": {
-          "type": "media",
+        "image_GejFFT": {
+          "type": "image",
           "settings": {
-            "enlarge_media": false,
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-travel.png",
+            "mobile_image": "shopify://shop_images/collection-card-traveling-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
             "subheading": "",
-            "title": "Denim",
-            "button_label": "Shop now",
-            "link": "",
-            "text_alignment": "bottom left"
+            "title": "Traveling",
+            "text": "<p>Lightweight, easy to style, and ready to go wherever you are.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
           }
         },
-        "1594970282022-2": {
-          "type": "media",
+        "image_ykJzdK": {
+          "type": "image",
           "settings": {
-            "enlarge_media": false,
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-swimming.png",
+            "mobile_image": "shopify://shop_images/collection-card-swimming-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
             "subheading": "",
-            "title": "Knitwear",
-            "button_label": "Shop Now",
-            "link": "",
-            "text_alignment": "bottom left"
+            "title": "Swimming",
+            "text": "<p>Secure, breathable, and durable for you who active in the water.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "image_CPE9Ki": {
+          "type": "image",
+          "settings": {
+            "width": "quarter",
+            "image": "shopify://shop_images/collection-card-fitness.png",
+            "mobile_image": "shopify://shop_images/collection-card-fitness-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "Fitness",
+            "text": "<p>Designed for intense workouts, ensuring a secure and natural look.</p>",
+            "enlarge_text": false,
+            "button_label": "SHOP NOW",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
           }
         }
       },
       "block_order": [
-        "1594970282022-0",
-        "1594970282022-1",
-        "1594970282022-2"
+        "image_EQBRM8",
+        "image_GejFFT",
+        "image_ykJzdK",
+        "image_CPE9Ki"
       ],
+      "name": "Custom content",
       "settings": {
-        "grid_desktop": 2,
-        "grid_mobile": "1",
-        "height": "fixed",
-        "desktop_image_height": 720,
-        "mobile_image_height": 480,
-        "title_size": 34,
-        "title_size_mobile": 28,
-        "enable_margin": false,
-        "enable_row_spacing": true,
-        "full_width": true,
-        "color_scheme": "default",
-        "enable_carousel": true,
-        "overlay_style": "shadow",
-        "overlay_padding": "standard",
-        "button_style": "link"
+        "spacing": "small",
+        "alignment": "top",
+        "color_scheme": "default"
       }
     },
-    "1614873846ee4b328c": {
-      "type": "rich-text",
+    "176275649494f4b2f8": {
+      "type": "apps",
+      "name": "Apps/Video UGC",
+      "settings": {
+        "full_width": false,
+        "show_space": true
+      }
+    },
+    "16148743091427bc38": {
+      "type": "image-with-text",
       "blocks": {
-        "293e9aad-5a79-41b7-8fd3-b708877ddcf2": {
+        "98728156-df44-4876-965e-1af1683386af": {
           "type": "heading",
           "settings": {
-            "title": "We’re transparent, proud of everybody we work with and everything we do.",
+            "title": "Not Sure Where To Begin?",
             "use_h1": false
           }
         },
-        "76486a37-2d11-4242-abc1-ae14b1a776a2": {
+        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7": {
           "type": "text",
           "settings": {
-            "text": "<p>Timeless designs constructed with the future in mind.</p>",
-            "enlarge_text": true
+            "text": "<p>Starting your hair system journey can feel overwhelming but we’re here to make it simple. Get the basics or personalized guidance from our expert.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_nDcain": {
+          "type": "button",
+          "settings": {
+            "button_label": "HELP ME CHOOSE",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "button_hHNiVV": {
+          "type": "button",
+          "settings": {
+            "button_label": "Book Free Consultation",
+            "button_link": "",
+            "button_style": "secondary"
           }
         }
       },
       "block_order": [
-        "293e9aad-5a79-41b7-8fd3-b708877ddcf2",
-        "76486a37-2d11-4242-abc1-ae14b1a776a2"
+        "98728156-df44-4876-965e-1af1683386af",
+        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7",
+        "button_nDcain",
+        "button_hHNiVV"
       ],
       "settings": {
-        "height": "medium",
-        "text_alignment": "center",
-        "full_width": false,
-        "color_scheme": "default"
-      }
-    },
-    "161158693318e52003": {
-      "type": "multi-column",
-      "blocks": {
-        "161158693318e52003-1": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Recycled materials, organic cotton, and more.",
-            "text": "",
-            "button_label": "Learn More",
-            "link": ""
-          }
-        },
-        "text_block_wHJYem": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Recycled materials, organic cotton, and more.",
-            "text": "",
-            "button_label": "Learn More",
-            "link": ""
-          }
-        },
-        "161158693318e52003-0": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "A collection made without the use of synthetic blends",
-            "text": "",
-            "button_label": "Shop the collection",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "161158693318e52003-1",
-        "text_block_wHJYem",
-        "161158693318e52003-0"
-      ],
-      "settings": {
-        "title": "",
-        "media_aspect_ratio": "s",
-        "media_width": 700,
+        "image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_1.png",
+        "image_2": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
+        "image_width": 670,
+        "image_link": "",
+        "image_position": "right",
         "text_alignment": "left",
-        "button_style": "link",
         "color_scheme": "default"
-      }
-    },
-    "992e4a60-c0f6-47a7-8819-0615c1089d4f": {
-      "type": "hotspots",
-      "blocks": {
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-2": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 28,
-            "hotspot_y": 24,
-            "hotspot_x_mobile": 28,
-            "hotspot_y_mobile": 24,
-            "heading": "Naturally sustainable wool",
-            "text": "<p>A sustainable, renewable and biodegradable natural fibre, with some great performance characteristics. It also provides and retains warmth while being naturally flame retardant. We believe that wool is hard to beat.</p>",
-            "icon": "check_mark_in_circle",
-            "icon_width": 32
-          }
-        },
-        "97903fac-3809-43fc-b3a3-feb15cd29ce1": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 64,
-            "hotspot_y": 32,
-            "hotspot_x_mobile": 64,
-            "hotspot_y_mobile": 32,
-            "heading": "Production & Sustainability",
-            "text": "<p>Our commitment to maintaining strong connections with our suppliers lies at the heart of our business. We emphasize personal visits to the factories, ensuring a close relationship and a deep understanding of our production processes</p>",
-            "icon": "eye",
-            "icon_width": 32
-          }
-        },
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-1": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_x": 56,
-            "hotspot_y": 64,
-            "hotspot_x_mobile": 56,
-            "hotspot_y_mobile": 64,
-            "heading": "100% Organic Cotton",
-            "text": "<p>Our cotton is grown on soil that is free of toxic pesticides and fertilizers. The fabric is dyed and finished without the use of heavy metals or allergenic disperse dyes.</p>",
-            "icon": "heart",
-            "icon_width": 32
-          }
-        }
-      },
-      "block_order": [
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-2",
-        "97903fac-3809-43fc-b3a3-feb15cd29ce1",
-        "template--15389994483785__992e4a60-c0f6-47a7-8819-0615c1089d4f-hotspot-1"
-      ],
-      "settings": {
-        "hotspot_color": "#070707",
-        "button_content": "plus",
-        "outer_circle": "pulse",
-        "full_width": false,
-        "text_alignment": "top left",
-        "overlay_style": "shadow",
-        "subheading": "",
-        "title": "",
-        "use_h1": false,
-        "heading_max_width": 10,
-        "text": "",
-        "button_1_label": "",
-        "button_1_link": "",
-        "button_1_style": "secondary",
-        "button_2_label": "",
-        "button_2_link": "",
-        "button_2_style": "primary"
       }
     },
     "16115832006dc80dc9": {
@@ -475,36 +429,6 @@
         "color_scheme": "default"
       }
     },
-    "16148743091427bc38": {
-      "type": "image-with-text",
-      "blocks": {
-        "98728156-df44-4876-965e-1af1683386af": {
-          "type": "heading",
-          "settings": {
-            "title": "Follow us on Instagram",
-            "use_h1": false
-          }
-        },
-        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7": {
-          "type": "text",
-          "settings": {
-            "text": "<p>All year round, unisex apparel made from 100% Organic Cotton (GOTS Certified).</p><p><a href=\"#\" target=\"_blank\">@INSTAGRAM</a></p>",
-            "enlarge_text": false
-          }
-        }
-      },
-      "block_order": [
-        "98728156-df44-4876-965e-1af1683386af",
-        "38dcca23-fdbf-43b6-a8f2-3aff649ebde7"
-      ],
-      "settings": {
-        "image_width": 700,
-        "image_link": "",
-        "image_position": "left",
-        "text_alignment": "left",
-        "color_scheme": "default"
-      }
-    },
     "featured_blog_3mVGNT": {
       "type": "featured-blog",
       "name": "Blog posts",
@@ -524,14 +448,12 @@
     "slideshow_m8jBVm",
     "1614871838b4f4ccd4",
     "1480591889144",
-    "1594970282022",
-    "1614873846ee4b328c",
-    "161158693318e52003",
-    "992e4a60-c0f6-47a7-8819-0615c1089d4f",
+    "custom_content_XydJMH",
+    "176275649494f4b2f8",
+    "16148743091427bc38",
     "16115832006dc80dc9",
     "40097cb1-89d1-495b-a695-4f5a8ee8138d",
     "custom_content_M4V8ip",
-    "16148743091427bc38",
     "featured_blog_3mVGNT"
   ]
 }
