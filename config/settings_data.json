@@ -93,7 +93,7 @@
     "font_size_base_int": 14,
     "font_size_nav_int": 14,
     "font_size_logo_int": 24,
-    "button_style": "normal",
+    "button_style": "caps",
     "button_shape": "sharp",
     "prod_thumb_shape": "square",
     "prod_thumb_crop": true,
