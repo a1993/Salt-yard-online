@@ -59,10 +59,19 @@
             "text": "<p>View <strong>Wholesale Prices </strong>for LaVivid Hair Systems, Wigs and Accessories through your <strong>Wholesale Account!</strong></p>",
             "enlarge_text": true
           }
+        },
+        "button_UxzJnJ": {
+          "type": "button",
+          "settings": {
+            "button_label": "login",
+            "button_link": "",
+            "button_style": "primary"
+          }
         }
       },
       "block_order": [
-        "text_UKfyyf"
+        "text_UKfyyf",
+        "button_UxzJnJ"
       ],
       "name": "Rich text",
       "settings": {
