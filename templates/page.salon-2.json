@@ -21,7 +21,8 @@
       "type": "common-banner",
       "name": "横幅 Banner",
       "settings": {
-        "banner_desktop": "shopify://shop_images/show_sp.jpg",
+        "banner_desktop": "shopify://shop_images/4a708e8b7dbe4cb588c1fe00df50cb0c.png",
+        "banner_mobile": "shopify://shop_images/9471e10931474d4481088f772e2d5e36.png",
         "alt_text": "Banner",
         "link_url": "",
         "width_mode": "full",
@@ -62,6 +63,7 @@
         },
         "button_UxzJnJ": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "button_label": "login",
             "button_link": "",
@@ -79,6 +81,15 @@
         "text_alignment": "center",
         "full_width": true,
         "color_scheme": "default"
+      }
+    },
+    "custom_liquid_Pwnz4m": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "full_width": true,
+        "show_space": true,
+        "code": "<div class='campaign-login-section' style='text-align: center; padding: 0 20px;'>\n  {% unless customer %}\n    {%- comment -%} 用户未登录 - 显示登录提示 {%- endcomment -%}\n\n    <div class='login-required-content'>\n      <a\n        href='{{ routes.account_login_url }}'\n        class='button button--secondary'\n        style='display: inline-block; padding: 10px 20px; background: #000; color: #fff; text-decoration: none; margin-right: 10px;'\n      >\n        LOGIN\n      </a>\n    </div>\n  {% endunless %}\n</div>\n\n<style>\n  .campaign-login-section .button {\n    transition: all 0.3s ease;\n  }\n\n  .campaign-login-section .button:hover {\n    opacity: 0.8;\n    transform: translateY(-2px);\n  }\n\n  @media (max-width: 768px) {\n    .campaign-login-section .button {\n      display: block !important;\n      margin: 10px auto !important;\n      max-width: 300px;\n    }\n  }\n</style>"
       }
     },
     "custom_html_content_Q3ixEG": {
@@ -119,6 +130,7 @@
     "common_banner_7DVNir",
     "common_heading_mgd6Kc",
     "rich_text_P94qFx",
+    "custom_liquid_Pwnz4m",
     "custom_html_content_Q3ixEG"
   ]
 }
