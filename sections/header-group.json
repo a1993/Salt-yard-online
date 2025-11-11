@@ -122,7 +122,7 @@
         "menu_linklist_mobile": "main-menu",
         "mobile_expand_with_entire_link": false,
         "enable_mobile_promo_carousel": true,
-        "enable_nav_mob_products": true,
+        "enable_nav_mob_products": false,
         "nav_mob_products_title": "Best Sellers",
         "nav_mob_products_collection": "best-seller-2025",
         "enable_search": true,
