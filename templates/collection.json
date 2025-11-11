@@ -94,7 +94,8 @@
         "collection_xf9YNe": {
           "type": "collection",
           "settings": {
-            "collection": "{{ collection }}",
+            "collection": "",
+            "image": "shopify://shop_images/collection-professional.webp",
             "subheading": "",
             "button_label": ""
           }
