@@ -117,7 +117,7 @@
         "transparent_fade": "#000000",
         "transparent_fade_strength": 55,
         "menu_linklist": "main-menu",
-        "menu_layout": "inline-menu-center",
+        "menu_layout": "underneath",
         "nav_featured_link": "Shop Accessories, Shop Hair Care",
         "menu_linklist_mobile": "main-menu",
         "mobile_expand_with_entire_link": true,
