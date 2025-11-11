@@ -99,11 +99,42 @@
             "title": "Shop Hair Care",
             "link_url": "shopify://collections/maintenance-accessories"
           }
+        },
+        "menu_promotion_large_YpxJKK": {
+          "type": "menu-promotion-large",
+          "settings": {
+            "dropdown_link_title": "Place a Custom Order",
+            "desktop_image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
+            "mobile_image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
+            "enable_fade": true,
+            "image_position": "right",
+            "subheading": "",
+            "title": "Custom Hair Systems",
+            "text": "<p>Take control of your style with our custom order service.</p>",
+            "button_1_label": "How to Customize",
+            "button_1_link": "",
+            "button_1_style": "secondary",
+            "button_2_label": "Place a Custom Order",
+            "button_2_link": "",
+            "button_2_style": "primary",
+            "text_alignment": "left",
+            "show_countdown": false,
+            "countdown_position": "under-heading",
+            "end_date": "",
+            "end_time": "",
+            "end_text": "",
+            "hide_on_end": false,
+            "number_size": 40,
+            "number_font": "base",
+            "divider_type": "colon",
+            "show_timer_labels": true
+          }
         }
       },
       "block_order": [
         "menu_promotion_small_GqdA7q",
-        "menu_promotion_small_DPxtNy"
+        "menu_promotion_small_DPxtNy",
+        "menu_promotion_large_YpxJKK"
       ],
       "settings": {
         "logo": "shopify://shop_images/logo-menu.webp",
