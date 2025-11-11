@@ -9,44 +9,6 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-collection",
-      "disabled": true,
-      "settings": {
-        "show_title": true,
-        "show_image_behind_heading": true,
-        "heading_image_height": "huge",
-        "overlay_style": "full",
-        "coll_desc_pos": "below",
-        "coll_num_per_page_int": 24,
-        "grid": 4,
-        "show_vendor": false,
-        "show_total": true,
-        "enable_filtering": true,
-        "collapse_tag_sidebar_by_default": true,
-        "collapse_filters_method": "over-6",
-        "show_filter_counts": false,
-        "filter_two_columns": true,
-        "button_grid_filter_name": "Size,Taille,Größe",
-        "auto_apply_hide_unavailable": false,
-        "enable_sticky_filter": true,
-        "show_sort": true,
-        "sort_show_featured": true,
-        "sort_show_best": true,
-        "sort_show_alpha": true,
-        "sort_show_price": true,
-        "sort_show_date": true,
-        "related_collections": [],
-        "related_collections_style": "buttons",
-        "rel_coll_gall_aspect_ratio": "1",
-        "image_position": "center center",
-        "rel_coll_gall_enable_margin": true,
-        "rel_coll_gall_full_width": false,
-        "rel_coll_gall_overlay_style": "shadow",
-        "rel_coll_gall_text_alignment": "center center",
-        "rel_coll_grid_mobile": "2"
-      }
-    },
     "slideshow_9tGaUn": {
       "type": "slideshow",
       "blocks": {
@@ -152,24 +114,41 @@
         "coll_button_style": "primary"
       }
     },
-    "product_list_CbiDD9": {
-      "type": "product-list",
-      "name": "Product list",
+    "main": {
+      "type": "main-collection",
       "settings": {
-        "title": "Product list",
-        "product_list": [
-          "1-order-balance-link",
-          "1-order-balance-link-1",
-          "15-base-cut",
-          "15-restocking-fee",
-          "20-shipping-fee",
-          "25-haircut"
-        ],
-        "show_vendor": false,
-        "enable_carousel": false,
+        "show_title": false,
+        "show_image_behind_heading": false,
+        "heading_image_height": "huge",
+        "overlay_style": "full",
+        "coll_desc_pos": "above",
+        "coll_num_per_page_int": 24,
         "grid": 4,
-        "color_scheme": "default",
-        "full_width": true
+        "show_vendor": true,
+        "show_total": true,
+        "enable_filtering": true,
+        "collapse_tag_sidebar_by_default": false,
+        "collapse_filters_method": "over-6",
+        "show_filter_counts": true,
+        "filter_two_columns": true,
+        "button_grid_filter_name": "Size,Taille,Größe",
+        "auto_apply_hide_unavailable": false,
+        "enable_sticky_filter": true,
+        "show_sort": true,
+        "sort_show_featured": true,
+        "sort_show_best": true,
+        "sort_show_alpha": true,
+        "sort_show_price": true,
+        "sort_show_date": true,
+        "related_collections": [],
+        "related_collections_style": "buttons",
+        "rel_coll_gall_aspect_ratio": "1",
+        "image_position": "center center",
+        "rel_coll_gall_enable_margin": true,
+        "rel_coll_gall_full_width": false,
+        "rel_coll_gall_overlay_style": "shadow",
+        "rel_coll_gall_text_alignment": "center center",
+        "rel_coll_grid_mobile": "2"
       }
     },
     "collapsible_tabs_amtjNH": {
@@ -324,10 +303,9 @@
     }
   },
   "order": [
-    "main",
     "slideshow_9tGaUn",
     "collection_list_tHkX6G",
-    "product_list_CbiDD9",
+    "main",
     "collapsible_tabs_amtjNH",
     "multi_column_Ar8NjX",
     "rich_text_BrxAy4"
