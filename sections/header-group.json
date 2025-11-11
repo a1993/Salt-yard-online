@@ -82,6 +82,15 @@
     "header": {
       "type": "header",
       "blocks": {
+        "menu_promotion_small_GqdA7q": {
+          "type": "menu-promotion-small",
+          "settings": {
+            "dropdown_link_title": "",
+            "image": "shopify://shop_images/collection-swimming.webp",
+            "title": "",
+            "link_url": ""
+          }
+        },
         "menu_promotion_large_CjF3Ym": {
           "type": "menu-promotion-large",
           "settings": {
@@ -113,6 +122,7 @@
         }
       },
       "block_order": [
+        "menu_promotion_small_GqdA7q",
         "menu_promotion_large_CjF3Ym"
       ],
       "settings": {
@@ -129,7 +139,7 @@
         "menu_linklist": "main-menu",
         "menu_layout": "inline-menu-left",
         "nav_featured_link": "Sale",
-        "menu_linklist_mobile": "",
+        "menu_linklist_mobile": "main-menu",
         "mobile_expand_with_entire_link": true,
         "enable_mobile_promo_carousel": true,
         "enable_nav_mob_products": true,
@@ -137,7 +147,7 @@
         "nav_mob_products_collection": "best-seller-2025",
         "enable_search": true,
         "search_recommendations_title": "Lavivid is where you find confidence",
-        "search_recommendations_menu": "",
+        "search_recommendations_menu": "main-menu",
         "icon_strategy": "icons_all",
         "cart_icon": "bag"
       }
