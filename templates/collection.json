@@ -15,10 +15,12 @@
         "image_6TdMNK": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/collection-banner-desktop.webp",
+            "mobile_image": "shopify://shop_images/collection-banner-mobile.webp",
             "slide_link": "",
             "subheading": "",
             "title": "Men’s Hair Systems",
-            "heading_max_width": 15,
+            "heading_max_width": 40,
             "title_size": 56,
             "title_size_mobile": 48,
             "use_h1": false,
