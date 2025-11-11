@@ -85,8 +85,8 @@
         "menu_promotion_small_GqdA7q": {
           "type": "menu-promotion-small",
           "settings": {
-            "dropdown_link_title": "Shop Accessories",
-            "image": "shopify://shop_images/collection-swimming.webp",
+            "dropdown_link_title": "Shop All Hair Systems",
+            "image": "shopify://shop_images/Shop_Accesories.png",
             "title": "Shop Accessories",
             "link_url": "shopify://collections/accessories"
           }
@@ -94,8 +94,8 @@
         "menu_promotion_small_DPxtNy": {
           "type": "menu-promotion-small",
           "settings": {
-            "dropdown_link_title": "Shop Hair Care",
-            "image": "shopify://shop_images/collection-swimming.webp",
+            "dropdown_link_title": "Shop All Hair Systems",
+            "image": "shopify://shop_images/Shop_Hair_Care.png",
             "title": "Shop Hair Care",
             "link_url": "shopify://collections/maintenance-accessories"
           }
@@ -117,8 +117,8 @@
         "transparent_fade": "#000000",
         "transparent_fade_strength": 55,
         "menu_linklist": "main-menu",
-        "menu_layout": "underneath",
-        "nav_featured_link": "'Shop Accessories' 'Shop Hair Care'",
+        "menu_layout": "inline-menu-center",
+        "nav_featured_link": "Shop Accessories, Shop Hair Care",
         "menu_linklist_mobile": "main-menu",
         "mobile_expand_with_entire_link": true,
         "enable_mobile_promo_carousel": true,
