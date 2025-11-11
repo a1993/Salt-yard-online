@@ -85,45 +85,25 @@
         "menu_promotion_small_GqdA7q": {
           "type": "menu-promotion-small",
           "settings": {
-            "dropdown_link_title": "",
+            "dropdown_link_title": "Shop Accesories",
             "image": "shopify://shop_images/collection-swimming.webp",
-            "title": "",
-            "link_url": ""
+            "title": "Shop Accesories",
+            "link_url": "shopify://collections/accessories"
           }
         },
-        "menu_promotion_large_CjF3Ym": {
-          "type": "menu-promotion-large",
+        "menu_promotion_small_DPxtNy": {
+          "type": "menu-promotion-small",
           "settings": {
-            "dropdown_link_title": "",
-            "desktop_image": "shopify://shop_images/download.webp",
-            "enable_fade": true,
-            "image_position": "left",
-            "subheading": "Tell youradsadasd story",
-            "title": "Wide menu pasdasdromotion",
-            "text": "<p>Pair text with an image to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>",
-            "button_1_label": "Shop this",
-            "button_1_link": "shopify://products/15-restocking-fee",
-            "button_1_style": "secondary",
-            "button_2_label": "Shop all",
-            "button_2_link": "",
-            "button_2_style": "primary",
-            "text_alignment": "center",
-            "show_countdown": false,
-            "countdown_position": "under-heading",
-            "end_date": "",
-            "end_time": "",
-            "end_text": "",
-            "hide_on_end": false,
-            "number_size": 40,
-            "number_font": "base",
-            "divider_type": "colon",
-            "show_timer_labels": true
+            "dropdown_link_title": "Shop Hair Care",
+            "image": "shopify://shop_images/collection-swimming.webp",
+            "title": "Shop Hair Care",
+            "link_url": "shopify://collections/maintenance-accessories"
           }
         }
       },
       "block_order": [
         "menu_promotion_small_GqdA7q",
-        "menu_promotion_large_CjF3Ym"
+        "menu_promotion_small_DPxtNy"
       ],
       "settings": {
         "logo": "shopify://shop_images/logo-menu.webp",
@@ -140,7 +120,7 @@
         "menu_layout": "inline-menu-left",
         "nav_featured_link": "Sale",
         "menu_linklist_mobile": "main-menu",
-        "mobile_expand_with_entire_link": true,
+        "mobile_expand_with_entire_link": false,
         "enable_mobile_promo_carousel": true,
         "enable_nav_mob_products": true,
         "nav_mob_products_title": "Best Sellers",
