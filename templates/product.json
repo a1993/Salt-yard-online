@@ -95,7 +95,7 @@
           "type": "complementary",
           "settings": {
             "heading": "Pairs well with",
-            "enable_carousel": true,
+            "enable_carousel": false,
             "max_products": 8
           }
         },
