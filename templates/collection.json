@@ -94,15 +94,45 @@
         "collection_xf9YNe": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "business",
             "image": "shopify://shop_images/collection-professional.webp",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_3KmHD9": {
+          "type": "collection",
+          "settings": {
+            "collection": "business",
+            "image": "shopify://shop_images/collection-traveling.webp",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_3PAUdz": {
+          "type": "collection",
+          "settings": {
+            "collection": "business",
+            "image": "shopify://shop_images/collection-swimming.webp",
+            "subheading": "",
+            "button_label": ""
+          }
+        },
+        "collection_LzXtVM": {
+          "type": "collection",
+          "settings": {
+            "collection": "business",
+            "image": "shopify://shop_images/collection-fitness.webp",
             "subheading": "",
             "button_label": ""
           }
         }
       },
       "block_order": [
-        "collection_xf9YNe"
+        "collection_xf9YNe",
+        "collection_3KmHD9",
+        "collection_3PAUdz",
+        "collection_LzXtVM"
       ],
       "name": "Collection list",
       "settings": {

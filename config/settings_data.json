@@ -564,5 +564,10 @@
       "free_shipping_bar_col_under": "#202223",
       "free_shipping_bar_col_met": "#ffe802"
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      "img {border-radius: 8px;}"
+    ]
   }
 }
