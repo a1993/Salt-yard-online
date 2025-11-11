@@ -55,18 +55,18 @@
           "settings": {
             "slide_link": "",
             "subheading": "",
-            "title": "{{ collection.title }}",
+            "title": "Men’s Hair Systems",
             "heading_max_width": 15,
-            "title_size": 40,
-            "title_size_mobile": 32,
+            "title_size": 56,
+            "title_size_mobile": 48,
             "use_h1": false,
-            "text": "{{ collection.description }}",
+            "text": "<p>Explore our most realistic, easy-to-wear skin hair systems—engineered for a seamless fit and the confidence to move through your day with ease.</p>",
             "enlarge_text": false,
             "button_label_1": "",
             "button_url_1": "",
             "button_label_2": "",
             "button_url_2": "",
-            "text_alignment": "center left"
+            "text_alignment": "bottom left"
           }
         }
       },
