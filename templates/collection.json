@@ -151,41 +151,161 @@
         "rel_coll_grid_mobile": "2"
       }
     },
+    "image_with_text_zMzTfh": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_NECjjN": {
+          "type": "heading",
+          "settings": {
+            "title": "Not Sure Where To Begin?",
+            "use_h1": false
+          }
+        },
+        "text_3bpiPC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Starting your hair system journey can feel overwhelming but we’re here to make it simple. Get the basics or personalized guidance from our expert.</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_N7C8qd": {
+          "type": "button",
+          "settings": {
+            "button_label": "HELP ME CHOOSE",
+            "button_link": "",
+            "button_style": "primary"
+          }
+        },
+        "button_eXQpnD": {
+          "type": "button",
+          "settings": {
+            "button_label": "Book Free Consultation",
+            "button_link": "",
+            "button_style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_NECjjN",
+        "text_3bpiPC",
+        "button_N7C8qd",
+        "button_eXQpnD"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_1.png",
+        "image_2": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
+        "image_width": 670,
+        "image_link": "",
+        "image_position": "right",
+        "text_alignment": "left",
+        "color_scheme": "2"
+      }
+    },
+    "multi_column_rk3kbJ": {
+      "type": "multi-column",
+      "blocks": {
+        "text_block_yNbHL3": {
+          "type": "text_block",
+          "settings": {
+            "enable_media": true,
+            "image": "shopify://shop_images/icon-free-shipping.svg",
+            "title": "Free Shipping",
+            "text": "<p>Enjoy fast, reliable delivery on every order.</p>",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "text_block_7MWzFy": {
+          "type": "text_block",
+          "settings": {
+            "enable_media": true,
+            "image": "shopify://shop_images/icon-secure-payment.svg",
+            "title": "Secure Payment",
+            "text": "<p>Shop confidently with encrypted checkout.</p>",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "text_block_w4AfVm": {
+          "type": "text_block",
+          "settings": {
+            "enable_media": true,
+            "image": "shopify://shop_images/icon-quality-guaranteed.svg",
+            "title": "Quality Guaranteed",
+            "text": "<p>Expertly crafted for natural look and lasting wear.</p>",
+            "button_label": "",
+            "link": ""
+          }
+        },
+        "text_block_gCjaci": {
+          "type": "text_block",
+          "settings": {
+            "enable_media": true,
+            "image": "shopify://shop_images/icon-45-day-money-back.svg",
+            "title": "45-day Money Back",
+            "text": "<p>Try risk-free with our hassle-free return policy.</p>",
+            "button_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_block_yNbHL3",
+        "text_block_7MWzFy",
+        "text_block_w4AfVm",
+        "text_block_gCjaci"
+      ],
+      "settings": {
+        "title": "",
+        "media_aspect_ratio": "1",
+        "media_width": 60,
+        "text_alignment": "center",
+        "button_style": "primary",
+        "color_scheme": "1"
+      }
+    },
     "collapsible_tabs_amtjNH": {
       "type": "collapsible-tabs",
       "blocks": {
         "question_Afk6FR": {
           "type": "question",
           "settings": {
-            "title": "Question",
+            "title": "What is a hair system?",
             "answer": "<p>Answer</p>"
           }
         },
         "question_9bQCeB": {
           "type": "question",
           "settings": {
-            "title": "Question",
+            "title": "What’s the difference between a wig and a hair system?",
             "answer": "<p>Answer</p>"
           }
         },
         "question_dd89Fc": {
           "type": "question",
           "settings": {
-            "title": "Question",
+            "title": "How long will my hair system last?",
             "answer": "<p>Answer</p>"
           }
         },
         "question_iWcVmN": {
           "type": "question",
           "settings": {
-            "title": "Question",
+            "title": "Can I swim, shower, or exercise while wearing a hair system?",
             "answer": "<p>Answer</p>"
           }
         },
         "question_bgtzcK": {
           "type": "question",
           "settings": {
-            "title": "Question",
+            "title": "How often do I need to remove and reapply a hair system?",
+            "answer": "<p>Answer</p>"
+          }
+        },
+        "question_FLq7F7": {
+          "type": "question",
+          "settings": {
+            "title": "Will the hair system look natural and undetectable?",
             "answer": "<p>Answer</p>"
           }
         }
@@ -195,110 +315,12 @@
         "question_9bQCeB",
         "question_dd89Fc",
         "question_iWcVmN",
-        "question_bgtzcK"
+        "question_bgtzcK",
+        "question_FLq7F7"
       ],
       "name": "Collapsible tabs",
       "settings": {
-        "title": "Collapsible tabs"
-      }
-    },
-    "multi_column_Ar8NjX": {
-      "type": "multi-column",
-      "blocks": {
-        "text_block_DNfHYC": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Free shipping",
-            "text": "<p>Enjoy fast, reliable delivery on every order.</p>",
-            "button_label": "",
-            "link": ""
-          }
-        },
-        "text_block_LyyGgR": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Secure Payment",
-            "text": "<p>Shop confidently with encrypted checkout.</p>",
-            "button_label": "",
-            "link": ""
-          }
-        },
-        "text_block_n6ma9E": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "Quality Guaranteed",
-            "text": "<p>Expertly crafted for natural look and lasting wear.</p>",
-            "button_label": "",
-            "link": ""
-          }
-        },
-        "text_block_amkAFA": {
-          "type": "text_block",
-          "settings": {
-            "enable_media": true,
-            "title": "45-day Money Back",
-            "text": "<p>Try risk-free with our hassle-free return policy.</p>",
-            "button_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "text_block_DNfHYC",
-        "text_block_LyyGgR",
-        "text_block_n6ma9E",
-        "text_block_amkAFA"
-      ],
-      "name": "Multi-column",
-      "settings": {
-        "title": "",
-        "media_aspect_ratio": "s",
-        "media_width": 60,
-        "text_alignment": "center",
-        "button_style": "primary",
-        "color_scheme": "default"
-      }
-    },
-    "rich_text_BrxAy4": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_WJWcaC": {
-          "type": "heading",
-          "settings": {
-            "title": "Rich text",
-            "use_h1": false
-          }
-        },
-        "text_qhafrd": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Use this text to share information about your store with your customers. Describe products, share announcements, or welcome customers to your store.</p>",
-            "enlarge_text": true
-          }
-        },
-        "button_VpeQaz": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button text",
-            "button_link": "",
-            "button_style": "primary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_WJWcaC",
-        "text_qhafrd",
-        "button_VpeQaz"
-      ],
-      "name": "Rich text",
-      "settings": {
-        "height": "medium",
-        "text_alignment": "center",
-        "full_width": false,
-        "color_scheme": "default"
+        "title": "Frequently Asked Questions"
       }
     }
   },
@@ -306,8 +328,8 @@
     "slideshow_9tGaUn",
     "collection_list_tHkX6G",
     "main",
-    "collapsible_tabs_amtjNH",
-    "multi_column_Ar8NjX",
-    "rich_text_BrxAy4"
+    "image_with_text_zMzTfh",
+    "multi_column_rk3kbJ",
+    "collapsible_tabs_amtjNH"
   ]
 }
