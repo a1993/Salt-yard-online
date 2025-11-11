@@ -95,12 +95,13 @@
           "type": "complementary",
           "settings": {
             "heading": "Pairs well with",
-            "enable_carousel": false,
+            "enable_carousel": true,
             "max_products": 8
           }
         },
         "tepo_product_options_product_app_block_4tWwWC": {
           "type": "shopify://apps/tepo-product-options/blocks/product-app-block/906ef57c-14e4-45d8-8b53-3ba7349d56a6",
+          "disabled": true,
           "settings": {
             "product": "{{product}}"
           }
