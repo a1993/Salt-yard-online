@@ -60,6 +60,18 @@
             "size_chart_page": ""
           }
         },
+        "custom_option_RbWnNc": {
+          "type": "custom-option",
+          "settings": {
+            "label": "Color",
+            "type": "multiple",
+            "text_required": false,
+            "checkbox_checked_value": "Yes",
+            "checkbox_unchecked_value": "No",
+            "multiple_style": "dropdown",
+            "multiple_options": "Option 1\nOption 2\nOption 3"
+          }
+        },
         "buy-buttons": {
           "type": "buy-buttons",
           "settings": {
@@ -102,6 +114,7 @@
         "inventory_level_6wd7kc",
         "divider",
         "variant-picker",
+        "custom_option_RbWnNc",
         "buy-buttons",
         "description",
         "complementary_J8PHJ3",

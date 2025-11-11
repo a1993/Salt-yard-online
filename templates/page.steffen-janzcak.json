@@ -65,7 +65,7 @@
             "text": "",
             "enlarge_text": false,
             "button_label": "Instagram",
-            "button_style": "primary",
+            "button_style": "secondary",
             "image_link": "",
             "text_alignment": "center center",
             "mobile_overlay_under": false,
@@ -84,11 +84,78 @@
         "color_scheme": "default"
       }
     },
-    "pagefly_section_tWQkr6": {
-      "type": "pagefly-section",
-      "name": "PageFly Section",
+    "image_with_text_nnCFNW": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Y4k6XP": {
+          "type": "heading",
+          "settings": {
+            "title": "Steffen’s Favorite: Tyler",
+            "use_h1": false
+          }
+        },
+        "text_pKYeH7": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Base Material:</strong> Lace front with silk in the middle and PU on the sides and back. </p><p><strong>Unmatched Natural Scalp Appearance.</strong><br/><strong>Hair Type:</strong> Indian Remy Human Hair<br/><strong>Hair Texture:</strong> 28mm Body Wave pattern<br/><strong>Life Span:</strong> 8–12 months<br/><strong>Base Size:</strong> 8” x 10” (can be trimmed down to a minimum of 6” x 8.75”)</p>",
+            "enlarge_text": false
+          }
+        },
+        "button_rBmPQA": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
+            "button_style": "primary"
+          }
+        },
+        "button_cc9NUq": {
+          "type": "button",
+          "settings": {
+            "button_label": "Use Discount \"Steffen15\" to save 15%",
+            "button_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
+            "button_style": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Y4k6XP",
+        "text_pKYeH7",
+        "button_rBmPQA",
+        "button_cc9NUq"
+      ],
+      "custom_css": [
+        ".button-row__btn {display: block; width: 100%;}"
+      ],
+      "name": "Image with text",
       "settings": {
-        "section_id": ""
+        "image": "shopify://shop_images/steffen_2.jpg",
+        "image_2": "shopify://shop_images/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_3__1.jpg",
+        "image_width": 700,
+        "image_link": "",
+        "image_position": "left",
+        "text_alignment": "left",
+        "color_scheme": "default"
+      }
+    },
+    "common_heading_AFnDGR": {
+      "type": "common-heading",
+      "name": "标题 Heading",
+      "settings": {
+        "title": "Video Show from Steffen",
+        "title_tag": "h2",
+        "title_size": "medium",
+        "title_color": "",
+        "subtitle": "",
+        "subtitle_tag": "p",
+        "subtitle_size": "medium",
+        "subtitle_color": "",
+        "align": "center",
+        "container_width": "standard",
+        "container_padding": "medium",
+        "spacing_top": "medium",
+        "spacing_bottom": "medium",
+        "background_color": ""
       }
     },
     "story_block_RKTXRX": {
@@ -221,7 +288,7 @@
             "text": "",
             "enlarge_text": false,
             "button_label": "Shop Now",
-            "button_style": "primary",
+            "button_style": "secondary",
             "image_link": "https://www.lavividhair.com/men-hair-system/tyler-hair-system-for-men-unmatched-natural-scalp-appearance-long-lasting-for-up-to-a-year_p2879-12108.html",
             "text_alignment": "center center",
             "mobile_overlay_under": false,
@@ -251,6 +318,7 @@
         "image_EFwkBD",
         "text_CWNFpp"
       ],
+      "disabled": true,
       "name": "Custom content",
       "settings": {
         "spacing": "medium",
@@ -366,7 +434,8 @@
     "main",
     "common_banner_73kkz7",
     "custom_content_RwTE7t",
-    "pagefly_section_tWQkr6",
+    "image_with_text_nnCFNW",
+    "common_heading_AFnDGR",
     "story_block_RKTXRX",
     "common_heading_eRUNkh",
     "halloween_with_swiper_NMYjhF",

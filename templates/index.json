@@ -15,6 +15,8 @@
         "image_fCnnht": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/hero-banner-desktop_1.png",
+            "mobile_image": "shopify://shop_images/hero-banner-mobile_1.png",
             "slide_link": "",
             "subheading": "",
             "title": "Rediscover Confidence Redefine Your Style",
@@ -27,7 +29,7 @@
             "button_label_1": "Shop Hair Systems",
             "button_url_1": "",
             "button_label_2": "Customize Hair System",
-            "button_url_2": "",
+            "button_url_2": "shopify://collections/best-seller-2025",
             "text_alignment": "center left"
           }
         }
@@ -37,11 +39,11 @@
       ],
       "name": "Slideshow",
       "settings": {
-        "height": "fixed",
+        "height": "adapt",
         "height_desktop": 600,
         "height_mobile": 460,
         "full_width": true,
-        "mobile_overlay_under": false,
+        "mobile_overlay_under": true,
         "overlay_style": "shadow",
         "transition": "fade",
         "navigation": "arrows",
@@ -296,50 +298,53 @@
         "image_link": "",
         "image_position": "right",
         "text_alignment": "left",
-        "color_scheme": "default"
+        "color_scheme": "2"
       }
     },
-    "image_with_text_overlay_Rr89kY": {
-      "type": "image-with-text-overlay",
+    "shop_the_look_BVNgah": {
+      "type": "shop-the-look",
       "blocks": {
-        "subheading_XnjRyK": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Tell your story"
-          }
-        },
-        "heading_JzEnJt": {
+        "heading_RhH7zw": {
           "type": "heading",
           "settings": {
-            "title": "Image with text overlay",
-            "heading_max_width": 15,
-            "title_size": 54,
+            "title": "Real Style, Real Confidence",
+            "heading_max_width": 10,
+            "title_size": 40,
             "title_size_mobile": 32,
             "use_h1": false
           }
         },
-        "text_6ngwpc": {
+        "text_iQ3Wnh": {
           "type": "text",
           "settings": {
-            "text": "<p>Promote your brand or products with this feature section</p>",
-            "enlarge_text": true
+            "text": "<p>From casual to active heavy fitness activity, our hair systems is <br/>designed for confidence, comfort, and cool airflow.</p>",
+            "enlarge_text": false
           }
         }
       },
       "block_order": [
-        "subheading_XnjRyK",
-        "heading_JzEnJt",
-        "text_6ngwpc"
+        "heading_RhH7zw",
+        "text_iQ3Wnh"
       ],
-      "name": "Image with text overlay",
+      "name": "Shop the look",
       "settings": {
-        "height": "fixed",
+        "image": "shopify://shop_images/featured-product-desktop.png",
+        "mobile_image": "shopify://shop_images/featured-product-mobile.png",
+        "video_external": "",
+        "video_description": "",
+        "height": "adapt",
         "height_desktop": 600,
         "height_mobile": 460,
-        "image_link": "",
+        "product_list": [
+          "2xcoeus-tp1902-total-1-x-color-2-label-donny-macdonald-1-x-color-4-label-lee-davis",
+          "achilles-mens-hair-unit-0-10-0-12mm-full-skin-base-mens-hairstyle-for-thin-hair"
+        ],
+        "products_alignment": "bottom right",
+        "product_card_layout": "portrait",
+        "show_swatches": true,
         "full_width": true,
         "text_alignment": "bottom left",
-        "mobile_overlay_under": false,
+        "mobile_overlay_over": false,
         "overlay_style": "shadow"
       }
     },
@@ -383,6 +388,7 @@
           "settings": {
             "width": "half",
             "image": "shopify://shop_images/about-us-image.png",
+            "mobile_image": "shopify://shop_images/about-us-image-mobile.png",
             "height": "adapt",
             "height_desktop": 600,
             "height_mobile": 500,
@@ -425,21 +431,117 @@
       "settings": {
         "spacing": "medium",
         "alignment": "middle",
+        "color_scheme": "2"
+      }
+    },
+    "custom_content_FUMDi3": {
+      "type": "custom-content",
+      "blocks": {
+        "image_63cGdL": {
+          "type": "image",
+          "settings": {
+            "width": "half",
+            "image": "shopify://shop_images/content-video-tutorial.png",
+            "mobile_image": "shopify://shop_images/content-video-tutorial-mobile.png",
+            "height": "adapt",
+            "height_desktop": 600,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "Watch Then Style Like a Pro",
+            "text": "<p>Real techniques. Real results. Follow along and master the art of natural-looking hair in minutes.</p>",
+            "enlarge_text": false,
+            "button_label": "WATCH VIDEO TUTORIALS",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        },
+        "image_nxDcKq": {
+          "type": "image",
+          "settings": {
+            "width": "half",
+            "image": "shopify://shop_images/content-blogs.png",
+            "mobile_image": "shopify://shop_images/content-blogs-mobile_7ef53c4f-4256-41a7-8091-ea1cc7a8bd58.png",
+            "height": "adapt",
+            "height_desktop": 520,
+            "height_mobile": 500,
+            "subheading": "",
+            "title": "The Style Journal",
+            "text": "<p>Dive into curated articles packed with trends, tutorials, and behind-the-scenes knowledge to keep your look on point.</p>",
+            "enlarge_text": false,
+            "button_label": "READ OUT BLOGS",
+            "button_style": "link",
+            "image_link": "",
+            "text_alignment": "bottom left",
+            "mobile_overlay_under": false,
+            "overlay_style": "shadow"
+          }
+        }
+      },
+      "block_order": [
+        "image_63cGdL",
+        "image_nxDcKq"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "spacing": "small",
+        "alignment": "top",
         "color_scheme": "default"
       }
     },
-    "featured_blog_3mVGNT": {
-      "type": "featured-blog",
-      "name": "Blog posts",
+    "image_text_grid_FgMnWt": {
+      "type": "image-text-grid",
+      "blocks": {
+        "image_text_item_YPiah4": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/Escobarbers_Kettering.png",
+            "title": "Escobarbers Kettering",
+            "text": "<p>Northamptonshire, UK</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_Tdfibm": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/Adherence_4_Appearance_LLC.png",
+            "title": "Adherence 4 Appearance LLC",
+            "text": "<p>Frederick, MD United States</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        },
+        "image_text_item_tpt4br": {
+          "type": "image_text_item",
+          "settings": {
+            "image": "shopify://shop_images/LA_Hair_Replacement.png",
+            "title": "LA Hair Replacement",
+            "text": "<p>West Hollywood, CA United States</p>",
+            "link_url": "",
+            "button_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_text_item_YPiah4",
+        "image_text_item_Tdfibm",
+        "image_text_item_tpt4br"
+      ],
+      "name": "Image Text Grid",
       "settings": {
-        "title": "Blog posts",
-        "blog": "",
-        "post_limit": 3,
-        "show_author": true,
-        "show_date": true,
-        "show_excerpts": true,
-        "crop_ratio": "1.78",
-        "color_scheme": "default"
+        "title": "Expert Care, Within Your Reach",
+        "max_width": 1400,
+        "columns_desktop": 3,
+        "columns_tablet": 2,
+        "columns_mobile": 1,
+        "gap_size": 24,
+        "text_alignment": "center",
+        "background_color": "",
+        "padding_top": "large",
+        "padding_bottom": "large"
       }
     }
   },
@@ -451,9 +553,10 @@
     "firework_feed_LK7r7T",
     "176275649494f4b2f8",
     "16148743091427bc38",
-    "image_with_text_overlay_Rr89kY",
+    "shop_the_look_BVNgah",
     "16115832006dc80dc9",
     "custom_content_M4V8ip",
-    "featured_blog_3mVGNT"
+    "custom_content_FUMDi3",
+    "image_text_grid_FgMnWt"
   ]
 }

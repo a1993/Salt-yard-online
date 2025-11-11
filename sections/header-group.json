@@ -82,23 +82,42 @@
     "header": {
       "type": "header",
       "blocks": {
-        "menu_promotion_large_CjF3Ym": {
+        "menu_promotion_small_GqdA7q": {
+          "type": "menu-promotion-small",
+          "settings": {
+            "dropdown_link_title": "Shop All Hair Systems",
+            "image": "shopify://shop_images/Shop_Accesories.png",
+            "title": "Shop Accessories",
+            "link_url": "shopify://collections/accessories"
+          }
+        },
+        "menu_promotion_small_DPxtNy": {
+          "type": "menu-promotion-small",
+          "settings": {
+            "dropdown_link_title": "Shop All Hair Systems",
+            "image": "shopify://shop_images/Shop_Hair_Care.png",
+            "title": "Shop Hair Care",
+            "link_url": "shopify://collections/maintenance-accessories"
+          }
+        },
+        "menu_promotion_large_YpxJKK": {
           "type": "menu-promotion-large",
           "settings": {
-            "dropdown_link_title": "hgfzhs",
-            "desktop_image": "shopify://shop_images/download.webp",
+            "dropdown_link_title": "Place a Custom Order",
+            "desktop_image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
+            "mobile_image": "shopify://shop_images/Not_Sure_Where_To_Begin__-_image_2.png",
             "enable_fade": true,
-            "image_position": "left",
-            "subheading": "Tell youradsadasd story",
-            "title": "Wide menu pasdasdromotion",
-            "text": "<p>Pair text with an image to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>",
-            "button_1_label": "Shop this",
-            "button_1_link": "shopify://products/15-restocking-fee",
+            "image_position": "right",
+            "subheading": "",
+            "title": "Custom Hair Systems",
+            "text": "<p>Take control of your style with our custom order service.</p>",
+            "button_1_label": "How to Customize",
+            "button_1_link": "",
             "button_1_style": "secondary",
-            "button_2_label": "Shop all",
+            "button_2_label": "Place a Custom Order",
             "button_2_link": "",
             "button_2_style": "primary",
-            "text_alignment": "center",
+            "text_alignment": "left",
             "show_countdown": false,
             "countdown_position": "under-heading",
             "end_date": "",
@@ -113,7 +132,9 @@
         }
       },
       "block_order": [
-        "menu_promotion_large_CjF3Ym"
+        "menu_promotion_small_GqdA7q",
+        "menu_promotion_small_DPxtNy",
+        "menu_promotion_large_YpxJKK"
       ],
       "settings": {
         "logo": "shopify://shop_images/logo-menu.webp",
@@ -127,9 +148,9 @@
         "transparent_fade": "#000000",
         "transparent_fade_strength": 55,
         "menu_linklist": "main-menu",
-        "menu_layout": "inline-menu-left",
-        "nav_featured_link": "Sale",
-        "menu_linklist_mobile": "",
+        "menu_layout": "underneath",
+        "nav_featured_link": "Shop Accessories, Shop Hair Care",
+        "menu_linklist_mobile": "main-menu",
         "mobile_expand_with_entire_link": true,
         "enable_mobile_promo_carousel": true,
         "enable_nav_mob_products": true,
