@@ -132,7 +132,7 @@
         "sticky_atc_mobile": true,
         "sticky_atc_behavior": "add_to_cart",
         "sticky_atc_button_style": "primary",
-        "gallery_size": "large",
+        "gallery_size": "medium",
         "gallery_layout": "collage-1",
         "enable_zoom": true,
         "show_alt_text": false,
