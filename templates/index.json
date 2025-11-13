@@ -119,8 +119,8 @@
       "type": "featured-collection",
       "settings": {
         "title": "New Arrivals",
-        "collection": "all",
-        "show_vendor": true,
+        "collection": "new-arrival",
+        "show_vendor": false,
         "enable_carousel": true,
         "grid": 4,
         "rows": 1,
