@@ -16,10 +16,52 @@
     assign gradient_value = section.settings.background_gradient
     
     comment
-      Shopify的color_background返回格式通常是: linear-gradient(to right, #667eea, #764ba2, #f093fb)
-      我们需要提取颜色并应用自定义角度
+      Shopify的color_background返回格式可能是:
+      1. linear-gradient(to right, #667eea, #764ba2, #f093fb)
+      2. radial-gradient(rgba(166, 109, 49, 1) 19.424%, rgba(255, 187, 168, 1) 100%)
+      3. 或者只是颜色值
     endcomment
-    if gradient_value contains 'linear-gradient'
+    if gradient_value contains 'radial-gradient'
+      comment
+        radial-gradient 不支持角度参数
+        可以选择直接使用原始值，或者提取颜色转换为 linear-gradient
+      endcomment
+      if section.settings.convert_radial_to_linear
+        comment
+          提取 radial-gradient 中的颜色并转换为 linear-gradient
+          格式: radial-gradient(rgba(166, 109, 49, 1) 19.424%, rgba(255, 187, 168, 1) 100%)
+        endcomment
+        assign radial_content = gradient_value | split: '(' | last | split: ')' | first
+        assign radial_parts = radial_content | split: ','
+        assign clean_colors = ''
+        
+        for part in radial_parts
+          assign part_clean = part | strip
+          comment
+            提取颜色值（去除百分比部分）
+          endcomment
+          if part_clean contains 'rgba' or part_clean contains 'rgb' or part_clean contains '#'
+            assign color_only = part_clean | split: ' ' | first
+            if clean_colors == '' or clean_colors == blank
+              assign clean_colors = color_only
+            else
+              assign clean_colors = clean_colors | append: ', ' | append: color_only
+            endif
+          endif
+        endfor
+        
+        if clean_colors != '' and clean_colors != blank
+          assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: clean_colors | append: ')'
+        else
+          assign background_style = gradient_value
+        endif
+      else
+        comment
+          直接使用 radial-gradient 原始值
+        endcomment
+        assign background_style = gradient_value
+      endif
+    elsif gradient_value contains 'linear-gradient'
       comment
         提取括号内的内容
         例如: linear-gradient(to right, #667eea, #764ba2, #f093fb)
@@ -107,25 +149,6 @@
   assign padding_left = section.settings.padding_left | default: 0
   assign padding_right = section.settings.padding_right | default: 0
 -%}
-
-{%- comment -%}
-  调试信息
-  background_type: {{ section.settings.background_type }}
-  background_gradient: {{ section.settings.background_gradient }}
-  gradient_angle: {{ section.settings.gradient_angle }}
-  background_style: {{ background_style }}
-{%- endcomment -%}
-
-{%- if request.design_mode -%}
-  {%- comment -%} 设计模式下显示调试信息 {%- endcomment -%}
-  <div style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; z-index: 9999; font-size: 12px; max-width: 300px;">
-    <strong>背景调试信息:</strong><br>
-    类型: {{ section.settings.background_type }}<br>
-    渐变值: {{ section.settings.background_gradient }}<br>
-    角度: {{ section.settings.gradient_angle }}<br>
-    最终样式: {{ background_style }}
-  </div>
-{%- endif -%}
 
 {%- style -%}
   #{{ section.id }} {
@@ -249,7 +272,14 @@
       "step": 5,
       "default": 90,
       "unit": "°",
-      "info": "渐变方向角度，0度为向右，90度为向下，180度为向左，270度为向上。步长为5度"
+      "info": "渐变方向角度，0度为向右，90度为向下，180度为向左，270度为向上。步长为5度。注意：radial-gradient 不支持角度，如需使用角度请启用下面的转换选项"
+    },
+    {
+      "type": "checkbox",
+      "id": "convert_radial_to_linear",
+      "label": "将径向渐变转换为线性渐变 Convert Radial to Linear",
+      "default": true,
+      "info": "当使用 radial-gradient 时，启用此选项可将其转换为 linear-gradient 以支持角度设置"
     },
     {
       "type": "header",
@@ -381,7 +411,7 @@
   ],
   "presets": [
     {
-      "name": "背景包装器 Background Wrapper",
+      "name": "Lv Background Wrapper",
       "settings": {
         "background_type": "none"
       }
