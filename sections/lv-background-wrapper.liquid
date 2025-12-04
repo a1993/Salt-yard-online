@@ -16,48 +16,82 @@
     assign gradient_value = section.settings.background_gradient
     
     comment
-      Shopify的color_background返回格式通常是: linear-gradient(to direction, color1, color2, ...)
-      或者只是颜色值。我们需要提取颜色并应用自定义角度
+      Shopify的color_background返回格式通常是: linear-gradient(to right, #667eea, #764ba2, #f093fb)
+      我们需要提取颜色并应用自定义角度
     endcomment
     if gradient_value contains 'linear-gradient'
       comment
-        提取括号内的内容（颜色部分）
-        格式可能是: linear-gradient(to right, #667eea, #764ba2, #f093fb)
-        或: linear-gradient(90deg, #667eea, #764ba2)
+        提取括号内的内容
+        例如: linear-gradient(to right, #667eea, #764ba2, #f093fb)
+        提取后: to right, #667eea, #764ba2, #f093fb
       endcomment
       assign gradient_content = gradient_value | split: '(' | last | split: ')' | first
+      
       comment
-        移除方向关键词，只保留颜色
+        移除方向关键词（带逗号和不带逗号的）
       endcomment
       assign gradient_content = gradient_content | replace: 'to right,', '' | replace: 'to bottom,', '' | replace: 'to left,', '' | replace: 'to top,', '' | replace: 'to right', '' | replace: 'to bottom', '' | replace: 'to left', '' | replace: 'to top', ''
+      
       comment
-        移除可能的角度值（如 90deg, 180deg等）
+        分割所有部分，提取颜色
       endcomment
-      assign color_parts = gradient_content | split: ','
+      assign all_parts = gradient_content | split: ','
       assign clean_colors = ''
-      for part in color_parts
+      
+      for part in all_parts
         assign part_clean = part | strip
-        unless part_clean contains 'deg' or part_clean == 'to right' or part_clean == 'to bottom' or part_clean == 'to left' or part_clean == 'to top' or part_clean == '' or part_clean == blank
-          if clean_colors == '' or clean_colors == blank
-            assign clean_colors = part_clean
-          else
-            assign clean_colors = clean_colors | append: ', ' | append: part_clean
+        comment
+          只保留颜色值（包含#或rgb/rgba的），跳过空值和角度值
+        endcomment
+        if part_clean != '' and part_clean != blank
+          if part_clean contains '#' or part_clean contains 'rgb'
+            unless part_clean contains 'deg'
+              if clean_colors == '' or clean_colors == blank
+                assign clean_colors = part_clean
+              else
+                assign clean_colors = clean_colors | append: ', ' | append: part_clean
+              endif
+            endunless
           endif
-        endunless
+        endif
       endfor
+      
       comment
-        如果清理后为空，使用原始内容（去除linear-gradient部分）
+        如果成功提取到颜色，构建新的渐变
       endcomment
-      if clean_colors == '' or clean_colors == blank
-        assign clean_colors = gradient_content
+      if clean_colors != '' and clean_colors != blank
+        assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: clean_colors | append: ')'
+      else
+        comment
+          如果提取失败，尝试直接替换方向关键词为角度
+        endcomment
+        assign temp_style = gradient_value
+        if temp_style contains 'to right,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to right,', angle_str
+        elsif temp_style contains 'to bottom,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to bottom,', angle_str
+        elsif temp_style contains 'to left,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to left,', angle_str
+        elsif temp_style contains 'to top,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to top,', angle_str
+        endif
+        
+        if temp_style != gradient_value
+          assign background_style = temp_style
+        else
+          comment
+            如果替换也失败，直接使用原始值
+          endcomment
+          assign background_style = gradient_value
+        endif
       endif
-      comment
-        构建新的渐变字符串
-      endcomment
-      assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: clean_colors | append: ')'
     else
       comment
-        只是颜色值，直接构建渐变
+        只是颜色值（可能是逗号分隔的多个颜色），直接构建渐变
       endcomment
       assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: gradient_value | append: ')'
     endif
@@ -74,10 +108,32 @@
   assign padding_right = section.settings.padding_right | default: 0
 -%}
 
+{%- comment -%}
+  调试信息
+  background_type: {{ section.settings.background_type }}
+  background_gradient: {{ section.settings.background_gradient }}
+  gradient_angle: {{ section.settings.gradient_angle }}
+  background_style: {{ background_style }}
+{%- endcomment -%}
+
+{%- if request.design_mode -%}
+  {%- comment -%} 设计模式下显示调试信息 {%- endcomment -%}
+  <div style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; z-index: 9999; font-size: 12px; max-width: 300px;">
+    <strong>背景调试信息:</strong><br>
+    类型: {{ section.settings.background_type }}<br>
+    渐变值: {{ section.settings.background_gradient }}<br>
+    角度: {{ section.settings.gradient_angle }}<br>
+    最终样式: {{ background_style }}
+  </div>
+{%- endif -%}
+
 {%- style -%}
   #{{ section.id }} {
     {% if background_style != blank %}
       background: {{ background_style }} !important;
+      background-image: none !important;
+      background-repeat: no-repeat !important;
+      background-attachment: scroll !important;
     {% endif %}
     {% if padding_top > 0 %}
       padding-top: {{ padding_top }}px;
@@ -114,7 +170,7 @@
   }
 {%- endstyle -%}
 
-<div id="{{ section.id }}" class="background-wrapper-section"{% if background_style != blank %} style="background: {{ background_style }};"{% endif %} {{ section.shopify_attributes }}>
+<div id="{{ section.id }}" class="background-wrapper-section"{% if background_style != blank %} style="background: {{ background_style }} !important; min-height: 200px;"{% endif %} {{ section.shopify_attributes }}>
   {% if section.blocks.size > 0 %}
     {% for block in section.blocks %}
       {% case block.type %}
@@ -144,7 +200,7 @@
 
 {% schema %}
 {
-  "name": "背景包装器 Background Wrapper",
+  "name": "Lv Background Wrapper",
   "tag": "section",
   "class": "background-wrapper-section",
   "settings": [
