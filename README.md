@@ -21,7 +21,7 @@
 
 ### 首次设置
 
-```bash
+````bash
 # 1. 克隆仓库
 git clone <repository-url>
 cd Salt-yard-online
@@ -33,10 +33,30 @@ npm install
 shopify auth login
 
 # 4. 启动开发服务器
+
+## 方式一：使用启动脚本（推荐）
+
+**Windows (PowerShell):**
+```powershell
+.\start-dev.ps1
+````
+
+**macOS/Linux:**
+
+```bash
+chmod +x start-dev.sh  # 首次使用需要添加执行权限
+./start-dev.sh
+```
+
+## 方式二：使用 npm 命令
+
+```bash
 npm run dev
 ```
 
 访问: http://127.0.0.1:9292
+
+> **提示**: 启动脚本已配置好环境变量和错误处理，推荐使用。如需配置代理，请编辑对应的启动脚本文件。
 
 **详细设置指南**: 参见 [SETUP.md](SETUP.md)
 
@@ -192,6 +212,7 @@ git commit -m "feat: your feature description"
 - `chore:` 构建/工具变更
 
 **示例：**
+
 ```
 feat: add customer reviews section to product page
 fix: resolve mobile menu overlay issue
@@ -279,8 +300,23 @@ Salt-yard-online/
 
 ## 🔧 常用命令
 
+### 启动开发服务器
+
 ```bash
-npm run dev           # 启动开发服务器
+# 方式一：使用启动脚本（推荐）
+# Windows
+.\start-dev.ps1
+
+# macOS/Linux
+./start-dev.sh
+
+# 方式二：使用 npm 命令
+npm run dev
+```
+
+### 其他命令
+
+```bash
 npm run format        # 格式化所有代码（自动修复格式问题）
 npm run format:check  # 检查代码格式（不修改）
 npm run lint          # 运行代码检查
@@ -316,4 +352,3 @@ npm run pull          # 从 Shopify 拉取
 ## 📞 联系方式
 
 如有问题，请联系开发团队或创建 Issue。
-
