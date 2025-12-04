@@ -119,13 +119,13 @@
       "type": "featured-collection",
       "settings": {
         "title": "New Arrivals",
-        "collection": "all",
-        "show_vendor": true,
-        "enable_carousel": false,
+        "collection": "new-arrival",
+        "show_vendor": false,
+        "enable_carousel": true,
         "grid": 4,
         "rows": 1,
         "color_scheme": "default",
-        "show_view_all": false,
+        "show_view_all": true,
         "full_width": true
       }
     },

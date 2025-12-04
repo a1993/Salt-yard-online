@@ -96,7 +96,7 @@
           "settings": {
             "heading": "Pairs well with",
             "enable_carousel": true,
-            "max_products": 9
+            "max_products": 10
           }
         },
         "tepo_product_options_product_app_block_4tWwWC": {
@@ -131,8 +131,8 @@
         "sticky_atc_mobile": true,
         "sticky_atc_behavior": "add_to_cart",
         "sticky_atc_button_style": "primary",
-        "gallery_size": "large",
-        "gallery_layout": "carousel-under",
+        "gallery_size": "medium",
+        "gallery_layout": "collage-1",
         "enable_zoom": true,
         "show_alt_text": false,
         "alt_text_icon": "",
