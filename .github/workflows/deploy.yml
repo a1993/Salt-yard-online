@@ -77,7 +77,7 @@ jobs:
             
             # 如果都没有，使用默认主题 ID（Salt-yard-online/main）
             if [ -z "$THEME_ID" ]; then
-              THEME_ID="151438459037"
+              THEME_ID="151735894173"
               echo "ℹ️  使用默认主题 ID: $THEME_ID (Salt-yard-online/main)"
             fi
             
