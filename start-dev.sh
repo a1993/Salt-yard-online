@@ -34,15 +34,29 @@ export SHOPIFY_CLI_NO_ANALYTICS="1"
 # 商店名称（会自动从 .shopify-cli.yml 读取）
 STORE="smka17-ff.myshopify.com"
 
+# ============ 启动 Tailwind CSS Watch ============
+
+echo -e "${GREEN}🎨 启动 Tailwind CSS 监听模式...${NC}"
+# 在后台启动 Tailwind CSS watch
+npm run watch:css > /dev/null 2>&1 &
+TAILWIND_PID=$!
+
+# 确保退出时清理后台进程
+trap "kill $TAILWIND_PID 2>/dev/null" EXIT
+
+echo -e "${GREEN}✅ Tailwind CSS 监听已启动 (PID: $TAILWIND_PID)${NC}"
+echo ""
+
 # ============ 启动服务器 ============
 
 echo -e "${GREEN}📦 商店: ${STORE}${NC}"
 echo -e "${YELLOW}🚀 正在启动开发服务器...${NC}"
 echo ""
 echo -e "${MAGENTA}提示:${NC}"
-echo -e "${GRAY}  - 按 Ctrl+C 停止服务器${NC}"
+echo -e "${GRAY}  - 按 Ctrl+C 停止服务器和 Tailwind 监听${NC}"
 echo -e "${GRAY}  - 本地预览: http://127.0.0.1:9292${NC}"
 echo -e "${GRAY}  - 修改文件会自动重载${NC}"
+echo -e "${GRAY}  - Tailwind CSS 会自动监听并重新构建${NC}"
 echo ""
 
 # 启动开发服务器（添加更多容错参数）
