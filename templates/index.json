@@ -543,6 +543,93 @@
         "padding_top": "large",
         "padding_bottom": "large"
       }
+    },
+    "17655106679dc80774": {
+      "type": "apps",
+      "blocks": {
+        "surecust_forms_lock_custom_form_XGxYKM": {
+          "type": "shopify://apps/surecust-forms-lock/blocks/custom-form/11b1d95b-f9a2-49ad-9a53-3d6a172a070d",
+          "settings": {
+            "formid": "17655170319667",
+            "title": "Custom Form",
+            "subtitle": "Submit the application by filling in this form.",
+            "selectproduct": "1-order-balance-link",
+            "fieldradius": 0,
+            "buttonback": "#000000",
+            "buttoncolor": "#ffffff"
+          }
+        },
+        "formcrm_form_gpt_dhk4Hq": {
+          "type": "shopify://apps/formcrm/blocks/form_gpt/1e8b3e46-7a0a-4a10-b0e8-89ae67ce834b",
+          "settings": {
+            "form_id": "",
+            "section_background_color": "rgba(0,0,0,0)",
+            "card_background_color": "#ffffff",
+            "card_width": 724,
+            "card_padding": 30,
+            "card_radius": 4,
+            "card_border_size": 1,
+            "card_border_color": "#f3f3f3",
+            "card_border_style": "solid",
+            "card_alignment": "center",
+            "card_shadow": true,
+            "block_margin_top": 50,
+            "block_margin_bottom": 100,
+            "block_margin_left": 0,
+            "block_margin_right": 0,
+            "image_position": "top"
+          }
+        },
+        "forms_inline_mNmbfL": {
+          "type": "shopify://apps/forms/blocks/inline/8744a304-fcb1-4347-b211-bb6b4759a76a",
+          "settings": {
+            "form_id": "",
+            "text_color": "#202020",
+            "button_background_color": "#202020",
+            "button_label_color": "#ffffff",
+            "links_color": "#1878b9",
+            "errors_color": "#e02229",
+            "text_alignment": "center",
+            "form_alignment": "center",
+            "padding_top": 0,
+            "padding_bottom": 24,
+            "padding_right": 0,
+            "padding_left": 0
+          }
+        },
+        "firework_shoppable_video_ugc_firework_pro_embed_JVghPD": {
+          "type": "shopify://apps/firework-shoppable-video-ugc/blocks/firework-pro-embed/347a2e4c-f5cb-410d-8354-490d1e80558c",
+          "settings": {
+            "embedConfigId": ""
+          }
+        },
+        "firework_shoppable_video_ugc_firework_embed_nheMjM": {
+          "type": "shopify://apps/firework-shoppable-video-ugc/blocks/firework-embed/347a2e4c-f5cb-410d-8354-490d1e80558c",
+          "settings": {
+            "channel": "uniwigs",
+            "playlist": "vrk11J",
+            "layout": "storyblock",
+            "embedtitle": "",
+            "titlealignment": "center",
+            "embedtitlesize": 20,
+            "size": "large",
+            "player_placement": "bottom-right",
+            "hashtag": "",
+            "pip": true
+          }
+        }
+      },
+      "block_order": [
+        "surecust_forms_lock_custom_form_XGxYKM",
+        "formcrm_form_gpt_dhk4Hq",
+        "forms_inline_mNmbfL",
+        "firework_shoppable_video_ugc_firework_pro_embed_JVghPD",
+        "firework_shoppable_video_ugc_firework_embed_nheMjM"
+      ],
+      "settings": {
+        "full_width": false,
+        "show_space": true
+      }
     }
   },
   "order": [
@@ -557,6 +644,7 @@
     "16115832006dc80dc9",
     "custom_content_M4V8ip",
     "custom_content_FUMDi3",
-    "image_text_grid_FgMnWt"
+    "image_text_grid_FgMnWt",
+    "17655106679dc80774"
   ]
 }
