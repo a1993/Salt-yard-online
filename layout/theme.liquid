@@ -40,6 +40,8 @@
   </style>
 
   {{ 'main.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'tailwind.output.css' | asset_url | stylesheet_tag: preload: true }}
+  {{ 'tailwind-overrides.css' | asset_url | stylesheet_tag }}
 
   {%- if settings.swatch_source == 'theme' and settings.swatch_value_list != blank -%}
     <link rel="stylesheet" href="{{ 'swatches.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -184,7 +186,7 @@
 
   {%- sections 'header-group' -%}
 
-  <main id="content" role="main">
+  <main id="content" role="main" >
     <div class="container cf">
 
       {{ content_for_layout }}

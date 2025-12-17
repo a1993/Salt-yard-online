@@ -1,0 +1,422 @@
+{% comment %}
+  背景包装器分区
+  Background Wrapper Section
+  
+  可在所有页面使用的背景包装器，支持单色和渐变背景配置
+  运营人员可以配置全景背景色，支持渐变和单色，渐变支持多个角度
+{% endcomment %}
+
+{%- liquid
+  comment
+    构建背景样式
+  endcomment
+  assign background_style = ''
+  if section.settings.background_type == 'gradient' and section.settings.background_gradient != blank
+    assign gradient_angle = section.settings.gradient_angle | default: 90
+    assign gradient_value = section.settings.background_gradient
+    
+    comment
+      Shopify的color_background返回格式可能是:
+      1. linear-gradient(to right, #667eea, #764ba2, #f093fb)
+      2. radial-gradient(rgba(166, 109, 49, 1) 19.424%, rgba(255, 187, 168, 1) 100%)
+      3. 或者只是颜色值
+    endcomment
+    if gradient_value contains 'radial-gradient'
+      comment
+        radial-gradient 不支持角度参数
+        可以选择直接使用原始值，或者提取颜色转换为 linear-gradient
+      endcomment
+      if section.settings.convert_radial_to_linear
+        comment
+          提取 radial-gradient 中的颜色并转换为 linear-gradient
+          格式: radial-gradient(rgba(166, 109, 49, 1) 19.424%, rgba(255, 187, 168, 1) 100%)
+        endcomment
+        assign radial_content = gradient_value | split: '(' | last | split: ')' | first
+        assign radial_parts = radial_content | split: ','
+        assign clean_colors = ''
+        
+        for part in radial_parts
+          assign part_clean = part | strip
+          comment
+            提取颜色值（去除百分比部分）
+          endcomment
+          if part_clean contains 'rgba' or part_clean contains 'rgb' or part_clean contains '#'
+            assign color_only = part_clean | split: ' ' | first
+            if clean_colors == '' or clean_colors == blank
+              assign clean_colors = color_only
+            else
+              assign clean_colors = clean_colors | append: ', ' | append: color_only
+            endif
+          endif
+        endfor
+        
+        if clean_colors != '' and clean_colors != blank
+          assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: clean_colors | append: ')'
+        else
+          assign background_style = gradient_value
+        endif
+      else
+        comment
+          直接使用 radial-gradient 原始值
+        endcomment
+        assign background_style = gradient_value
+      endif
+    elsif gradient_value contains 'linear-gradient'
+      comment
+        提取括号内的内容
+        例如: linear-gradient(to right, #667eea, #764ba2, #f093fb)
+        提取后: to right, #667eea, #764ba2, #f093fb
+      endcomment
+      assign gradient_content = gradient_value | split: '(' | last | split: ')' | first
+      
+      comment
+        移除方向关键词（带逗号和不带逗号的）
+      endcomment
+      assign gradient_content = gradient_content | replace: 'to right,', '' | replace: 'to bottom,', '' | replace: 'to left,', '' | replace: 'to top,', '' | replace: 'to right', '' | replace: 'to bottom', '' | replace: 'to left', '' | replace: 'to top', ''
+      
+      comment
+        分割所有部分，提取颜色
+      endcomment
+      assign all_parts = gradient_content | split: ','
+      assign clean_colors = ''
+      
+      for part in all_parts
+        assign part_clean = part | strip
+        comment
+          只保留颜色值（包含#或rgb/rgba的），跳过空值和角度值
+        endcomment
+        if part_clean != '' and part_clean != blank
+          if part_clean contains '#' or part_clean contains 'rgb'
+            unless part_clean contains 'deg'
+              if clean_colors == '' or clean_colors == blank
+                assign clean_colors = part_clean
+              else
+                assign clean_colors = clean_colors | append: ', ' | append: part_clean
+              endif
+            endunless
+          endif
+        endif
+      endfor
+      
+      comment
+        如果成功提取到颜色，构建新的渐变
+      endcomment
+      if clean_colors != '' and clean_colors != blank
+        assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: clean_colors | append: ')'
+      else
+        comment
+          如果提取失败，尝试直接替换方向关键词为角度
+        endcomment
+        assign temp_style = gradient_value
+        if temp_style contains 'to right,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to right,', angle_str
+        elsif temp_style contains 'to bottom,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to bottom,', angle_str
+        elsif temp_style contains 'to left,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to left,', angle_str
+        elsif temp_style contains 'to top,'
+          assign angle_str = gradient_angle | append: 'deg,'
+          assign temp_style = temp_style | replace: 'to top,', angle_str
+        endif
+        
+        if temp_style != gradient_value
+          assign background_style = temp_style
+        else
+          comment
+            如果替换也失败，直接使用原始值
+          endcomment
+          assign background_style = gradient_value
+        endif
+      endif
+    else
+      comment
+        只是颜色值（可能是逗号分隔的多个颜色），直接构建渐变
+      endcomment
+      assign background_style = 'linear-gradient(' | append: gradient_angle | append: 'deg, ' | append: gradient_value | append: ')'
+    endif
+  elsif section.settings.background_type == 'solid' and section.settings.background_color != blank
+    assign background_style = section.settings.background_color
+  endif
+  
+  comment
+    获取间距和内边距设置
+  endcomment
+  assign padding_top = section.settings.padding_top | default: 0
+  assign padding_bottom = section.settings.padding_bottom | default: 0
+  assign padding_left = section.settings.padding_left | default: 0
+  assign padding_right = section.settings.padding_right | default: 0
+-%}
+
+{%- style -%}
+  #{{ section.id }} {
+    {% if background_style != blank %}
+      background: {{ background_style }} !important;
+      background-image: none !important;
+      background-repeat: no-repeat !important;
+      background-attachment: scroll !important;
+    {% endif %}
+    {% if padding_top > 0 %}
+      padding-top: {{ padding_top }}px;
+    {% endif %}
+    {% if padding_bottom > 0 %}
+      padding-bottom: {{ padding_bottom }}px;
+    {% endif %}
+    {% if padding_left > 0 %}
+      padding-left: {{ padding_left }}px;
+    {% endif %}
+    {% if padding_right > 0 %}
+      padding-right: {{ padding_right }}px;
+    {% endif %}
+    width: 100%;
+    min-height: 100%;
+    position: relative;
+  }
+  
+  @media screen and (max-width: 767px) {
+    #{{ section.id }} {
+      {% if section.settings.padding_top_mobile > 0 %}
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+      {% endif %}
+      {% if section.settings.padding_bottom_mobile > 0 %}
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+      {% endif %}
+      {% if section.settings.padding_left_mobile > 0 %}
+        padding-left: {{ section.settings.padding_left_mobile }}px;
+      {% endif %}
+      {% if section.settings.padding_right_mobile > 0 %}
+        padding-right: {{ section.settings.padding_right_mobile }}px;
+      {% endif %}
+    }
+  }
+{%- endstyle -%}
+
+<div id="{{ section.id }}" class="background-wrapper-section"{% if background_style != blank %} style="background: {{ background_style }} !important; min-height: 200px;"{% endif %} {{ section.shopify_attributes }}>
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'content' %}
+          <div class="background-wrapper-content" {{ block.shopify_attributes }}>
+            {{ block.settings.content }}
+          </div>
+        {% when 'html' %}
+          <div class="background-wrapper-html" {{ block.shopify_attributes }}>
+            {{ block.settings.html_content }}
+          </div>
+        {% when 'liquid' %}
+          <div class="background-wrapper-liquid" {{ block.shopify_attributes }}>
+            {{ block.settings.liquid_content }}
+          </div>
+      {% endcase %}
+    {% endfor %}
+  {% else %}
+    {% comment %} 如果没有blocks，显示占位内容 {% endcomment %}
+    <div class="background-wrapper-placeholder">
+      <p style="text-align: center; padding: 2rem; color: #666;">
+        请在主题编辑器中添加内容块，或在此分区下方添加其他分区
+      </p>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Lv Background Wrapper",
+  "tag": "section",
+  "class": "background-wrapper-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "背景设置 Background Settings"
+    },
+    {
+      "type": "select",
+      "id": "background_type",
+      "label": "背景类型 Background Type",
+      "options": [
+        {
+          "value": "none",
+          "label": "无 None"
+        },
+        {
+          "value": "solid",
+          "label": "单色 Solid Color"
+        },
+        {
+          "value": "gradient",
+          "label": "渐变 Gradient"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景颜色 Background Color",
+      "info": "仅在背景类型为单色时生效"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "渐变颜色 Gradient Colors",
+      "info": "仅在背景类型为渐变时生效。可以添加多个颜色，用逗号分隔，例如: #ff0000, #00ff00, #0000ff"
+    },
+    {
+      "type": "range",
+      "id": "gradient_angle",
+      "label": "渐变角度 Gradient Angle (度)",
+      "min": 0,
+      "max": 360,
+      "step": 5,
+      "default": 90,
+      "unit": "°",
+      "info": "渐变方向角度，0度为向右，90度为向下，180度为向左，270度为向上。步长为5度。注意：radial-gradient 不支持角度，如需使用角度请启用下面的转换选项"
+    },
+    {
+      "type": "checkbox",
+      "id": "convert_radial_to_linear",
+      "label": "将径向渐变转换为线性渐变 Convert Radial to Linear",
+      "default": true,
+      "info": "当使用 radial-gradient 时，启用此选项可将其转换为 linear-gradient 以支持角度设置"
+    },
+    {
+      "type": "header",
+      "content": "内边距设置 Padding Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "上内边距 Top Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "下内边距 Bottom Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "左内边距 Left Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "右内边距 Right Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "移动端内边距设置 Mobile Padding Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "移动端上内边距 Mobile Top Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px",
+      "info": "如果为0，则使用桌面端设置"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "移动端下内边距 Mobile Bottom Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px",
+      "info": "如果为0，则使用桌面端设置"
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "label": "移动端左内边距 Mobile Left Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px",
+      "info": "如果为0，则使用桌面端设置"
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "label": "移动端右内边距 Mobile Right Padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "default": 0,
+      "unit": "px",
+      "info": "如果为0，则使用桌面端设置"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "富文本内容 Rich Text",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "内容 Content"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "name": "HTML 内容",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html_content",
+          "label": "HTML 内容 HTML Content"
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "Liquid 代码",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "liquid_content",
+          "label": "Liquid 代码 Liquid Code"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lv Background Wrapper",
+      "settings": {
+        "background_type": "none"
+      }
+    }
+  ]
+}
+{% endschema %}
+

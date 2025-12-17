@@ -1,0 +1,123 @@
+/**
+ * Tailwind CSS 样式冲突修复
+ * 
+ * 此文件用于修复 tailwind.output.css 与项目现有样式的冲突
+ * 请在 theme.liquid 中在 tailwind.output.css 之后引入此文件
+ */
+
+/* ============================================
+   1. SVG 显示属性修复
+   ============================================ */
+
+/* 全局 SVG 修复 - 恢复为 inline-block 以支持文本对齐 */
+svg {
+  display: inline-block !important;
+  vertical-align: middle;
+}
+
+/* 确保图标 SVG 正确显示 */
+.icon svg,
+.btn .icon svg,
+button svg,
+a svg,
+.custom-select__btn svg,
+.navigation__link svg {
+  display: inline-block !important;
+  vertical-align: middle;
+}
+
+/* 特定场景的 SVG 可能需要 block */
+.placeholder-image svg,
+.gallery-viewer__button svg,
+.hotspot__btn svg {
+  display: block !important;
+}
+
+/* ============================================
+   2. 列表样式恢复
+   ============================================ */
+
+/* 恢复富文本中的列表样式 */
+.rte ul {
+  list-style: disc outside;
+  margin-inline-start: 2em;
+  margin-bottom: 1em;
+}
+
+.rte ol {
+  list-style: decimal outside;
+  margin-inline-start: 2em;
+  margin-bottom: 1em;
+}
+
+.rte ul ul li {
+  list-style-type: circle;
+}
+
+.rte ul ul,
+.rte ul ol,
+.rte ol ul,
+.rte ol ol {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* 恢复样式化列表 */
+.styled-list {
+  list-style: disc outside;
+  margin-inline-start: 2em;
+  margin-bottom: 1em;
+}
+
+/* ============================================
+   3. 图片显示修复（如需要）
+   ============================================ */
+
+/* 如果需要内联图片，取消注释以下代码 */
+/*
+img.inline,
+img.inline-block {
+  display: inline-block;
+}
+*/
+
+/* ============================================
+   4. 表单元素样式保护
+   ============================================ */
+
+/* 确保表单元素保持主题样式 */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+  /* 这些样式应该由 main.css 提供，这里只是占位 */
+  /* 如果发现表单样式被覆盖，可以在这里添加修复 */
+}
+
+/* ============================================
+   5. 其他可能的修复
+   ============================================ */
+
+/* 确保链接样式不被完全覆盖 */
+.rte a {
+  /* main.css 中已有样式，这里确保优先级 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 确保按钮中的图标容器正确 */
+.btn .icon {
+  display: inline-block;
+  position: relative;
+}
+
+/* 确保导航菜单中的 SVG 正确显示 */
+.mobile-navigation-drawer svg,
+.navigation svg {
+  display: inline-block !important;
+}
+

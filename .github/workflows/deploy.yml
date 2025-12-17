@@ -2,6 +2,20 @@ name: Deploy to Shopify
 
 on:
   workflow_dispatch: # 仅手动触发
+    inputs:
+      deploy_target:
+        description: '部署目标'
+        required: true
+        default: 'theme_id'
+        type: choice
+        options:
+          - theme_id
+          - development
+          - live
+      theme_id:
+        description: '主题 ID（如果选择 theme_id，请输入主题 ID）'
+        required: false
+        type: string
   # push:
   #   branches: [ main ]
 
@@ -19,13 +33,75 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Tailwind CSS
+        run: npm run build:css
+
       - name: Install Shopify CLI
         run: npm install -g @shopify/cli @shopify/theme
 
       - name: Deploy to Shopify
         env:
-          SHOPIFY_FLAG_STORE: ${{ secrets.SHOPIFY_STORE }}
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
+          SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+          SHOPIFY_THEME_ID: ${{ secrets.SHOPIFY_THEME_ID }}
         run: |
-          shopify theme push --allow-live --path=.
-        # 注意：生产环境部署需要谨慎，建议先推送到非live主题
+          # 验证环境变量是否设置
+          if [ -z "$SHOPIFY_CLI_THEME_TOKEN" ]; then
+            echo "❌ 错误: SHOPIFY_CLI_THEME_TOKEN 未设置"
+            echo "请在 GitHub Secrets 中设置 SHOPIFY_CLI_THEME_TOKEN"
+            exit 1
+          fi
+
+          if [ -z "$SHOPIFY_STORE" ]; then
+            echo "❌ 错误: SHOPIFY_STORE 未设置"
+            echo "请在 GitHub Secrets 中设置 SHOPIFY_STORE"
+            exit 1
+          fi
+
+          echo "✅ 环境变量已设置"
+          echo "商店: $SHOPIFY_STORE"
+          echo "部署目标: ${{ github.event.inputs.deploy_target }}"
+
+          # 根据部署目标选择不同的命令
+          if [ "${{ github.event.inputs.deploy_target }}" == "theme_id" ]; then
+            # 使用主题 ID 部署（推荐：精确指定主题）
+            # 优先级：workflow 输入 > GitHub Secret > 默认值
+            THEME_ID="${{ github.event.inputs.theme_id }}"
+            if [ -z "$THEME_ID" ] && [ -n "$SHOPIFY_THEME_ID" ]; then
+              THEME_ID="$SHOPIFY_THEME_ID"
+              echo "ℹ️  使用 GitHub Secret 中的主题 ID"
+            fi
+            
+            # 如果都没有，使用默认主题 ID（Salt-yard-online/main）
+            if [ -z "$THEME_ID" ]; then
+              THEME_ID="151735894173"
+              echo "ℹ️  使用默认主题 ID: $THEME_ID (Salt-yard-online/main)"
+            fi
+            
+            echo "✅ 正在部署到指定主题 (ID: $THEME_ID)"
+            shopify theme push \
+              --store="$SHOPIFY_STORE" \
+              --password="$SHOPIFY_CLI_THEME_TOKEN" \
+              --theme="$THEME_ID" \
+              --path=.
+          elif [ "${{ github.event.inputs.deploy_target }}" == "live" ]; then
+            echo "⚠️  警告: 正在部署到生产主题 (live)"
+            # 使用 --live 和 --allow-live 推送到 live 主题
+            shopify theme push \
+              --store="$SHOPIFY_STORE" \
+              --password="$SHOPIFY_CLI_THEME_TOKEN" \
+              --live \
+              --allow-live \
+              --path=.
+          else
+            echo "✅ 正在部署到开发主题 (development)"
+            # 使用 --development 推送到开发主题
+            shopify theme push \
+              --store="$SHOPIFY_STORE" \
+              --password="$SHOPIFY_CLI_THEME_TOKEN" \
+              --development \
+              --path=.
+          fi

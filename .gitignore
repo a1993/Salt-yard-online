@@ -32,6 +32,9 @@ yarn-error.log*
 dist/
 build/
 
+# Tailwind CSS output (generated file)
+assets/tailwind.output.css
+
 # Temporary files
 *.tmp
 *.temp
