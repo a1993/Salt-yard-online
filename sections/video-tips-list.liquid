@@ -4,7 +4,7 @@
 {% endcomment %}
 
 {{ 'built-to-last-durable.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'built-to-last-durable.js' | asset_url }}" defer></script>
+<script src='{{ 'built-to-last-durable.js' | asset_url }}' defer></script>
 
 {%- liquid
   assign video_1_title = section.settings.video_1_title
@@ -13,49 +13,62 @@
   assign video_2_title = section.settings.video_2_title
   assign video_2_cover = section.settings.video_2_cover
   assign video_2_url = section.settings.video_2_url
+  assign videos_per_row = section.settings.videos_per_row | default: 2
 -%}
 
-<div class="durable-video-tips-list" {{ section.shopify_attributes }}>
-  {% if video_1_title != blank and video_1_cover != blank and video_1_url != blank %}
-  <div class="durable-video-tip-item">
-    {% if video_1_title != blank %}
-      <h2 class="durable-video-tip-title">{{ video_1_title }}</h2>
-    {% endif %}
-    <div class="durable-video-tip-image-wrapper" onclick="openVideoModal('durable-video-modal', '{{ video_1_url }}')">
-      <img 
-        src="{{ video_1_cover | image_url: width: 600 }}"
-        alt="{{ video_1_title | escape }}"
-        loading="lazy"
-        class="durable-video-tip-image">
-      <div class="durable-play-button">
-        <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
-          <circle cx="34" cy="34" r="34" fill="white" opacity="0.9"/>
-          <path d="M27 22L47 34L27 46V22Z" fill="#1d1e20"/>
-        </svg>
+<div
+  class='durable-video-tips-list'
+  style='--videos-per-row: {{ videos_per_row }};'
+  {{ section.shopify_attributes }}
+>
+  {% if video_1_cover != blank and video_1_url != blank %}
+    <div class='durable-video-tip-item'>
+      {% if video_1_title != blank %}
+        <h2 class='durable-video-tip-title'>{{ video_1_title }}</h2>
+      {% endif %}
+      <div
+        class='durable-video-tip-image-wrapper'
+        onclick="openVideoModal('durable-video-modal', '{{ video_1_url }}')"
+      >
+        <img
+          src='{{ video_1_cover | image_url: width: 600 }}'
+          alt='{{ video_1_title | escape }}'
+          loading='lazy'
+          class='durable-video-tip-image'
+        >
+        <div class='durable-play-button'>
+          <svg width='68' height='68' viewBox='0 0 68 68' fill='none'>
+            <circle cx="34" cy="34" r="34" fill="white" opacity="0.9"/>
+            <path d="M27 22L47 34L27 46V22Z" fill="#1d1e20"/>
+          </svg>
+        </div>
       </div>
     </div>
-  </div>
   {% endif %}
-  
-  {% if video_2_title != blank and video_2_cover != blank and video_2_url != blank %}
-  <div class="durable-video-tip-item">
-    {% if video_2_title != blank %}
-      <h2 class="durable-video-tip-title">{{ video_2_title }}</h2>
-    {% endif %}
-    <div class="durable-video-tip-image-wrapper" onclick="openVideoModal('durable-video-modal', '{{ video_2_url }}')">
-      <img 
-        src="{{ video_2_cover | image_url: width: 600 }}"
-        alt="{{ video_2_title | escape }}"
-        loading="lazy"
-        class="durable-video-tip-image">
-      <div class="durable-play-button">
-        <svg width="68" height="68" viewBox="0 0 68 68" fill="none">
-          <circle cx="34" cy="34" r="34" fill="white" opacity="0.9"/>
-          <path d="M27 22L47 34L27 46V22Z" fill="#1d1e20"/>
-        </svg>
+
+  {% if video_2_cover != blank and video_2_url != blank %}
+    <div class='durable-video-tip-item'>
+      {% if video_2_title != blank %}
+        <h2 class='durable-video-tip-title'>{{ video_2_title }}</h2>
+      {% endif %}
+      <div
+        class='durable-video-tip-image-wrapper'
+        onclick="openVideoModal('durable-video-modal', '{{ video_2_url }}')"
+      >
+        <img
+          src='{{ video_2_cover | image_url: width: 600 }}'
+          alt='{{ video_2_title | escape }}'
+          loading='lazy'
+          class='durable-video-tip-image'
+        >
+        <div class='durable-play-button'>
+          <svg width='68' height='68' viewBox='0 0 68 68' fill='none'>
+            <circle cx="34" cy="34" r="34" fill="white" opacity="0.9"/>
+            <path d="M27 22L47 34L27 46V22Z" fill="#1d1e20"/>
+          </svg>
+        </div>
       </div>
     </div>
-  </div>
   {% endif %}
 </div>
 
@@ -63,80 +76,74 @@
 {% render 'video-modal', modal_id: 'durable-video-modal' %}
 
 <style>
-.durable-video-tips-list {
-  display: flex;
-  gap: 2rem;
-  margin: 4rem 0;
-  flex-wrap: wrap;
-}
-
-.durable-video-tip-item {
-  flex: 1;
-  min-width: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.durable-video-tip-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1d1e20;
-  margin: 0 0 1rem 0;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.durable-video-tip-image-wrapper {
-  position: relative;
-  cursor: pointer;
-  border-radius: 0.9375rem;
-  overflow: hidden;
-  width: 100%;
-  max-width: 578px;
-}
-
-.durable-video-tip-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.durable-video-tip-image-wrapper:hover .durable-video-tip-image {
-  transform: scale(1.05);
-}
-
-.durable-play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: transform 0.3s ease;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.durable-video-tip-image-wrapper:hover .durable-play-button {
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-@media screen and (max-width: 767px) {
   .durable-video-tips-list {
-    flex-direction: column;
-    gap: 1.5rem;
-    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(var(--videos-per-row, 2), 1fr);
+    gap: 2rem;
+    margin: 4rem 0;
   }
-  
+
   .durable-video-tip-item {
-    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  
+
   .durable-video-tip-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1d1e20;
+    margin: 0 0 1rem 0;
+    text-align: center;
+    line-height: 1.4;
   }
-}
+
+  .durable-video-tip-image-wrapper {
+    position: relative;
+    cursor: pointer;
+    border-radius: 0.9375rem;
+    overflow: hidden;
+    width: 100%;
+    max-width: 578px;
+  }
+
+  .durable-video-tip-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .durable-video-tip-image-wrapper:hover .durable-video-tip-image {
+    transform: scale(1.05);
+  }
+
+  .durable-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .durable-video-tip-image-wrapper:hover .durable-play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  @media screen and (max-width: 767px) {
+    .durable-video-tips-list {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .durable-video-tip-title {
+      font-size: 1.25rem;
+    }
+  }
 </style>
 
 {% schema %}
@@ -145,6 +152,20 @@
   "tag": "section",
   "class": "video-tips-list-section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "range",
+      "id": "videos_per_row",
+      "label": "Videos per row",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2,
+      "info": "Number of videos to display per row (Desktop only, mobile will always show 1 per row)"
+    },
     {
       "type": "header",
       "content": "Video 1"
@@ -193,5 +214,3 @@
   ]
 }
 {% endschema %}
-
-
