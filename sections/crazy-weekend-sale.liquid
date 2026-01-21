@@ -178,6 +178,7 @@
               badge_image: badge_image,
               currency_symbol: currency_symbol,
               button_text: btn_text,
+              placeholder_index: forloop.index,
               shopify_attributes: block.shopify_attributes
             %}
           {% else %}
@@ -440,5 +441,28 @@
 
   .product-card--placeholder .product-card__desc {
     color: #999;
+  }
+
+  /* 占位图片样式 - 用于正常产品卡片中缺少图片的情况 */
+  .product-card--crazy .product-card__image--placeholder {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 254px;
+    width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 5rem;
+  }
+
+  .product-card--crazy .product-card__image--placeholder svg {
+    width: 50%;
+    height: 50%;
+    fill: #ddd;
+  }
+
+  .product-card--crazy.product-card--type2 .product-card__image--placeholder {
+    min-height: 260px;
+    margin-top: 0;
   }
 {% endstyle %}
