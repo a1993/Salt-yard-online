@@ -4,10 +4,11 @@
 
   功能特性:
   - 支持自定义 banner 图片（桌面端和移动端）
-  - 支持手动添加多个商品块
+  - 支持关联 Shopify 产品或手动添加商品信息
   - 商品卡片包含：图片、标题、描述、原价、折扣价、优惠标签
   - 响应式布局（桌面端 2 列，移动端 1 列）
   - 支持不同卡片类型（标准卡片和带浮动图片的卡片）
+  - 支持预览模式，显示占位内容
 {% endcomment %}
 
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
@@ -28,30 +29,52 @@
       "@type": "ItemList",
       "itemListElement": [
         {% for block in section.blocks %}
-          {% if block.type == 'product_item' and block.settings.product_title != blank %}
-          {
-            "@type": "ListItem",
-            "position": {{ forloop.index }},
-            "item": {
-              "@type": "Product",
-              "name": {{ block.settings.product_title | json }},
-              {% if block.settings.product_image != blank %}
-              "image": {{ block.settings.product_image | image_url: width: 630 | json }},
-              {% endif %}
-              {% if block.settings.product_url != blank %}
-              "url": {{ block.settings.product_url | json }},
-              {% endif %}
-              "offers": {
-                "@type": "Offer",
-                "priceCurrency": "USD",
-                {% if block.settings.new_price != blank %}
-                "price": {{ block.settings.new_price | json }},
+          {% if block.type == 'product_item' %}
+            {%- liquid
+              assign product = block.settings.product
+
+              if product
+                assign seo_title = block.settings.product_title | default: product.title
+                assign seo_image = block.settings.product_image | default: product.featured_image
+                assign seo_url = block.settings.product_url | default: product.url
+                if block.settings.new_price != blank
+                  assign seo_price = block.settings.new_price
+                else
+                  assign seo_price = product.price | money_without_currency | remove: '$' | remove: ',' | strip
+                endif
+              else
+                assign seo_title = block.settings.product_title
+                assign seo_image = block.settings.product_image
+                assign seo_url = block.settings.product_url
+                assign seo_price = block.settings.new_price
+              endif
+            -%}
+
+            {% if seo_title != blank %}
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "item": {
+                "@type": "Product",
+                "name": {{ seo_title | json }},
+                {% if seo_image != blank %}
+                "image": {{ seo_image | image_url: width: 630 | json }},
                 {% endif %}
-                "itemCondition": "https://schema.org/NewCondition",
-                "availability": "https://schema.org/InStock"
+                {% if seo_url != blank %}
+                "url": {{ seo_url | json }},
+                {% endif %}
+                "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "USD",
+                  {% if seo_price != blank %}
+                  "price": {{ seo_price | json }},
+                  {% endif %}
+                  "itemCondition": "https://schema.org/NewCondition",
+                  "availability": "https://schema.org/InStock"
+                }
               }
-            }
-          }{% unless forloop.last %},{% endunless %}
+            }{% unless forloop.last %},{% endunless %}
+            {% endif %}
           {% endif %}
         {% endfor %}
       ]
@@ -73,12 +96,146 @@
 
 <!-- Products Grid -->
 <div class='crazy-weekend-wrap'>
-  {% render 'product-grid',
-    section_blocks: section.blocks,
-    grid_style: 'crazy',
-    grid_class: 'crazy-weekend-list',
-    currency_symbol: currency_symbol
-  %}
+  <div class='product-grid product-grid--crazy crazy-weekend-list'>
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'product_item' %}
+          {%- liquid
+            assign product = block.settings.product
+
+            # 优先使用关联的产品，如果没有则使用手动输入的信息
+            if product
+              # 图片：优先使用手动设置的，否则使用产品的特色图片
+              if block.settings.product_image != blank
+                assign display_image = block.settings.product_image
+              else
+                assign display_image = product.featured_image
+              endif
+
+              # 标题：优先使用手动设置的，否则使用产品标题
+              if block.settings.product_title != blank
+                assign display_title = block.settings.product_title
+              else
+                assign display_title = product.title
+              endif
+
+              # 描述：优先使用手动设置的，否则使用产品描述
+              if block.settings.product_desc != blank
+                assign display_desc = block.settings.product_desc
+              else
+                assign display_desc = product.description | strip_html | truncate: 100
+              endif
+
+              # 链接：优先使用手动设置的，否则使用产品链接
+              if block.settings.product_url != blank
+                assign display_url = block.settings.product_url
+              else
+                assign display_url = product.url
+              endif
+
+              # 价格：优先使用手动设置的，否则从产品获取
+              if block.settings.old_price != blank
+                assign display_old_price = block.settings.old_price
+              elsif product.compare_at_price > product.price
+                assign display_old_price = product.compare_at_price | money_without_currency | remove: '$' | remove: ',' | strip
+              else
+                assign display_old_price = ''
+              endif
+
+              if block.settings.new_price != blank
+                assign display_new_price = block.settings.new_price
+              else
+                assign display_new_price = product.price | money_without_currency | remove: '$' | remove: ',' | strip
+              endif
+            else
+              # 使用手动输入的信息
+              assign display_image = block.settings.product_image
+              assign display_title = block.settings.product_title
+              assign display_desc = block.settings.product_desc
+              if block.settings.product_url != blank
+                assign display_url = block.settings.product_url
+              else
+                assign display_url = '#'
+              endif
+              assign display_old_price = block.settings.old_price
+              assign display_new_price = block.settings.new_price
+            endif
+
+            assign card_type = block.settings.card_type | default: 'type1'
+            assign badge_image = block.settings.badge_image
+            assign btn_text = block.settings.button_text | default: 'Shop Now >'
+          -%}
+
+          {% if display_title != blank or product %}
+            {% render 'product-card-crazy',
+              product_image: display_image,
+              product_title: display_title,
+              product_desc: display_desc,
+              product_url: display_url,
+              old_price: display_old_price,
+              new_price: display_new_price,
+              card_type: card_type,
+              badge_image: badge_image,
+              currency_symbol: currency_symbol,
+              button_text: btn_text,
+              shopify_attributes: block.shopify_attributes
+            %}
+          {% else %}
+            {% comment %} 预览模式：显示占位产品卡片 {% endcomment %}
+            {%- liquid
+              assign placeholder_old_price = '299.00'
+              assign placeholder_new_price = '215.20'
+            -%}
+            <div
+              class='product-card product-card--crazy product-card--placeholder'
+              {{ block.shopify_attributes }}
+            >
+              <div class='product-card__image product-card__image--placeholder'>
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+              <h2 class='product-card__title'>示例产品 {{ forloop.index }}</h2>
+              <h3 class='product-card__desc'>请选择一个产品或填写产品信息以显示实际内容</h3>
+              <div class='product-card__price'>
+                <div class='product-card__price-main'>
+                  <div class='product-card__price-group'>
+                    <div class='product-card__price-old'>
+                      {{ currency_symbol -}}
+                      {{- placeholder_old_price }}
+                    </div>
+                    <div class='product-card__price-new'>
+                      {{ currency_symbol -}}
+                      {{- placeholder_new_price }}
+                    </div>
+                  </div>
+                  <div class='product-card__button'>{{ btn_text }}</div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% comment %} 预览模式：没有 blocks 时显示占位产品卡片 {% endcomment %}
+      {% for i in (1..4) %}
+        <div class='product-card product-card--crazy product-card--placeholder'>
+          <div class='product-card__image product-card__image--placeholder'>
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+          <h2 class='product-card__title'>示例产品 {{ i }}</h2>
+          <h3 class='product-card__desc'>请添加产品块以显示实际内容</h3>
+          <div class='product-card__price'>
+            <div class='product-card__price-main'>
+              <div class='product-card__price-group'>
+                <div class='product-card__price-old'>{{ currency_symbol }}299.00</div>
+                <div class='product-card__price-new'>{{ currency_symbol }}215.20</div>
+              </div>
+              <div class='product-card__button'>Shop Now ></div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
 </div>
 
 {% schema %}
@@ -124,14 +281,30 @@
       "name": "Product Item",
       "settings": [
         {
+          "type": "header",
+          "content": "产品关联"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "关联 Shopify 产品",
+          "info": "选择产品后，将自动填充产品信息。您也可以手动覆盖这些信息。"
+        },
+        {
+          "type": "header",
+          "content": "产品信息（手动输入，可选）"
+        },
+        {
           "type": "image_picker",
           "id": "product_image",
-          "label": "Product Image"
+          "label": "Product Image",
+          "info": "如果关联了产品，留空则使用产品的特色图片"
         },
         {
           "type": "text",
           "id": "product_title",
-          "label": "Product Title"
+          "label": "Product Title",
+          "info": "如果关联了产品，留空则使用产品标题"
         },
         {
           "type": "text",
@@ -142,18 +315,21 @@
           "type": "text",
           "id": "old_price",
           "label": "Original Price (number only)",
-          "placeholder": "269.00"
+          "placeholder": "269.00",
+          "info": "如果关联了产品，留空则使用产品的 compare_at_price"
         },
         {
           "type": "text",
           "id": "new_price",
           "label": "Sale Price (number only)",
-          "placeholder": "215.20"
+          "placeholder": "215.20",
+          "info": "如果关联了产品，留空则使用产品的 price"
         },
         {
           "type": "url",
           "id": "product_url",
-          "label": "Product URL"
+          "label": "Product URL",
+          "info": "如果关联了产品，留空则使用产品的链接"
         },
         {
           "type": "text",
@@ -187,9 +363,82 @@
   ],
   "presets": [
     {
-      "name": "Crazy Weekend Sale",
-      "blocks": []
+      "name": "[gy] Crazy Weekend Sale(Product List)",
+      "blocks": [
+        {
+          "type": "product_item",
+          "settings": {
+            "product_title": "示例产品 1",
+            "product_desc": "这是第一个示例产品的描述",
+            "old_price": "299.00",
+            "new_price": "215.20",
+            "product_url": "#",
+            "button_text": "Shop Now >",
+            "card_type": "type1"
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "product_title": "示例产品 2",
+            "product_desc": "这是第二个示例产品的描述",
+            "old_price": "399.00",
+            "new_price": "299.00",
+            "product_url": "#",
+            "button_text": "Shop Now >",
+            "card_type": "type2"
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "product_title": "示例产品 3",
+            "product_desc": "这是第三个示例产品的描述",
+            "old_price": "249.00",
+            "new_price": "199.00",
+            "product_url": "#",
+            "button_text": "Shop Now >",
+            "card_type": "type1"
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "product_title": "示例产品 4",
+            "product_desc": "这是第四个示例产品的描述",
+            "old_price": "349.00",
+            "new_price": "279.00",
+            "product_url": "#",
+            "button_text": "Shop Now >",
+            "card_type": "type2"
+          }
+        }
+      ]
     }
   ]
 }
 {% endschema %}
+
+{% style %}
+  /* Placeholder Product Cards */
+  .product-card--placeholder {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .product-card--placeholder .product-card__image--placeholder {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 254px;
+  }
+
+  .product-card--placeholder .product-card__title {
+    color: #1d1e20;
+  }
+
+  .product-card--placeholder .product-card__desc {
+    color: #999;
+  }
+{% endstyle %}
