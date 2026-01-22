@@ -180,6 +180,43 @@
           "info": "Override tab discount. Set to 0 to use tab discount or product's system discount. Example: 20 for 20% OFF"
         }
       ]
+    },
+    {
+      "type": "product_collection",
+      "name": "Product Collection",
+      "settings": [
+        {
+          "type": "number",
+          "id": "parent_tab_number",
+          "label": "Belongs to Tab Number",
+          "default": 1,
+          "info": "Enter 1 for first tab, 2 for second tab, etc."
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection",
+          "info": "All products from this collection will be displayed"
+        },
+        {
+          "type": "number",
+          "id": "product_limit",
+          "label": "Product Limit",
+          "default": 50,
+          "info": "Maximum number of products to display from collection (0 = no limit)"
+        },
+        {
+          "type": "header",
+          "content": "Price Customization (Optional)"
+        },
+        {
+          "type": "number",
+          "id": "custom_discount_percent",
+          "label": "Custom Discount %",
+          "default": 0,
+          "info": "Override tab discount. Set to 0 to use tab discount or product's system discount. Example: 20 for 20% OFF"
+        }
+      ]
     }
   ],
   "presets": [
