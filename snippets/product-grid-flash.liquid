@@ -58,6 +58,44 @@
             shopify_attributes: block.shopify_attributes
           %}
         {% endif %}
+      {% elsif block.type == 'product_collection' %}
+        {% comment %} 处理产品系列 {% endcomment %}
+        {% assign collection = block.settings.collection %}
+        {% if collection %}
+          {% comment %} 检查分类过滤 {% endcomment %}
+          {% assign should_render = false %}
+          {% if filter_category %}
+            {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
+            {% if parent_num == filter_category %}
+              {% assign should_render = true %}
+            {% endif %}
+          {% else %}
+            {% assign should_render = true %}
+          {% endif %}
+
+          {% if should_render %}
+            {% comment %} 获取产品限制数量 {% endcomment %}
+            {% assign product_limit = block.settings.product_limit | plus: 0 %}
+            {% if product_limit == 0 %}
+              {% assign product_limit = 999 %}
+            {% endif %}
+
+            {% comment %} 遍历 collection 中的产品 {% endcomment %}
+            {% for product in collection.products limit: product_limit %}
+              {% render 'product-card-flash',
+                product: product,
+                show_reviews: show_reviews,
+                discount_percent: discount_percent,
+                custom_image: null,
+                custom_title: null,
+                custom_description: null,
+                custom_compare_price: null,
+                custom_discount_percent: block.settings.custom_discount_percent,
+                shopify_attributes: block.shopify_attributes
+              %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
       {% endif %}
     {% endfor %}
   {% endif %}

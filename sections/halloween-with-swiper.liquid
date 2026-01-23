@@ -51,6 +51,34 @@
                   %}
                 </div>
               {% endif %}
+            {% elsif block.type == 'product_collection' %}
+              {% comment %} 处理产品系列 {% endcomment %}
+              {% assign collection = block.settings.collection %}
+              {% if collection %}
+                {% comment %} 获取产品限制数量 {% endcomment %}
+                {% assign product_limit = block.settings.product_limit | plus: 0 %}
+                {% if product_limit == 0 %}
+                  {% assign product_limit = 999 %}
+                {% endif %}
+
+                {% comment %} 遍历 collection 中的产品 {% endcomment %}
+                {% for product in collection.products limit: product_limit %}
+                  <div class='halloween-swiper-slide' {{ block.shopify_attributes }}>
+                    {% render 'product-card-halloween',
+                      product: product,
+                      show_reviews: show_reviews,
+                      button_text: block.settings.button_text,
+                      tag_image: block.settings.tag_image,
+                      custom_image: null,
+                      custom_title: null,
+                      custom_description: null,
+                      custom_compare_price: null,
+                      custom_discount_percent: block.settings.custom_discount_percent,
+                      category_discount_percent: block.settings.category_discount_percent
+                    %}
+                  </div>
+                {% endfor %}
+              {% endif %}
             {% endif %}
           {% endfor %}
         </div>
@@ -445,6 +473,56 @@
           "label": "Category Discount %",
           "default": 0,
           "info": "Set to 0 to use product's system discount. Or set custom % for this product."
+        }
+      ]
+    },
+    {
+      "type": "product_collection",
+      "name": "Product Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Select Collection",
+          "info": "All products from this collection will be displayed in the swiper"
+        },
+        {
+          "type": "number",
+          "id": "product_limit",
+          "label": "Product Limit",
+          "default": 50,
+          "info": "Maximum number of products to display from collection (0 = no limit)"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Shop Now",
+          "info": "Text displayed on the product button"
+        },
+        {
+          "type": "image_picker",
+          "id": "tag_image",
+          "label": "Sale Tag Image (Optional)",
+          "info": "Custom tag image displayed on all products from this collection"
+        },
+        {
+          "type": "header",
+          "content": "Price Customization (Optional)"
+        },
+        {
+          "type": "number",
+          "id": "custom_discount_percent",
+          "label": "Custom Discount %",
+          "default": 0,
+          "info": "Set to 0 to use system discount. Or set custom % for all products in this collection. Example: 20 for 20% OFF"
+        },
+        {
+          "type": "number",
+          "id": "category_discount_percent",
+          "label": "Category Discount %",
+          "default": 0,
+          "info": "Set to 0 to use product's system discount. Or set custom % for all products in this collection."
         }
       ]
     }
