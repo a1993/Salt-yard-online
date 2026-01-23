@@ -69,10 +69,10 @@
                       show_reviews: show_reviews,
                       button_text: block.settings.button_text,
                       tag_image: block.settings.tag_image,
-                      custom_image: null,
-                      custom_title: null,
-                      custom_description: null,
-                      custom_compare_price: null,
+                      custom_image: block.settings.custom_image,
+                      custom_title: block.settings.custom_title,
+                      custom_description: block.settings.custom_description,
+                      custom_compare_price: block.settings.custom_compare_price,
                       custom_discount_percent: block.settings.custom_discount_percent,
                       category_discount_percent: block.settings.category_discount_percent
                     %}
@@ -508,7 +508,35 @@
         },
         {
           "type": "header",
+          "content": "Content Customization (Optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image",
+          "info": "Leave blank to use each product's featured image. If set, this image will be used for all products in the collection"
+        },
+        {
+          "type": "text",
+          "id": "custom_title",
+          "label": "Custom Title Override",
+          "info": "Leave blank to use each product's title. If set, this will override all product titles (not recommended for collections)"
+        },
+        {
+          "type": "textarea",
+          "id": "custom_description",
+          "label": "Custom Description",
+          "info": "Optional description that will be displayed on all products from this collection"
+        },
+        {
+          "type": "header",
           "content": "Price Customization (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "custom_compare_price",
+          "label": "Custom Original Price",
+          "info": "Leave blank to use each product's compare_at_price. If set, this price will be used for all products. Example: 299.00"
         },
         {
           "type": "number",
