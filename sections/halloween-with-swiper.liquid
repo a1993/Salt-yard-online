@@ -36,33 +36,25 @@
               {% assign product = block.settings.product %}
 
               {% if product %}
-                <div class='halloween-swiper-slide' {{ block.shopify_attributes }}>
-                  {% render 'product-card-halloween',
-                    product: product,
-                    show_reviews: show_reviews,
-                    button_text: block.settings.button_text,
-                    tag_image: block.settings.tag_image,
-                    custom_image: block.settings.custom_image,
-                    custom_title: block.settings.custom_title,
-                    custom_description: block.settings.custom_description,
-                    custom_compare_price: block.settings.custom_compare_price,
-                    custom_discount_percent: block.settings.custom_discount_percent,
-                    category_discount_percent: block.settings.category_discount_percent
-                  %}
-                </div>
-              {% endif %}
-            {% elsif block.type == 'product_collection' %}
-              {% comment %} 处理产品系列 {% endcomment %}
-              {% assign collection = block.settings.collection %}
-              {% if collection %}
-                {% comment %} 获取产品限制数量 {% endcomment %}
-                {% assign product_limit = block.settings.product_limit | plus: 0 %}
-                {% if product_limit == 0 %}
-                  {% assign product_limit = 999 %}
-                {% endif %}
+                {% comment %} 检查这个产品是否在某个 collection 中 {% endcomment %}
+                {% assign is_in_collection = false %}
+                {% for check_block in section.blocks %}
+                  {% if check_block.type == 'product_collection' %}
+                    {% assign check_collection = check_block.settings.collection %}
+                    {% if check_collection %}
+                      {% for collection_product in check_collection.products %}
+                        {% if collection_product.id == product.id %}
+                          {% assign is_in_collection = true %}
+                          {% break %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
 
-                {% comment %} 遍历 collection 中的产品 {% endcomment %}
-                {% for product in collection.products limit: product_limit %}
+                {% comment %} 如果产品不在任何 collection 中，单独渲染 {% endcomment %}
+                {% comment %} 如果产品在 collection 中，collection 的循环会检查是否有对应的 product_item block，如果有就使用它的设置 {% endcomment %}
+                {% unless is_in_collection %}
                   <div class='halloween-swiper-slide' {{ block.shopify_attributes }}>
                     {% render 'product-card-halloween',
                       product: product,
@@ -77,6 +69,66 @@
                       category_discount_percent: block.settings.category_discount_percent
                     %}
                   </div>
+                {% endunless %}
+              {% endif %}
+            {% elsif block.type == 'product_collection' %}
+              {% comment %} 处理产品系列 {% endcomment %}
+              {% assign collection = block.settings.collection %}
+              {% if collection %}
+                {% comment %} 获取产品限制数量 {% endcomment %}
+                {% assign product_limit = block.settings.product_limit | plus: 0 %}
+                {% if product_limit == 0 %}
+                  {% assign product_limit = 999 %}
+                {% endif %}
+
+                {% comment %} 遍历 collection 中的产品 {% endcomment %}
+                {% for product in collection.products limit: product_limit %}
+                  {% comment %} 检查是否有对应的 product_item block 为这个产品设置了自定义内容 {% endcomment %}
+                  {% assign custom_block = null %}
+                  {% for check_block in section.blocks %}
+                    {% if check_block.type == 'product_item' %}
+                      {% assign check_product = check_block.settings.product %}
+                      {% if check_product and check_product.id == product.id %}
+                        {% assign custom_block = check_block %}
+                        {% break %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+
+                  {% comment %} 如果找到自定义 block，使用它的设置；否则使用 collection 的默认设置 {% endcomment %}
+                  {% if custom_block %}
+                    {% comment %} 使用 product_item block 的自定义设置 {% endcomment %}
+                    <div class='halloween-swiper-slide' {{ custom_block.shopify_attributes }}>
+                      {% render 'product-card-halloween',
+                        product: product,
+                        show_reviews: show_reviews,
+                        button_text: custom_block.settings.button_text,
+                        tag_image: custom_block.settings.tag_image,
+                        custom_image: custom_block.settings.custom_image,
+                        custom_title: custom_block.settings.custom_title,
+                        custom_description: custom_block.settings.custom_description,
+                        custom_compare_price: custom_block.settings.custom_compare_price,
+                        custom_discount_percent: custom_block.settings.custom_discount_percent,
+                        category_discount_percent: custom_block.settings.category_discount_percent
+                      %}
+                    </div>
+                  {% else %}
+                    {% comment %} 使用 collection 的默认设置，如果没有设置则使用产品本身的设置 {% endcomment %}
+                    <div class='halloween-swiper-slide' {{ block.shopify_attributes }}>
+                      {% render 'product-card-halloween',
+                        product: product,
+                        show_reviews: show_reviews,
+                        button_text: block.settings.button_text,
+                        tag_image: block.settings.tag_image,
+                        custom_image: block.settings.custom_image,
+                        custom_title: block.settings.custom_title,
+                        custom_description: block.settings.custom_description,
+                        custom_compare_price: block.settings.custom_compare_price,
+                        custom_discount_percent: block.settings.custom_discount_percent,
+                        category_discount_percent: block.settings.category_discount_percent
+                      %}
+                    </div>
+                  {% endif %}
                 {% endfor %}
               {% endif %}
             {% endif %}
@@ -484,7 +536,7 @@
           "type": "collection",
           "id": "collection",
           "label": "Select Collection",
-          "info": "All products from this collection will be displayed in the swiper"
+          "info": "All products from this collection will be displayed in the swiper. To customize individual products, add a 'Product' block for that specific product - its custom settings will override the collection defaults."
         },
         {
           "type": "number",
@@ -496,61 +548,61 @@
         {
           "type": "text",
           "id": "button_text",
-          "label": "Button Text",
+          "label": "Default Button Text",
           "default": "Shop Now",
-          "info": "Text displayed on the product button"
+          "info": "Default button text for all products. Can be overridden by individual Product blocks."
         },
         {
           "type": "image_picker",
           "id": "tag_image",
-          "label": "Sale Tag Image (Optional)",
-          "info": "Custom tag image displayed on all products from this collection"
+          "label": "Default Sale Tag Image (Optional)",
+          "info": "Default tag image for all products. Can be overridden by individual Product blocks."
         },
         {
           "type": "header",
-          "content": "Content Customization (Optional)"
+          "content": "Default Content Customization (Optional)"
         },
         {
           "type": "image_picker",
           "id": "custom_image",
-          "label": "Custom Product Image",
-          "info": "Leave blank to use each product's featured image. If set, this image will be used for all products in the collection"
+          "label": "Default Custom Product Image",
+          "info": "Leave blank to use each product's featured image. If set, this will be the default image. Can be overridden by individual Product blocks."
         },
         {
           "type": "text",
           "id": "custom_title",
-          "label": "Custom Title Override",
-          "info": "Leave blank to use each product's title. If set, this will override all product titles (not recommended for collections)"
+          "label": "Default Custom Title",
+          "info": "Leave blank to use each product's title. If set, this will be the default title. Can be overridden by individual Product blocks."
         },
         {
           "type": "textarea",
           "id": "custom_description",
-          "label": "Custom Description",
-          "info": "Optional description that will be displayed on all products from this collection"
+          "label": "Default Custom Description",
+          "info": "Optional default description. Can be overridden by individual Product blocks."
         },
         {
           "type": "header",
-          "content": "Price Customization (Optional)"
+          "content": "Default Price Customization (Optional)"
         },
         {
           "type": "text",
           "id": "custom_compare_price",
-          "label": "Custom Original Price",
-          "info": "Leave blank to use each product's compare_at_price. If set, this price will be used for all products. Example: 299.00"
+          "label": "Default Custom Original Price",
+          "info": "Leave blank to use each product's compare_at_price. If set, this will be the default price. Can be overridden by individual Product blocks. Example: 299.00"
         },
         {
           "type": "number",
           "id": "custom_discount_percent",
-          "label": "Custom Discount %",
+          "label": "Default Custom Discount %",
           "default": 0,
-          "info": "Set to 0 to use system discount. Or set custom % for all products in this collection. Example: 20 for 20% OFF"
+          "info": "Set to 0 to use system discount. Or set default custom % for all products. Can be overridden by individual Product blocks. Example: 20 for 20% OFF"
         },
         {
           "type": "number",
           "id": "category_discount_percent",
-          "label": "Category Discount %",
+          "label": "Default Category Discount %",
           "default": 0,
-          "info": "Set to 0 to use product's system discount. Or set custom % for all products in this collection."
+          "info": "Set to 0 to use product's system discount. Or set default custom % for all products. Can be overridden by individual Product blocks."
         }
       ]
     }
