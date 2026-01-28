@@ -28,13 +28,130 @@
     {% for block in section.blocks %}
       {% if block.type == 'product_tab' %}
         {% assign tab_index = tab_index | plus: 1 %}
+        {%- liquid
+          assign is_active = forloop.first
+
+          comment
+          endcomment
+          if block.settings.bg_color == blank or block.settings.bg_color == 'rgba(0,0,0,0)' or block.settings.bg_color == 'rgba(0, 0, 0, 0)'
+            assign bg_color = 'transparent'
+          else
+            assign bg_color = block.settings.bg_color
+          endif
+          if bg_color == blank
+            assign bg_color = '#fff'
+          endif
+
+          if block.settings.bg_color_active == blank or block.settings.bg_color_active == 'rgba(0,0,0,0)' or block.settings.bg_color_active == 'rgba(0, 0, 0, 0)'
+            assign bg_color_active = 'transparent'
+          else
+            assign bg_color_active = block.settings.bg_color_active
+          endif
+          if bg_color_active == blank
+            if bg_color == 'transparent'
+              assign bg_color_active = 'transparent'
+            else
+              assign bg_color_active = bg_color
+            endif
+          endif
+
+          assign bg_image = block.settings.bg_image
+          assign bg_image_active = block.settings.bg_image_active | default: block.settings.bg_image
+          assign bg_image_repeat = block.settings.bg_image_repeat | default: 'no-repeat'
+          assign bg_image_repeat_active = block.settings.bg_image_repeat_active | default: block.settings.bg_image_repeat | default: 'no-repeat'
+          assign bg_image_position = block.settings.bg_image_position | default: 'center'
+          assign bg_image_position_active = block.settings.bg_image_position_active | default: block.settings.bg_image_position | default: 'center'
+          assign bg_image_size = block.settings.bg_image_size | default: 'cover'
+          assign bg_image_size_active = block.settings.bg_image_size_active | default: block.settings.bg_image_size | default: 'cover'
+
+          comment
+          endcomment
+          if block.settings.text_color == blank or block.settings.text_color == 'rgba(0,0,0,0)' or block.settings.text_color == 'rgba(0, 0, 0, 0)'
+            assign text_color = 'transparent'
+          else
+            assign text_color = block.settings.text_color
+          endif
+          if text_color == blank
+            assign text_color = '#2a8e9e'
+          endif
+
+          if block.settings.text_color_active == blank or block.settings.text_color_active == 'rgba(0,0,0,0)' or block.settings.text_color_active == 'rgba(0, 0, 0, 0)'
+            assign text_color_active = 'transparent'
+          else
+            assign text_color_active = block.settings.text_color_active
+          endif
+          if text_color_active == blank
+            assign text_color_active = '#fff'
+          endif
+
+          comment
+          endcomment
+          if block.settings.border_color == blank or block.settings.border_color == 'rgba(0,0,0,0)' or block.settings.border_color == 'rgba(0, 0, 0, 0)'
+            assign border_color = 'transparent'
+          else
+            assign border_color = block.settings.border_color
+          endif
+          if border_color == blank
+            assign border_color = '#2a8e9e'
+          endif
+
+          if block.settings.border_color_active == blank or block.settings.border_color_active == 'rgba(0,0,0,0)' or block.settings.border_color_active == 'rgba(0, 0, 0, 0)'
+            assign border_color_active = 'transparent'
+          else
+            assign border_color_active = block.settings.border_color_active
+          endif
+          if border_color_active == blank
+            if border_color == 'transparent'
+              assign border_color_active = 'transparent'
+            else
+              assign border_color_active = border_color
+            endif
+          endif
+
+          assign border_width = block.settings.border_width | default: 2
+          assign border_radius = block.settings.border_radius | default: 0.5
+          assign font_size = block.settings.font_size
+          assign font_size_mobile = block.settings.font_size_mobile
+          assign padding_top = block.settings.padding_top | default: 0.6
+          assign padding_bottom = block.settings.padding_bottom | default: 0.6
+          assign padding_left = block.settings.padding_left | default: 2.5
+          assign padding_right = block.settings.padding_right | default: 2.5
+          assign tab_image = block.settings.tab_image
+          assign badge_image = block.settings.badge_image
+          assign badge_position = block.settings.badge_position | default: 'top-right'
+          assign badge_size = block.settings.badge_size | default: 60
+          assign badge_size_mobile = block.settings.badge_size_mobile | default: 40
+        -%}
         <button
           type='button'
-          class='flash-sale-tab-btn{% if forloop.first %} active{% endif %}'
+          class='flash-sale-tab-btn{% if is_active %} active{% endif %}{% if tab_image %} has-image{% endif %}{% if badge_image %} has-badge badge-{{ badge_position }}{% endif %}{% if bg_image %} has-bg-image{% endif %}'
           data-tab-index='{{ tab_index }}'
+          style='--tab-bg: {{ bg_color }}; --tab-bg-active: {{ bg_color_active }};{% if bg_image %} --tab-bg-image: url({{ bg_image | image_url }}); --tab-bg-image-repeat: {{ bg_image_repeat }}; --tab-bg-image-position: {{ bg_image_position }}; --tab-bg-image-size: {{ bg_image_size }};{% endif %}{% if bg_image_active %} --tab-bg-image-active: url({{ bg_image_active | image_url }}); --tab-bg-image-repeat-active: {{ bg_image_repeat_active }}; --tab-bg-image-position-active: {{ bg_image_position_active }}; --tab-bg-image-size-active: {{ bg_image_size_active }};{% endif %} --tab-text: {{ text_color }}; --tab-text-active: {{ text_color_active }}; --tab-border: {{ border_color }}; --tab-border-active: {{ border_color_active }}; --tab-border-width: {{ border_width }}px; --tab-border-radius: {{ border_radius }}rem;{% if font_size %} --tab-font-size: {{ font_size }}rem;{% endif %}{% if font_size_mobile %} --tab-font-size-mobile: {{ font_size_mobile }}rem;{% endif %} --tab-padding-top: {{ padding_top }}rem; --tab-padding-bottom: {{ padding_bottom }}rem; --tab-padding-left: {{ padding_left }}rem; --tab-padding-right: {{ padding_right }}rem; --tab-badge-size: {{ badge_size }}px; --tab-badge-size-mobile: {{ badge_size_mobile }}px;'
           {{ block.shopify_attributes }}
         >
-          {{ block.settings.tab_title }}
+          {% if tab_image %}
+            <span class='flash-sale-tab-image'>
+              <img
+                src='{{ tab_image | image_url: width: 40 }}'
+                alt='{{ block.settings.tab_title }}'
+                width='40'
+                height='40'
+                loading='lazy'
+              >
+            </span>
+          {% endif %}
+          <span class='flash-sale-tab-text'>{{ block.settings.tab_title }}</span>
+          {% if badge_image %}
+            <span class='flash-sale-tab-badge'>
+              <img
+                src='{{ badge_image | image_url: width: badge_size }}'
+                alt=''
+                width='{{ badge_size }}'
+                height='{{ badge_size }}'
+                loading='lazy'
+              >
+            </span>
+          {% endif %}
         </button>
       {% endif %}
     {% endfor %}
@@ -52,14 +169,80 @@
           {{ block.shopify_attributes }}
         >
           <!-- Product Grid -->
-          {% render 'product-grid',
-            section_blocks: section.blocks,
-            grid_style: 'flash',
-            grid_class: 'flash-sale-products',
-            show_reviews: section.settings.show_reviews,
-            discount_percent: block.settings.discount_percent,
-            filter_category: tab_index
-          %}
+          {%- liquid
+            assign has_products = false
+            for block_item in section.blocks
+              if block_item.type == 'product_item'
+                assign parent_num = block_item.settings.parent_tab_number | plus: 0
+                if parent_num == tab_index and block_item.settings.product != blank
+                  assign has_products = true
+                  break
+                endif
+              endif
+            endfor
+          -%}
+
+          {%- liquid
+            assign tab_collection = block.settings.collection
+            assign collection_limit = block.settings.collection_limit | default: 12
+            assign collection_position = block.settings.collection_position | default: 'after'
+            assign collection_dedupe = block.settings.collection_dedupe
+            if collection_dedupe == null
+              assign collection_dedupe = true
+            endif
+          -%}
+
+          {% if has_products or tab_collection != blank %}
+            {% render 'product-grid',
+              section_blocks: section.blocks,
+              grid_style: 'flash',
+              grid_class: 'flash-sale-products',
+              show_reviews: section.settings.show_reviews,
+              discount_percent: block.settings.discount_percent,
+              filter_category: tab_index,
+              collection: tab_collection,
+              collection_limit: collection_limit,
+              collection_position: collection_position,
+              collection_dedupe: collection_dedupe
+            %}
+          {% else %}
+            {% comment %} 预览模式：显示占位产品卡片 {% endcomment %}
+            {%- liquid
+              assign placeholder_discount = block.settings.discount_percent | default: 20
+              assign placeholder_compare = 299
+              assign discount_amount = placeholder_compare | times: placeholder_discount | divided_by: 100.0 | round
+              assign placeholder_sale = placeholder_compare | minus: discount_amount
+            -%}
+            <div class='product-grid product-grid--flash flash-sale-products'>
+              {% for i in (1..4) %}
+                <div class='product-card product-card--flash product-card--placeholder'>
+                  <div class='product-card__image-wrapper'>
+                    <div class='product-card__image product-card__image--placeholder'>
+                      {{ 'product-1' | placeholder_svg_tag }}
+                    </div>
+                    {% if placeholder_discount > 0 %}
+                      <div class='product-card__discount-badge'>
+                        <span>{{ placeholder_discount }}</span>
+                        <span class='product-card__discount-off'>OFF</span>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class='product-card__info'>
+                    <h3 class='product-card__title'>示例产品 {{ i }}</h3>
+                    <p class='product-card__description'>请选择一个产品以显示实际内容</p>
+                    <div class='product-card__price'>
+                      {% if placeholder_discount > 0 %}
+                        <s class='product-card__price-compare'>${{ placeholder_compare }}.00</s>
+                        <span class='product-card__price-sale'>${{ placeholder_sale }}.00</span>
+                      {% else %}
+                        <span class='product-card__price-sale'>${{ placeholder_compare }}.00</span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
         </div>
       {% endif %}
     {% endfor %}
@@ -110,17 +293,451 @@
       "name": "Product Tab",
       "settings": [
         {
+          "type": "header",
+          "content": "基本设置"
+        },
+        {
           "type": "text",
           "id": "tab_title",
-          "label": "Tab Title",
+          "label": "Tab 标题",
           "default": "Product Category"
         },
         {
           "type": "number",
           "id": "discount_percent",
-          "label": "Discount Percentage",
+          "label": "折扣百分比",
           "default": 0,
-          "info": "Set to 0 to use product's system discount (compare_at_price). Or set custom % (e.g., 15 for 15% OFF)"
+          "info": "设置为 0 使用产品系统折扣 (compare_at_price)，或设置自定义百分比（例如：15 表示 15% OFF）"
+        },
+        {
+          "type": "header",
+          "content": "批量商品设置（Collection）"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "选择 Collection",
+          "info": "从 Collection 批量添加商品，无需逐个配置。留空则仅显示下方手动添加的商品"
+        },
+        {
+          "type": "range",
+          "id": "collection_limit",
+          "label": "Collection 商品数量上限",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 12,
+          "info": "从 Collection 中最多显示多少个商品"
+        },
+        {
+          "type": "select",
+          "id": "collection_position",
+          "label": "Collection 商品显示位置",
+          "options": [
+            {
+              "value": "after",
+              "label": "在手动添加的商品之后"
+            },
+            {
+              "value": "before",
+              "label": "在手动添加的商品之前"
+            },
+            {
+              "value": "only",
+              "label": "仅显示 Collection 商品（忽略手动添加）"
+            }
+          ],
+          "default": "after",
+          "info": "手动添加的商品 = 下方通过 Product block 单独添加的商品"
+        },
+        {
+          "type": "checkbox",
+          "id": "collection_dedupe",
+          "label": "自动去重",
+          "default": true,
+          "info": "如果某商品已通过 Product block 手动添加，则不从 Collection 重复显示"
+        },
+        {
+          "type": "header",
+          "content": "Tab 样式设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_image",
+          "label": "Tab 图标/图片",
+          "info": "可选：在 tab 文字前显示的图标或图片"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "背景图片（默认状态）",
+          "info": "可选：tab 按钮的背景图片"
+        },
+        {
+          "type": "select",
+          "id": "bg_image_repeat",
+          "label": "背景图片重复方式（默认状态）",
+          "options": [
+            {
+              "value": "no-repeat",
+              "label": "不重复"
+            },
+            {
+              "value": "repeat",
+              "label": "重复"
+            },
+            {
+              "value": "repeat-x",
+              "label": "水平重复"
+            },
+            {
+              "value": "repeat-y",
+              "label": "垂直重复"
+            }
+          ],
+          "default": "no-repeat"
+        },
+        {
+          "type": "select",
+          "id": "bg_image_position",
+          "label": "背景图片位置（默认状态）",
+          "options": [
+            {
+              "value": "center",
+              "label": "居中"
+            },
+            {
+              "value": "top left",
+              "label": "左上"
+            },
+            {
+              "value": "top center",
+              "label": "上中"
+            },
+            {
+              "value": "top right",
+              "label": "右上"
+            },
+            {
+              "value": "center left",
+              "label": "左中"
+            },
+            {
+              "value": "center right",
+              "label": "右中"
+            },
+            {
+              "value": "bottom left",
+              "label": "左下"
+            },
+            {
+              "value": "bottom center",
+              "label": "下中"
+            },
+            {
+              "value": "bottom right",
+              "label": "右下"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "bg_image_size",
+          "label": "背景图片大小（默认状态）",
+          "options": [
+            {
+              "value": "cover",
+              "label": "覆盖"
+            },
+            {
+              "value": "contain",
+              "label": "包含"
+            },
+            {
+              "value": "auto",
+              "label": "自动"
+            }
+          ],
+          "default": "cover"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image_active",
+          "label": "背景图片（激活状态）",
+          "info": "可选：激活状态的背景图片，留空则使用默认状态的背景图"
+        },
+        {
+          "type": "select",
+          "id": "bg_image_repeat_active",
+          "label": "背景图片重复方式（激活状态）",
+          "options": [
+            {
+              "value": "no-repeat",
+              "label": "不重复"
+            },
+            {
+              "value": "repeat",
+              "label": "重复"
+            },
+            {
+              "value": "repeat-x",
+              "label": "水平重复"
+            },
+            {
+              "value": "repeat-y",
+              "label": "垂直重复"
+            }
+          ],
+          "default": "no-repeat"
+        },
+        {
+          "type": "select",
+          "id": "bg_image_position_active",
+          "label": "背景图片位置（激活状态）",
+          "options": [
+            {
+              "value": "center",
+              "label": "居中"
+            },
+            {
+              "value": "top left",
+              "label": "左上"
+            },
+            {
+              "value": "top center",
+              "label": "上中"
+            },
+            {
+              "value": "top right",
+              "label": "右上"
+            },
+            {
+              "value": "center left",
+              "label": "左中"
+            },
+            {
+              "value": "center right",
+              "label": "右中"
+            },
+            {
+              "value": "bottom left",
+              "label": "左下"
+            },
+            {
+              "value": "bottom center",
+              "label": "下中"
+            },
+            {
+              "value": "bottom right",
+              "label": "右下"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "select",
+          "id": "bg_image_size_active",
+          "label": "背景图片大小（激活状态）",
+          "options": [
+            {
+              "value": "cover",
+              "label": "覆盖"
+            },
+            {
+              "value": "contain",
+              "label": "包含"
+            },
+            {
+              "value": "auto",
+              "label": "自动"
+            }
+          ],
+          "default": "cover"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "背景颜色（默认状态）",
+          "default": "#ffffff",
+          "info": "提示：将透明度设置为 0% 可设置为透明色"
+        },
+        {
+          "type": "color",
+          "id": "bg_color_active",
+          "label": "背景颜色（激活状态）",
+          "default": "#2a8e9e",
+          "info": "留空则使用默认状态的背景色。提示：将透明度设置为 0% 可设置为透明色"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "文字颜色（默认状态）",
+          "default": "#2a8e9e",
+          "info": "提示：将透明度设置为 0% 可设置为透明色"
+        },
+        {
+          "type": "color",
+          "id": "text_color_active",
+          "label": "文字颜色（激活状态）",
+          "default": "#ffffff",
+          "info": "提示：将透明度设置为 0% 可设置为透明色"
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "边框颜色（默认状态）",
+          "default": "#2a8e9e",
+          "info": "提示：将透明度设置为 0% 可设置为透明色（需要将边框宽度设置为 0 或大于 0 的值）"
+        },
+        {
+          "type": "color",
+          "id": "border_color_active",
+          "label": "边框颜色（激活状态）",
+          "default": "#2a8e9e",
+          "info": "留空则使用默认状态的边框色。提示：将透明度设置为 0% 可设置为透明色"
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "label": "边框宽度 (px)",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 2,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "label": "圆角大小 (rem)",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 0.5,
+          "unit": "rem"
+        },
+        {
+          "type": "header",
+          "content": "尺寸设置"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "字体大小 - 桌面端 (rem)",
+          "min": 0.8,
+          "max": 3,
+          "step": 0.1,
+          "default": 1.5,
+          "unit": "rem",
+          "info": "留空则使用默认值"
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "label": "字体大小 - 移动端 (rem)",
+          "min": 0.8,
+          "max": 2,
+          "step": 0.1,
+          "default": 1,
+          "unit": "rem",
+          "info": "留空则使用默认值"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "内边距 - 上 (rem)",
+          "min": 0,
+          "max": 3,
+          "step": 0.1,
+          "default": 0.6,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "内边距 - 下 (rem)",
+          "min": 0,
+          "max": 3,
+          "step": 0.1,
+          "default": 0.6,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_left",
+          "label": "内边距 - 左 (rem)",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 2.5,
+          "unit": "rem"
+        },
+        {
+          "type": "range",
+          "id": "padding_right",
+          "label": "内边距 - 右 (rem)",
+          "min": 0,
+          "max": 5,
+          "step": 0.1,
+          "default": 2.5,
+          "unit": "rem"
+        },
+        {
+          "type": "header",
+          "content": "角标设置"
+        },
+        {
+          "type": "image_picker",
+          "id": "badge_image",
+          "label": "角标图片",
+          "info": "可选：在 tab 上显示的角标图片"
+        },
+        {
+          "type": "select",
+          "id": "badge_position",
+          "label": "角标位置",
+          "options": [
+            {
+              "value": "top-right",
+              "label": "右上角"
+            },
+            {
+              "value": "top-left",
+              "label": "左上角"
+            },
+            {
+              "value": "bottom-right",
+              "label": "右下角"
+            },
+            {
+              "value": "bottom-left",
+              "label": "左下角"
+            }
+          ],
+          "default": "top-right"
+        },
+        {
+          "type": "range",
+          "id": "badge_size",
+          "label": "角标大小 (px)",
+          "min": 20,
+          "max": 150,
+          "step": 5,
+          "default": 60,
+          "unit": "px",
+          "info": "角标图片的显示大小"
+        },
+        {
+          "type": "range",
+          "id": "badge_size_mobile",
+          "label": "角标大小 - 移动端 (px)",
+          "min": 15,
+          "max": 100,
+          "step": 5,
+          "default": 40,
+          "unit": "px",
+          "info": "移动端角标图片的显示大小"
         }
       ]
     },
@@ -180,49 +797,137 @@
           "info": "Override tab discount. Set to 0 to use tab discount or product's system discount. Example: 20 for 20% OFF"
         }
       ]
-    },
-    {
-      "type": "product_collection",
-      "name": "Product Collection",
-      "settings": [
-        {
-          "type": "number",
-          "id": "parent_tab_number",
-          "label": "Belongs to Tab Number",
-          "default": 1,
-          "info": "Enter 1 for first tab, 2 for second tab, etc."
-        },
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Select Collection",
-          "info": "All products from this collection will be displayed"
-        },
-        {
-          "type": "number",
-          "id": "product_limit",
-          "label": "Product Limit",
-          "default": 50,
-          "info": "Maximum number of products to display from collection (0 = no limit)"
-        },
-        {
-          "type": "header",
-          "content": "Price Customization (Optional)"
-        },
-        {
-          "type": "number",
-          "id": "custom_discount_percent",
-          "label": "Custom Discount %",
-          "default": 0,
-          "info": "Override tab discount. Set to 0 to use tab discount or product's system discount. Example: 20 for 20% OFF"
-        }
-      ]
     }
   ],
   "presets": [
     {
-      "name": "Flash Sale"
+      "name": "[gy] Tab Product List",
+      "blocks": [
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_title": "热销产品",
+            "discount_percent": 15,
+            "bg_color": "#ffffff",
+            "bg_color_active": "#2a8e9e",
+            "text_color": "#2a8e9e",
+            "text_color_active": "#ffffff",
+            "border_color": "#2a8e9e",
+            "border_color_active": "#2a8e9e"
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "custom_discount_percent": 0
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "custom_discount_percent": 0
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1,
+            "custom_discount_percent": 0
+          }
+        },
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_title": "新品推荐",
+            "discount_percent": 20,
+            "bg_color": "#ffffff",
+            "bg_color_active": "#2a8e9e",
+            "text_color": "#2a8e9e",
+            "text_color_active": "#ffffff",
+            "border_color": "#2a8e9e",
+            "border_color_active": "#2a8e9e"
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 2,
+            "custom_discount_percent": 0
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 2,
+            "custom_discount_percent": 0
+          }
+        },
+        {
+          "type": "product_tab",
+          "settings": {
+            "tab_title": "限时特价",
+            "discount_percent": 25,
+            "bg_color": "#ffffff",
+            "bg_color_active": "#2a8e9e",
+            "text_color": "#2a8e9e",
+            "text_color_active": "#ffffff",
+            "border_color": "#2a8e9e",
+            "border_color_active": "#2a8e9e"
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 3,
+            "custom_discount_percent": 0
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 3,
+            "custom_discount_percent": 0
+          }
+        }
+      ]
     }
   ]
 }
 {% endschema %}
+
+{% style %}
+  /* Placeholder Product Cards - 使用主题色 */
+  .product-card--placeholder {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .product-card--placeholder .product-card__image--placeholder {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  .product-card--placeholder .product-card__title {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: rgb(var(--heading-color));
+  }
+
+  .product-card--placeholder .product-card__description {
+    font-size: 0.875rem;
+    color: rgb(var(--text-color));
+    opacity: 0.6;
+    margin: 0.5rem 0;
+  }
+
+  .product-card--placeholder .product-card__discount-badge {
+    background: rgb(var(--btn-bg-color));
+    color: rgb(var(--btn-text-color));
+  }
+{% endstyle %}

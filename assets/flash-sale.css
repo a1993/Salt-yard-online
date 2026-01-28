@@ -17,25 +17,129 @@
 }
 
 .flash-sale-tab-btn {
-  padding: 0.625rem 2.5rem;
-  font-size: 1rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: var(--tab-padding-top, 0.625rem) var(--tab-padding-right, 2.5rem)
+    var(--tab-padding-bottom, 0.625rem) var(--tab-padding-left, 2.5rem);
+  font-size: var(--tab-font-size-mobile, 1rem);
   font-weight: 600;
-  color: #2a8e9e;
-  background: #fff;
-  border: 2px solid #2a8e9e;
-  border-radius: 0.5rem;
+  /* 使用主题按钮色作为默认回退值 */
+  color: var(--tab-text, rgb(var(--btn-bg-color, 42, 142, 158)));
+  background-color: var(--tab-bg, #fff);
+  border: var(--tab-border-width, 2px) solid
+    var(--tab-border, rgb(var(--btn-bg-color, 42, 142, 158)));
+  border-radius: var(--tab-border-radius, 0.5rem);
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
+/* Background Image Support */
+.flash-sale-tab-btn.has-bg-image {
+  background-image: var(--tab-bg-image);
+  background-repeat: var(--tab-bg-image-repeat, no-repeat);
+  background-position: var(--tab-bg-image-position, center);
+  background-size: var(--tab-bg-image-size, cover);
+}
+
+.flash-sale-tab-btn.has-bg-image:hover {
+  opacity: 0.95;
+}
+
+.flash-sale-tab-btn.active.has-bg-image {
+  background-color: transparent;
+  background-image: var(--tab-bg-image-active, var(--tab-bg-image));
+  background-repeat: var(--tab-bg-image-repeat-active, var(--tab-bg-image-repeat, no-repeat));
+  background-position: var(--tab-bg-image-position-active, var(--tab-bg-image-position, center));
+  background-size: var(--tab-bg-image-size-active, var(--tab-bg-image-size, cover));
+}
+
 .flash-sale-tab-btn:hover {
-  background: #f0f9fa;
+  opacity: 0.9;
 }
 
 .flash-sale-tab-btn.active {
-  color: #fff;
-  background: #2a8e9e;
+  /* 使用主题按钮色作为默认回退值 */
+  color: var(--tab-text-active, rgb(var(--btn-text-color, 255, 255, 255)));
+  background-color: var(--tab-bg-active, rgb(var(--btn-bg-color, 42, 142, 158)));
+  border-color: var(--tab-border-active, rgb(var(--btn-bg-color, 42, 142, 158)));
+}
+
+.flash-sale-tab-btn:focus {
+  outline: 2px solid rgb(var(--btn-bg-color, 42, 142, 158));
+  outline-offset: 2px;
+}
+
+/* Tab Image */
+.flash-sale-tab-image {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.flash-sale-tab-image img {
+  display: block;
+  max-width: 24px;
+  max-height: 24px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.flash-sale-tab-btn.active .flash-sale-tab-image img {
+  filter: brightness(0) invert(1);
+}
+
+/* Tab Text */
+.flash-sale-tab-text {
+  display: inline-block;
+}
+
+/* Tab Badge */
+.flash-sale-tab-btn.has-badge {
+  overflow: visible;
+}
+
+.flash-sale-tab-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.flash-sale-tab-badge img {
+  display: block;
+  max-width: var(--tab-badge-size-mobile, 40px);
+  max-height: var(--tab-badge-size-mobile, 40px);
+  width: var(--tab-badge-size-mobile, 40px);
+  height: var(--tab-badge-size-mobile, 40px);
+  object-fit: contain;
+}
+
+/* Badge Positions - 使用 CSS 变量根据角标大小动态调整位置 */
+.flash-sale-tab-btn.badge-top-right .flash-sale-tab-badge {
+  top: calc(var(--tab-badge-size-mobile, 40px) / -2);
+  right: calc(var(--tab-badge-size-mobile, 40px) / -2);
+}
+
+.flash-sale-tab-btn.badge-top-left .flash-sale-tab-badge {
+  top: calc(var(--tab-badge-size-mobile, 40px) / -2);
+  left: calc(var(--tab-badge-size-mobile, 40px) / -2);
+}
+
+.flash-sale-tab-btn.badge-bottom-right .flash-sale-tab-badge {
+  bottom: calc(var(--tab-badge-size-mobile, 40px) / -2);
+  right: calc(var(--tab-badge-size-mobile, 40px) / -2);
+}
+
+.flash-sale-tab-btn.badge-bottom-left .flash-sale-tab-badge {
+  bottom: calc(var(--tab-badge-size-mobile, 40px) / -2);
+  left: calc(var(--tab-badge-size-mobile, 40px) / -2);
 }
 
 /* Tab Content */
@@ -95,13 +199,47 @@
   }
 
   .flash-sale-tab-btn {
-    padding: 0.625rem 2.5rem;
-    font-size: 1.5rem;
+    padding: var(--tab-padding-top, 0.625rem) var(--tab-padding-right, 2.5rem)
+      var(--tab-padding-bottom, 0.625rem) var(--tab-padding-left, 2.5rem);
+    font-size: var(--tab-font-size, 1.5rem);
   }
 
   .flash-sale-tab-btn:nth-child(2) {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .flash-sale-tab-image img {
+    max-width: 32px;
+    max-height: 32px;
+  }
+
+  .flash-sale-tab-badge img {
+    max-width: var(--tab-badge-size, 60px);
+    max-height: var(--tab-badge-size, 60px);
+    width: var(--tab-badge-size, 60px);
+    height: var(--tab-badge-size, 60px);
+  }
+
+  /* 桌面端角标位置使用桌面端角标大小 */
+  .flash-sale-tab-btn.badge-top-right .flash-sale-tab-badge {
+    top: calc(var(--tab-badge-size, 60px) / -2);
+    right: calc(var(--tab-badge-size, 60px) / -2);
+  }
+
+  .flash-sale-tab-btn.badge-top-left .flash-sale-tab-badge {
+    top: calc(var(--tab-badge-size, 60px) / -2);
+    left: calc(var(--tab-badge-size, 60px) / -2);
+  }
+
+  .flash-sale-tab-btn.badge-bottom-right .flash-sale-tab-badge {
+    bottom: calc(var(--tab-badge-size, 60px) / -2);
+    right: calc(var(--tab-badge-size, 60px) / -2);
+  }
+
+  .flash-sale-tab-btn.badge-bottom-left .flash-sale-tab-badge {
+    bottom: calc(var(--tab-badge-size, 60px) / -2);
+    left: calc(var(--tab-badge-size, 60px) / -2);
   }
 
   .product-grid--flash {
@@ -205,8 +343,21 @@
   }
 
   .flash-sale-tab-btn {
-    padding: 0.5rem 1.25rem;
-    font-size: 1rem;
+    padding: var(--tab-padding-top, 0.5rem) var(--tab-padding-right, 1.25rem)
+      var(--tab-padding-bottom, 0.5rem) var(--tab-padding-left, 1.25rem);
+    font-size: var(--tab-font-size-mobile, 1rem);
+  }
+
+  .flash-sale-tab-image img {
+    max-width: 20px;
+    max-height: 20px;
+  }
+
+  .flash-sale-tab-badge img {
+    max-width: var(--tab-badge-size-mobile, 40px);
+    max-height: var(--tab-badge-size-mobile, 40px);
+    width: var(--tab-badge-size-mobile, 40px);
+    height: var(--tab-badge-size-mobile, 40px);
   }
 
   .product-grid--flash {

@@ -10,15 +10,89 @@
   - discount_percent: 统一的折扣百分比 (可选)
   - section_blocks: section.blocks 数组 (用于遍历产品块)
   - filter_category: 过滤分类编号 (用于 flash-sale 和 halloween)
+  - collection: Collection 对象 (可选，用于批量添加商品)
+  - collection_limit: Collection 商品数量上限 (默认 12)
+  - collection_position: Collection 商品显示位置 ('before', 'after', 'only')
+  - collection_dedupe: 是否去重 (默认 true)
 {% endcomment %}
 
 {%- liquid
   assign grid_style = grid_style | default: 'standard'
+  assign collection_limit = collection_limit | default: 12
+  assign collection_position = collection_position | default: 'after'
+  if collection_dedupe == null
+    assign collection_dedupe = true
+  endif
+
+  comment
+    收集手动添加的商品 ID，用于去重
+  endcomment
+  assign manual_product_ids = ''
+  if section_blocks and collection_dedupe
+    for block in section_blocks
+      if block.type == 'product_item' and block.settings.product != blank
+        if filter_category
+          assign parent_num = 0
+          if grid_style == 'flash'
+            assign parent_num = block.settings.parent_tab_number | plus: 0
+          elsif grid_style == 'halloween'
+            assign parent_num = block.settings.parent_category_number | plus: 0
+          endif
+          if parent_num == filter_category
+            if manual_product_ids == ''
+              assign manual_product_ids = block.settings.product.id | append: ''
+            else
+              assign manual_product_ids = manual_product_ids | append: ',' | append: block.settings.product.id
+            endif
+          endif
+        else
+          if manual_product_ids == ''
+            assign manual_product_ids = block.settings.product.id | append: ''
+          else
+            assign manual_product_ids = manual_product_ids | append: ',' | append: block.settings.product.id
+          endif
+        endif
+      endif
+    endfor
+  endif
+  assign manual_product_ids_array = manual_product_ids | split: ','
 -%}
 
 <div class='product-grid product-grid--{{ grid_style }}{% if grid_class %} {{ grid_class }}{% endif %}'>
-  {% if section_blocks %}
-    {% comment %} 使用 section.blocks 遍历 {% endcomment %}
+  {% comment %} === Collection 商品 (before 模式) === {% endcomment %}
+  {% if collection != blank and collection_position == 'before' %}
+    {%- liquid
+      assign collection_count = 0
+    -%}
+    {% for product in collection.products limit: collection_limit %}
+      {%- liquid
+        assign should_skip = false
+        if collection_dedupe
+          assign product_id_str = product.id | append: ''
+          if manual_product_ids_array contains product_id_str
+            assign should_skip = true
+          endif
+        endif
+      -%}
+      {% unless should_skip %}
+        {%- liquid
+          assign collection_count = collection_count | plus: 1
+        -%}
+        {% if grid_style == 'flash' %}
+          {% render 'product-card-flash',
+            product: product,
+            show_reviews: show_reviews,
+            discount_percent: discount_percent
+          %}
+        {% elsif grid_style == 'halloween' %}
+          {% render 'product-card-halloween', product: product, show_reviews: show_reviews %}
+        {% endif %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+
+  {% comment %} === 手动添加的商品 (非 only 模式) === {% endcomment %}
+  {% if section_blocks and collection_position != 'only' %}
     {% for block in section_blocks %}
       {% if block.type == 'product_item' %}
         {% comment %} 如果有分类过滤，检查是否属于当前分类 {% endcomment %}
@@ -80,64 +154,39 @@
             %}
           {% endif %}
         {% endif %}
-      {% elsif block.type == 'product_collection' %}
-        {% comment %} 处理产品系列 {% endcomment %}
-        {% assign collection = block.settings.collection %}
-        {% if collection %}
-          {% comment %} 检查分类过滤 {% endcomment %}
-          {% assign should_render = false %}
-          {% if filter_category %}
-            {% assign parent_num = 0 %}
-            {% if grid_style == 'flash' %}
-              {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
-            {% elsif grid_style == 'halloween' %}
-              {% assign parent_num = block.settings.parent_category_number | plus: 0 %}
-            {% endif %}
-            {% if parent_num == filter_category %}
-              {% assign should_render = true %}
-            {% endif %}
-          {% else %}
-            {% assign should_render = true %}
-          {% endif %}
-
-          {% if should_render %}
-            {% comment %} 获取产品限制数量 {% endcomment %}
-            {% assign product_limit = block.settings.product_limit | plus: 0 %}
-            {% if product_limit == 0 %}
-              {% assign product_limit = 999 %}
-            {% endif %}
-
-            {% comment %} 遍历 collection 中的产品 {% endcomment %}
-            {% for product in collection.products limit: product_limit %}
-              {% if grid_style == 'flash' %}
-                {% render 'product-card-flash',
-                  product: product,
-                  show_reviews: show_reviews,
-                  discount_percent: discount_percent,
-                  custom_image: null,
-                  custom_title: null,
-                  custom_description: null,
-                  custom_compare_price: null,
-                  custom_discount_percent: block.settings.custom_discount_percent,
-                  shopify_attributes: block.shopify_attributes
-                %}
-              {% elsif grid_style == 'halloween' %}
-                {% render 'product-card-halloween',
-                  product: product,
-                  show_reviews: show_reviews,
-                  button_text: null,
-                  custom_image: null,
-                  custom_title: null,
-                  custom_description: null,
-                  custom_compare_price: null,
-                  custom_discount_percent: block.settings.custom_discount_percent,
-                  shopify_attributes: block.shopify_attributes
-                %}
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endif %}
       {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% comment %} === Collection 商品 (after 或 only 模式) === {% endcomment %}
+  {% if collection != blank and collection_position != 'before' %}
+    {%- liquid
+      assign collection_count = 0
+    -%}
+    {% for product in collection.products limit: collection_limit %}
+      {%- liquid
+        assign should_skip = false
+        if collection_dedupe and collection_position != 'only'
+          assign product_id_str = product.id | append: ''
+          if manual_product_ids_array contains product_id_str
+            assign should_skip = true
+          endif
+        endif
+      -%}
+      {% unless should_skip %}
+        {%- liquid
+          assign collection_count = collection_count | plus: 1
+        -%}
+        {% if grid_style == 'flash' %}
+          {% render 'product-card-flash',
+            product: product,
+            show_reviews: show_reviews,
+            discount_percent: discount_percent
+          %}
+        {% elsif grid_style == 'halloween' %}
+          {% render 'product-card-halloween', product: product, show_reviews: show_reviews %}
+        {% endif %}
+      {% endunless %}
     {% endfor %}
   {% endif %}
 </div>
