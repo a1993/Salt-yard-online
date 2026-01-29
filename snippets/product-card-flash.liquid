@@ -1,168 +1,108 @@
 {% comment %}
   Flash Sale 商品卡片组件
-  使用 Shopify 产品对象
-  
+  使用 Shopify 产品对象，折扣基于系统价格（compare_at_price）
+
   参数:
   - product: Shopify 产品对象 (必需)
   - show_reviews: 是否显示评论
-  - discount_percent: Tab 的折扣百分比
   - custom_image: 自定义商品图片 (可选)
   - custom_title: 自定义标题 (可选)
   - custom_description: 自定义描述 (可选)
-  - custom_compare_price: 自定义原价 (可选)
-  - custom_discount_percent: 自定义折扣百分比 (可选，优先于 discount_percent)
   - shopify_attributes: Shopify 属性
 {% endcomment %}
 
 {% if product %}
   {%- liquid
-    # 确定原价和折扣价
-    # 优先级：自定义价格 > 系统价格（product.compare_at_price 和 product.price）
-    assign compare_price = 0
-    assign sale_price = product.price
+    # 获取最便宜的变体用于计算折扣
+    assign cheapest_variant = product.variants | sort: 'price' | first
+
+    # 使用系统价格
+    assign compare_price = cheapest_variant.compare_at_price
+    assign sale_price = cheapest_variant.price
     assign show_compare_price = false
-    assign final_discount_percent = 0
-    
-    # 计算系统折扣百分比（基于产品的 compare_at_price）
-    assign system_discount_percent = 0
-    if product.compare_at_price > product.price
-      assign discount_amount = product.compare_at_price | minus: product.price
-      assign system_discount_percent = discount_amount | times: 100.0 | divided_by: product.compare_at_price | round
-    endif
-    
-    # 如果有自定义原价
-    if custom_compare_price != blank
-      assign compare_price_value = custom_compare_price | times: 100
-      assign compare_price = compare_price_value
+
+    # 判断是否有折扣（基于系统 compare_at_price）
+    if compare_price > sale_price
       assign show_compare_price = true
-      
-      # 确定使用的折扣百分比（优先级：custom_discount_percent > discount_percent > 系统计算的）
-      if custom_discount_percent and custom_discount_percent > 0
-        assign final_discount_percent = custom_discount_percent
-      elsif discount_percent and discount_percent > 0
-        assign final_discount_percent = discount_percent
-      elsif system_discount_percent > 0
-        assign final_discount_percent = system_discount_percent
-      endif
-      
-      # 如果有折扣百分比，基于自定义原价计算现价
-      if final_discount_percent > 0
-        assign discount_decimal = final_discount_percent | times: 1.0 | divided_by: 100.0
-        assign discount_amount = compare_price | times: discount_decimal
-        assign sale_price = compare_price | minus: discount_amount
-      else
-        # 没有折扣设置，使用产品价格
-        assign sale_price = product.price
-      endif
-    else
-      # 没有自定义原价，使用系统价格（product.compare_at_price 和 product.price）
-      # 确定使用的折扣百分比（优先级：custom_discount_percent > discount_percent > 系统计算的）
-      if custom_discount_percent and custom_discount_percent > 0
-        assign final_discount_percent = custom_discount_percent
-      elsif discount_percent and discount_percent > 0
-        assign final_discount_percent = discount_percent
-      elsif system_discount_percent > 0
-        assign final_discount_percent = system_discount_percent
-      endif
-      
-      # 使用系统固定折扣（product.compare_at_price）
-      if product.compare_at_price > product.price
-        # 系统已配置折扣，直接使用
-        assign compare_price = product.compare_at_price
-        assign sale_price = product.price
-        assign show_compare_price = true
-        # 如果没有设置任何折扣百分比，使用系统计算的
-        if final_discount_percent == 0
-          assign final_discount_percent = system_discount_percent
-        endif
-      elsif final_discount_percent > 0
-        # 有折扣百分比但没有系统固定折扣，基于产品价格计算
-        assign compare_price = product.price
-        assign discount_decimal = final_discount_percent | times: 1.0 | divided_by: 100.0
-        assign discount_amount = product.price | times: discount_decimal
-        assign sale_price = product.price | minus: discount_amount
-        assign show_compare_price = true
-      endif
-    endif
-    
-    # 显示折扣徽章的条件
-    assign show_discount_badge = false
-    if final_discount_percent > 0
-      assign show_discount_badge = true
     endif
   -%}
-  
-  <a href="{{ product.url }}" class="product-card product-card--flash" {{ shopify_attributes }}>
+
+  <a href='{{ product.url }}' class='product-card product-card--flash' {{ shopify_attributes }}>
     <!-- Product Image -->
-    <div class="product-card__image-wrapper">
+    <div class='product-card__image-wrapper'>
       {%- liquid
         # 优先使用自定义图片
         assign display_image = custom_image | default: product.featured_image
         assign display_title = custom_title | default: product.title
       -%}
-      
+
       {% if display_image %}
-        <img 
-          src="{{ display_image | image_url: width: 400 }}"
-          srcset="{{ display_image | image_url: width: 200 }} 200w,
-                  {{ display_image | image_url: width: 400 }} 400w,
-                  {{ display_image | image_url: width: 600 }} 600w"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          alt="{{ display_title | escape }}"
-          width="400"
-          height="400"
-          loading="lazy"
-          class="product-card__image">
+        <img
+          src='{{ display_image | image_url: width: 400 }}'
+          srcset='
+            {{ display_image | image_url: width: 200 }} 200w,
+            {{ display_image | image_url: width: 400 }} 400w,
+            {{ display_image | image_url: width: 600 }} 600w
+          '
+          sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
+          alt='{{ display_title | escape }}'
+          width='400'
+          height='400'
+          loading='lazy'
+          class='product-card__image'
+        >
       {% else %}
-        <div class="product-card__image product-card__image--placeholder">
+        <div class='product-card__image product-card__image--placeholder'>
           {{ 'product-1' | placeholder_svg_tag }}
         </div>
       {% endif %}
-      
-      <!-- Discount Badge -->
-      {% if show_discount_badge %}
-        <div class="product-card__discount-badge">
-          <span>{{ final_discount_percent }}%</span>
-          <span class="product-card__discount-off">OFF</span>
-        </div>
-      {% endif %}
-      
+
+      {% comment %} 使用主题的 product-label 组件显示折扣标签 {% endcomment %}
+      {%- render 'product-label', product: product, cheapest_variant: cheapest_variant -%}
+
       <!-- Hot Tag -->
       {% if product.tags contains 'HOT' or product.tags contains 'hot' %}
-        <div class="product-card__hot-tag">
+        <div class='product-card__hot-tag'>
           <span>HOT</span>
         </div>
       {% endif %}
     </div>
-    
+
     <!-- Product Info -->
-    <div class="product-card__info">
-      <h3 class="product-card__title">{{ display_title }}</h3>
-      
+    <div class='product-card__info'>
+      <h3 class='product-card__title'>{{ display_title }}</h3>
+
       <!-- Custom Description (Optional) -->
       {% if custom_description != blank %}
-        <p class="product-card__description">{{ custom_description }}</p>
+        <p class='product-card__description'>{{ custom_description }}</p>
       {% endif %}
-      
-      <!-- Price -->
-      <div class="product-card__price">
-        {% if show_compare_price and compare_price > sale_price %}
+
+      <!-- Price (使用系统价格) -->
+      <div class='product-card__price'>
+        {% if show_compare_price %}
           {% comment %} 显示原价和折扣价（符合 Shopify 官方格式） {% endcomment %}
-          <s class="product-card__price-compare">{{ compare_price | money }}</s>
-          <span class="product-card__price-sale">{{ sale_price | money }}</span>
+          <s class='product-card__price-compare'>{{ compare_price | money }}</s>
+          <span class='product-card__price-sale'>{{ sale_price | money }}</span>
         {% else %}
           {% comment %} 只显示当前价格 {% endcomment %}
-          <span class="product-card__price-sale">{{ sale_price | money }}</span>
+          <span class='product-card__price-sale'>{{ sale_price | money }}</span>
         {% endif %}
       </div>
-      
+
       <!-- Reviews (Optional) -->
       {% if show_reviews and product.metafields.reviews.rating_count.value %}
-        <div class="product-card__reviews">
+        <div class='product-card__reviews'>
           {{ product.metafields.reviews.rating_count.value }} Review(s)
         </div>
       {% endif %}
     </div>
   </a>
-{% endif %}
 
+  <!-- 商品结构化数据 -->
+  {% render 'product-structured-data',
+    product: product,
+    custom_title: custom_title,
+    custom_description: custom_description,
+    custom_image: custom_image
+  %}
+{% endif %}

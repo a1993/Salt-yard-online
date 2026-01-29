@@ -198,7 +198,6 @@
               grid_style: 'flash',
               grid_class: 'flash-sale-products',
               show_reviews: section.settings.show_reviews,
-              discount_percent: block.settings.discount_percent,
               filter_category: tab_index,
               collection: tab_collection,
               collection_limit: collection_limit,
@@ -207,12 +206,6 @@
             %}
           {% else %}
             {% comment %} 预览模式：显示占位产品卡片 {% endcomment %}
-            {%- liquid
-              assign placeholder_discount = block.settings.discount_percent | default: 20
-              assign placeholder_compare = 299
-              assign discount_amount = placeholder_compare | times: placeholder_discount | divided_by: 100.0 | round
-              assign placeholder_sale = placeholder_compare | minus: discount_amount
-            -%}
             <div class='product-grid product-grid--flash flash-sale-products'>
               {% for i in (1..4) %}
                 <div class='product-card product-card--flash product-card--placeholder'>
@@ -220,23 +213,19 @@
                     <div class='product-card__image product-card__image--placeholder'>
                       {{ 'product-1' | placeholder_svg_tag }}
                     </div>
-                    {% if placeholder_discount > 0 %}
-                      <div class='product-card__discount-badge'>
-                        <span>{{ placeholder_discount }}</span>
-                        <span class='product-card__discount-off'>OFF</span>
-                      </div>
-                    {% endif %}
+                    {% comment %} 使用主题折扣标签样式 {% endcomment %}
+                    <div class='product-label-container'>
+                      <span class='product-label product-label--sale'>
+                        <span>-20%</span>
+                      </span>
+                    </div>
                   </div>
                   <div class='product-card__info'>
                     <h3 class='product-card__title'>示例产品 {{ i }}</h3>
-                    <p class='product-card__description'>请选择一个产品以显示实际内容</p>
+                    <p class='product-card__description'>请选择一个产品或 Collection</p>
                     <div class='product-card__price'>
-                      {% if placeholder_discount > 0 %}
-                        <s class='product-card__price-compare'>${{ placeholder_compare }}.00</s>
-                        <span class='product-card__price-sale'>${{ placeholder_sale }}.00</span>
-                      {% else %}
-                        <span class='product-card__price-sale'>${{ placeholder_compare }}.00</span>
-                      {% endif %}
+                      <s class='product-card__price-compare'>$299.00</s>
+                      <span class='product-card__price-sale'>$239.00</span>
                     </div>
                   </div>
                 </div>
@@ -301,13 +290,6 @@
           "id": "tab_title",
           "label": "Tab 标题",
           "default": "Product Category"
-        },
-        {
-          "type": "number",
-          "id": "discount_percent",
-          "label": "折扣百分比",
-          "default": 0,
-          "info": "设置为 0 使用产品系统折扣 (compare_at_price)，或设置自定义百分比（例如：15 表示 15% OFF）"
         },
         {
           "type": "header",
@@ -778,23 +760,6 @@
           "id": "custom_description",
           "label": "Custom Description",
           "info": "Optional short description (not shown in current design)"
-        },
-        {
-          "type": "header",
-          "content": "Price Customization (Optional)"
-        },
-        {
-          "type": "text",
-          "id": "custom_compare_price",
-          "label": "Custom Original Price",
-          "info": "Leave blank to use product's compare_at_price. Example: 299.00"
-        },
-        {
-          "type": "number",
-          "id": "custom_discount_percent",
-          "label": "Custom Discount %",
-          "default": 0,
-          "info": "Override tab discount. Set to 0 to use tab discount or product's system discount. Example: 20 for 20% OFF"
         }
       ]
     }
@@ -807,7 +772,6 @@
           "type": "product_tab",
           "settings": {
             "tab_title": "热销产品",
-            "discount_percent": 15,
             "bg_color": "#ffffff",
             "bg_color_active": "#2a8e9e",
             "text_color": "#2a8e9e",
@@ -819,29 +783,25 @@
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 1,
-            "custom_discount_percent": 0
+            "parent_tab_number": 1
           }
         },
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 1,
-            "custom_discount_percent": 0
+            "parent_tab_number": 1
           }
         },
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 1,
-            "custom_discount_percent": 0
+            "parent_tab_number": 1
           }
         },
         {
           "type": "product_tab",
           "settings": {
             "tab_title": "新品推荐",
-            "discount_percent": 20,
             "bg_color": "#ffffff",
             "bg_color_active": "#2a8e9e",
             "text_color": "#2a8e9e",
@@ -853,22 +813,19 @@
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 2,
-            "custom_discount_percent": 0
+            "parent_tab_number": 2
           }
         },
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 2,
-            "custom_discount_percent": 0
+            "parent_tab_number": 2
           }
         },
         {
           "type": "product_tab",
           "settings": {
             "tab_title": "限时特价",
-            "discount_percent": 25,
             "bg_color": "#ffffff",
             "bg_color_active": "#2a8e9e",
             "text_color": "#2a8e9e",
@@ -880,15 +837,13 @@
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 3,
-            "custom_discount_percent": 0
+            "parent_tab_number": 3
           }
         },
         {
           "type": "product_item",
           "settings": {
-            "parent_tab_number": 3,
-            "custom_discount_percent": 0
+            "parent_tab_number": 3
           }
         }
       ]
@@ -926,8 +881,10 @@
     margin: 0.5rem 0;
   }
 
-  .product-card--placeholder .product-card__discount-badge {
-    background: rgb(var(--btn-bg-color));
-    color: rgb(var(--btn-text-color));
+  /* 占位商品使用主题折扣标签样式 */
+  .product-card--placeholder .product-label-container {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 {% endstyle %}

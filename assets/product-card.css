@@ -258,29 +258,12 @@
   opacity: 0.6;
 }
 
-/* Flash Discount Badge - 使用主题按钮色 */
-.product-card--flash .product-card__discount-badge {
+/* Flash Discount Badge - 使用主题 product-label 组件 */
+.product-card--flash .product-label-container {
   position: absolute;
   top: 0;
   left: 0;
-  background: rgb(var(--btn-bg-color, 42, 142, 158));
-  color: rgb(var(--btn-text-color, 255, 255, 255));
-  padding: 0.25rem 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  font-weight: bold;
   z-index: 2;
-}
-
-.product-card--flash .product-card__discount-badge span:first-child {
-  font-size: 1rem;
-  line-height: 1;
-}
-
-.product-card--flash .product-card__discount-off {
-  font-size: 0.75rem;
-  line-height: 1;
 }
 
 /* Flash Hot Tag - 使用辅助色 */

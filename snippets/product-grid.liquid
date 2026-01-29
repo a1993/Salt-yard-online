@@ -7,7 +7,6 @@
   - grid_class: 额外的 CSS class (可选)
   - show_reviews: 是否显示评论
   - currency_symbol: 货币符号
-  - discount_percent: 统一的折扣百分比 (可选)
   - section_blocks: section.blocks 数组 (用于遍历产品块)
   - filter_category: 过滤分类编号 (用于 flash-sale 和 halloween)
   - collection: Collection 对象 (可选，用于批量添加商品)
@@ -79,11 +78,7 @@
           assign collection_count = collection_count | plus: 1
         -%}
         {% if grid_style == 'flash' %}
-          {% render 'product-card-flash',
-            product: product,
-            show_reviews: show_reviews,
-            discount_percent: discount_percent
-          %}
+          {% render 'product-card-flash', product: product, show_reviews: show_reviews %}
         {% elsif grid_style == 'halloween' %}
           {% render 'product-card-halloween', product: product, show_reviews: show_reviews %}
         {% endif %}
@@ -111,12 +106,9 @@
               {% render 'product-card-flash',
                 product: product,
                 show_reviews: show_reviews,
-                discount_percent: discount_percent,
                 custom_image: block.settings.custom_image,
                 custom_title: block.settings.custom_title,
                 custom_description: block.settings.custom_description,
-                custom_compare_price: block.settings.custom_compare_price,
-                custom_discount_percent: block.settings.custom_discount_percent,
                 shopify_attributes: block.shopify_attributes
               %}
             {% elsif grid_style == 'halloween' %}
@@ -178,11 +170,7 @@
           assign collection_count = collection_count | plus: 1
         -%}
         {% if grid_style == 'flash' %}
-          {% render 'product-card-flash',
-            product: product,
-            show_reviews: show_reviews,
-            discount_percent: discount_percent
-          %}
+          {% render 'product-card-flash', product: product, show_reviews: show_reviews %}
         {% elsif grid_style == 'halloween' %}
           {% render 'product-card-halloween', product: product, show_reviews: show_reviews %}
         {% endif %}
