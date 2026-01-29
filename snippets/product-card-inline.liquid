@@ -1,0 +1,182 @@
+{% comment %}
+  Inline 产品卡片组件
+  横向布局：左侧图片，右侧产品信息
+  
+  参数:
+  - product: Shopify 产品对象 (可选，如果使用自定义内容)
+  - custom_image: 自定义商品图片 (可选)
+  - custom_title: 自定义标题 (可选)
+  - custom_description: 自定义描述 (可选)
+  - custom_url: 自定义链接 (可选)
+  - custom_price: 自定义现价 (可选)
+  - custom_compare_price: 自定义原价 (可选)
+  - title_image: 标题图片/Logo (可选)
+  - title_image_width: 标题图片宽度 (可选，默认 124)
+  - title_image_height: 标题图片高度 (可选，默认 47)
+  - btn_text: 按钮文字 (可选，默认 "Shop Now >")
+  - currency_symbol: 货币符号 (可选，默认 "$")
+  - image_width: 图片宽度 (可选，默认 356)
+  - image_height: 图片高度 (可选，默认 291)
+  - image_padding_top: 图片区域内边距-上 (可选，默认 0)
+  - image_padding_right: 图片区域内边距-右 (可选，默认 0)
+  - image_padding_bottom: 图片区域内边距-下 (可选，默认 0)
+  - image_padding_left: 图片区域内边距-左 (可选，默认 0)
+  - sku: 产品 SKU (可选，用于展示)
+  - shopify_attributes: Shopify 属性
+{% endcomment %}
+
+{%- liquid
+  # 优先使用自定义内容，如果没有则使用系统商品数据
+  
+  # 图片：自定义优先，否则使用系统商品
+  if custom_image != blank
+    assign display_image = custom_image
+  elsif product and product.featured_image
+    assign display_image = product.featured_image
+  endif
+  
+  # 标题：自定义优先，否则使用系统商品
+  if custom_title != blank
+    assign display_title = custom_title
+  elsif product and product.title != blank
+    assign display_title = product.title
+  else
+    assign display_title = "Product Title"
+  endif
+  
+  # 描述：自定义优先，否则使用系统商品
+  if custom_description != blank
+    assign display_description = custom_description
+  elsif product and product.description != blank
+    assign display_description = product.description | strip_html | truncate: 100
+  endif
+  
+  # 链接：自定义优先，否则使用系统商品
+  if custom_url != blank
+    assign display_url = custom_url
+  elsif product and product.url != blank
+    assign display_url = product.url
+  else
+    assign display_url = "#"
+  endif
+  
+  # 价格：自定义优先，否则使用系统商品
+  assign show_compare_price = false
+  assign final_price = 0
+  assign final_compare_price = 0
+  assign use_custom_price = false
+  
+  if custom_price != blank
+    assign final_price = custom_price | times: 100
+    assign use_custom_price = true
+  elsif product and product.price
+    assign final_price = product.price
+  endif
+  
+  if custom_compare_price != blank
+    assign final_compare_price = custom_compare_price | times: 100
+    assign use_custom_price = true
+    if final_compare_price > final_price
+      assign show_compare_price = true
+    endif
+  elsif product and product.compare_at_price > product.price
+    assign final_compare_price = product.compare_at_price
+    assign show_compare_price = true
+  endif
+  
+  # SKU：自定义优先，否则使用系统商品
+  if sku != blank
+    assign display_sku = sku
+  elsif product and product.selected_or_first_available_variant.sku != blank
+    assign display_sku = product.selected_or_first_available_variant.sku
+  elsif product and product.variants.first.sku != blank
+    assign display_sku = product.variants.first.sku
+  endif
+  
+  # 默认值
+  assign final_btn_text = btn_text | default: "Shop Now >"
+  assign final_currency = currency_symbol | default: "$"
+  assign final_img_width = image_width | default: 356
+  assign final_img_height = image_height | default: 291
+  assign final_title_img_width = title_image_width | default: 124
+  assign final_title_img_height = title_image_height | default: 47
+  assign final_img_padding_top = image_padding_top | default: 0
+  assign final_img_padding_right = image_padding_right | default: 0
+  assign final_img_padding_bottom = image_padding_bottom | default: 0
+  assign final_img_padding_left = image_padding_left | default: 0
+-%}
+
+<a href="{{ display_url }}" class="product-card-inline" {{ shopify_attributes }} target="_blank">
+  <!-- Product Image -->
+  <div class="product-card-inline__image-wrapper" 
+       style="padding: {{ final_img_padding_top }}px {{ final_img_padding_right }}px {{ final_img_padding_bottom }}px {{ final_img_padding_left }}px; box-sizing: border-box;">
+    {% if display_image %}
+      <img 
+        src="{{ display_image | image_url: width: 600 }}"
+        srcset="{{ display_image | image_url: width: 300 }} 300w,
+                {{ display_image | image_url: width: 450 }} 450w,
+                {{ display_image | image_url: width: 600 }} 600w"
+        sizes="(max-width: 768px) 50vw, 35vw"
+        alt="{{ display_title | escape }}"
+        width="{{ final_img_width }}"
+        height="{{ final_img_height }}"
+        loading="lazy"
+        class="product-card-inline__image">
+    {% else %}
+      <div class="product-card-inline__image product-card-inline__image--placeholder">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+  </div>
+  
+  <!-- Product Content -->
+  <div class="product-card-inline__content">
+    <!-- Title Logo/Image (Optional) -->
+    {% if title_image != blank %}
+      <img 
+        src="{{ title_image | image_url: width: 200 }}"
+        alt="{{ display_title | escape }}"
+        width="{{ final_title_img_width }}"
+        height="{{ final_title_img_height }}"
+        loading="lazy"
+        class="product-card-inline__title-image">
+    {% endif %}
+    
+    <!-- Product Title -->
+    <h3 class="product-card-inline__title">{{ display_title }}</h3>
+    
+    <!-- Product Description (Optional) -->
+    {% if display_description != blank %}
+      <p class="product-card-inline__description">{{ display_description }}</p>
+    {% endif %}
+    
+    <!-- SKU (Optional) -->
+    {% if show_sku and display_sku != blank %}
+      <p class="product-card-inline__sku">{{ display_sku }}</p>
+    {% endif %}
+    
+    <!-- Price -->
+    <div class="product-card-inline__price">
+      {% if show_compare_price %}
+        <span class="product-card-inline__price-old">
+          {% if use_custom_price and custom_compare_price != blank %}
+            {{ final_currency }}{{ custom_compare_price }}
+          {% else %}
+            {{ final_compare_price | money }}
+          {% endif %}
+        </span>
+      {% endif %}
+      <span class="product-card-inline__price-new">
+        {% if use_custom_price and custom_price != blank %}
+          {{ final_currency }}{{ custom_price }}
+        {% else %}
+          {{ final_price | money }}
+        {% endif %}
+      </span>
+    </div>
+    
+    <!-- Shop Button -->
+    <div class="product-card-inline__btn">{{ final_btn_text }}</div>
+  </div>
+</a>
+
