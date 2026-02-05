@@ -95,7 +95,7 @@
               {{ before_after_image | image_url: width: 600 }} 600w,
               {{ before_after_image | image_url: width: 800 }} 800w
             '
-            sizes='(max-width: 749px) 100vw, 50vw'
+            sizes='(max-width: 749px) calc(100vw - 2rem), 50vw'
             alt='{{ review_title | default: 'Before and After' | escape }}'
             width='{{ before_after_image.width }}'
             height='{{ before_after_image.height }}'

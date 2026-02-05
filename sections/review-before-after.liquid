@@ -23,15 +23,18 @@
 
 {%- style -%}
   #{{ section_id }} {
-    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
-    padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
     {% if section.settings.background_gradient != blank %}
       background: {{ section.settings.background_gradient }};
     {% elsif section.settings.background_color != blank %}
       background-color: {{ section.settings.background_color }};
     {% endif %}
   }
-
+  @media screen and (max-width: 749px) {
+    #{{ section_id }} {
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+  }
   @media screen and (min-width: 750px) {
     #{{ section_id }} {
       padding-top: {{ section.settings.padding_top }}px;
@@ -98,39 +101,39 @@
             {% endfor %}
           </div>
 
-          {% if section.settings.show_navigation %}
-            <div class='rbac-nav rbac-nav-prev'>
-              {% if section.settings.nav_prev_image != blank %}
-                <img
-                  src='{{ section.settings.nav_prev_image | image_url: width: 88 }}'
-                  alt='Previous'
-                  width='44'
-                  height='44'
-                  loading='lazy'
-                >
-              {% else %}
-                <span class='rbac-nav-default'>‹</span>
-              {% endif %}
-            </div>
-            <div class='rbac-nav rbac-nav-next'>
-              {% if section.settings.nav_next_image != blank %}
-                <img
-                  src='{{ section.settings.nav_next_image | image_url: width: 88 }}'
-                  alt='Next'
-                  width='44'
-                  height='44'
-                  loading='lazy'
-                >
-              {% else %}
-                <span class='rbac-nav-default'>›</span>
-              {% endif %}
-            </div>
-          {% endif %}
-
           {% if section.settings.show_pagination %}
             <div class='swiper-pagination'></div>
           {% endif %}
         </div>
+
+        {% if section.settings.show_navigation %}
+          <div class='rbac-nav rbac-nav-prev'>
+            {% if section.settings.nav_prev_image != blank %}
+              <img
+                src='{{ section.settings.nav_prev_image | image_url: width: 88 }}'
+                alt='Previous'
+                width='44'
+                height='44'
+                loading='lazy'
+              >
+            {% else %}
+              <span class='rbac-nav-default'>‹</span>
+            {% endif %}
+          </div>
+          <div class='rbac-nav rbac-nav-next'>
+            {% if section.settings.nav_next_image != blank %}
+              <img
+                src='{{ section.settings.nav_next_image | image_url: width: 88 }}'
+                alt='Next'
+                width='44'
+                height='44'
+                loading='lazy'
+              >
+            {% else %}
+              <span class='rbac-nav-default'>›</span>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
     {% else %}
       {% for block in section.blocks %}

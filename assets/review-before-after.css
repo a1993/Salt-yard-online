@@ -9,6 +9,7 @@
 .rbac-container {
   margin: 0 auto;
   padding: 0 1rem;
+  overflow: visible;
 }
 
 @media screen and (min-width: 750px) {
@@ -17,8 +18,12 @@
   }
 }
 
-/* 移动端单卡片全屏 */
+/* 移动端：减小边距，卡片不被压缩 */
 @media screen and (max-width: 749px) {
+  .rbac-container {
+    padding: 0 0.5rem;
+  }
+
   .rbac-single-card-mode .rbac-container {
     padding: 0 0.5rem;
     max-width: 100%;
@@ -43,16 +48,16 @@
   max-width: 100%;
 }
 
-/* 轮播包装 - 为切换按钮超出部分预留空间(各22px) */
+/* 轮播包装 - 切换按钮移出 swiper，超出部分可见 */
 .rbac-swiper-wrapper {
   position: relative;
-  padding: 0 44px;
+  padding: 0 38px;
   overflow: visible;
 }
 
 @media screen and (max-width: 749px) {
   .rbac-swiper-wrapper {
-    padding: 0 40px;
+    padding: 0 36px;
   }
 }
 
@@ -89,10 +94,11 @@
   }
 }
 
-/* 移动端：上下布局，对比图在上 */
+/* 移动端：上下布局，对比图在上，等比例缩小 */
 @media screen and (max-width: 749px) {
   .rbac-card__inner {
-    padding: 1.25rem;
+    padding: 1rem;
+    gap: 1rem;
   }
 
   .rbac-card__left {
@@ -101,6 +107,67 @@
 
   .rbac-card__right {
     order: 1;
+  }
+
+  /* 移动端图片等比例缩小 */
+  .rbac-before-after,
+  .rbac-before-after-placeholder {
+    aspect-ratio: 4/3;
+    max-width: 100%;
+  }
+
+  .rbac-before-after-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* 移动端商品卡片样式修复 */
+  .rbac-product-inner {
+    padding: 0.5rem;
+    gap: 0.75rem;
+  }
+
+  .rbac-product-image-wrap {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+  }
+
+  .rbac-product-title {
+    font-size: 0.8125rem;
+  }
+
+  .rbac-product-desc {
+    font-size: 0.6875rem;
+  }
+
+  .rbac-shop-btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.6875rem;
+    margin-top: 0.35rem;
+  }
+
+  .rbac-divider {
+    margin: 0.75rem 0;
+  }
+
+  .rbac-stars {
+    margin-bottom: 0.5rem;
+  }
+
+  .rbac-star svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .rbac-review-title {
+    font-size: 0.9375rem;
+  }
+
+  .rbac-review-content {
+    font-size: 0.8125rem;
+    margin-bottom: 0.5rem;
   }
 }
 
