@@ -1,0 +1,399 @@
+{% comment %}
+  评价与前后对比分区
+  - PC端：左右布局，左侧评价信息+产品卡片，右侧前后对比图
+  - 移动端：上下布局，轮播展示
+  - 支持自定义背景（含渐变）、自定义切换按钮图片
+{% endcomment %}
+
+{%- liquid
+  assign section_id = 'review-before-after-' | append: section.id
+  assign use_slideshow = section.blocks.size > 1
+-%}
+
+{% if section.settings.use_cdn %}
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css'>
+{% else %}
+  {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{{ 'review-before-after.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #{{ section_id }} {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+    {% if section.settings.background_gradient != blank %}
+      background: {{ section.settings.background_gradient }};
+    {% elsif section.settings.background_color != blank %}
+      background-color: {{ section.settings.background_color }};
+    {% endif %}
+  }
+
+  @media screen and (min-width: 750px) {
+    #{{ section_id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #{{ section_id }} .rbac-star-color {
+    color: {{ section.settings.star_color | default: '#E9A80A' }};
+  }
+
+  #{{ section_id }} .rbac-card-bg {
+    background-color: {{ section.settings.card_background | default: 'rgba(255,255,255,0.9)' }};
+  }
+
+  #{{ section_id }} .rbac-btn-bg {
+    background-color: {{ section.settings.shop_button_bg | default: '#1d1e20' }};
+    color: {{ section.settings.shop_button_color | default: '#ffffff' }};
+  }
+{%- endstyle -%}
+
+<div id='{{ section_id }}' class='review-before-after-section' {{ section.shopify_attributes }}>
+  <div class='rbac-container' style='max-width: {{ section.settings.container_width }}px;'>
+    {% if section.settings.section_title != blank %}
+      <h2 class='rbac-title'>{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    {% if use_slideshow %}
+      <div class='rbac-swiper-wrapper'>
+        <div class='swiper rbac-swiper rbac-swiper-{{ section.id }}'>
+          <div class='swiper-wrapper'>
+            {% for block in section.blocks %}
+              <div class='swiper-slide' {{ block.shopify_attributes }}>
+                {% render 'review-before-after-card',
+                  block: block,
+                  star_color: section.settings.star_color,
+                  card_background: section.settings.card_background,
+                  shop_button_bg: section.settings.shop_button_bg,
+                  shop_button_color: section.settings.shop_button_color,
+                  shop_button_text: section.settings.shop_button_text
+                %}
+              </div>
+            {% endfor %}
+          </div>
+
+          {% if section.settings.show_navigation %}
+            <div class='rbac-nav rbac-nav-prev'>
+              {% if section.settings.nav_prev_image != blank %}
+                <img
+                  src='{{ section.settings.nav_prev_image | image_url: width: 88 }}'
+                  alt='Previous'
+                  width='44'
+                  height='44'
+                  loading='lazy'
+                >
+              {% else %}
+                <span class='rbac-nav-default'>‹</span>
+              {% endif %}
+            </div>
+            <div class='rbac-nav rbac-nav-next'>
+              {% if section.settings.nav_next_image != blank %}
+                <img
+                  src='{{ section.settings.nav_next_image | image_url: width: 88 }}'
+                  alt='Next'
+                  width='44'
+                  height='44'
+                  loading='lazy'
+                >
+              {% else %}
+                <span class='rbac-nav-default'>›</span>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_pagination %}
+            <div class='swiper-pagination'></div>
+          {% endif %}
+        </div>
+      </div>
+    {% else %}
+      {% for block in section.blocks %}
+        <div class='rbac-single-card' {{ block.shopify_attributes }}>
+          {% render 'review-before-after-card',
+            block: block,
+            star_color: section.settings.star_color,
+            card_background: section.settings.card_background,
+            shop_button_bg: section.settings.shop_button_bg,
+            shop_button_color: section.settings.shop_button_color,
+            shop_button_text: section.settings.shop_button_text
+          %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% if use_slideshow %}
+  {% if section.settings.use_cdn %}
+    <script src='https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js'></script>
+  {% else %}
+    <script src='{{ 'swiper-bundle.min.js' | asset_url }}'></script>
+  {% endif %}
+  <script>
+    (function() {
+      function initRbacSwiper{{ section.id | replace: '-', '_' }}() {
+        if (typeof Swiper === 'undefined') return;
+        const el = document.querySelector('.rbac-swiper-{{ section.id }}');
+        if (!el) return;
+        new Swiper('.rbac-swiper-{{ section.id }}', {
+          slidesPerView: 1,
+          spaceBetween: 20,
+          loop: {{ section.settings.enable_loop }},
+          {% if section.settings.enable_autoplay %}
+          autoplay: { delay: {{ section.settings.autoplay_delay }}, disableOnInteraction: false },
+          {% endif %}
+          navigation: {
+            nextEl: '#{{ section_id }} .rbac-nav-next',
+            prevEl: '#{{ section_id }} .rbac-nav-prev',
+          },
+          pagination: {
+            el: '#{{ section_id }} .swiper-pagination',
+            clickable: true,
+          },
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { setTimeout(initRbacSwiper{{ section.id | replace: '-', '_' }}, 100); });
+      } else {
+        setTimeout(initRbacSwiper{{ section.id | replace: '-', '_' }}, 100);
+      }
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "评价与前后对比",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "标题"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "分区标题"
+    },
+    {
+      "type": "header",
+      "content": "背景样式"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "背景颜色",
+      "info": "当未设置渐变时生效"
+    },
+    {
+      "type": "text",
+      "id": "background_gradient",
+      "label": "背景渐变",
+      "info": "例如: linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #e8e0f0 100%)"
+    },
+    {
+      "type": "header",
+      "content": "卡片样式"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "卡片背景色",
+      "default": "#f5f0f8"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "星级颜色",
+      "default": "#E9A80A"
+    },
+    {
+      "type": "header",
+      "content": "产品卡片按钮"
+    },
+    {
+      "type": "text",
+      "id": "shop_button_text",
+      "label": "购买按钮文字",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "color",
+      "id": "shop_button_bg",
+      "label": "按钮背景色",
+      "default": "#1d1e20"
+    },
+    {
+      "type": "color",
+      "id": "shop_button_color",
+      "label": "按钮文字色",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "轮播控制"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_cdn",
+      "label": "使用 CDN 加载 Swiper",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "显示左右切换按钮",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "nav_prev_image",
+      "label": "左切换按钮图片",
+      "info": "建议 88x88px，不设置则使用默认箭头"
+    },
+    {
+      "type": "image_picker",
+      "id": "nav_next_image",
+      "label": "右切换按钮图片",
+      "info": "建议 88x88px，不设置则使用默认箭头"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pagination",
+      "label": "显示分页圆点",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "循环播放",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "自动播放",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_delay",
+      "min": 2000,
+      "max": 10000,
+      "step": 500,
+      "unit": "ms",
+      "label": "自动播放间隔",
+      "default": 5000
+    },
+    {
+      "type": "header",
+      "content": "布局"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "min": 900,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "容器最大宽度",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "上内边距",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "下内边距",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "评价项",
+      "settings": [
+        {
+          "type": "range",
+          "id": "star_rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "星级评分",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "评价标题",
+          "default": "Lavivids Hairsystem is quality!"
+        },
+        {
+          "type": "textarea",
+          "id": "review_content",
+          "label": "评价内容",
+          "default": "This was my first ever hairpiece with LaVivid. Tina answered all my questions, and helped me choose the right unit."
+        },
+        {
+          "type": "header",
+          "content": "前后对比图"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_after_image",
+          "label": "前后对比图（合并为一张）",
+          "info": "建议将 BEFORE 与 AFTER 合并为一张图片上传，左侧为使用前，右侧为使用后"
+        },
+        {
+          "type": "header",
+          "content": "关联产品"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "关联产品"
+        },
+        {
+          "type": "text",
+          "id": "product_desc",
+          "label": "产品规格/描述",
+          "info": "覆盖产品默认描述，如: 0.04-0.06mm Full Super Thin Skin Base"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "评价与前后对比",
+      "settings": {
+        "background_gradient": "linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #e8e0f0 100%)",
+        "section_title": "Customer Reviews"
+      },
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "star_rating": 4,
+            "review_title": "Lavivids Hairsystem is quality!",
+            "review_content": "This was my first ever hairpiece with LaVivid. Tina answered all my questions, and helped me choose the right unit."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

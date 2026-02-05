@@ -1,0 +1,113 @@
+{% comment %}
+  评价前后对比卡片 - 单条评价内容
+  参数: block, star_color, card_background, shop_button_bg, shop_button_color, shop_button_text
+{% endcomment %}
+
+{%- liquid
+  assign block = block | default: null
+  assign star_rating = block.settings.star_rating | default: 5
+  assign review_title = block.settings.review_title
+  assign review_content = block.settings.review_content
+  assign before_after_image = block.settings.before_after_image
+  assign product = block.settings.product
+  assign product_desc = block.settings.product_desc
+  assign shop_btn_text = shop_button_text | default: 'SHOP NOW'
+-%}
+
+<div class='rbac-card rbac-card-bg'>
+  <div class='rbac-card__inner'>
+    {% comment %} 左侧：评价信息 + 产品卡片 {% endcomment %}
+    <div class='rbac-card__left'>
+      {% if star_rating > 0 %}
+        <div class='rbac-stars rbac-star-color heading-font'>
+          {% for i in (1..star_rating) %}
+            <span class='rbac-star'>{% render 'icon-star' %}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if review_title != blank %}
+        <h3 class='rbac-review-title'>{{ review_title }}</h3>
+      {% endif %}
+
+      {% if review_content != blank %}
+        <div class='rbac-review-content rte'>{{ review_content }}</div>
+      {% endif %}
+
+      {% if product != blank or product_desc != blank %}
+        <div class='rbac-product-card'>
+          {% if product != blank %}
+            <a href='{{ product.url }}' class='rbac-product-link'>
+              <div class='rbac-product-inner'>
+                <div class='rbac-product-image-wrap'>
+                  {% if product.featured_image %}
+                    <img
+                      src='{{ product.featured_image | image_url: width: 200 }}'
+                      srcset='{{ product.featured_image | image_url: width: 100 }} 100w, {{ product.featured_image | image_url: width: 200 }} 200w'
+                      sizes='80px'
+                      alt='{{ product.title | escape }}'
+                      width='80'
+                      height='80'
+                      loading='lazy'
+                      class='rbac-product-image'
+                    >
+                  {% else %}
+                    <div class='rbac-product-placeholder'>
+                      {{ 'product-1' | placeholder_svg_tag }}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class='rbac-product-info'>
+                  <span class='rbac-product-title'>{{ product.title }}</span>
+                  {% if product_desc != blank %}
+                    <span class='rbac-product-desc'>{{ product_desc }}</span>
+                  {% elsif product.description != blank %}
+                    <span class='rbac-product-desc'>
+                      {{- product.description | strip_html | truncate: 60 -}}
+                    </span>
+                  {% endif %}
+                  <span class='rbac-shop-btn rbac-btn-bg'>{{ shop_btn_text }}</span>
+                </div>
+              </div>
+            </a>
+          {% else %}
+            <div class='rbac-product-inner'>
+              <div class='rbac-product-info rbac-product-info--no-img'>
+                {% if product_desc != blank %}
+                  <span class='rbac-product-desc'>{{ product_desc }}</span>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% comment %} 右侧：前后对比图 {% endcomment %}
+    <div class='rbac-card__right'>
+      {% if before_after_image != blank %}
+        <figure class='rbac-before-after'>
+          <img
+            src='{{ before_after_image | image_url: width: 800 }}'
+            srcset='
+              {{ before_after_image | image_url: width: 400 }} 400w,
+              {{ before_after_image | image_url: width: 600 }} 600w,
+              {{ before_after_image | image_url: width: 800 }} 800w
+            '
+            sizes='(max-width: 749px) 100vw, 50vw'
+            alt='{{ review_title | default: 'Before and After' | escape }}'
+            width='{{ before_after_image.width }}'
+            height='{{ before_after_image.height }}'
+            loading='lazy'
+            class='rbac-before-after-img'
+          >
+        </figure>
+      {% else %}
+        <div class='rbac-before-after-placeholder'>
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          <span>前后对比图</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
