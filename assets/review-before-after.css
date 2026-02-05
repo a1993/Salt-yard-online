@@ -18,15 +18,10 @@
   }
 }
 
-/* 移动端：减小边距，卡片不被压缩 */
+/* 移动端：取消背景内边距 */
 @media screen and (max-width: 749px) {
   .rbac-container {
-    padding: 0 0.5rem;
-  }
-
-  .rbac-single-card-mode .rbac-container {
-    padding: 0 0.5rem;
-    max-width: 100%;
+    padding: 0;
   }
 }
 
@@ -372,6 +367,16 @@
 
 .rbac-nav-next {
   right: -22px;
+}
+
+@media screen and (max-width: 749px) {
+  .rbac-nav-prev {
+    left: 4px;
+  }
+
+  .rbac-nav-next {
+    right: 4px;
+  }
 }
 
 .rbac-nav img {

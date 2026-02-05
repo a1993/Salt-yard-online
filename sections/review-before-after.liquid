@@ -31,8 +31,8 @@
   }
   @media screen and (max-width: 749px) {
     #{{ section_id }} {
-      padding-top: 16px;
-      padding-bottom: 16px;
+      padding-top: 0;
+      padding-bottom: 0;
     }
   }
   @media screen and (min-width: 750px) {
@@ -79,10 +79,6 @@
   {{ section.shopify_attributes }}
 >
   <div class='rbac-container' style='max-width: {{ container_max_width }};'>
-    {% if section.settings.section_title != blank %}
-      <h2 class='rbac-title'>{{ section.settings.section_title }}</h2>
-    {% endif %}
-
     {% if use_slideshow %}
       <div class='rbac-swiper-wrapper'>
         <div class='swiper rbac-swiper rbac-swiper-{{ section.id }}'>
@@ -168,7 +164,7 @@
           slidesPerView: 1,
           spaceBetween: 20,
           breakpoints: {
-            0: { slidesPerView: 1.5 },
+            0: { slidesPerView: 1.25 },
             750: { slidesPerView: 1 }
           },
           loop: {{ section.settings.enable_loop }},
