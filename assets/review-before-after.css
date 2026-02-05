@@ -3,7 +3,7 @@
 .review-before-after-section {
   width: 100%;
   margin: 0 auto;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .rbac-container {
@@ -14,6 +14,14 @@
 @media screen and (min-width: 750px) {
   .rbac-container {
     padding: 0 1.5rem;
+  }
+}
+
+/* 移动端单卡片全屏 */
+@media screen and (max-width: 749px) {
+  .rbac-single-card-mode .rbac-container {
+    padding: 0 0.5rem;
+    max-width: 100%;
   }
 }
 
@@ -35,15 +43,16 @@
   max-width: 100%;
 }
 
-/* 轮播包装 */
+/* 轮播包装 - 为切换按钮超出部分预留空间(各22px) */
 .rbac-swiper-wrapper {
   position: relative;
-  padding: 0 50px;
+  padding: 0 44px;
+  overflow: visible;
 }
 
 @media screen and (max-width: 749px) {
   .rbac-swiper-wrapper {
-    padding: 0 44px;
+    padding: 0 40px;
   }
 }
 
@@ -80,18 +89,18 @@
   }
 }
 
-/* 移动端：上下布局，内容在上，图在下 */
+/* 移动端：上下布局，对比图在上 */
 @media screen and (max-width: 749px) {
   .rbac-card__inner {
     padding: 1.25rem;
   }
 
   .rbac-card__left {
-    order: 1;
+    order: 2;
   }
 
   .rbac-card__right {
-    order: 2;
+    order: 1;
   }
 }
 
@@ -137,8 +146,15 @@
 }
 
 /* 产品卡片 */
+/* 评价与商品卡片之间的分割线 */
+.rbac-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+  margin: 1rem 0;
+}
+
 .rbac-product-card {
-  margin-top: 0.5rem;
+  margin-top: 0;
 }
 
 .rbac-product-link {
@@ -160,9 +176,12 @@
   flex-shrink: 0;
   width: 80px;
   height: 80px;
-  border-radius: 50%;
   overflow: hidden;
   background: #f0f0f0;
+}
+
+.rbac-product-image-wrap.rbac-product-image--square {
+  border-radius: 4px;
 }
 
 .rbac-product-image {
@@ -258,7 +277,7 @@
   opacity: 0.5;
 }
 
-/* Swiper 导航按钮 - 图片模式 */
+/* Swiper 导航按钮 - 超出卡片区域为按钮一半宽度(22px) */
 .rbac-nav {
   position: absolute;
   top: 50%;
@@ -281,11 +300,11 @@
 }
 
 .rbac-nav-prev {
-  left: 0;
+  left: -22px;
 }
 
 .rbac-nav-next {
-  right: 0;
+  right: -22px;
 }
 
 .rbac-nav img {

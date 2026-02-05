@@ -44,7 +44,11 @@
   }
 
   #{{ section_id }} .rbac-card-bg {
-    background-color: {{ section.settings.card_background | default: 'rgba(255,255,255,0.9)' }};
+    {% if section.settings.card_background_gradient != blank %}
+      background: {{ section.settings.card_background_gradient }};
+    {% else %}
+      background-color: {{ section.settings.card_background | default: 'rgba(255,255,255,0.9)' }};
+    {% endif %}
   }
 
   #{{ section_id }} .rbac-btn-bg {
@@ -53,8 +57,25 @@
   }
 {%- endstyle -%}
 
-<div id='{{ section_id }}' class='review-before-after-section' {{ section.shopify_attributes }}>
-  <div class='rbac-container' style='max-width: {{ section.settings.container_width }}px;'>
+{%- liquid
+  assign card_width = section.settings.card_width
+  if card_width == 'full'
+    assign container_max_width = '100%'
+  else
+    assign container_max_width = card_width | append: 'px'
+  endif
+  if section.blocks.size == 1
+    assign has_single_card = true
+  else
+    assign has_single_card = false
+  endif
+-%}
+<div
+  id='{{ section_id }}'
+  class='review-before-after-section rbac-card-width-{{ card_width }}{% if has_single_card %} rbac-single-card-mode{% endif %}'
+  {{ section.shopify_attributes }}
+>
+  <div class='rbac-container' style='max-width: {{ container_max_width }};'>
     {% if section.settings.section_title != blank %}
       <h2 class='rbac-title'>{{ section.settings.section_title }}</h2>
     {% endif %}
@@ -143,6 +164,10 @@
         new Swiper('.rbac-swiper-{{ section.id }}', {
           slidesPerView: 1,
           spaceBetween: 20,
+          breakpoints: {
+            0: { slidesPerView: 1.5 },
+            750: { slidesPerView: 1 }
+          },
           loop: {{ section.settings.enable_loop }},
           {% if section.settings.enable_autoplay %}
           autoplay: { delay: {{ section.settings.autoplay_delay }}, disableOnInteraction: false },
@@ -206,6 +231,12 @@
       "id": "card_background",
       "label": "卡片背景色",
       "default": "#f5f0f8"
+    },
+    {
+      "type": "text",
+      "id": "card_background_gradient",
+      "label": "卡片背景渐变",
+      "info": "设置后覆盖背景色，例: linear-gradient(135deg, #f5f0f8 0%, #e8e0f0 100%)"
     },
     {
       "type": "color",
@@ -296,14 +327,16 @@
       "content": "布局"
     },
     {
-      "type": "range",
-      "id": "container_width",
-      "min": 900,
-      "max": 1600,
-      "step": 20,
-      "unit": "px",
-      "label": "容器最大宽度",
-      "default": 1200
+      "type": "select",
+      "id": "card_width",
+      "label": "卡片宽度",
+      "info": "实际内容宽度会减去左右切换按钮超出的部分",
+      "options": [
+        { "value": "1400", "label": "1400px" },
+        { "value": "1200", "label": "1200px" },
+        { "value": "full", "label": "全屏" }
+      ],
+      "default": "1200"
     },
     {
       "type": "range",

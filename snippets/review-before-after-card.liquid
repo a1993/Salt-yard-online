@@ -16,7 +16,7 @@
 
 <div class='rbac-card rbac-card-bg'>
   <div class='rbac-card__inner'>
-    {% comment %} 左侧：评价信息 + 产品卡片 {% endcomment %}
+    {% comment %} 左侧：评价信息 + 产品卡片；移动端对比图在上(order由CSS控制) {% endcomment %}
     <div class='rbac-card__left'>
       {% if star_rating > 0 %}
         <div class='rbac-stars rbac-star-color heading-font'>
@@ -35,11 +35,12 @@
       {% endif %}
 
       {% if product != blank or product_desc != blank %}
+        <div class='rbac-divider'></div>
         <div class='rbac-product-card'>
           {% if product != blank %}
             <a href='{{ product.url }}' class='rbac-product-link'>
               <div class='rbac-product-inner'>
-                <div class='rbac-product-image-wrap'>
+                <div class='rbac-product-image-wrap rbac-product-image--square'>
                   {% if product.featured_image %}
                     <img
                       src='{{ product.featured_image | image_url: width: 200 }}'
