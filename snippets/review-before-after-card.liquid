@@ -1,22 +1,46 @@
 {% comment %}
   评价前后对比卡片 - 单条评价内容
-  参数: block, star_color, card_background, shop_button_bg, shop_button_color, shop_button_text
+  参数: block, star_color, card_background, shop_button_bg, shop_button_color, shop_button_text, section
 {% endcomment %}
 
 {%- liquid
   assign block = block | default: null
+  assign section = section | default: null
   assign star_rating = block.settings.star_rating | default: 5
   assign review_title = block.settings.review_title
   assign review_content = block.settings.review_content
+  assign reviewer_name = block.settings.reviewer_name
+  assign review_date = block.settings.review_date
+  assign verified_badge = block.settings.verified_badge
   assign before_after_image = block.settings.before_after_image
+  assign before_image = block.settings.before_image
+  assign after_image = block.settings.after_image
+  assign before_label_override = block.settings.before_label_override
+  assign after_label_override = block.settings.after_label_override
   assign product = block.settings.product
+  assign product_title_override = block.settings.product_title
   assign product_desc = block.settings.product_desc
   assign shop_btn_text = shop_button_text | default: 'SHOP NOW'
+  assign use_dual = false
+  if before_image != blank and after_image != blank
+    assign use_dual = true
+  endif
+  assign before_label = before_label_override | default: 'BEFORE'
+  assign after_label = after_label_override | default: 'AFTER'
+  assign enable_lightbox = true
+  if section != blank
+    if before_label_override == blank and section.settings.before_label != blank
+      assign before_label = section.settings.before_label
+    endif
+    if after_label_override == blank and section.settings.after_label != blank
+      assign after_label = section.settings.after_label
+    endif
+    assign enable_lightbox = section.settings.enable_lightbox
+  endif
 -%}
 
 <div class='rbac-card rbac-card-bg'>
   <div class='rbac-card__inner'>
-    {% comment %} 左侧：评价信息 + 产品卡片；移动端对比图在上(order由CSS控制) {% endcomment %}
     <div class='rbac-card__left'>
       {% if star_rating > 0 %}
         <div class='rbac-stars rbac-star-color heading-font'>
@@ -32,6 +56,20 @@
 
       {% if review_content != blank %}
         <div class='rbac-review-content rte'>{{ review_content }}</div>
+      {% endif %}
+
+      {% if reviewer_name != blank or review_date != blank or verified_badge != blank %}
+        <div class='rbac-review-meta'>
+          {% if verified_badge != blank %}
+            <span class='rbac-verified-badge'>{{ verified_badge }}</span>
+          {% endif %}
+          {% if reviewer_name != blank %}
+            <span class='rbac-reviewer-name'>{{ reviewer_name }}</span>
+          {% endif %}
+          {% if review_date != blank %}
+            <span class='rbac-review-date'>{{ review_date }}</span>
+          {% endif %}
+        </div>
       {% endif %}
 
       {% if product != blank or product_desc != blank %}
@@ -59,7 +97,9 @@
                   {% endif %}
                 </div>
                 <div class='rbac-product-info'>
-                  <span class='rbac-product-title'>{{ product.title }}</span>
+                  <span class='rbac-product-title'>
+                    {{- product_title_override | default: product.title -}}
+                  </span>
                   {% if product_desc != blank %}
                     <span class='rbac-product-desc'>{{ product_desc }}</span>
                   {% elsif product.description != blank %}
@@ -84,10 +124,56 @@
       {% endif %}
     </div>
 
-    {% comment %} 右侧：前后对比图 {% endcomment %}
     <div class='rbac-card__right'>
-      {% if before_after_image != blank %}
-        <figure class='rbac-before-after'>
+      {% if use_dual %}
+        <div class='rbac-before-after-dual'>
+          <figure
+            class='rbac-ba-single{% if enable_lightbox %} rbac-before-after-clickable{% endif %}'
+            {% if enable_lightbox %}
+              data-lightbox-src='{{ before_image | image_url: width: 1200 }}'
+              data-lightbox-alt='{{ before_label | escape }}'
+            {% endif %}
+          >
+            <img
+              src='{{ before_image | image_url: width: 500 }}'
+              srcset='{{ before_image | image_url: width: 300 }} 300w, {{ before_image | image_url: width: 500 }} 500w'
+              sizes='(max-width: 749px) 50vw, 24vw'
+              alt='{{ before_label | escape }}'
+              width='{{ before_image.width }}'
+              height='{{ before_image.height }}'
+              loading='lazy'
+              class='rbac-before-after-img'
+            >
+            <figcaption class='rbac-ba-label rbac-ba-label--before'>{{ before_label }}</figcaption>
+          </figure>
+          <figure
+            class='rbac-ba-single{% if enable_lightbox %} rbac-before-after-clickable{% endif %}'
+            {% if enable_lightbox %}
+              data-lightbox-src='{{ after_image | image_url: width: 1200 }}'
+              data-lightbox-alt='{{ after_label | escape }}'
+            {% endif %}
+          >
+            <img
+              src='{{ after_image | image_url: width: 500 }}'
+              srcset='{{ after_image | image_url: width: 300 }} 300w, {{ after_image | image_url: width: 500 }} 500w'
+              sizes='(max-width: 749px) 50vw, 24vw'
+              alt='{{ after_label | escape }}'
+              width='{{ after_image.width }}'
+              height='{{ after_image.height }}'
+              loading='lazy'
+              class='rbac-before-after-img'
+            >
+            <figcaption class='rbac-ba-label rbac-ba-label--after'>{{ after_label }}</figcaption>
+          </figure>
+        </div>
+      {% elsif before_after_image != blank %}
+        <figure
+          class='rbac-before-after{% if enable_lightbox %} rbac-before-after-clickable{% endif %}'
+          {% if enable_lightbox %}
+            data-lightbox-src='{{ before_after_image | image_url: width: 1200 }}'
+            data-lightbox-alt='{{ review_title | default: 'Before and After' | escape }}'
+          {% endif %}
+        >
           <img
             src='{{ before_after_image | image_url: width: 800 }}'
             srcset='
@@ -102,6 +188,9 @@
             loading='lazy'
             class='rbac-before-after-img'
           >
+          <figcaption class='rbac-ba-label rbac-ba-label--merged'>
+            <span>{{ before_label }}</span><span>{{ after_label }}</span>
+          </figcaption>
         </figure>
       {% else %}
         <div class='rbac-before-after-placeholder'>

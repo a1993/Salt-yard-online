@@ -52,6 +52,7 @@
     {% else %}
       background-color: {{ section.settings.card_background | default: 'rgba(255,255,255,0.9)' }};
     {% endif %}
+    border-radius: {{ section.settings.card_border_radius | default: 12 }}px;
   }
 
   #{{ section_id }} .rbac-btn-bg {
@@ -79,6 +80,16 @@
   {{ section.shopify_attributes }}
 >
   <div class='rbac-container' style='max-width: {{ container_max_width }};'>
+    {% if section.settings.section_title != blank or section.settings.section_subtitle != blank %}
+      <header class='rbac-header rbac-header--{{ section.settings.title_alignment | default: "center" }}'>
+        {% if section.settings.section_title != blank %}
+          <h2 class='rbac-title'>{{ section.settings.section_title }}</h2>
+        {% endif %}
+        {% if section.settings.section_subtitle != blank %}
+          <p class='rbac-subtitle'>{{ section.settings.section_subtitle }}</p>
+        {% endif %}
+      </header>
+    {% endif %}
     {% if use_slideshow %}
       <div class='rbac-swiper-wrapper'>
         <div class='swiper rbac-swiper rbac-swiper-{{ section.id }}'>
@@ -91,7 +102,8 @@
                   card_background: section.settings.card_background,
                   shop_button_bg: section.settings.shop_button_bg,
                   shop_button_color: section.settings.shop_button_color,
-                  shop_button_text: section.settings.shop_button_text
+                  shop_button_text: section.settings.shop_button_text,
+                  section: section
                 %}
               </div>
             {% endfor %}
@@ -140,12 +152,22 @@
             card_background: section.settings.card_background,
             shop_button_bg: section.settings.shop_button_bg,
             shop_button_color: section.settings.shop_button_color,
-            shop_button_text: section.settings.shop_button_text
+            shop_button_text: section.settings.shop_button_text,
+            section: section
           %}
         </div>
       {% endfor %}
     {% endif %}
   </div>
+
+  {% if section.settings.enable_lightbox %}
+    <div class='rbac-lightbox' id='rbac-lightbox-{{ section.id }}' aria-hidden='true' role='dialog'>
+      <button type='button' class='rbac-lightbox__close' aria-label='Close'>×</button>
+      <div class='rbac-lightbox__inner'>
+        <img class='rbac-lightbox__img' src='' alt='' width='1' height='1' loading='lazy'>
+      </div>
+    </div>
+  {% endif %}
 </div>
 
 {% if use_slideshow %}
@@ -190,6 +212,49 @@
   </script>
 {% endif %}
 
+{% if section.settings.enable_lightbox %}
+  <script>
+    (function () {
+      const sectionId = '{{ section_id }}';
+      const lightbox = document.querySelector('#rbac-lightbox-{{ section.id }}');
+      if (!lightbox) return;
+      const img = lightbox.querySelector('.rbac-lightbox__img');
+      const closeBtn = lightbox.querySelector('.rbac-lightbox__close');
+      const open = function (src, alt) {
+        if (!img || !src) return;
+        img.src = src;
+        img.alt = alt || '';
+        lightbox.classList.add('rbac-lightbox--open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      };
+      const close = function () {
+        lightbox.classList.remove('rbac-lightbox--open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      };
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.addEventListener('click', function (e) {
+          const t = e.target.closest('.rbac-before-after-clickable');
+          if (t) {
+            e.preventDefault();
+            const src = t.getAttribute('data-lightbox-src');
+            if (src) open(src, (t.getAttribute('data-lightbox-alt') || '').trim());
+          }
+        });
+      }
+      if (closeBtn) closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+{% endif %}
+
 {% schema %}
 {
   "name": "评价与前后对比",
@@ -204,6 +269,44 @@
       "type": "text",
       "id": "section_title",
       "label": "分区标题"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "分区副标题",
+      "info": "可选，显示在标题下方"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "标题对齐",
+      "options": [
+        { "value": "left", "label": "左对齐" },
+        { "value": "center", "label": "居中" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "前后对比图标签"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "「使用前」标签",
+      "default": "BEFORE"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "「使用后」标签",
+      "default": "AFTER"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_lightbox",
+      "label": "点击对比图放大",
+      "default": true
     },
     {
       "type": "header",
@@ -236,6 +339,16 @@
       "id": "card_background_gradient",
       "label": "卡片背景渐变",
       "info": "设置后覆盖背景色，例: linear-gradient(135deg, #f5f0f8 0%, #e8e0f0 100%)"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "卡片圆角",
+      "default": 12
     },
     {
       "type": "color",
@@ -386,6 +499,27 @@
         },
         {
           "type": "header",
+          "content": "评价人信息"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "评价人姓名"
+        },
+        {
+          "type": "text",
+          "id": "review_date",
+          "label": "评价日期",
+          "info": "如: 2024-01-15 或 Jan 15, 2024"
+        },
+        {
+          "type": "text",
+          "id": "verified_badge",
+          "label": "认证徽章文字",
+          "info": "如: Verified Buyer，留空不显示"
+        },
+        {
+          "type": "header",
           "content": "前后对比图"
         },
         {
@@ -393,6 +527,30 @@
           "id": "before_after_image",
           "label": "前后对比图（合并为一张）",
           "info": "建议将 BEFORE 与 AFTER 合并为一张图片上传，左侧为使用前，右侧为使用后"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image",
+          "label": "使用前图片（独立）",
+          "info": "若与「使用后图片」同时设置，将并排显示两张图；否则使用上方合并图"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image",
+          "label": "使用后图片（独立）",
+          "info": "与「使用前图片」同时设置时并排显示"
+        },
+        {
+          "type": "text",
+          "id": "before_label_override",
+          "label": "本条「使用前」标签",
+          "info": "留空则使用分区默认标签"
+        },
+        {
+          "type": "text",
+          "id": "after_label_override",
+          "label": "本条「使用后」标签",
+          "info": "留空则使用分区默认标签"
         },
         {
           "type": "header",
@@ -405,19 +563,25 @@
         },
         {
           "type": "text",
+          "id": "product_title",
+          "label": "产品卡片标题",
+          "info": "留空则使用关联产品标题"
+        },
+        {
+          "type": "text",
           "id": "product_desc",
           "label": "产品规格/描述",
-          "info": "覆盖产品默认描述，如: 0.04-0.06mm Full Super Thin Skin Base"
+          "info": "可自定义描述，留空则使用关联产品描述摘要"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "评价与前后对比",
+      "name": "[gy] before and after review",
       "settings": {
         "background_gradient": "linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 50%, #e8e0f0 100%)",
-        "section_title": "Customer Reviews"
+        "section_title": "Before and After Reviews"
       },
       "blocks": [
         {
