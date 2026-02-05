@@ -7,7 +7,11 @@
 
 {%- liquid
   assign section_id = 'review-before-after-' | append: section.id
-  assign use_slideshow = section.blocks.size > 1
+  if section.blocks.size > 1
+    assign use_slideshow = true
+  else
+    assign use_slideshow = false
+  endif
 -%}
 
 {% if section.settings.use_cdn %}
@@ -281,7 +285,7 @@
       "type": "range",
       "id": "autoplay_delay",
       "min": 2000,
-      "max": 10000,
+      "max": 9500,
       "step": 500,
       "unit": "ms",
       "label": "自动播放间隔",
