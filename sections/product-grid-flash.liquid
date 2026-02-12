@@ -9,16 +9,58 @@
 {%- liquid
   # 支持作为 section 使用（从 section.settings 获取）或作为 snippet 使用（从参数获取）
   assign show_reviews = show_reviews | default: section.settings.show_reviews | default: false
-  assign discount_percent = discount_percent | default: section.settings.discount_percent | default: 0
   assign section_blocks = section_blocks | default: section.blocks
   assign filter_category = filter_category | default: section.settings.filter_category | default: 0
   assign grid_class = grid_class | default: ''
   assign products_per_row = products_per_row | default: section.settings.products_per_row | default: 4
   assign products_per_row_mobile = products_per_row_mobile | default: section.settings.products_per_row_mobile | default: settings.prod_thumb_mob_per_row | default: 2
+  assign bulk_products = bulk_products | default: section.settings.product_list | default: null
 -%}
 
 <div class='product-grid product-grid--flash product-grid--per-row-{{ products_per_row }} product-grid--per-row-mob-{{ products_per_row_mobile }}{% if grid_class %} {{ grid_class }}{% endif %}'>
-  {% if section_blocks %}
+  {%- liquid
+    assign has_products = false
+    assign product_count = 0
+    if bulk_products != blank and bulk_products.size > 0
+      assign has_products = true
+    endif
+    unless has_products
+      if section_blocks
+        for block in section_blocks
+          if block.type == 'product_item'
+            if filter_category and filter_category > 0
+              assign parent_num = block.settings.parent_tab_number | plus: 0
+              if parent_num == filter_category and block.settings.product != blank
+                assign has_products = true
+                assign product_count = product_count | plus: 1
+              endif
+            else
+              if block.settings.product != blank
+                assign has_products = true
+                assign product_count = product_count | plus: 1
+              endif
+            endif
+          endif
+        endfor
+      endif
+    endunless
+  -%}
+
+  {% if has_products %}
+    {% comment %} 先渲染批量产品（使用产品默认图/标题） {% endcomment %}
+    {% if bulk_products != blank and bulk_products.size > 0 %}
+      {% for product in bulk_products %}
+        {% render 'product-card-flash',
+          product: product,
+          show_reviews: show_reviews,
+          custom_image: null,
+          custom_title: null,
+          custom_description: null,
+          shopify_attributes: null
+        %}
+      {% endfor %}
+    {% endif %}
+    {% comment %} 再渲染单个 Product 块（可自定义图/标题/描述） {% endcomment %}
     {% for block in section_blocks %}
       {% if block.type == 'product_item' %}
         {% if filter_category and filter_category > 0 %}
@@ -26,72 +68,51 @@
           {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
           {% if parent_num == filter_category %}
             {% assign product = block.settings.product %}
-            {% render 'product-card-flash',
-              product: product,
-              show_reviews: show_reviews,
-              discount_percent: discount_percent,
-              custom_image: block.settings.custom_image,
-              custom_title: block.settings.custom_title,
-              custom_description: block.settings.custom_description,
-              custom_compare_price: block.settings.custom_compare_price,
-              custom_discount_percent: block.settings.custom_discount_percent,
-              shopify_attributes: block.shopify_attributes
-            %}
+            {% if product %}
+              {% render 'product-card-flash',
+                product: product,
+                show_reviews: show_reviews,
+                custom_image: block.settings.custom_image,
+                custom_title: block.settings.custom_title,
+                custom_description: block.settings.custom_description,
+                shopify_attributes: block.shopify_attributes
+              %}
+            {% endif %}
           {% endif %}
         {% else %}
           {% comment %} 没有分类过滤，直接渲染所有产品 {% endcomment %}
           {% assign product = block.settings.product %}
-          {% render 'product-card-flash',
-            product: product,
-            show_reviews: show_reviews,
-            discount_percent: discount_percent,
-            custom_image: block.settings.custom_image,
-            custom_title: block.settings.custom_title,
-            custom_description: block.settings.custom_description,
-            custom_compare_price: block.settings.custom_compare_price,
-            custom_discount_percent: block.settings.custom_discount_percent,
-            shopify_attributes: block.shopify_attributes
-          %}
-        {% endif %}
-      {% elsif block.type == 'product_collection' %}
-        {% comment %} 处理产品系列 {% endcomment %}
-        {% assign collection = block.settings.collection %}
-        {% if collection %}
-          {% comment %} 检查分类过滤 {% endcomment %}
-          {% assign should_render = false %}
-          {% if filter_category and filter_category > 0 %}
-            {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
-            {% if parent_num == filter_category %}
-              {% assign should_render = true %}
-            {% endif %}
-          {% else %}
-            {% assign should_render = true %}
-          {% endif %}
-
-          {% if should_render %}
-            {% comment %} 获取产品限制数量 {% endcomment %}
-            {% assign product_limit = block.settings.product_limit | plus: 0 %}
-            {% if product_limit == 0 %}
-              {% assign product_limit = 999 %}
-            {% endif %}
-
-            {% comment %} 遍历 collection 中的产品 {% endcomment %}
-            {% for product in collection.products limit: product_limit %}
-              {% render 'product-card-flash',
-                product: product,
-                show_reviews: show_reviews,
-                discount_percent: discount_percent,
-                custom_image: null,
-                custom_title: null,
-                custom_description: null,
-                custom_compare_price: null,
-                custom_discount_percent: block.settings.custom_discount_percent,
-                shopify_attributes: block.shopify_attributes
-              %}
-            {% endfor %}
+          {% if product %}
+            {% render 'product-card-flash',
+              product: product,
+              show_reviews: show_reviews,
+              custom_image: block.settings.custom_image,
+              custom_title: block.settings.custom_title,
+              custom_description: block.settings.custom_description,
+              shopify_attributes: block.shopify_attributes
+            %}
           {% endif %}
         {% endif %}
       {% endif %}
+    {% endfor %}
+  {% else %}
+    {% comment %} 预览模式：显示占位产品卡片（仅系统折扣） {% endcomment %}
+    {%- assign placeholder_compare = 299 -%}
+    {% for i in (1..4) %}
+      <div class='product-card product-card--flash product-card--placeholder'>
+        <div class='product-card__image-wrapper'>
+          <div class='product-card__image product-card__image--placeholder'>
+            {{ 'product-1' | placeholder_svg_tag }}
+          </div>
+        </div>
+        <div class='product-card__info'>
+          <h3 class='product-card__title'>示例产品 {{ i }}</h3>
+          <p class='product-card__description'>请选择一个产品以显示实际内容</p>
+          <div class='product-card__price'>
+            <span class='product-card__price-sale'>${{ placeholder_compare }}.00</span>
+          </div>
+        </div>
+      </div>
     {% endfor %}
   {% endif %}
 </div>
@@ -129,16 +150,16 @@
       "content": "Display Settings"
     },
     {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "批量产品（可选）",
+      "info": "一次添加多个产品，使用默认图/标题。需单独自定义的请用下方「添加 Product」块"
+    },
+    {
       "type": "checkbox",
       "id": "show_reviews",
       "label": "Show Reviews",
       "default": false
-    },
-    {
-      "type": "number",
-      "id": "discount_percent",
-      "label": "Discount Percent",
-      "default": 0
     },
     {
       "type": "number",
@@ -183,19 +204,6 @@
         },
         {
           "type": "text",
-          "id": "custom_compare_price",
-          "label": "Custom Compare Price",
-          "info": "Leave blank to use product's compare_at_price"
-        },
-        {
-          "type": "number",
-          "id": "custom_discount_percent",
-          "label": "Custom Discount Percent",
-          "default": 0,
-          "info": "Leave blank to use product's discount_percent"
-        },
-        {
-          "type": "text",
           "id": "custom_class",
           "label": "Custom Class",
           "info": "Leave blank to use product's custom class"
@@ -207,45 +215,78 @@
           "info": "Leave blank to use product's shopify attributes"
         }
       ]
-    },
-    {
-      "type": "product_collection",
-      "name": "Product Collection",
-      "settings": [
-        {
-          "type": "number",
-          "id": "parent_tab_number",
-          "label": "Parent Tab Number",
-          "default": 1,
-          "info": "Enter 1 for first tab, 2 for second tab, etc."
-        },
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Select Collection",
-          "info": "All products from this collection will be displayed"
-        },
-        {
-          "type": "number",
-          "id": "product_limit",
-          "label": "Product Limit",
-          "default": 50,
-          "info": "Maximum number of products to display from collection (0 = no limit)"
-        },
-        {
-          "type": "number",
-          "id": "custom_discount_percent",
-          "label": "Custom Discount %",
-          "default": 0,
-          "info": "Override section discount. Set to 0 to use section discount or product's system discount. Example: 20 for 20% OFF"
-        }
-      ]
     }
   ],
   "presets": [
     {
-      "name": "Product Grid Flash"
+      "name": "[gy] Product Grid Flash",
+      "blocks": [
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1
+          }
+        },
+        {
+          "type": "product_item",
+          "settings": {
+            "parent_tab_number": 1
+          }
+        }
+      ]
     }
   ]
 }
 {% endschema %}
+
+{% style %}
+  /* Placeholder Product Cards */
+  .product-card--placeholder {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .product-card--placeholder .product-card__image--placeholder {
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+  }
+
+  .product-card--placeholder .product-card__title {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .product-card--placeholder .product-card__description {
+    font-size: 0.875rem;
+    color: #999;
+    margin: 0.5rem 0;
+  }
+{% endstyle %}

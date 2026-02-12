@@ -116,6 +116,10 @@
           assign padding_bottom = block.settings.padding_bottom | default: 0.6
           assign padding_left = block.settings.padding_left | default: 2.5
           assign padding_right = block.settings.padding_right | default: 2.5
+          assign tab_min_width = block.settings.tab_min_width
+          assign tab_min_height = block.settings.tab_min_height
+          assign tab_min_width_mobile = block.settings.tab_min_width_mobile
+          assign tab_min_height_mobile = block.settings.tab_min_height_mobile
           assign tab_image = block.settings.tab_image
           assign badge_image = block.settings.badge_image
           assign badge_position = block.settings.badge_position | default: 'top-right'
@@ -126,7 +130,7 @@
           type='button'
           class='flash-sale-tab-btn{% if is_active %} active{% endif %}{% if tab_image %} has-image{% endif %}{% if badge_image %} has-badge badge-{{ badge_position }}{% endif %}{% if bg_image %} has-bg-image{% endif %}'
           data-tab-index='{{ tab_index }}'
-          style='--tab-bg: {{ bg_color }}; --tab-bg-active: {{ bg_color_active }};{% if bg_image %} --tab-bg-image: url({{ bg_image | image_url }}); --tab-bg-image-repeat: {{ bg_image_repeat }}; --tab-bg-image-position: {{ bg_image_position }}; --tab-bg-image-size: {{ bg_image_size }};{% endif %}{% if bg_image_active %} --tab-bg-image-active: url({{ bg_image_active | image_url }}); --tab-bg-image-repeat-active: {{ bg_image_repeat_active }}; --tab-bg-image-position-active: {{ bg_image_position_active }}; --tab-bg-image-size-active: {{ bg_image_size_active }};{% endif %} --tab-text: {{ text_color }}; --tab-text-active: {{ text_color_active }}; --tab-border: {{ border_color }}; --tab-border-active: {{ border_color_active }}; --tab-border-width: {{ border_width }}px; --tab-border-radius: {{ border_radius }}rem;{% if font_size %} --tab-font-size: {{ font_size }}rem;{% endif %}{% if font_size_mobile %} --tab-font-size-mobile: {{ font_size_mobile }}rem;{% endif %} --tab-padding-top: {{ padding_top }}rem; --tab-padding-bottom: {{ padding_bottom }}rem; --tab-padding-left: {{ padding_left }}rem; --tab-padding-right: {{ padding_right }}rem; --tab-badge-size: {{ badge_size }}px; --tab-badge-size-mobile: {{ badge_size_mobile }}px;'
+          style='--tab-bg: {{ bg_color }}; --tab-bg-active: {{ bg_color_active }};{% if bg_image %} --tab-bg-image: url({{ bg_image | image_url }}); --tab-bg-image-repeat: {{ bg_image_repeat }}; --tab-bg-image-position: {{ bg_image_position }}; --tab-bg-image-size: {{ bg_image_size }};{% endif %}{% if bg_image_active %} --tab-bg-image-active: url({{ bg_image_active | image_url }}); --tab-bg-image-repeat-active: {{ bg_image_repeat_active }}; --tab-bg-image-position-active: {{ bg_image_position_active }}; --tab-bg-image-size-active: {{ bg_image_size_active }};{% endif %} --tab-text: {{ text_color }}; --tab-text-active: {{ text_color_active }}; --tab-border: {{ border_color }}; --tab-border-active: {{ border_color_active }}; --tab-border-width: {{ border_width }}px; --tab-border-radius: {{ border_radius }}rem;{% if font_size %} --tab-font-size: {{ font_size }}rem;{% endif %}{% if font_size_mobile %} --tab-font-size-mobile: {{ font_size_mobile }}rem;{% endif %} --tab-padding-top: {{ padding_top }}rem; --tab-padding-bottom: {{ padding_bottom }}rem; --tab-padding-left: {{ padding_left }}rem; --tab-padding-right: {{ padding_right }}rem;{% if tab_min_width and tab_min_width > 0 %} --tab-min-width: {{ tab_min_width }}px;{% endif %}{% if tab_min_height and tab_min_height > 0 %} --tab-min-height: {{ tab_min_height }}px;{% endif %}{% if tab_min_width_mobile and tab_min_width_mobile > 0 %} --tab-min-width-mobile: {{ tab_min_width_mobile }}px;{% endif %}{% if tab_min_height_mobile and tab_min_height_mobile > 0 %} --tab-min-height-mobile: {{ tab_min_height_mobile }}px;{% endif %} --tab-badge-size: {{ badge_size }}px; --tab-badge-size-mobile: {{ badge_size_mobile }}px;'
           {{ block.shopify_attributes }}
         >
           {% if tab_image %}
@@ -171,41 +175,35 @@
           <!-- Product Grid -->
           {%- liquid
             assign has_products = false
-            for block_item in section.blocks
-              if block_item.type == 'product_item'
-                assign parent_num = block_item.settings.parent_tab_number | plus: 0
-                if parent_num == tab_index and block_item.settings.product != blank
-                  assign has_products = true
-                  break
-                endif
-              endif
-            endfor
-          -%}
-
-          {%- liquid
-            assign tab_collection = block.settings.collection
-            assign collection_limit = block.settings.collection_limit | default: 12
-            assign collection_position = block.settings.collection_position | default: 'after'
-            assign collection_dedupe = block.settings.collection_dedupe
-            if collection_dedupe == null
-              assign collection_dedupe = true
+            assign tab_bulk_products = block.settings.product_list
+            if tab_bulk_products != blank and tab_bulk_products.size > 0
+              assign has_products = true
             endif
+            unless has_products
+              for block_item in section.blocks
+                if block_item.type == 'product_item'
+                  assign parent_num = block_item.settings.parent_tab_number | plus: 0
+                  if parent_num == tab_index and block_item.settings.product != blank
+                    assign has_products = true
+                    break
+                  endif
+                endif
+              endfor
+            endunless
           -%}
 
-          {% if has_products or tab_collection != blank %}
+          {% if has_products %}
             {% render 'product-grid',
               section_blocks: section.blocks,
               grid_style: 'flash',
               grid_class: 'flash-sale-products',
               show_reviews: section.settings.show_reviews,
               filter_category: tab_index,
-              collection: tab_collection,
-              collection_limit: collection_limit,
-              collection_position: collection_position,
-              collection_dedupe: collection_dedupe
+              bulk_products: tab_bulk_products
             %}
           {% else %}
-            {% comment %} 预览模式：显示占位产品卡片 {% endcomment %}
+            {% comment %} 预览模式：显示占位产品卡片（仅系统折扣，无自定义折扣） {% endcomment %}
+            {%- assign placeholder_compare = 299 -%}
             <div class='product-grid product-grid--flash flash-sale-products'>
               {% for i in (1..4) %}
                 <div class='product-card product-card--flash product-card--placeholder'>
@@ -213,19 +211,12 @@
                     <div class='product-card__image product-card__image--placeholder'>
                       {{ 'product-1' | placeholder_svg_tag }}
                     </div>
-                    {% comment %} 使用主题折扣标签样式 {% endcomment %}
-                    <div class='product-label-container'>
-                      <span class='product-label product-label--sale'>
-                        <span>-20%</span>
-                      </span>
-                    </div>
                   </div>
                   <div class='product-card__info'>
                     <h3 class='product-card__title'>示例产品 {{ i }}</h3>
-                    <p class='product-card__description'>请选择一个产品或 Collection</p>
+                    <p class='product-card__description'>请选择一个产品以显示实际内容</p>
                     <div class='product-card__price'>
-                      <s class='product-card__price-compare'>$299.00</s>
-                      <span class='product-card__price-sale'>$239.00</span>
+                      <span class='product-card__price-sale'>${{ placeholder_compare }}.00</span>
                     </div>
                   </div>
                 </div>
@@ -292,52 +283,10 @@
           "default": "Product Category"
         },
         {
-          "type": "header",
-          "content": "批量商品设置（Collection）"
-        },
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "选择 Collection",
-          "info": "从 Collection 批量添加商品，无需逐个配置。留空则仅显示下方手动添加的商品"
-        },
-        {
-          "type": "range",
-          "id": "collection_limit",
-          "label": "Collection 商品数量上限",
-          "min": 1,
-          "max": 50,
-          "step": 1,
-          "default": 12,
-          "info": "从 Collection 中最多显示多少个商品"
-        },
-        {
-          "type": "select",
-          "id": "collection_position",
-          "label": "Collection 商品显示位置",
-          "options": [
-            {
-              "value": "after",
-              "label": "在手动添加的商品之后"
-            },
-            {
-              "value": "before",
-              "label": "在手动添加的商品之前"
-            },
-            {
-              "value": "only",
-              "label": "仅显示 Collection 商品（忽略手动添加）"
-            }
-          ],
-          "default": "after",
-          "info": "手动添加的商品 = 下方通过 Product block 单独添加的商品"
-        },
-        {
-          "type": "checkbox",
-          "id": "collection_dedupe",
-          "label": "自动去重",
-          "default": true,
-          "info": "如果某商品已通过 Product block 手动添加，则不从 Collection 重复显示"
+          "type": "product_list",
+          "id": "product_list",
+          "label": "批量产品（可选）",
+          "info": "一次添加多个产品到本 Tab，使用产品默认图/标题。需要单独自定义的请用下方「添加 Product」块"
         },
         {
           "type": "header",
@@ -604,6 +553,54 @@
           "content": "尺寸设置"
         },
         {
+          "type": "paragraph",
+          "content": "仅使用背景图时，可通过下方「最小宽度/高度」控制 tab 按钮尺寸，避免过小或过大。"
+        },
+        {
+          "type": "range",
+          "id": "tab_min_width",
+          "label": "最小宽度 - 桌面端 (px)",
+          "min": 0,
+          "max": 400,
+          "step": 10,
+          "default": 0,
+          "unit": "px",
+          "info": "0 表示由内容决定；仅背景图时可设 80–200 等"
+        },
+        {
+          "type": "range",
+          "id": "tab_min_height",
+          "label": "最小高度 - 桌面端 (px)",
+          "min": 0,
+          "max": 120,
+          "step": 4,
+          "default": 0,
+          "unit": "px",
+          "info": "0 表示由内容决定"
+        },
+        {
+          "type": "range",
+          "id": "tab_min_width_mobile",
+          "label": "最小宽度 - 移动端 (px)",
+          "min": 0,
+          "max": 280,
+          "step": 8,
+          "default": 0,
+          "unit": "px",
+          "info": "0 表示由内容决定"
+        },
+        {
+          "type": "range",
+          "id": "tab_min_height_mobile",
+          "label": "最小高度 - 移动端 (px)",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "default": 0,
+          "unit": "px",
+          "info": "0 表示由内容决定"
+        },
+        {
           "type": "range",
           "id": "font_size",
           "label": "字体大小 - 桌面端 (rem)",
@@ -853,7 +850,7 @@
 {% endschema %}
 
 {% style %}
-  /* Placeholder Product Cards - 使用主题色 */
+  /* Placeholder Product Cards */
   .product-card--placeholder {
     opacity: 0.8;
     pointer-events: none;
@@ -871,20 +868,11 @@
     margin: 0.5rem 0;
     font-size: 1rem;
     font-weight: 500;
-    color: rgb(var(--heading-color));
   }
 
   .product-card--placeholder .product-card__description {
     font-size: 0.875rem;
-    color: rgb(var(--text-color));
-    opacity: 0.6;
+    color: #999;
     margin: 0.5rem 0;
-  }
-
-  /* 占位商品使用主题折扣标签样式 */
-  .product-card--placeholder .product-label-container {
-    position: absolute;
-    top: 0;
-    left: 0;
   }
 {% endstyle %}
