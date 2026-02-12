@@ -9,7 +9,7 @@
   - currency_symbol: 货币符号
   - section_blocks: section.blocks 数组 (用于遍历产品块)
   - filter_category: 过滤分类编号 (用于 flash-sale 和 halloween)
-  - bulk_products: 批量产品列表 (仅 flash 风格，来自 Tab 的 product_list，无 per-item 自定义)
+  - bulk_products: 批量产品列表 (仅 flash 风格)；若同 Tab 下有 Product 块选同一产品，则使用该块的自定义图/标题/描述
 {% endcomment %}
 
 {%- liquid
@@ -18,22 +18,42 @@
 -%}
 
 <div class='product-grid product-grid--{{ grid_style }}{% if grid_class %} {{ grid_class }}{% endif %}'>
-  {% comment %} Flash 风格且传入批量产品时：先渲染批量产品（使用默认图/标题） {% endcomment %}
+  {% comment %} Flash 风格且传入批量产品：按列表顺序渲染，每个产品若存在同 Tab 同产品的 Product 块则使用其自定义图/标题/描述 {% endcomment %}
   {% if grid_style == 'flash' and bulk_products != blank and bulk_products.size > 0 %}
     {% for product in bulk_products %}
+      {%- liquid
+        assign custom_image = null
+        assign custom_title = null
+        assign custom_description = null
+        assign card_shopify_attributes = null
+        if section_blocks and filter_category
+          for blk in section_blocks
+            if blk.type == 'product_item'
+              assign pnum = blk.settings.parent_tab_number | plus: 0
+              if pnum == filter_category and blk.settings.product != blank and blk.settings.product.id == product.id
+                assign custom_image = blk.settings.custom_image
+                assign custom_title = blk.settings.custom_title
+                assign custom_description = blk.settings.custom_description
+                assign card_shopify_attributes = blk.shopify_attributes
+                break
+              endif
+            endif
+          endfor
+        endif
+      -%}
       {% render 'product-card-flash',
         product: product,
         show_reviews: show_reviews,
-        custom_image: null,
-        custom_title: null,
-        custom_description: null,
-        shopify_attributes: null
+        custom_image: custom_image,
+        custom_title: custom_title,
+        custom_description: custom_description,
+        shopify_attributes: card_shopify_attributes
       %}
     {% endfor %}
   {% endif %}
 
   {% if section_blocks %}
-    {% comment %} 使用 section.blocks 遍历（含自定义图/标题的单个产品块） {% endcomment %}
+    {% comment %} 使用 section.blocks 遍历（含自定义图/标题的单个产品块）；若该产品已在 bulk_products 中渲染过则跳过 {% endcomment %}
     {% for block in section_blocks %}
       {% if block.type == 'product_item' %}
         {% comment %} 如果有分类过滤，检查是否属于当前分类 {% endcomment %}
@@ -47,28 +67,42 @@
 
           {% if parent_num == filter_category %}
             {% assign product = block.settings.product %}
+            {% comment %} Flash 且存在批量列表时：若该产品已在批量列表中渲染过则跳过，避免重复 {% endcomment %}
+            {% if grid_style == 'flash' and bulk_products != blank and product != blank %}
+              {% assign already_in_bulk = false %}
+              {% for p in bulk_products %}
+                {% if p.id == product.id %}
+                  {% assign already_in_bulk = true %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              {% assign already_in_bulk = false %}
+            {% endif %}
 
-            {% if grid_style == 'flash' %}
-              {% render 'product-card-flash',
-                product: product,
-                show_reviews: show_reviews,
-                custom_image: block.settings.custom_image,
-                custom_title: block.settings.custom_title,
-                custom_description: block.settings.custom_description,
-                shopify_attributes: block.shopify_attributes
-              %}
-            {% elsif grid_style == 'halloween' %}
-              {% render 'product-card-halloween',
-                product: product,
-                show_reviews: show_reviews,
-                button_text: block.settings.button_text,
-                custom_image: block.settings.custom_image,
-                custom_title: block.settings.custom_title,
-                custom_description: block.settings.custom_description,
-                custom_compare_price: block.settings.custom_compare_price,
-                custom_discount_percent: block.settings.custom_discount_percent,
-                shopify_attributes: block.shopify_attributes
-              %}
+            {% if already_in_bulk == false %}
+              {% if grid_style == 'flash' %}
+                {% render 'product-card-flash',
+                  product: product,
+                  show_reviews: show_reviews,
+                  custom_image: block.settings.custom_image,
+                  custom_title: block.settings.custom_title,
+                  custom_description: block.settings.custom_description,
+                  shopify_attributes: block.shopify_attributes
+                %}
+              {% elsif grid_style == 'halloween' %}
+                {% render 'product-card-halloween',
+                  product: product,
+                  show_reviews: show_reviews,
+                  button_text: block.settings.button_text,
+                  custom_image: block.settings.custom_image,
+                  custom_title: block.settings.custom_title,
+                  custom_description: block.settings.custom_description,
+                  custom_compare_price: block.settings.custom_compare_price,
+                  custom_discount_percent: block.settings.custom_discount_percent,
+                  shopify_attributes: block.shopify_attributes
+                %}
+              {% endif %}
             {% endif %}
           {% endif %}
 

@@ -1,0 +1,9 @@
+{%- comment -%}
+  商品结构化数据 (JSON-LD)
+  参数: product, custom_title (可选), custom_description (可选), custom_image (可选)
+  使用 Shopify 标准 structured_data，自定义参数仅用于显示层，schema 使用产品原始数据
+{%- endcomment -%}
+
+{% if product %}
+  {% render 'structured-data-product', product: product %}
+{% endif %}

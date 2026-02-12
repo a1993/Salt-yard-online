@@ -47,28 +47,89 @@
   -%}
 
   {% if has_products %}
-    {% comment %} 先渲染批量产品（使用产品默认图/标题） {% endcomment %}
+    {% comment %} 先渲染批量产品；若存在同产品的 Product 块则使用其自定义图/标题/描述 {% endcomment %}
     {% if bulk_products != blank and bulk_products.size > 0 %}
       {% for product in bulk_products %}
+        {%- liquid
+          assign custom_image = null
+          assign custom_title = null
+          assign custom_description = null
+          assign card_shopify_attributes = null
+          if section_blocks
+            for blk in section_blocks
+              if blk.type == 'product_item' and blk.settings.product != blank and blk.settings.product.id == product.id
+                if filter_category != 0
+                  assign pnum = blk.settings.parent_tab_number | plus: 0
+                  if pnum == filter_category
+                    assign custom_image = blk.settings.custom_image
+                    assign custom_title = blk.settings.custom_title
+                    assign custom_description = blk.settings.custom_description
+                    assign card_shopify_attributes = blk.shopify_attributes
+                    break
+                  endif
+                else
+                  assign custom_image = blk.settings.custom_image
+                  assign custom_title = blk.settings.custom_title
+                  assign custom_description = blk.settings.custom_description
+                  assign card_shopify_attributes = blk.shopify_attributes
+                  break
+                endif
+              endif
+            endfor
+          endif
+        -%}
         {% render 'product-card-flash',
           product: product,
           show_reviews: show_reviews,
-          custom_image: null,
-          custom_title: null,
-          custom_description: null,
-          shopify_attributes: null
+          custom_image: custom_image,
+          custom_title: custom_title,
+          custom_description: custom_description,
+          shopify_attributes: card_shopify_attributes
         %}
       {% endfor %}
     {% endif %}
-    {% comment %} 再渲染单个 Product 块（可自定义图/标题/描述） {% endcomment %}
+    {% comment %} 再渲染未在批量列表中的 Product 块，避免重复 {% endcomment %}
     {% for block in section_blocks %}
       {% if block.type == 'product_item' %}
         {% if filter_category and filter_category > 0 %}
-          {% comment %} 如果有分类过滤，检查是否属于当前分类 {% endcomment %}
           {% assign parent_num = block.settings.parent_tab_number | plus: 0 %}
           {% if parent_num == filter_category %}
             {% assign product = block.settings.product %}
             {% if product %}
+              {% assign already_in_bulk = false %}
+              {% if bulk_products != blank %}
+                {% for p in bulk_products %}
+                  {% if p.id == product.id -%}
+                    {%- assign already_in_bulk = true -%}
+                    {%- break -%}
+                  {%- endif %}
+                {% endfor %}
+              {% endif %}
+              {% unless already_in_bulk %}
+                {% render 'product-card-flash',
+                  product: product,
+                  show_reviews: show_reviews,
+                  custom_image: block.settings.custom_image,
+                  custom_title: block.settings.custom_title,
+                  custom_description: block.settings.custom_description,
+                  shopify_attributes: block.shopify_attributes
+                %}
+              {% endunless %}
+            {% endif %}
+          {% endif %}
+        {% else %}
+          {% assign product = block.settings.product %}
+          {% if product %}
+            {% assign already_in_bulk = false %}
+            {% if bulk_products != blank %}
+              {% for p in bulk_products %}
+                {% if p.id == product.id -%}
+                  {%- assign already_in_bulk = true -%}
+                  {%- break -%}
+                {%- endif %}
+              {% endfor %}
+            {% endif %}
+            {% unless already_in_bulk %}
               {% render 'product-card-flash',
                 product: product,
                 show_reviews: show_reviews,
@@ -77,20 +138,7 @@
                 custom_description: block.settings.custom_description,
                 shopify_attributes: block.shopify_attributes
               %}
-            {% endif %}
-          {% endif %}
-        {% else %}
-          {% comment %} 没有分类过滤，直接渲染所有产品 {% endcomment %}
-          {% assign product = block.settings.product %}
-          {% if product %}
-            {% render 'product-card-flash',
-              product: product,
-              show_reviews: show_reviews,
-              custom_image: block.settings.custom_image,
-              custom_title: block.settings.custom_title,
-              custom_description: block.settings.custom_description,
-              shopify_attributes: block.shopify_attributes
-            %}
+            {% endunless %}
           {% endif %}
         {% endif %}
       {% endif %}
@@ -153,7 +201,7 @@
       "type": "product_list",
       "id": "product_list",
       "label": "批量产品（可选）",
-      "info": "一次添加多个产品，使用默认图/标题。需单独自定义的请用下方「添加 Product」块"
+      "info": "一次添加多个产品。若需自定义某款的图片/标题/描述，请添加「Product」块并选择同一产品即可覆盖该卡片"
     },
     {
       "type": "checkbox",
